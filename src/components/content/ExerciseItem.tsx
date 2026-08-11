@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Check, X } from 'lucide-react'
+import { Check, HelpCircle, X } from 'lucide-react'
 import type { Exercise } from '../../types/content'
 
 const difficultyLabel: Record<Exercise['difficulty'], string> = {
@@ -20,14 +20,18 @@ export function ExerciseItem({ exercise, index }: { exercise: Exercise; index: n
   const isMultiChoice = exercise.type === 'multiple-choice'
   const isChoiceBased = isMultiChoice || exercise.type === 'single-choice' || exercise.type === 'true-false'
   const isFreeform = !isChoiceBased
+  const hasAnswerKey = exercise.correctAnswer !== undefined
 
   const correctSet = new Set(
-    Array.isArray(exercise.correctAnswer) ? exercise.correctAnswer : [exercise.correctAnswer],
+    hasAnswerKey ? (Array.isArray(exercise.correctAnswer) ? exercise.correctAnswer : [exercise.correctAnswer!]) : [],
   )
 
-  const isCorrect = isFreeform
-    ? textAnswer.trim().toLowerCase() === firstCorrectAnswer(exercise.correctAnswer).trim().toLowerCase()
-    : selected.length === correctSet.size && selected.every((s) => correctSet.has(s))
+  // `null` = no answer key in the source material; grading is left to the learner (self-assessment).
+  const isCorrect = !hasAnswerKey
+    ? null
+    : isFreeform
+      ? textAnswer.trim().toLowerCase() === firstCorrectAnswer(exercise.correctAnswer!).trim().toLowerCase()
+      : selected.length === correctSet.size && selected.every((s) => correctSet.has(s))
 
   const toggleOption = (optionId: string) => {
     if (checked) return
@@ -110,7 +114,7 @@ export function ExerciseItem({ exercise, index }: { exercise: Exercise; index: n
             disabled={!canCheck}
             className="inline-flex h-9 items-center rounded-full bg-brand-600 px-4 text-sm font-medium text-white transition-colors hover:bg-brand-700 disabled:pointer-events-none disabled:opacity-40 dark:bg-brand-500 dark:hover:bg-brand-400"
           >
-            Antwort prüfen
+            {hasAnswerKey ? 'Antwort prüfen' : 'Lösung anzeigen'}
           </button>
         ) : (
           <button
@@ -123,7 +127,18 @@ export function ExerciseItem({ exercise, index }: { exercise: Exercise; index: n
         )}
       </div>
 
-      {checked && (
+      {checked && isCorrect === null && (
+        <div className="mt-4 flex items-start gap-2 rounded-lg bg-ink-100 p-3 text-sm text-ink-600 dark:bg-ink-800/60 dark:text-ink-300">
+          <HelpCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+          <span>
+            {exercise.explanation
+              ? 'Diese Übung wird nicht automatisch ausgewertet. Vergleiche deine Antwort mit dem Hinweis unten und bewerte dich selbst.'
+              : 'Für diese Übung liegt keine hinterlegte Musterlösung vor. Bewerte dein Ergebnis selbst (z. B. durch Ausprobieren oder Nachschlagen).'}
+          </span>
+        </div>
+      )}
+
+      {checked && isCorrect !== null && (
         <p
           className={`mt-4 text-sm font-medium ${
             isCorrect ? 'text-teal-600 dark:text-teal-400' : 'text-rose-600 dark:text-rose-400'
@@ -134,7 +149,7 @@ export function ExerciseItem({ exercise, index }: { exercise: Exercise; index: n
       )}
 
       {checked && exercise.explanation && (
-        <p className="mt-2 rounded-lg bg-ink-50 p-3 text-sm leading-relaxed text-ink-600 dark:bg-ink-800/60 dark:text-ink-300">
+        <p className="mt-2 whitespace-pre-line rounded-lg bg-ink-50 p-3 text-sm leading-relaxed text-ink-600 dark:bg-ink-800/60 dark:text-ink-300">
           {exercise.explanation}
         </p>
       )}

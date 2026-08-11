@@ -30,7 +30,9 @@ export interface ExamSection {
   description: string
   accent: AccentKey
   icon: LucideIcon
-  status: 'coming-soon'
+  status: 'coming-soon' | 'available'
+  /** Present when `status === 'available'` — where the card links to. */
+  path?: string
 }
 
 /* -------------------------------------------------------------------------- */
@@ -137,6 +139,46 @@ export interface KeyPointsBlock {
   items: string[]
 }
 
+/**
+ * Supplementary explanation that goes beyond the core school material —
+ * always rendered in a visually distinct (violet) callout so it can never
+ * be mistaken for required exam content.
+ */
+export interface InsightBlock {
+  type: 'insight'
+  title?: string
+  text: string
+}
+
+/** An exam-focused note — strategy, common pitfalls, what graders look for. */
+export interface ExamTipBlock {
+  type: 'exam-tip'
+  text: string
+}
+
+/**
+ * A named entry from the illustration registry (`components/content/illustrations`).
+ * Keeps `Topic` data files framework-agnostic — a lesson references a diagram
+ * by key, and new diagrams are added by registering a component, not by
+ * touching the renderer.
+ */
+export interface IllustrationBlock {
+  type: 'illustration'
+  component: string
+  caption?: string
+}
+
+/**
+ * A named entry from the interactive-widget registry
+ * (`components/content/interactive`) — e.g. a live formula calculator.
+ * Same registry pattern as `IllustrationBlock`.
+ */
+export interface InteractiveBlock {
+  type: 'interactive'
+  component: string
+  caption?: string
+}
+
 export type ContentBlock =
   | HeadingBlock
   | ParagraphBlock
@@ -149,6 +191,10 @@ export type ContentBlock =
   | NoteBlock
   | WarningBlock
   | KeyPointsBlock
+  | InsightBlock
+  | ExamTipBlock
+  | IllustrationBlock
+  | InteractiveBlock
 
 /* Exercises & tests ----------------------------------------------------------- */
 
@@ -180,7 +226,15 @@ export interface Exercise {
   difficulty: Difficulty
   question: string
   options?: AnswerOption[]
-  correctAnswer: string | string[]
+  /**
+   * Left `undefined` when the source material has no answer key for this
+   * exercise (e.g. an open-ended "write a program" task, or a trace-table
+   * worksheet with a blank answer box) — never a guessed value. The UI
+   * then skips automatic right/wrong grading and falls back to
+   * self-assessment, same principle as `answerStatus: 'unclear'` in the
+   * WISO/AP exam data.
+   */
+  correctAnswer?: string | string[]
   explanation?: string
 }
 

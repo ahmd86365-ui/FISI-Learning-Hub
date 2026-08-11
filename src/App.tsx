@@ -5,6 +5,14 @@ import It from './pages/It'
 import Wirtschaft from './pages/Wirtschaft'
 import ItEnglish from './pages/ItEnglish'
 import Pruefungsvorbereitung from './pages/Pruefungsvorbereitung'
+import ApIhkOverview from './pages/apExam/ApIhkOverview'
+import ApExamDetail from './pages/apExam/ApExamDetail'
+import ApExamUebung from './pages/apExam/ApExamUebung'
+import ApExamSimulation from './pages/apExam/ApExamSimulation'
+import PruefungWirtschaftGesellschaft from './pages/wisoExam/PruefungWirtschaftGesellschaft'
+import WisoIhkOverview from './pages/wisoExam/WisoIhkOverview'
+import WisoIhkUebung from './pages/wisoExam/WisoIhkUebung'
+import WisoIhkSimulation from './pages/wisoExam/WisoIhkSimulation'
 import ModulePage from './pages/ModulePage'
 import LessonPage from './pages/LessonPage'
 import Search from './pages/Search'
@@ -32,6 +40,17 @@ export default function App() {
         <Route path="it-english/:moduleSlug/:topicSlug" element={<LessonPage subjectSlug="english" />} />
 
         <Route path="pruefungsvorbereitung" element={<Pruefungsvorbereitung />} />
+        <Route path="pruefungsvorbereitung/it-ap" element={<ApIhkOverview />} />
+        <Route path="pruefungsvorbereitung/it-ap/:examId" element={<ApExamDetail />} />
+        <Route path="pruefungsvorbereitung/it-ap/:examId/uebung" element={<ApExamUebung />} />
+        <Route path="pruefungsvorbereitung/it-ap/:examId/simulation" element={<ApExamSimulation />} />
+        <Route path="pruefungsvorbereitung/wirtschaft-gesellschaft" element={<PruefungWirtschaftGesellschaft />} />
+        <Route path="pruefungsvorbereitung/wirtschaft-gesellschaft/wiso-ihk" element={<WisoIhkOverview />} />
+        <Route path="pruefungsvorbereitung/wirtschaft-gesellschaft/wiso-ihk/uebung" element={<WisoIhkUebung />} />
+        <Route
+          path="pruefungsvorbereitung/wirtschaft-gesellschaft/wiso-ihk/simulation"
+          element={<WisoIhkSimulation />}
+        />
 
         <Route path="suche" element={<Search />} />
         <Route path="*" element={<NotFound />} />

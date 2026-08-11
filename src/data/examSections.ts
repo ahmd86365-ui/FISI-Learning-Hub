@@ -1,4 +1,4 @@
-import { Cpu, Landmark, FileCheck2 } from 'lucide-react'
+import { Cpu, Landmark } from 'lucide-react'
 import type { ExamSection } from '../types/content'
 
 export const examSections: ExamSection[] = [
@@ -8,7 +8,8 @@ export const examSections: ExamSection[] = [
     description: 'Abschlussprüfung Teil 1 und Teil 2 für Fachinformatiker für Systemintegration.',
     accent: 'brand',
     icon: Cpu,
-    status: 'coming-soon',
+    status: 'available',
+    path: '/pruefungsvorbereitung/it-ap',
   },
   {
     id: 'wg',
@@ -16,14 +17,7 @@ export const examSections: ExamSection[] = [
     description: 'Prüfungsrelevante Themen aus Wirtschafts- und Sozialkunde.',
     accent: 'amber',
     icon: Landmark,
-    status: 'coming-soon',
-  },
-  {
-    id: 'ehk',
-    title: 'EHK-Prüfungen',
-    description: 'Vorbereitung auf die Einsatzgebietsbezogenen Handlungskompetenzen.',
-    accent: 'rose',
-    icon: FileCheck2,
-    status: 'coming-soon',
+    status: 'available',
+    path: '/pruefungsvorbereitung/wirtschaft-gesellschaft',
   },
 ]

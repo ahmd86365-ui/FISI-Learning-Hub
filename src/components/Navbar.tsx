@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Menu, Search } from 'lucide-react'
+import { Menu, Search, LogOut } from 'lucide-react'
 import { Logo } from './Logo'
 import { ThemeToggle } from './ThemeToggle'
 import { IconButton } from './IconButton'
@@ -25,6 +25,12 @@ export function Navbar() {
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
   }, [])
+
+  const handleLogout = () => {
+    fetch('/api/logout', { method: 'POST', credentials: 'same-origin' }).finally(() => {
+      window.location.href = '/login.html'
+    })
+  }
 
   return (
     <>
@@ -84,6 +90,12 @@ export function Navbar() {
             />
 
             <ThemeToggle />
+
+            <IconButton
+              icon={<LogOut className="h-[1.15rem] w-[1.15rem]" />}
+              label="Abmelden"
+              onClick={handleLogout}
+            />
 
             <IconButton
               icon={<Menu className="h-5 w-5" />}

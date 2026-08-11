@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800&display=swap"
+      rel="stylesheet"
+    />
+    <title>FISI Learning Hub – Anmeldung</title>
+    <script>
+      ;(function () {
+        try {
+          var stored = window.sessionStorage.getItem('fisi-theme')
+          var theme =
+            stored === 'light' || stored === 'dark'
+              ? stored
+              : window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light'
+          if (theme === 'dark') document.documentElement.classList.add('dark')
+          document.documentElement.style.colorScheme = theme
+        } catch (e) {}
+      })()
+    </script>
+    <style>
+      :root {
+        --brand-500: #4a56e3;
+        --brand-600: #3a42c4;
+        --ink-100: #eef0f3;
+        --ink-200: #dce0e6;
+        --ink-400: #8b95a5;
+        --ink-500: #5f6b7d;
+        --ink-600: #454f60;
+        --ink-700: #313a49;
+        --ink-900: #10141c;
+        --ink-950: #0a0d13;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 1.5rem;
+        font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+        background: #ffffff;
+        color: var(--ink-900);
+      }
+
+      html.dark body {
+        background: var(--ink-950);
+        color: var(--ink-100);
+      }
+
+      .card {
+        width: 100%;
+        max-width: 24rem;
+        border-radius: 1.25rem;
+        border: 1px solid var(--ink-200);
+        background: #ffffff;
+        padding: 2rem;
+        box-shadow:
+          0 1px 2px 0 rgb(15 23 42 / 0.04),
+          0 8px 24px -8px rgb(15 23 42 / 0.1);
+      }
+
+      html.dark .card {
+        border-color: var(--ink-700);
+        background: #10141c;
+        box-shadow:
+          0 1px 2px 0 rgb(0 0 0 / 0.2),
+          0 8px 24px -8px rgb(0 0 0 / 0.4);
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .logo-mark {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 0.75rem;
+        background: var(--brand-500);
+        color: white;
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+
+      .logo-text {
+        font-weight: 700;
+        font-size: 1.05rem;
+        letter-spacing: -0.01em;
+      }
+
+      h1 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin: 0 0 0.4rem;
+        letter-spacing: -0.01em;
+      }
+
+      p.intro {
+        margin: 0 0 1.5rem;
+        font-size: 0.9rem;
+        color: var(--ink-500);
+      }
+
+      html.dark p.intro {
+        color: var(--ink-400);
+      }
+
+      label {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-bottom: 0.4rem;
+        color: var(--ink-600);
+      }
+
+      html.dark label {
+        color: var(--ink-400);
+      }
+
+      input[type='password'] {
+        width: 100%;
+        padding: 0.65rem 0.85rem;
+        border-radius: 0.75rem;
+        border: 1px solid var(--ink-200);
+        background: #ffffff;
+        color: var(--ink-900);
+        font-size: 0.95rem;
+        outline: none;
+        transition: border-color 0.15s ease;
+      }
+
+      html.dark input[type='password'] {
+        border-color: var(--ink-700);
+        background: #161b24;
+        color: var(--ink-100);
+      }
+
+      input[type='password']:focus {
+        border-color: var(--brand-500);
+        box-shadow: 0 0 0 3px rgb(74 86 227 / 0.18);
+      }
+
+      button {
+        width: 100%;
+        margin-top: 1.25rem;
+        padding: 0.7rem 1rem;
+        border: none;
+        border-radius: 0.75rem;
+        background: var(--brand-500);
+        color: white;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          background 0.15s ease,
+          opacity 0.15s ease;
+      }
+
+      button:hover {
+        background: var(--brand-600);
+      }
+
+      button:disabled {
+        opacity: 0.6;
+        cursor: default;
+      }
+
+      .error {
+        display: none;
+        margin-top: 0.9rem;
+        padding: 0.65rem 0.85rem;
+        border-radius: 0.65rem;
+        background: rgb(239 68 68 / 0.1);
+        border: 1px solid rgb(239 68 68 / 0.3);
+        color: #b91c1c;
+        font-size: 0.85rem;
+      }
+
+      html.dark .error {
+        color: #fca5a5;
+      }
+
+      .error.visible {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <div class="logo">
+        <span class="logo-mark">FL</span>
+        <span class="logo-text">FISI Learning Hub</span>
+      </div>
+      <h1>Anmeldung erforderlich</h1>
+      <p class="intro">Bitte Passwort eingeben, um fortzufahren.</p>
+
+      <form id="login-form" autocomplete="off">
+        <label for="password">Passwort</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" autofocus required />
+        <div id="error" class="error" role="alert"></div>
+        <button id="submit" type="submit">Anmelden</button>
+      </form>
+    </main>
+
+    <script>
+      var form = document.getElementById('login-form')
+      var input = document.getElementById('password')
+      var errorBox = document.getElementById('error')
+      var submitBtn = document.getElementById('submit')
+
+      function showError(message) {
+        errorBox.textContent = message
+        errorBox.classList.add('visible')
+      }
+
+      function hideError() {
+        errorBox.classList.remove('visible')
+        errorBox.textContent = ''
+      }
+
+      function safeRedirectTarget() {
+        var params = new URLSearchParams(window.location.search)
+        var redirect = params.get('redirect')
+        if (!redirect) return '/'
+        // Only allow same-origin relative paths, never an absolute URL to another host.
+        if (!redirect.startsWith('/') || redirect.startsWith('//')) return '/'
+        return redirect
+      }
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault()
+        hideError()
+        submitBtn.disabled = true
+
+        fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({ password: input.value }),
+        })
+          .then(function (res) {
+            return res.json().then(function (data) {
+              return { ok: res.ok, data: data }
+            })
+          })
+          .then(function (result) {
+            if (result.ok && result.data && result.data.ok) {
+              window.location.href = safeRedirectTarget()
+              return
+            }
+            submitBtn.disabled = false
+            showError((result.data && result.data.error) || 'Falsches Passwort.')
+            input.select()
+          })
+          .catch(function () {
+            submitBtn.disabled = false
+            showError('Verbindung zum Server fehlgeschlagen. Bitte erneut versuchen.')
+          })
+      })
+    </script>
+  </body>
+</html>

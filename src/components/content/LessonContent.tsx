@@ -1,7 +1,10 @@
 import { useState } from 'react'
-import { Check, Copy, Info, Lightbulb, TriangleAlert } from 'lucide-react'
+import { Check, Copy, GraduationCap, Info, Lightbulb, Sparkles, TriangleAlert } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import type { ContentBlock } from '../../types/content'
+import { illustrationRegistry } from './illustrations/registry'
+import { IllustrationFrame } from './illustrations/IllustrationFrame'
+import { interactiveRegistry } from './interactive/registry'
 
 export function LessonContent({ blocks }: { blocks: ContentBlock[] }) {
   if (blocks.length === 0) return null
@@ -133,6 +136,43 @@ function ContentBlockView({ block }: { block: ContentBlock }) {
           </ul>
         </div>
       )
+
+    case 'insight':
+      return (
+        <div className="rounded-xl border border-violet-200 bg-violet-50/60 p-4 dark:border-violet-500/30 dark:bg-violet-500/10">
+          <p className="mb-1.5 flex items-center gap-2 text-sm font-semibold text-violet-800 dark:text-violet-300">
+            <Sparkles className="h-4 w-4" aria-hidden="true" />
+            {block.title ?? 'Zusatzwissen'}
+          </p>
+          <p className="text-sm leading-relaxed text-violet-900/80 dark:text-violet-200/80">{block.text}</p>
+        </div>
+      )
+
+    case 'exam-tip':
+      return <Callout icon={GraduationCap} tone="rose" label="Prüfungsfokus" text={block.text} />
+
+    case 'illustration': {
+      const Illustration = illustrationRegistry[block.component]
+      if (!Illustration) return null
+      return (
+        <IllustrationFrame caption={block.caption}>
+          <Illustration />
+        </IllustrationFrame>
+      )
+    }
+
+    case 'interactive': {
+      const Widget = interactiveRegistry[block.component]
+      if (!Widget) return null
+      return (
+        <div>
+          <Widget />
+          {block.caption && (
+            <p className="mt-2 text-center text-xs text-ink-500 dark:text-ink-400">{block.caption}</p>
+          )}
+        </div>
+      )
+    }
   }
 }
 
@@ -143,14 +183,18 @@ function Callout({
   text,
 }: {
   icon: LucideIcon
-  tone: 'brand' | 'amber'
+  tone: 'brand' | 'amber' | 'rose'
   label: string
   text: string
 }) {
-  const toneCls =
-    tone === 'brand'
-      ? 'border-brand-200 bg-brand-50/60 text-brand-800 dark:border-brand-500/30 dark:bg-brand-500/10 dark:text-brand-300'
-      : 'border-amber-200 bg-amber-50/60 text-amber-800 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-300'
+  const toneClsMap = {
+    brand:
+      'border-brand-200 bg-brand-50/60 text-brand-800 dark:border-brand-500/30 dark:bg-brand-500/10 dark:text-brand-300',
+    amber:
+      'border-amber-200 bg-amber-50/60 text-amber-800 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-300',
+    rose: 'border-rose-200 bg-rose-50/60 text-rose-800 dark:border-rose-500/30 dark:bg-rose-500/10 dark:text-rose-300',
+  } as const
+  const toneCls = toneClsMap[tone]
 
   return (
     <div className={`flex gap-3 rounded-xl border p-4 ${toneCls}`}>

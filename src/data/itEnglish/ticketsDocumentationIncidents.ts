@@ -1,0 +1,258 @@
+import type { Exercise, Topic } from '../../types/content'
+
+/**
+ * Source: IT_Englisch.md, Lesson 18 "TICKETS & DOCUMENTATION" (lines 2060-2118,
+ * incl. full example ticket), Lesson 19 "TECHNICAL DOCUMENTATION" (lines
+ * 2120-2153), and Lesson 29 "INCIDENT REPORT" (lines 2560-2616, incl. full
+ * example incident report). IT_Englisch.md is the sole source of truth —
+ * nothing here contradicts or extends its vocabulary, example ticket,
+ * example incident report, or example sentences. Exercises are original
+ * practice questions applying exactly the content given in that source.
+ */
+
+const TOPIC_SLUG = 'tickets-documentation-incidents'
+
+const exercises: Exercise[] = [
+  {
+    id: 'ex-eng-fisi-tickets-01',
+    topicSlug: TOPIC_SLUG,
+    type: 'single-choice',
+    difficulty: 'easy',
+    question: 'What is the English term for "Störung"?',
+    options: [
+      { id: 'a', text: 'incident' },
+      { id: 'b', text: 'request' },
+      { id: 'c', text: 'issue' },
+    ],
+    correctAnswer: 'a',
+    explanation: 'incident — Störung.',
+  },
+  {
+    id: 'ex-eng-fisi-tickets-02',
+    topicSlug: TOPIC_SLUG,
+    type: 'single-choice',
+    difficulty: 'easy',
+    question: 'What is the German translation of "pending"?',
+    options: [
+      { id: 'a', text: 'ausstehend' },
+      { id: 'b', text: 'geschlossen' },
+      { id: 'c', text: 'gelöst' },
+    ],
+    correctAnswer: 'a',
+    explanation: 'pending — ausstehend.',
+  },
+  {
+    id: 'ex-eng-fisi-tickets-03',
+    topicSlug: TOPIC_SLUG,
+    type: 'single-choice',
+    difficulty: 'medium',
+    question: 'In the example ticket (Lesson 18), what was the cause of the network connection problem?',
+    options: [
+      { id: 'a', text: 'The DHCP service was unavailable.' },
+      { id: 'b', text: 'The router was broken.' },
+      { id: 'c', text: 'The IP address was wrong.' },
+    ],
+    correctAnswer: 'a',
+    explanation: 'Cause: The DHCP service was unavailable. → Ursache: Der DHCP-Dienst war nicht verfügbar.',
+  },
+  {
+    id: 'ex-eng-fisi-tickets-04',
+    topicSlug: TOPIC_SLUG,
+    type: 'text',
+    difficulty: 'medium',
+    question: 'In the example ticket, what was the solution? "The DHCP service was ____."',
+    correctAnswer: 'restarted',
+    explanation: 'Solution: The DHCP service was restarted. → Lösung: Der DHCP-Dienst wurde neu gestartet.',
+  },
+  {
+    id: 'ex-eng-fisi-tickets-05',
+    topicSlug: TOPIC_SLUG,
+    type: 'single-choice',
+    difficulty: 'easy',
+    question: 'What is the English term for "aktualisieren / aufrüsten"?',
+    options: [
+      { id: 'a', text: 'upgrade' },
+      { id: 'b', text: 'update' },
+      { id: 'c', text: 'deploy' },
+    ],
+    correctAnswer: 'a',
+    explanation: 'upgrade — aktualisieren / aufrüsten. (update — aktualisieren.)',
+  },
+  {
+    id: 'ex-eng-fisi-tickets-06',
+    topicSlug: TOPIC_SLUG,
+    type: 'true-false',
+    difficulty: 'easy',
+    question: 'The "Useful structure" in Lesson 19 uses the sequence: First, Next, Then, Finally.',
+    options: [
+      { id: 'true', text: 'True' },
+      { id: 'false', text: 'False' },
+    ],
+    correctAnswer: 'true',
+    explanation: 'First, connect the server to the network. Next, configure the IP address. Then restart the service. Finally, verify the configuration.',
+  },
+  {
+    id: 'ex-eng-fisi-tickets-07',
+    topicSlug: TOPIC_SLUG,
+    type: 'single-choice',
+    difficulty: 'medium',
+    question: 'In the example incident report (Lesson 29), what time did the incident occur?',
+    options: [
+      { id: 'a', text: '09:15' },
+      { id: 'b', text: '10:30' },
+      { id: 'c', text: '08:00' },
+    ],
+    correctAnswer: 'a',
+    explanation: 'Time: 09:15 → Zeit: 09:15.',
+  },
+  {
+    id: 'ex-eng-fisi-tickets-08',
+    topicSlug: TOPIC_SLUG,
+    type: 'single-choice',
+    difficulty: 'medium',
+    question: 'In the example incident report, what was the cause of the network outage?',
+    options: [
+      { id: 'a', text: 'The WAN connection was unavailable.' },
+      { id: 'b', text: 'The router was replaced.' },
+      { id: 'c', text: 'The DHCP service failed.' },
+    ],
+    correctAnswer: 'a',
+    explanation: 'Cause: The WAN connection was unavailable. → Ursache: Die WAN-Verbindung war nicht verfügbar.',
+  },
+  {
+    id: 'ex-eng-fisi-tickets-09',
+    topicSlug: TOPIC_SLUG,
+    type: 'text',
+    difficulty: 'easy',
+    question: 'Complete: "First, connect the server to the ____." (Zuerst verbinden Sie den Server mit dem Netzwerk.)',
+    correctAnswer: 'network',
+    explanation: 'First, connect the server to the network. → Zuerst verbinden Sie den Server mit dem Netzwerk.',
+  },
+  {
+    id: 'ex-eng-fisi-tickets-10',
+    topicSlug: TOPIC_SLUG,
+    type: 'single-choice',
+    difficulty: 'easy',
+    question: 'What is the German translation of "assigned to"?',
+    options: [
+      { id: 'a', text: 'zugewiesen an' },
+      { id: 'b', text: 'zugeordnet zu' },
+      { id: 'c', text: 'übertragen an' },
+    ],
+    correctAnswer: 'a',
+    explanation: 'assigned to — zugewiesen an.',
+  },
+]
+
+export const ticketsDocumentationIncidentsTopic: Topic = {
+  id: 'topic-eng-fisi-tickets-docs',
+  slug: TOPIC_SLUG,
+  moduleSlug: 'technical-english-fisi',
+  title: 'Tickets, Documentation & Incident Reports',
+  shortIntro: 'Vokabular und feste Formulierungen für Support-Tickets, technische Dokumentation und Störungsberichte.',
+  order: 14,
+  keyPoints: [
+    'Ein Ticket folgt der festen Struktur: Subject, Description, Investigation, Cause, Solution, Status.',
+    'Ein Incident Report ergänzt zusätzlich Time und Affected system.',
+    'Technische Anleitungen nutzen die Signalwörter First, Next, Then, Finally.',
+    'status: pending (ausstehend) → resolved (gelöst) → closed (geschlossen).',
+  ],
+  exercises,
+  content: [
+    { type: 'heading', level: 2, text: 'Tickets & Documentation' },
+    {
+      type: 'table',
+      headers: ['English', 'Deutsch'],
+      rows: [
+        ['ticket', 'Ticket'],
+        ['issue', 'Problem'],
+        ['incident', 'Störung'],
+        ['request', 'Anfrage'],
+        ['description', 'Beschreibung'],
+        ['status', 'Status'],
+        ['priority', 'Priorität'],
+        ['assigned to', 'zugewiesen an'],
+        ['resolved', 'gelöst'],
+        ['closed', 'geschlossen'],
+        ['pending', 'ausstehend'],
+        ['documentation', 'Dokumentation'],
+        ['procedure', 'Vorgehensweise'],
+        ['instructions', 'Anleitung'],
+        ['configuration', 'Konfiguration'],
+      ],
+    },
+    { type: 'heading', level: 3, text: 'Example ticket' },
+    {
+      type: 'table',
+      headers: ['Field', 'English', 'Deutsch'],
+      rows: [
+        ['Subject', 'Network connection problem', 'Problem mit der Netzwerkverbindung'],
+        ['Description', 'The user cannot connect to the company network.', 'Der Benutzer kann keine Verbindung zum Firmennetzwerk herstellen.'],
+        ['Investigation', 'I checked the network adapter and IP configuration.', 'Ich habe den Netzwerkadapter und die IP-Konfiguration überprüft.'],
+        ['Cause', 'The DHCP service was unavailable.', 'Der DHCP-Dienst war nicht verfügbar.'],
+        ['Solution', 'The DHCP service was restarted.', 'Der DHCP-Dienst wurde neu gestartet.'],
+        ['Status', 'Resolved.', 'Gelöst.'],
+      ],
+    },
+    { type: 'heading', level: 2, text: 'Technical Documentation' },
+    {
+      type: 'table',
+      headers: ['English', 'Deutsch'],
+      rows: [
+        ['configure', 'konfigurieren'],
+        ['install', 'installieren'],
+        ['enable', 'aktivieren'],
+        ['disable', 'deaktivieren'],
+        ['create', 'erstellen'],
+        ['remove', 'entfernen'],
+        ['modify', 'ändern'],
+        ['verify', 'überprüfen'],
+        ['test', 'testen'],
+        ['restart', 'neu starten'],
+        ['update', 'aktualisieren'],
+        ['upgrade', 'aktualisieren / aufrüsten'],
+        ['deploy', 'bereitstellen'],
+        ['maintain', 'warten'],
+      ],
+    },
+    { type: 'heading', level: 3, text: 'Useful structure' },
+    {
+      type: 'table',
+      headers: ['English', 'Deutsch'],
+      rows: [
+        ['First, connect the server to the network.', 'Zuerst verbinden Sie den Server mit dem Netzwerk.'],
+        ['Next, configure the IP address.', 'Als Nächstes konfigurieren Sie die IP-Adresse.'],
+        ['Then restart the service.', 'Starten Sie anschließend den Dienst neu.'],
+        ['Finally, verify the configuration.', 'Überprüfen Sie abschließend die Konfiguration.'],
+      ],
+    },
+    { type: 'heading', level: 2, text: 'Incident Report' },
+    {
+      type: 'table',
+      headers: ['Field', 'English', 'Deutsch'],
+      rows: [
+        ['Incident', 'Network outage', 'Netzwerkausfall'],
+        ['Time', '09:15', '09:15'],
+        ['Affected system', 'Company network', 'Firmennetzwerk'],
+        ['Problem', 'Users cannot access the Internet.', 'Benutzer können nicht auf das Internet zugreifen.'],
+        ['Investigation', 'The router was checked and restarted.', 'Der Router wurde überprüft und neu gestartet.'],
+        ['Cause', 'The WAN connection was unavailable.', 'Die WAN-Verbindung war nicht verfügbar.'],
+        ['Solution', 'The connection was restored.', 'Die Verbindung wurde wiederhergestellt.'],
+        ['Status', 'Resolved.', 'Gelöst.'],
+      ],
+    },
+    {
+      type: 'key-points',
+      items: [
+        'Ein Ticket besteht immer aus Subject, Description, Investigation, Cause, Solution und Status.',
+        'Ein Incident Report enthält zusätzlich Time und Affected system.',
+        'Technische Anleitungen folgen der Reihenfolge First → Next → Then → Finally.',
+        'status kann pending, resolved oder closed sein.',
+      ],
+    },
+    {
+      type: 'exam-tip',
+      text: 'Übe, ein eigenes Ticket oder einen Incident Report exakt nach dem Muster aus Lesson 18/29 zu formulieren (Subject/Incident → Description/Problem → Investigation → Cause → Solution → Status) — diese Struktur wird im Fachgespräch oft direkt abgefragt.',
+    },
+  ],
+}
