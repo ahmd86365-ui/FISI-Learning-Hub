@@ -17,6 +17,7 @@ import ModulePage from './pages/ModulePage'
 import LessonPage from './pages/LessonPage'
 import Search from './pages/Search'
 import NotFound from './pages/NotFound'
+import ItTechnicalPage from './pages/itTechnical/ItTechnicalPage'
 
 export default function App() {
   return (
@@ -25,6 +26,9 @@ export default function App() {
         <Route index element={<Home />} />
 
         <Route path="it" element={<It />} />
+        <Route path="it/it-technical" element={<ItTechnicalPage />} />
+        <Route path="it/it-technical/:chapterSlug" element={<ItTechnicalPage />} />
+        <Route path="it/it-technical/:chapterSlug/:lessonSlug" element={<ItTechnicalPage />} />
         <Route path="it/:moduleSlug" element={<ModulePage subjectSlug="it" />} />
         <Route path="it/:moduleSlug/:topicSlug" element={<LessonPage subjectSlug="it" />} />
 

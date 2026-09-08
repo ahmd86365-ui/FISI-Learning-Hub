@@ -4,3 +4,6 @@ dist-ssr
 *.local
 .DS_Store
 .env
+
+# Private IT Technical course source material
+/IT-Technik/
