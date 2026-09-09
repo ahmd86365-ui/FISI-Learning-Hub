@@ -8,6 +8,7 @@ import { Breadcrumb } from '../components/content/Breadcrumb'
 import { LessonContent } from '../components/content/LessonContent'
 import { ExercisesSection } from '../components/content/ExercisesSection'
 import { ContentActions } from '../components/saved/ContentActions'
+import { LessonCompletionButton } from '../components/progress/LessonCompletionButton'
 import { TestRunner } from '../components/content/TestRunner'
 import { getSubjectBySlug } from '../data/subjects'
 import { getModuleBySlug } from '../data/modules'
@@ -59,8 +60,9 @@ export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }
       />
 
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-        <div className="mb-6">
+        <div className="mb-6 flex flex-wrap gap-2">
           <ContentActions contentType="lesson" contentId={topic.id} title={topic.title} />
+          <LessonCompletionButton lessonId={topic.id} />
         </div>
         {hasNothing ? (
           <EmptyState

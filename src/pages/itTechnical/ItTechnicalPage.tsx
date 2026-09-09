@@ -7,6 +7,7 @@ import { LessonContent } from '../../components/content/LessonContent'
 import { ExercisesSection } from '../../components/content/ExercisesSection'
 import { ButtonLink } from '../../components/Button'
 import { ContentActions } from '../../components/saved/ContentActions'
+import { LessonCompletionButton } from '../../components/progress/LessonCompletionButton'
 import { itTechnicalChapters, itTechnicalModule as mod } from '../../data/itTechnical'
 import { getSubjectBySlug } from '../../data/subjects'
 import type { Topic } from '../../types/content'
@@ -49,8 +50,9 @@ export default function ItTechnicalPage() {
       />
       {lesson ? (
         <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-          <div className="mb-6">
+          <div className="mb-6 flex flex-wrap gap-2">
             <ContentActions contentType="lesson" contentId={lesson.id} title={lesson.title} />
+            <LessonCompletionButton lessonId={lesson.id} />
           </div>
           <LessonContent blocks={lesson.content} />
           {lesson.exercises.length > 0 && (
