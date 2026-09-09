@@ -2,7 +2,7 @@ import type { ExamAttempt } from '../contexts/ExamAttemptsContext'
 import type { QuestionPerformance } from '../contexts/QuestionPerformanceContext'
 import type { SavedItem } from '../contexts/SavedItemsContext'
 import type { StudyActivity } from '../contexts/StudyActivityContext'
-import { isSimulationAnswerCorrect } from './examSimulation'
+import { isSimulationAnswerCorrect } from './examSimulationCore'
 import { lessonCatalog } from './lessonCatalog'
 
 export type ReviewPriority = 'Sehr hoch' | 'Hoch' | 'Mittel' | 'Niedrig'

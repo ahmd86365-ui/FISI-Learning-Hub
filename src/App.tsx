@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import { AuthProvider } from './contexts/AuthContext'
@@ -6,33 +7,34 @@ import { LearningProgressProvider } from './contexts/LearningProgressContext'
 import { StudyActivityProvider } from './contexts/StudyActivityContext'
 import { QuestionPerformanceProvider } from './contexts/QuestionPerformanceContext'
 import { GuestOnlyRoute, ProtectedRoute } from './components/auth/AuthGuards'
-import Home from './pages/Home'
-import It from './pages/It'
-import Wirtschaft from './pages/Wirtschaft'
-import ItEnglish from './pages/ItEnglish'
-import Pruefungsvorbereitung from './pages/Pruefungsvorbereitung'
-import ApIhkOverview from './pages/apExam/ApIhkOverview'
-import ApExamDetail from './pages/apExam/ApExamDetail'
-import ApExamUebung from './pages/apExam/ApExamUebung'
-import ApExamSimulation from './pages/apExam/ApExamSimulation'
-import PruefungWirtschaftGesellschaft from './pages/wisoExam/PruefungWirtschaftGesellschaft'
-import WisoIhkOverview from './pages/wisoExam/WisoIhkOverview'
-import WisoIhkUebung from './pages/wisoExam/WisoIhkUebung'
-import WisoIhkSimulation from './pages/wisoExam/WisoIhkSimulation'
-import ModulePage from './pages/ModulePage'
-import LessonPage from './pages/LessonPage'
-import Search from './pages/Search'
-import NotFound from './pages/NotFound'
-import ItTechnicalPage from './pages/itTechnical/ItTechnicalPage'
-import Auth from './pages/Auth'
-import Profile from './pages/Profile'
-import SavedItems from './pages/SavedItems'
-import LearningProgress from './pages/LearningProgress'
-import LearningStatistics from './pages/LearningStatistics'
-import ErrorTraining from './pages/ErrorTraining'
-import Exams from './pages/Exams'
 import { ExamAttemptsProvider } from './contexts/ExamAttemptsContext'
-import SmartReview from './pages/SmartReview'
+
+const Home = lazy(() => import('./pages/Home'))
+const It = lazy(() => import('./pages/It'))
+const Wirtschaft = lazy(() => import('./pages/Wirtschaft'))
+const ItEnglish = lazy(() => import('./pages/ItEnglish'))
+const Pruefungsvorbereitung = lazy(() => import('./pages/Pruefungsvorbereitung'))
+const ApIhkOverview = lazy(() => import('./pages/apExam/ApIhkOverview'))
+const ApExamDetail = lazy(() => import('./pages/apExam/ApExamDetail'))
+const ApExamUebung = lazy(() => import('./pages/apExam/ApExamUebung'))
+const ApExamSimulation = lazy(() => import('./pages/apExam/ApExamSimulation'))
+const PruefungWirtschaftGesellschaft = lazy(() => import('./pages/wisoExam/PruefungWirtschaftGesellschaft'))
+const WisoIhkOverview = lazy(() => import('./pages/wisoExam/WisoIhkOverview'))
+const WisoIhkUebung = lazy(() => import('./pages/wisoExam/WisoIhkUebung'))
+const WisoIhkSimulation = lazy(() => import('./pages/wisoExam/WisoIhkSimulation'))
+const ModulePage = lazy(() => import('./pages/ModulePage'))
+const LessonPage = lazy(() => import('./pages/LessonPage'))
+const Search = lazy(() => import('./pages/Search'))
+const NotFound = lazy(() => import('./pages/NotFound'))
+const ItTechnicalPage = lazy(() => import('./pages/itTechnical/ItTechnicalPage'))
+const Auth = lazy(() => import('./pages/Auth'))
+const Profile = lazy(() => import('./pages/Profile'))
+const SavedItems = lazy(() => import('./pages/SavedItems'))
+const LearningProgress = lazy(() => import('./pages/LearningProgress'))
+const LearningStatistics = lazy(() => import('./pages/LearningStatistics'))
+const ErrorTraining = lazy(() => import('./pages/ErrorTraining'))
+const Exams = lazy(() => import('./pages/Exams'))
+const SmartReview = lazy(() => import('./pages/SmartReview'))
 
 export default function App() {
   return (
@@ -42,6 +44,7 @@ export default function App() {
           <QuestionPerformanceProvider>
             <ExamAttemptsProvider>
             <LearningProgressProvider>
+            <Suspense fallback={<RouteLoading />}>
             <Routes>
               <Route element={<GuestOnlyRoute />}>
                 <Route path="auth" element={<Auth />} />
@@ -94,6 +97,7 @@ export default function App() {
                 </Route>
               </Route>
             </Routes>
+            </Suspense>
             </LearningProgressProvider>
             </ExamAttemptsProvider>
           </QuestionPerformanceProvider>
@@ -101,4 +105,8 @@ export default function App() {
       </SavedItemsProvider>
     </AuthProvider>
   )
+}
+
+function RouteLoading() {
+  return <div className="flex min-h-[50vh] items-center justify-center px-4" role="status" aria-live="polite">Seite wird geladen …</div>
 }

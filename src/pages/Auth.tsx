@@ -30,14 +30,16 @@ export default function Auth() {
     const formData = new FormData(event.currentTarget)
     const email = String(formData.get('email') ?? '').trim()
     const password = String(formData.get('password') ?? '')
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-
-    setFeedback(
-      error
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email, password })
+      setFeedback(error
         ? { type: 'error', message: error.message }
-        : { type: 'success', message: 'Du bist jetzt angemeldet.' },
-    )
-    setSubmitting(false)
+        : { type: 'success', message: 'Du bist jetzt angemeldet.' })
+    } catch {
+      setFeedback({ type: 'error', message: 'Die Anmeldung ist fehlgeschlagen. Bitte prüfe deine Verbindung.' })
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const handleRegister = async (event: FormEvent<HTMLFormElement>) => {
@@ -58,39 +60,46 @@ export default function Auth() {
     }
 
     setSubmitting(true)
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { first_name: firstName, last_name: lastName },
-        emailRedirectTo: getAuthRedirectUrl(),
-      },
-    })
-
-    if (error) {
-      setFeedback({ type: 'error', message: error.message })
-    } else if (data.session) {
-      setFeedback({ type: 'success', message: 'Dein Konto wurde erstellt und du bist angemeldet.' })
-      form.reset()
-    } else {
-      setFeedback({
-        type: 'success',
-        message: 'Fast geschafft: Bitte bestätige deine E-Mail-Adresse über den Link in deinem Postfach.',
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: { first_name: firstName, last_name: lastName },
+          emailRedirectTo: getAuthRedirectUrl(),
+        },
       })
-      form.reset()
+      if (error) {
+        setFeedback({ type: 'error', message: error.message })
+      } else if (data.session) {
+        setFeedback({ type: 'success', message: 'Dein Konto wurde erstellt und du bist angemeldet.' })
+        form.reset()
+      } else {
+        setFeedback({
+          type: 'success',
+          message: 'Fast geschafft: Bitte bestätige deine E-Mail-Adresse über den Link in deinem Postfach.',
+        })
+        form.reset()
+      }
+    } catch {
+      setFeedback({ type: 'error', message: 'Die Registrierung ist fehlgeschlagen. Bitte prüfe deine Verbindung.' })
+    } finally {
+      setSubmitting(false)
     }
-    setSubmitting(false)
   }
 
   const handleGoogleLogin = async () => {
     setSubmitting(true)
     setFeedback(null)
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: getAuthRedirectUrl() },
-    })
-    if (error) {
-      setFeedback({ type: 'error', message: error.message })
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo: getAuthRedirectUrl() },
+      })
+      if (error) setFeedback({ type: 'error', message: error.message })
+    } catch {
+      setFeedback({ type: 'error', message: 'Google Login konnte nicht gestartet werden. Bitte prüfe deine Verbindung.' })
+    } finally {
       setSubmitting(false)
     }
   }

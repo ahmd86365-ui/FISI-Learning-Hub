@@ -160,7 +160,7 @@ export function Navbar() {
             <IconButton
               icon={<UserRoundX className="h-[1.15rem] w-[1.15rem]" />}
               label="Benutzerkonto abmelden"
-              onClick={() => void signOut()}
+              onClick={() => void signOut().catch((error: unknown) => console.error('Abmeldung fehlgeschlagen.', error))}
               className="hidden lg:inline-flex"
             />
 

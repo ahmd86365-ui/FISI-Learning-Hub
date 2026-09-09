@@ -1,7 +1,7 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { supabase } from '../lib/supabase'
-import type { ExamMode, ExamResultData, SimulationQuestion } from '../lib/examSimulation'
-import { isSimulationAnswerCorrect, toPerformanceAttempt } from '../lib/examSimulation'
+import type { ExamMode, ExamResultData, SimulationQuestion } from '../lib/examSimulationCore'
+import { isSimulationAnswerCorrect, toPerformanceAttempt } from '../lib/examSimulationCore'
 import { useAuth } from './AuthContext'
 import { useQuestionPerformance } from './QuestionPerformanceContext'
 
@@ -49,6 +49,8 @@ export function ExamAttemptsProvider({ children }: { children: ReactNode }) {
   const [attempts, setAttempts] = useState<ExamAttempt[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const currentUser = useRef(session?.user.id)
+  currentUser.current = session?.user.id
 
   useEffect(() => {
     let active = true
@@ -77,6 +79,8 @@ export function ExamAttemptsProvider({ children }: { children: ReactNode }) {
   }, [session?.user.id])
 
   const submitExam = useCallback(async (input: SubmitExamInput) => {
+    const userId = currentUser.current
+    if (!userId) return null
     const answeredQuestions = input.questions.filter((question) => (input.answers[question.questionKey] ?? []).some((value) => value.trim()))
     const correct = answeredQuestions.filter((question) => isSimulationAnswerCorrect(question, input.answers[question.questionKey] ?? [])).length
     const incorrect = answeredQuestions.length - correct
@@ -116,6 +120,7 @@ export function ExamAttemptsProvider({ children }: { children: ReactNode }) {
       p_result_data: { questions: input.questions, answers: input.answers },
       p_question_results: questionResults,
     }).single()
+    if (currentUser.current !== userId) return null
 
     if (saveError) {
       setError(saveError.message)

@@ -194,7 +194,7 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
             <div className="border-t border-ink-200 p-5 dark:border-ink-800">
               <button
                 type="button"
-                onClick={() => void signOut()}
+                onClick={() => void signOut().catch((error: unknown) => console.error('Abmeldung fehlgeschlagen.', error))}
                 className="mb-4 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-ink-700 transition-colors hover:bg-ink-100 dark:text-ink-200 dark:hover:bg-ink-800"
               >
                 <UserRoundX className="h-5 w-5" aria-hidden="true" />

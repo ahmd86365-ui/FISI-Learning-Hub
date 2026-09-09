@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from './AuthContext'
 
@@ -27,6 +27,8 @@ export function StudyActivityProvider({ children }: { children: ReactNode }) {
   const [activities, setActivities] = useState<StudyActivity[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const currentUser = useRef(session?.user.id)
+  currentUser.current = session?.user.id
 
   useEffect(() => {
     let active = true
@@ -87,6 +89,7 @@ export function StudyActivityProvider({ children }: { children: ReactNode }) {
         })
         .select('id,user_id,activity_type,lesson_id,activity_date,occurred_at')
         .single()
+      if (currentUser.current !== user.id) return
 
       if (saveError) {
         setActivities((current) => current.filter((activity) => activity.id !== optimistic.id))

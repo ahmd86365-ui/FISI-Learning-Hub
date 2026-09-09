@@ -95,6 +95,8 @@ export function QuestionPerformanceProvider({ children }: { children: ReactNode 
   useEffect(() => { void refresh() }, [refresh])
 
   const recordAttempt = useCallback(async (attempt: QuestionAttempt) => {
+    const userId = currentUser.current
+    if (!userId) return
     const { data, error: saveError } = await supabase.rpc('record_question_attempt', {
       p_question_key: attempt.questionKey,
       p_question_id: attempt.questionId,
@@ -107,6 +109,7 @@ export function QuestionPerformanceProvider({ children }: { children: ReactNode 
       p_question_data: attempt.questionData,
       p_correct: attempt.correct,
     }).single()
+    if (currentUser.current !== userId) return
 
     if (saveError) {
       setError(saveError.message)

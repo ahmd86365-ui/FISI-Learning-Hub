@@ -87,6 +87,10 @@ try {
     const response = await fetch(`http://localhost:${port}${route}`)
     assert.equal(response.status, 200)
     assert.equal(response.headers.get('cache-control'), 'no-cache')
+    assert.equal(response.headers.get('x-content-type-options'), 'nosniff')
+    assert.equal(response.headers.get('x-frame-options'), 'DENY')
+    assert.equal(response.headers.get('referrer-policy'), 'strict-origin-when-cross-origin')
+    assert.equal(response.headers.get('permissions-policy'), 'camera=(), microphone=(), geolocation=()')
     assert.equal(await response.text(), html)
   }
   for (const [route, type] of [['/sw.js', 'javascript'], ['/manifest.webmanifest', 'manifest'], ['/offline.html', 'text/html'], ['/icons/icon-192.png', 'image/png']]) {

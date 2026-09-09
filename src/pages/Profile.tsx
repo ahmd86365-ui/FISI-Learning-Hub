@@ -202,7 +202,15 @@ export default function Profile() {
           </div>
 
           <div className="flex flex-col-reverse gap-3 border-t border-ink-200 bg-ink-50 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-8 dark:border-ink-800 dark:bg-ink-950/40">
-            <Button type="button" variant="ghost" icon={<LogOut />} onClick={() => void signOut()}>
+            <Button
+              type="button"
+              variant="ghost"
+              icon={<LogOut />}
+              onClick={() => void signOut().catch((error: unknown) => setFeedback({
+                type: 'error',
+                message: error instanceof Error ? error.message : 'Die Abmeldung ist fehlgeschlagen.',
+              }))}
+            >
               Abmelden
             </Button>
             <Button type="submit" icon={<Check />} disabled={saving}>

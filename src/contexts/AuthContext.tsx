@@ -17,11 +17,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let active = true
 
-    void supabase.auth.getSession().then(({ data }) => {
-      if (!active) return
-      setSession(data.session)
-      setLoading(false)
-    })
+    void supabase.auth.getSession()
+      .then(({ data, error }) => {
+        if (!active) return
+        if (error) console.error('Sitzung konnte nicht geladen werden.', error)
+        setSession(error ? null : data.session)
+      })
+      .catch((error: unknown) => {
+        if (active) console.error('Sitzung konnte nicht geladen werden.', error)
+      })
+      .finally(() => {
+        if (active) setLoading(false)
+      })
 
     const { data } = supabase.auth.onAuthStateChange((_event, nextSession) => {
       if (!active) return

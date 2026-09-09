@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useAuth } from './AuthContext'
 import { supabase } from '../lib/supabase'
 
@@ -42,9 +42,12 @@ export function SavedItemsProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [pendingKeys, setPendingKeys] = useState<Set<string>>(new Set())
+  const currentUser = useRef(session?.user.id)
+  currentUser.current = session?.user.id
 
   useEffect(() => {
     let active = true
+    setPendingKeys(new Set())
     if (!session?.user) {
       setItems([])
       setLoading(false)
@@ -131,6 +134,7 @@ export function SavedItemsProvider({ children }: { children: ReactNode }) {
             .eq('content_id', content.contentId)
         : supabase.from('user_content_items').insert(optimisticItem)
       const { error: saveError } = await query
+      if (currentUser.current !== user.id) return
 
       if (saveError) {
         setItems((current) =>

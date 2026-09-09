@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useAuth } from './AuthContext'
 import { supabase } from '../lib/supabase'
 import { useStudyActivity } from './StudyActivityContext'
@@ -28,9 +28,12 @@ export function LearningProgressProvider({ children }: { children: ReactNode }) 
   const [pendingIds, setPendingIds] = useState<Set<string>>(new Set())
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const currentUser = useRef(session?.user.id)
+  currentUser.current = session?.user.id
 
   useEffect(() => {
     let active = true
+    setPendingIds(new Set())
     if (!session?.user) {
       setProgress([])
       setLoading(false)
@@ -91,6 +94,7 @@ export function LearningProgressProvider({ children }: { children: ReactNode }) 
         )
         .select('user_id,lesson_id,completed,updated_at')
         .single()
+      if (currentUser.current !== user.id) return
 
       if (saveError) {
         setProgress((current) => [
