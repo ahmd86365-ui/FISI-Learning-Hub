@@ -77,6 +77,8 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
                 Home
               </NavLink>
 
+              <NavLink to="/exams" onClick={onClose} className="rounded-xl px-4 py-3.5 font-medium text-brand-600 dark:text-brand-400">Prüfungsmodus & Verlauf</NavLink>
+
               {subjects.map((s) => {
                 const Icon = s.icon
                 return (

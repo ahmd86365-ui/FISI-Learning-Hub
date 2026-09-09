@@ -30,6 +30,8 @@ import SavedItems from './pages/SavedItems'
 import LearningProgress from './pages/LearningProgress'
 import LearningStatistics from './pages/LearningStatistics'
 import ErrorTraining from './pages/ErrorTraining'
+import Exams from './pages/Exams'
+import { ExamAttemptsProvider } from './contexts/ExamAttemptsContext'
 
 export default function App() {
   return (
@@ -37,6 +39,7 @@ export default function App() {
       <SavedItemsProvider>
         <StudyActivityProvider>
           <QuestionPerformanceProvider>
+            <ExamAttemptsProvider>
             <LearningProgressProvider>
             <Routes>
               <Route element={<GuestOnlyRoute />}>
@@ -51,6 +54,7 @@ export default function App() {
                   <Route path="progress" element={<LearningProgress />} />
                   <Route path="stats" element={<LearningStatistics />} />
                   <Route path="errors" element={<ErrorTraining />} />
+                  <Route path="exams" element={<Exams />} />
 
         <Route path="it" element={<It />} />
         <Route path="it/it-technical" element={<ItTechnicalPage />} />
@@ -89,6 +93,7 @@ export default function App() {
               </Route>
             </Routes>
             </LearningProgressProvider>
+            </ExamAttemptsProvider>
           </QuestionPerformanceProvider>
         </StudyActivityProvider>
       </SavedItemsProvider>

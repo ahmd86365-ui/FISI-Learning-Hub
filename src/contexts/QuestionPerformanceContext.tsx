@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from './AuthContext'
 
@@ -53,6 +53,7 @@ interface QuestionPerformanceContextValue {
   error: string | null
   recordAttempt: (attempt: QuestionAttempt) => Promise<void>
   recordAttempts: (attempts: QuestionAttempt[]) => Promise<void>
+  refresh: () => Promise<void>
 }
 
 const QuestionPerformanceContext = createContext<QuestionPerformanceContextValue | undefined>(undefined)
@@ -62,9 +63,13 @@ export function QuestionPerformanceProvider({ children }: { children: ReactNode 
   const [performance, setPerformance] = useState<QuestionPerformance[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const currentUser = useRef(session?.user.id)
+  currentUser.current = session?.user.id
+  const requestId = useRef(0)
 
-  useEffect(() => {
-    let active = true
+  const refresh = useCallback(async () => {
+    const userId = session?.user.id
+    const request = ++requestId.current
     if (!session?.user) {
       setPerformance([])
       setLoading(false)
@@ -73,25 +78,21 @@ export function QuestionPerformanceProvider({ children }: { children: ReactNode 
 
     setLoading(true)
     setError(null)
-    void supabase
+    const { data, error: loadError } = await supabase
       .from('question_performance')
       .select('user_id,question_key,question_id,question_type,source_id,title,subject_label,module_label,content_path,question_data,attempts,correct_answers,incorrect_answers,consecutive_correct,last_result,last_answered_at')
       .order('last_answered_at', { ascending: false })
-      .then(({ data, error: loadError }) => {
-        if (!active) return
-        if (loadError) {
-          setPerformance([])
-          setError(loadError.message)
-        } else {
-          setPerformance((data ?? []) as QuestionPerformance[])
-        }
-        setLoading(false)
-      })
-
-    return () => {
-      active = false
+    if (currentUser.current !== userId || request !== requestId.current) return
+    if (loadError) {
+      setPerformance([])
+      setError(loadError.message)
+    } else {
+      setPerformance((data ?? []) as QuestionPerformance[])
     }
+    setLoading(false)
   }, [session?.user.id])
+
+  useEffect(() => { void refresh() }, [refresh])
 
   const recordAttempt = useCallback(async (attempt: QuestionAttempt) => {
     const { data, error: saveError } = await supabase.rpc('record_question_attempt', {
@@ -124,8 +125,8 @@ export function QuestionPerformanceProvider({ children }: { children: ReactNode 
   )
 
   const value = useMemo(
-    () => ({ performance, loading, error, recordAttempt, recordAttempts }),
-    [error, loading, performance, recordAttempt, recordAttempts],
+    () => ({ performance, loading, error, recordAttempt, recordAttempts, refresh }),
+    [error, loading, performance, recordAttempt, recordAttempts, refresh],
   )
 
   return <QuestionPerformanceContext.Provider value={value}>{children}</QuestionPerformanceContext.Provider>

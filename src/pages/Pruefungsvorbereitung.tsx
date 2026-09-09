@@ -1,3 +1,4 @@
+import { ButtonLink } from '../components/Button'
 import { PageHeader } from '../components/PageHeader'
 import { SectionHeader } from '../components/SectionHeader'
 import { ExamPreparationCard } from '../components/ExamPreparationCard'
@@ -18,6 +19,7 @@ export default function Pruefungsvorbereitung() {
       />
 
       <section className="mx-auto max-w-content px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+        <div className="mb-8"><ButtonLink to="/exams">Prüfungsmodus & Verlauf öffnen</ButtonLink></div>
         <SectionHeader
           title="Prüfungsbereiche"
           description="Diese Bereiche werden nach und nach mit Übungen und Prüfungsmaterial gefüllt."
