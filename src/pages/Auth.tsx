@@ -4,7 +4,7 @@ import { Button } from '../components/Button'
 import { LogoMark } from '../components/Logo'
 import { supabase } from '../lib/supabase'
 
-const AUTH_REDIRECT_URL = 'https://fisi-learning-hub.onrender.com/auth'
+const getAuthRedirectUrl = () => new URL('/auth', window.location.origin).toString()
 
 type AuthMode = 'login' | 'register'
 type Feedback = { type: 'success' | 'error'; message: string }
@@ -63,7 +63,7 @@ export default function Auth() {
       password,
       options: {
         data: { first_name: firstName, last_name: lastName },
-        emailRedirectTo: AUTH_REDIRECT_URL,
+        emailRedirectTo: getAuthRedirectUrl(),
       },
     })
 
@@ -87,7 +87,7 @@ export default function Auth() {
     setFeedback(null)
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: AUTH_REDIRECT_URL },
+      options: { redirectTo: getAuthRedirectUrl() },
     })
     if (error) {
       setFeedback({ type: 'error', message: error.message })

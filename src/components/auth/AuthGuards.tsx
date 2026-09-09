@@ -13,9 +13,14 @@ export function ProtectedRoute() {
 
 export function GuestOnlyRoute() {
   const { session, loading } = useAuth()
+  const location = useLocation()
 
   if (loading) return <SessionLoading />
-  if (session) return <Navigate to="/" replace />
+  if (session) {
+    const from = (location.state as { from?: { pathname?: string; search?: string; hash?: string } } | null)?.from
+    const destination = from?.pathname ? `${from.pathname}${from.search ?? ''}${from.hash ?? ''}` : '/'
+    return <Navigate to={destination} replace />
+  }
   return <Outlet />
 }
 

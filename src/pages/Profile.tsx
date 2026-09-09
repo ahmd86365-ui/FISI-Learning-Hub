@@ -21,6 +21,13 @@ export default function Profile() {
   const [saving, setSaving] = useState(false)
   const [feedback, setFeedback] = useState<Feedback | null>(null)
 
+  useEffect(
+    () => () => {
+      if (avatarUrl?.startsWith('blob:')) URL.revokeObjectURL(avatarUrl)
+    },
+    [avatarUrl],
+  )
+
   useEffect(() => {
     const avatarPath = user.user_metadata.avatar_path
     if (typeof avatarPath === 'string' && avatarPath) {

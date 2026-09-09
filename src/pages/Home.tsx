@@ -22,8 +22,8 @@ const features = [
   },
   {
     icon: ShieldCheck,
-    title: 'Frei zugänglich',
-    description: 'Keine Anmeldung, kein Account – einfach öffnen und loslegen.',
+    title: 'Persönlich gespeichert',
+    description: 'Dein Konto hält Profil, Merklisten und Lernfortschritt für dich bereit.',
   },
 ]
 
