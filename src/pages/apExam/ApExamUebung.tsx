@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { ClipboardCheck, FileQuestion, Gauge } from 'lucide-react'
 import { PageHeader } from '../../components/PageHeader'
 import { EmptyState } from '../../components/EmptyState'
@@ -10,6 +10,8 @@ import { getSubjectBySlug } from '../../data/subjects'
 import { getApExamMeta, getApExamQuestions } from '../../data/apExam'
 import { apPointsEarned, apTotalScorablePoints, hasApSolution, type ApSelfAssessment } from '../../lib/apExamHelpers'
 import type { ApArea } from '../../types/apExam'
+import { useQuestionPerformance } from '../../contexts/QuestionPerformanceContext'
+import { apExamAttempt } from '../../lib/questionTracking'
 
 const areaLabel: Record<ApArea, string> = {
   AP1: 'AP1',
@@ -19,6 +21,8 @@ const areaLabel: Record<ApArea, string> = {
 
 export default function ApExamUebung() {
   const { examId } = useParams<{ examId: string }>()
+  const location = useLocation()
+  const { recordAttempt } = useQuestionPerformance()
   const subject = getSubjectBySlug('pruefung')!
   const exam = examId ? getApExamMeta(examId) : undefined
   const questions = useMemo(() => (examId ? getApExamQuestions(examId) : []), [examId])
@@ -72,6 +76,11 @@ export default function ApExamUebung() {
   const earnedPoints = questions.reduce((sum, q) => sum + apPointsEarned(q, assessments[q.id]), 0)
   const assessedCount = scorableQuestions.filter((q) => assessments[q.id]).length
   const scorePercent = totalPoints > 0 ? Math.round((earnedPoints / totalPoints) * 100) : 0
+  const assess = (question: (typeof questions)[number], assessment: ApSelfAssessment) => {
+    if (assessments[question.id] === assessment) return
+    setAssessments((prev) => ({ ...prev, [question.id]: assessment }))
+    void recordAttempt(apExamAttempt(question, exam, location.pathname, assessment === 'correct'))
+  }
 
   return (
     <div>
@@ -136,7 +145,7 @@ export default function ApExamUebung() {
                       revealed={revealedIds.has(question.id)}
                       onToggleReveal={() => toggleReveal(question.id)}
                       assessment={assessments[question.id]}
-                      onAssessmentChange={(a) => setAssessments((prev) => ({ ...prev, [question.id]: a }))}
+                      onAssessmentChange={(assessment) => assess(question, assessment)}
                     />
                   ))}
                 </div>

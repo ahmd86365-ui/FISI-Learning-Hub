@@ -8,6 +8,9 @@ import { getSubjectBySlug } from '../../data/subjects'
 import { getAllWisoExams, getAllWisoQuestions, getWisoExamMeta, getWisoExamQuestions } from '../../data/wisoExam'
 import { formatCountdown, isWisoAnswerCorrect, pickRandomQuestions } from '../../lib/wisoExamHelpers'
 import type { WisoExamQuestion } from '../../types/wisoExam'
+import { useLocation } from 'react-router-dom'
+import { useQuestionPerformance } from '../../contexts/QuestionPerformanceContext'
+import { wisoExamAttempt } from '../../lib/questionTracking'
 
 const MIXED_QUESTION_COUNT = 30
 const MIXED_DURATION_MINUTES = 60
@@ -20,6 +23,8 @@ function sortByOriginalOrder(questions: WisoExamQuestion[]): WisoExamQuestion[] 
 }
 
 export default function WisoIhkSimulation() {
+  const location = useLocation()
+  const { recordAttempts } = useQuestionPerformance()
   const subject = getSubjectBySlug('pruefung')!
   const exams = getAllWisoExams().filter((e) => e.hasOfficialSolution)
 
@@ -38,8 +43,19 @@ export default function WisoIhkSimulation() {
   const submit = useCallback(() => {
     if (submittedRef.current) return
     submittedRef.current = true
+    const attemptedQuestions = questions.filter((question) => (answers[question.id] ?? []).some((value) => value.trim()))
+    void recordAttempts(
+      attemptedQuestions.map((question) =>
+        wisoExamAttempt(
+          question,
+          examLabel(question.examId),
+          location.pathname,
+          isWisoAnswerCorrect(question, answers[question.id] ?? []) === true,
+        ),
+      ),
+    )
     setPhase('review')
-  }, [])
+  }, [answers, location.pathname, questions, recordAttempts])
 
   useEffect(() => {
     if (phase !== 'running') return

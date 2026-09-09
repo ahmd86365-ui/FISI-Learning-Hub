@@ -4,6 +4,7 @@ import { AuthProvider } from './contexts/AuthContext'
 import { SavedItemsProvider } from './contexts/SavedItemsContext'
 import { LearningProgressProvider } from './contexts/LearningProgressContext'
 import { StudyActivityProvider } from './contexts/StudyActivityContext'
+import { QuestionPerformanceProvider } from './contexts/QuestionPerformanceContext'
 import { GuestOnlyRoute, ProtectedRoute } from './components/auth/AuthGuards'
 import Home from './pages/Home'
 import It from './pages/It'
@@ -28,13 +29,15 @@ import Profile from './pages/Profile'
 import SavedItems from './pages/SavedItems'
 import LearningProgress from './pages/LearningProgress'
 import LearningStatistics from './pages/LearningStatistics'
+import ErrorTraining from './pages/ErrorTraining'
 
 export default function App() {
   return (
     <AuthProvider>
       <SavedItemsProvider>
         <StudyActivityProvider>
-          <LearningProgressProvider>
+          <QuestionPerformanceProvider>
+            <LearningProgressProvider>
             <Routes>
               <Route element={<GuestOnlyRoute />}>
                 <Route path="auth" element={<Auth />} />
@@ -47,6 +50,7 @@ export default function App() {
                   <Route path="saved" element={<SavedItems />} />
                   <Route path="progress" element={<LearningProgress />} />
                   <Route path="stats" element={<LearningStatistics />} />
+                  <Route path="errors" element={<ErrorTraining />} />
 
         <Route path="it" element={<It />} />
         <Route path="it/it-technical" element={<ItTechnicalPage />} />
@@ -84,7 +88,8 @@ export default function App() {
                 </Route>
               </Route>
             </Routes>
-          </LearningProgressProvider>
+            </LearningProgressProvider>
+          </QuestionPerformanceProvider>
         </StudyActivityProvider>
       </SavedItemsProvider>
     </AuthProvider>

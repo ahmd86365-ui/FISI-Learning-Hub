@@ -50,7 +50,7 @@ export function ApQuestionView({
   const hasSolution = hasApSolution(question)
 
   return (
-    <div className="rounded-xl border border-ink-200 bg-white p-5 dark:border-ink-800 dark:bg-ink-900">
+    <div id={question.id} className="scroll-mt-24 rounded-xl border border-ink-200 bg-white p-5 dark:border-ink-800 dark:bg-ink-900">
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <span className="font-mono text-xs font-medium uppercase tracking-wider text-ink-400 dark:text-ink-500">
           {apQuestionLabel(question)}

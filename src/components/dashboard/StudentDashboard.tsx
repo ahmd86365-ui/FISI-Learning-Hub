@@ -4,6 +4,7 @@ import {
   BookOpen,
   Bookmark,
   CalendarDays,
+  CircleAlert,
   RotateCcw,
   Flame,
   Trophy,
@@ -15,6 +16,7 @@ import { useSavedItems, type SavedItem, type SavedItemKind } from '../../context
 import { useStudyActivity } from '../../contexts/StudyActivityContext'
 import { lessonCatalog } from '../../lib/lessonCatalog'
 import { calculateStudyStats } from '../../lib/studyStats'
+import { questionStats, useQuestionPerformance } from '../../contexts/QuestionPerformanceContext'
 import { ButtonLink } from '../Button'
 
 const previewLimit = 3
@@ -23,7 +25,9 @@ export function StudentDashboard() {
   const { progress, loading: progressLoading, error: progressError } = useLearningProgress()
   const { items, loading: savedLoading, error: savedError } = useSavedItems()
   const { activities, loading: activityLoading, error: activityError } = useStudyActivity()
+  const { performance: questionPerformance, loading: questionLoading, error: questionError } = useQuestionPerformance()
   const studyStats = calculateStudyStats(activities)
+  const quizStats = questionStats(questionPerformance)
   const completedIds = new Set(progress.filter((entry) => entry.completed).map((entry) => entry.lesson_id))
   const lessons = lessonCatalog.flatMap((module) => module.lessons)
   const completedLessons = lessons.filter((lesson) => completedIds.has(lesson.id)).length
@@ -57,11 +61,11 @@ export function StudentDashboard() {
             </h2>
           </div>
           <span className="font-mono text-xs uppercase tracking-wider text-ink-400 dark:text-ink-500" role="status">
-            {progressLoading || savedLoading || activityLoading ? 'Wird geladen …' : 'Aktueller Stand'}
+            {progressLoading || savedLoading || activityLoading || questionLoading ? 'Wird geladen …' : 'Aktueller Stand'}
           </span>
         </div>
 
-        {(progressError || savedError || activityError) && (
+        {(progressError || savedError || activityError || questionError) && (
           <p className="mb-6 rounded-xl border border-rose-300 bg-rose-50 p-4 text-sm text-rose-700 dark:border-rose-500/30 dark:bg-rose-500/10 dark:text-rose-300" role="alert">
             Einige persönliche Daten konnten nicht geladen werden. Bitte aktualisiere die Seite.
           </p>
@@ -143,19 +147,45 @@ export function StudentDashboard() {
           <DashboardStat icon={BookOpen} value={studyStats.lessonsCompletedThisWeek} label="Diese Woche" suffix="Lektionen" />
         </div>
 
+        <Link to="/errors" className="mt-5 flex flex-col gap-4 rounded-2xl border border-ink-200 bg-white p-5 shadow-card transition-colors hover:border-brand-200 dark:border-ink-800 dark:bg-ink-900 dark:shadow-card-dark dark:hover:border-brand-500/30 sm:flex-row sm:items-center">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-rose-50 text-rose-600 dark:bg-rose-500/10 dark:text-rose-300">
+            <CircleAlert className="h-5 w-5" aria-hidden="true" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <h3 className="font-semibold text-ink-900 dark:text-white">Fehlertraining</h3>
+            <p className="mt-1 text-sm text-ink-500 dark:text-ink-400">Schwierige Fragen gezielt wiederholen und meistern.</p>
+          </div>
+          <div className="grid grid-cols-3 gap-5 sm:shrink-0 sm:text-right">
+            <MiniQuizStat value={quizStats.attempts} label="Versuche" />
+            <MiniQuizStat value={`${quizStats.accuracy}%`} label="Genauigkeit" />
+            <MiniQuizStat value={quizStats.activeErrors} label="Aktive Fehler" />
+          </div>
+          <ArrowRight className="hidden h-4 w-4 shrink-0 text-brand-500 sm:block" aria-hidden="true" />
+        </Link>
+
         <div className="mt-5 grid gap-5 lg:grid-cols-2">
           <SavedPreview kind="favorite" title="Favoriten" items={favoriteItems} loading={savedLoading} />
           <SavedPreview kind="review" title="Wiederholen" items={reviewItems} loading={savedLoading} />
         </div>
 
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           <QuickLink to="/progress" icon={BarChart3} title="Mein Lernfortschritt" description="Alle Module im Überblick" />
           <QuickLink to="/saved" icon={Bookmark} title="Favoriten & Wiederholen" description="Gespeicherte Inhalte öffnen" />
           <QuickLink to="/stats" icon={Flame} title="Lernstatistik" description="Serien und Aktivität ansehen" />
+          <QuickLink to="/errors" icon={CircleAlert} title="Fehlertraining" description="Schwierige Fragen üben" />
           <QuickLink to="/profile" icon={UserRound} title="Profil" description="Konto und Profilbild verwalten" />
         </div>
       </div>
     </section>
+  )
+}
+
+function MiniQuizStat({ value, label }: { value: number | string; label: string }) {
+  return (
+    <span>
+      <span className="block text-lg font-bold text-ink-900 dark:text-white">{value}</span>
+      <span className="block text-[0.65rem] text-ink-400 dark:text-ink-500">{label}</span>
+    </span>
   )
 }
 

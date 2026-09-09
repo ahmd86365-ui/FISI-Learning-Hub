@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { BarChart3, BookmarkCheck, Flame, Menu, Search, UserRound, UserRoundX } from 'lucide-react'
+import { BarChart3, BookmarkCheck, CircleAlert, Flame, Menu, Search, UserRound, UserRoundX } from 'lucide-react'
 import { Logo } from './Logo'
 import { ThemeToggle } from './ThemeToggle'
 import { IconButton } from './IconButton'
@@ -141,6 +141,20 @@ export function Navbar() {
               aria-label="Lernstatistik öffnen"
             >
               <Flame className="h-[1.15rem] w-[1.15rem]" />
+            </NavLink>
+
+            <NavLink
+              to="/errors"
+              className={({ isActive }) =>
+                `hidden h-10 w-10 items-center justify-center rounded-full transition-colors lg:inline-flex ${
+                  isActive
+                    ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-brand-400'
+                    : 'text-ink-500 hover:bg-ink-100 hover:text-ink-900 dark:text-ink-400 dark:hover:bg-ink-800 dark:hover:text-white'
+                }`
+              }
+              aria-label="Fehlertraining öffnen"
+            >
+              <CircleAlert className="h-[1.15rem] w-[1.15rem]" />
             </NavLink>
 
             <IconButton

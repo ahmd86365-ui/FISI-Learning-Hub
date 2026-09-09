@@ -3,6 +3,9 @@ import { CheckCircle2, ClipboardCheck, RotateCcw, XCircle } from 'lucide-react'
 import type { Question, Test } from '../../types/content'
 import { EmptyState } from '../EmptyState'
 import { ContentActions } from '../saved/ContentActions'
+import { useLocation } from 'react-router-dom'
+import { useQuestionPerformance } from '../../contexts/QuestionPerformanceContext'
+import { lessonTestAttempt } from '../../lib/questionTracking'
 
 function isAnswerCorrect(given: string[], correctAnswer: string | string[]): boolean {
   const correctSet = new Set(Array.isArray(correctAnswer) ? correctAnswer : [correctAnswer])
@@ -23,6 +26,8 @@ function drawRandomSubset(pool: Question[], size: number): Question[] {
  * showing every question.
  */
 export function TestRunner({ test }: { test?: Test }) {
+  const location = useLocation()
+  const { recordAttempts } = useQuestionPerformance()
   const [started, setStarted] = useState(false)
   const [activeQuestions, setActiveQuestions] = useState<Question[]>([])
   const [current, setCurrent] = useState(0)
@@ -60,7 +65,7 @@ export function TestRunner({ test }: { test?: Test }) {
 
   if (!started) {
     return (
-      <div className="rounded-2xl border border-ink-200 bg-white p-8 text-center dark:border-ink-800 dark:bg-ink-900">
+      <div id={`test-${test.id}`} className="scroll-mt-24 rounded-2xl border border-ink-200 bg-white p-8 text-center dark:border-ink-800 dark:bg-ink-900">
         <ClipboardCheck className="mx-auto h-8 w-8 text-brand-500 dark:text-brand-400" aria-hidden="true" />
         <h3 className="mt-4 text-lg font-semibold text-ink-900 dark:text-white">{test.title}</h3>
         <p className="mt-1.5 text-sm text-ink-500 dark:text-ink-400">
@@ -86,7 +91,7 @@ export function TestRunner({ test }: { test?: Test }) {
     const score = Math.round((correctCount / questions.length) * 100)
 
     return (
-      <div className="rounded-2xl border border-ink-200 bg-white p-8 dark:border-ink-800 dark:bg-ink-900">
+      <div id={`test-${test.id}`} className="scroll-mt-24 rounded-2xl border border-ink-200 bg-white p-8 dark:border-ink-800 dark:bg-ink-900">
         <div className="text-center">
           <CheckCircle2 className="mx-auto h-8 w-8 text-brand-500 dark:text-brand-400" aria-hidden="true" />
           <h3 className="mt-4 text-lg font-semibold text-ink-900 dark:text-white">Test abgeschlossen</h3>
@@ -155,12 +160,17 @@ export function TestRunner({ test }: { test?: Test }) {
     if (current < questions.length - 1) {
       setCurrent((c) => c + 1)
     } else {
+      void recordAttempts(
+        questions.map((item) =>
+          lessonTestAttempt(item, test, location.pathname, isAnswerCorrect(answers[item.id] ?? [], item.correctAnswer)),
+        ),
+      )
       setFinished(true)
     }
   }
 
   return (
-    <div className="rounded-2xl border border-ink-200 bg-white p-6 dark:border-ink-800 dark:bg-ink-900 sm:p-8">
+    <div id={`test-${test.id}`} className="scroll-mt-24 rounded-2xl border border-ink-200 bg-white p-6 dark:border-ink-800 dark:bg-ink-900 sm:p-8">
       <div className="mb-5 flex items-center justify-between">
         <span className="font-mono text-xs font-medium uppercase tracking-wider text-ink-400 dark:text-ink-500">
           Frage {current + 1} / {questions.length}

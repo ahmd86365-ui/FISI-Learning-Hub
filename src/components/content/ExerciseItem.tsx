@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { Check, HelpCircle, X } from 'lucide-react'
 import type { Exercise } from '../../types/content'
 import { ContentActions } from '../saved/ContentActions'
+import { useLocation } from 'react-router-dom'
+import { useQuestionPerformance } from '../../contexts/QuestionPerformanceContext'
+import { lessonExerciseAttempt } from '../../lib/questionTracking'
 
 const difficultyLabel: Record<Exercise['difficulty'], string> = {
   easy: 'Leicht',
@@ -14,6 +17,8 @@ function firstCorrectAnswer(correctAnswer: string | string[]): string {
 }
 
 export function ExerciseItem({ exercise, index }: { exercise: Exercise; index: number }) {
+  const location = useLocation()
+  const { recordAttempt } = useQuestionPerformance()
   const [selected, setSelected] = useState<string[]>([])
   const [textAnswer, setTextAnswer] = useState('')
   const [checked, setChecked] = useState(false)
@@ -50,9 +55,13 @@ export function ExerciseItem({ exercise, index }: { exercise: Exercise; index: n
   }
 
   const canCheck = isFreeform ? textAnswer.trim().length > 0 : selected.length > 0
+  const checkAnswer = () => {
+    setChecked(true)
+    if (isCorrect !== null) void recordAttempt(lessonExerciseAttempt(exercise, location.pathname, isCorrect))
+  }
 
   return (
-    <div className="rounded-xl border border-ink-200 bg-white p-5 dark:border-ink-800 dark:bg-ink-900">
+    <div id={`exercise-${exercise.id}`} className="scroll-mt-24 rounded-xl border border-ink-200 bg-white p-5 dark:border-ink-800 dark:bg-ink-900">
       <div className="mb-3 flex items-center justify-between gap-3">
         <span className="font-mono text-xs font-medium uppercase tracking-wider text-ink-400 dark:text-ink-500">
           Übung {index + 1}
@@ -115,7 +124,7 @@ export function ExerciseItem({ exercise, index }: { exercise: Exercise; index: n
         {!checked ? (
           <button
             type="button"
-            onClick={() => setChecked(true)}
+            onClick={checkAnswer}
             disabled={!canCheck}
             className="inline-flex h-9 items-center rounded-full bg-brand-600 px-4 text-sm font-medium text-white transition-colors hover:bg-brand-700 disabled:pointer-events-none disabled:opacity-40 dark:bg-brand-500 dark:hover:bg-brand-400"
           >

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useLocation, useSearchParams } from 'react-router-dom'
 import { CheckCircle2, ClipboardCheck, Dumbbell, RotateCcw } from 'lucide-react'
 import { PageHeader } from '../../components/PageHeader'
 import { Breadcrumb } from '../../components/content/Breadcrumb'
@@ -9,24 +9,29 @@ import { getSubjectBySlug } from '../../data/subjects'
 import { getAllWisoExams, getAllWisoQuestions, getWisoExamMeta, getWisoTopics } from '../../data/wisoExam'
 import { isWisoAnswerCorrect, pickRandomQuestions } from '../../lib/wisoExamHelpers'
 import type { WisoExamQuestion } from '../../types/wisoExam'
+import { useQuestionPerformance } from '../../contexts/QuestionPerformanceContext'
+import { wisoExamAttempt } from '../../lib/questionTracking'
 
 const COUNT_OPTIONS = [10, 20, 30] as const
 
 export default function WisoIhkUebung() {
   const subject = getSubjectBySlug('pruefung')!
+  const location = useLocation()
+  const { recordAttempt } = useQuestionPerformance()
   const [searchParams] = useSearchParams()
   const preselectedExamId = searchParams.get('exam')
 
   const exams = getAllWisoExams()
   const topics = getWisoTopics()
   const allQuestions = getAllWisoQuestions()
+  const requestedQuestion = allQuestions.find((question) => question.id === searchParams.get('question'))
 
   const [examFilter, setExamFilter] = useState(preselectedExamId ?? 'all')
   const [topicFilter, setTopicFilter] = useState('all')
   const [count, setCount] = useState<number>(20)
 
-  const [phase, setPhase] = useState<'setup' | 'running' | 'done'>('setup')
-  const [questions, setQuestions] = useState<WisoExamQuestion[]>([])
+  const [phase, setPhase] = useState<'setup' | 'running' | 'done'>(requestedQuestion ? 'running' : 'setup')
+  const [questions, setQuestions] = useState<WisoExamQuestion[]>(requestedQuestion ? [requestedQuestion] : [])
   const [current, setCurrent] = useState(0)
   const [answers, setAnswers] = useState<Record<string, string[]>>({})
   const [revealed, setRevealed] = useState(false)
@@ -53,6 +58,13 @@ export default function WisoIhkUebung() {
   const question = questions[current]
   const value = question ? (answers[question.id] ?? []) : []
   const canCheck = value.length > 0 && value.some((v) => v.trim().length > 0)
+  const checkAnswer = () => {
+    setRevealed(true)
+    const correct = isWisoAnswerCorrect(question, value)
+    if (correct !== null) {
+      void recordAttempt(wisoExamAttempt(question, examLabel(question.examId), `${location.pathname}${location.search}`, correct))
+    }
+  }
 
   const goNext = () => {
     if (current < questions.length - 1) {
@@ -206,7 +218,7 @@ export default function WisoIhkUebung() {
 
             <div className="mt-5 flex justify-end gap-3">
               {!revealed ? (
-                <Button onClick={() => setRevealed(true)} disabled={!canCheck}>
+                <Button onClick={checkAnswer} disabled={!canCheck}>
                   Antwort prüfen
                 </Button>
               ) : (

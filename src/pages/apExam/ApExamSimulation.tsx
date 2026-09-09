@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { CheckCircle2, ChevronLeft, ChevronRight, FileQuestion, RotateCcw, Send, Timer } from 'lucide-react'
 import { PageHeader } from '../../components/PageHeader'
 import { EmptyState } from '../../components/EmptyState'
@@ -17,6 +17,8 @@ import {
   type ApSelfAssessment,
 } from '../../lib/apExamHelpers'
 import type { ApArea, ApExamQuestion } from '../../types/apExam'
+import { useQuestionPerformance } from '../../contexts/QuestionPerformanceContext'
+import { apExamAttempt } from '../../lib/questionTracking'
 
 const areaLabel: Record<ApArea, string> = {
   AP1: 'AP1',
@@ -28,6 +30,8 @@ const DEFAULT_DURATION_MINUTES = 90
 
 export default function ApExamSimulation() {
   const { examId } = useParams<{ examId: string }>()
+  const location = useLocation()
+  const { recordAttempt } = useQuestionPerformance()
   const subject = getSubjectBySlug('pruefung')!
   const exam = examId ? getApExamMeta(examId) : undefined
 
@@ -127,6 +131,11 @@ export default function ApExamSimulation() {
   const assessedCount = scorableQuestions.filter((q) => assessments[q.id]).length
   const scorePercent = totalPoints > 0 ? Math.round((earnedPoints / totalPoints) * 100) : 0
   const unclearCount = questions.length - scorableQuestions.length
+  const assess = (questionToAssess: ApExamQuestion, assessment: ApSelfAssessment) => {
+    if (assessments[questionToAssess.id] === assessment) return
+    setAssessments((prev) => ({ ...prev, [questionToAssess.id]: assessment }))
+    void recordAttempt(apExamAttempt(questionToAssess, exam, location.pathname, assessment === 'correct'))
+  }
 
   const timeLow = secondsLeft <= 5 * 60
   const timeCritical = secondsLeft <= 60
@@ -303,7 +312,7 @@ export default function ApExamSimulation() {
                         answerValue={answers[q.id] ?? ''}
                         revealed
                         assessment={assessments[q.id]}
-                        onAssessmentChange={(a) => setAssessments((prev) => ({ ...prev, [q.id]: a }))}
+                        onAssessmentChange={(assessment) => assess(q, assessment)}
                       />
                     ))}
                   </div>
