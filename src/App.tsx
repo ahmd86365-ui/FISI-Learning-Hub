@@ -21,6 +21,7 @@ import Search from './pages/Search'
 import NotFound from './pages/NotFound'
 import ItTechnicalPage from './pages/itTechnical/ItTechnicalPage'
 import Auth from './pages/Auth'
+import Profile from './pages/Profile'
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path="profile" element={<Profile />} />
 
         <Route path="it" element={<It />} />
         <Route path="it/it-technical" element={<ItTechnicalPage />} />
