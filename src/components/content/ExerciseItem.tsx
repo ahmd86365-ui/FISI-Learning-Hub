@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Check, HelpCircle, X } from 'lucide-react'
 import type { Exercise } from '../../types/content'
+import { ContentActions } from '../saved/ContentActions'
 
 const difficultyLabel: Record<Exercise['difficulty'], string> = {
   easy: 'Leicht',
@@ -59,6 +60,10 @@ export function ExerciseItem({ exercise, index }: { exercise: Exercise; index: n
         <span className="rounded-full bg-ink-100 px-2.5 py-0.5 text-[0.7rem] font-medium text-ink-500 dark:bg-ink-800 dark:text-ink-400">
           {difficultyLabel[exercise.difficulty]}
         </span>
+      </div>
+
+      <div className="mb-4">
+        <ContentActions contentType="exercise" contentId={exercise.id} title={exercise.question} compact />
       </div>
 
       <p className="text-base font-medium leading-relaxed text-ink-900 dark:text-white">{exercise.question}</p>

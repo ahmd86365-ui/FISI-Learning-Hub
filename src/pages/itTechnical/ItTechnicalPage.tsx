@@ -6,6 +6,7 @@ import { TopicCard } from '../../components/content/TopicCard'
 import { LessonContent } from '../../components/content/LessonContent'
 import { ExercisesSection } from '../../components/content/ExercisesSection'
 import { ButtonLink } from '../../components/Button'
+import { ContentActions } from '../../components/saved/ContentActions'
 import { itTechnicalChapters, itTechnicalModule as mod } from '../../data/itTechnical'
 import { getSubjectBySlug } from '../../data/subjects'
 import type { Topic } from '../../types/content'
@@ -48,6 +49,9 @@ export default function ItTechnicalPage() {
       />
       {lesson ? (
         <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+          <div className="mb-6">
+            <ContentActions contentType="lesson" contentId={lesson.id} title={lesson.title} />
+          </div>
           <LessonContent blocks={lesson.content} />
           {lesson.exercises.length > 0 && (
             <section className="mt-14">

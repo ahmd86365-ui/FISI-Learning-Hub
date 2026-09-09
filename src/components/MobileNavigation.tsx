@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { NavLink } from 'react-router-dom'
-import { X, Home, Search, UserRound, UserRoundX } from 'lucide-react'
+import { BookmarkCheck, X, Home, Search, UserRound, UserRoundX } from 'lucide-react'
 import { useEffect } from 'react'
 import { Logo } from './Logo'
 import { subjects } from '../data/subjects'
@@ -126,6 +126,21 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
               >
                 <UserRound className="h-5 w-5" aria-hidden="true" />
                 Mein Profil
+              </NavLink>
+
+              <NavLink
+                to="/saved"
+                onClick={onClose}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-xl px-4 py-3.5 text-base font-medium transition-colors ${
+                    isActive
+                      ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-brand-400'
+                      : 'text-ink-700 hover:bg-ink-100 dark:text-ink-200 dark:hover:bg-ink-800'
+                  }`
+                }
+              >
+                <BookmarkCheck className="h-5 w-5" aria-hidden="true" />
+                Gespeichert
               </NavLink>
             </div>
 

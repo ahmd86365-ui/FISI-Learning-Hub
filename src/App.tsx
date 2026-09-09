@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import { AuthProvider } from './contexts/AuthContext'
+import { SavedItemsProvider } from './contexts/SavedItemsContext'
 import { GuestOnlyRoute, ProtectedRoute } from './components/auth/AuthGuards'
 import Home from './pages/Home'
 import It from './pages/It'
@@ -22,11 +23,13 @@ import NotFound from './pages/NotFound'
 import ItTechnicalPage from './pages/itTechnical/ItTechnicalPage'
 import Auth from './pages/Auth'
 import Profile from './pages/Profile'
+import SavedItems from './pages/SavedItems'
 
 export default function App() {
   return (
     <AuthProvider>
-      <Routes>
+      <SavedItemsProvider>
+        <Routes>
         <Route element={<GuestOnlyRoute />}>
           <Route path="auth" element={<Auth />} />
         </Route>
@@ -35,6 +38,7 @@ export default function App() {
           <Route element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="saved" element={<SavedItems />} />
 
         <Route path="it" element={<It />} />
         <Route path="it/it-technical" element={<ItTechnicalPage />} />
@@ -71,7 +75,8 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Route>
         </Route>
-      </Routes>
+        </Routes>
+      </SavedItemsProvider>
     </AuthProvider>
   )
 }

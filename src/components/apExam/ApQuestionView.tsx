@@ -1,6 +1,7 @@
 import { AlertTriangle, Check, ChevronDown, FileText, HelpCircle, Minus, ScrollText, X } from 'lucide-react'
 import type { ApExamQuestion } from '../../types/apExam'
 import { apQuestionLabel, hasApSolution, type ApSelfAssessment } from '../../lib/apExamHelpers'
+import { ContentActions } from '../saved/ContentActions'
 
 interface ApQuestionViewProps {
   question: ApExamQuestion
@@ -67,6 +68,15 @@ export function ApQuestionView({
             </span>
           )}
         </div>
+      </div>
+
+      <div className="mb-4">
+        <ContentActions
+          contentType="exercise"
+          contentId={question.id}
+          title={`${apQuestionLabel(question)}: ${question.question}`}
+          compact
+        />
       </div>
 
       {question.scenario && (

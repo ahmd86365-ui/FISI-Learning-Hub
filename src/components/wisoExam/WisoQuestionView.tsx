@@ -1,6 +1,7 @@
 import { Check, FileText, Info, ScrollText, X } from 'lucide-react'
 import type { WisoExamQuestion } from '../../types/wisoExam'
 import { isWisoAnswerCorrect, questionLabel } from '../../lib/wisoExamHelpers'
+import { ContentActions } from '../saved/ContentActions'
 
 interface WisoQuestionViewProps {
   question: WisoExamQuestion
@@ -42,6 +43,15 @@ export function WisoQuestionView({ question, examLabel, value, onChange, reveale
           Quelle: {examLabel}
           {question.sourcePage ? ` · S. ${question.sourcePage}` : ''}
         </span>
+      </div>
+
+      <div className="mb-4">
+        <ContentActions
+          contentType="exercise"
+          contentId={question.id}
+          title={`${questionLabel(question)}: ${question.question}`}
+          compact
+        />
       </div>
 
       {question.scenario && (

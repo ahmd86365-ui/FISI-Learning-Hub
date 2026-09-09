@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { CheckCircle2, ClipboardCheck, RotateCcw, XCircle } from 'lucide-react'
 import type { Question, Test } from '../../types/content'
 import { EmptyState } from '../EmptyState'
+import { ContentActions } from '../saved/ContentActions'
 
 function isAnswerCorrect(given: string[], correctAnswer: string | string[]): boolean {
   const correctSet = new Set(Array.isArray(correctAnswer) ? correctAnswer : [correctAnswer])
@@ -164,6 +165,10 @@ export function TestRunner({ test }: { test?: Test }) {
         <span className="font-mono text-xs font-medium uppercase tracking-wider text-ink-400 dark:text-ink-500">
           Frage {current + 1} / {questions.length}
         </span>
+      </div>
+
+      <div className="mb-4">
+        <ContentActions contentType="exercise" contentId={question.id} title={question.question} compact />
       </div>
 
       <p className="text-base font-medium leading-relaxed text-ink-900 dark:text-white">{question.question}</p>
