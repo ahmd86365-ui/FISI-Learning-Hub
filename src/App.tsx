@@ -1,5 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
+import { AuthProvider } from './contexts/AuthContext'
+import { GuestOnlyRoute, ProtectedRoute } from './components/auth/AuthGuards'
 import Home from './pages/Home'
 import It from './pages/It'
 import Wirtschaft from './pages/Wirtschaft'
@@ -18,12 +20,19 @@ import LessonPage from './pages/LessonPage'
 import Search from './pages/Search'
 import NotFound from './pages/NotFound'
 import ItTechnicalPage from './pages/itTechnical/ItTechnicalPage'
+import Auth from './pages/Auth'
 
 export default function App() {
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route index element={<Home />} />
+    <AuthProvider>
+      <Routes>
+        <Route element={<GuestOnlyRoute />}>
+          <Route path="auth" element={<Auth />} />
+        </Route>
+
+        <Route element={<ProtectedRoute />}>
+          <Route element={<Layout />}>
+            <Route index element={<Home />} />
 
         <Route path="it" element={<It />} />
         <Route path="it/it-technical" element={<ItTechnicalPage />} />
@@ -57,8 +66,10 @@ export default function App() {
         />
 
         <Route path="suche" element={<Search />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Route>
+      </Routes>
+    </AuthProvider>
   )
 }

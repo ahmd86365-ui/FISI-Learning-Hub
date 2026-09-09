@@ -1,9 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { NavLink } from 'react-router-dom'
-import { X, Home, Search } from 'lucide-react'
+import { X, Home, Search, UserRoundX } from 'lucide-react'
 import { useEffect } from 'react'
 import { Logo } from './Logo'
 import { subjects } from '../data/subjects'
+import { useAuth } from '../contexts/AuthContext'
 
 interface MobileNavigationProps {
   open: boolean
@@ -11,6 +12,7 @@ interface MobileNavigationProps {
 }
 
 export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
+  const { signOut } = useAuth()
   useEffect(() => {
     if (!open) return
     document.body.style.overflow = 'hidden'
@@ -113,6 +115,14 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
             </div>
 
             <div className="border-t border-ink-200 p-5 dark:border-ink-800">
+              <button
+                type="button"
+                onClick={() => void signOut()}
+                className="mb-4 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-ink-700 transition-colors hover:bg-ink-100 dark:text-ink-200 dark:hover:bg-ink-800"
+              >
+                <UserRoundX className="h-5 w-5" aria-hidden="true" />
+                Benutzerkonto abmelden
+              </button>
               <p className="font-mono text-[0.7rem] uppercase tracking-wider text-ink-400 dark:text-ink-500">
                 Fachinformatiker für Systemintegration
               </p>

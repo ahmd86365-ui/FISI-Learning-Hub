@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Menu, Search, LogOut } from 'lucide-react'
+import { Menu, Search, UserRoundX } from 'lucide-react'
 import { Logo } from './Logo'
 import { ThemeToggle } from './ThemeToggle'
 import { IconButton } from './IconButton'
 import { SearchOverlay } from './SearchOverlay'
 import { MobileNavigation } from './MobileNavigation'
 import { subjects } from '../data/subjects'
+import { useAuth } from '../contexts/AuthContext'
 
 const navLinkBase =
   'relative px-3 py-2 text-sm font-medium rounded-full transition-colors duration-200'
@@ -14,6 +15,7 @@ const navLinkBase =
 export function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { signOut } = useAuth()
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -25,12 +27,6 @@ export function Navbar() {
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
   }, [])
-
-  const handleLogout = () => {
-    fetch('/api/logout', { method: 'POST', credentials: 'same-origin' }).finally(() => {
-      window.location.href = '/login.html'
-    })
-  }
 
   return (
     <>
@@ -92,9 +88,10 @@ export function Navbar() {
             <ThemeToggle />
 
             <IconButton
-              icon={<LogOut className="h-[1.15rem] w-[1.15rem]" />}
-              label="Abmelden"
-              onClick={handleLogout}
+              icon={<UserRoundX className="h-[1.15rem] w-[1.15rem]" />}
+              label="Benutzerkonto abmelden"
+              onClick={() => void signOut()}
+              className="hidden lg:inline-flex"
             />
 
             <IconButton
