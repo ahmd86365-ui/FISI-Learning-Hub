@@ -32,6 +32,7 @@ import LearningStatistics from './pages/LearningStatistics'
 import ErrorTraining from './pages/ErrorTraining'
 import Exams from './pages/Exams'
 import { ExamAttemptsProvider } from './contexts/ExamAttemptsContext'
+import SmartReview from './pages/SmartReview'
 
 export default function App() {
   return (
@@ -55,6 +56,7 @@ export default function App() {
                   <Route path="stats" element={<LearningStatistics />} />
                   <Route path="errors" element={<ErrorTraining />} />
                   <Route path="exams" element={<Exams />} />
+                  <Route path="review" element={<SmartReview />} />
 
         <Route path="it" element={<It />} />
         <Route path="it/it-technical" element={<ItTechnicalPage />} />

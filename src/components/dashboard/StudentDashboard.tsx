@@ -9,6 +9,7 @@ import {
   Flame,
   Trophy,
   UserRound,
+  Sparkles,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useLearningProgress } from '../../contexts/LearningProgressContext'
@@ -18,6 +19,7 @@ import { lessonCatalog } from '../../lib/lessonCatalog'
 import { calculateStudyStats } from '../../lib/studyStats'
 import { questionStats, useQuestionPerformance } from '../../contexts/QuestionPerformanceContext'
 import { ButtonLink } from '../Button'
+import { useSmartReviewPlan } from '../../hooks/useSmartReviewPlan'
 
 const previewLimit = 3
 
@@ -26,6 +28,7 @@ export function StudentDashboard() {
   const { items, loading: savedLoading, error: savedError } = useSavedItems()
   const { activities, loading: activityLoading, error: activityError } = useStudyActivity()
   const { performance: questionPerformance, loading: questionLoading, error: questionError } = useQuestionPerformance()
+  const { plan: reviewPlan, loading: reviewLoading, error: reviewError } = useSmartReviewPlan()
   const studyStats = calculateStudyStats(activities)
   const quizStats = questionStats(questionPerformance)
   const completedIds = new Set(progress.filter((entry) => entry.completed).map((entry) => entry.lesson_id))
@@ -61,11 +64,11 @@ export function StudentDashboard() {
             </h2>
           </div>
           <span className="font-mono text-xs uppercase tracking-wider text-ink-400 dark:text-ink-500" role="status">
-            {progressLoading || savedLoading || activityLoading || questionLoading ? 'Wird geladen …' : 'Aktueller Stand'}
+            {progressLoading || savedLoading || activityLoading || questionLoading || reviewLoading ? 'Wird geladen …' : 'Aktueller Stand'}
           </span>
         </div>
 
-        {(progressError || savedError || activityError || questionError) && (
+        {(progressError || savedError || activityError || questionError || reviewError) && (
           <p className="mb-6 rounded-xl border border-rose-300 bg-rose-50 p-4 text-sm text-rose-700 dark:border-rose-500/30 dark:bg-rose-500/10 dark:text-rose-300" role="alert">
             Einige persönliche Daten konnten nicht geladen werden. Bitte aktualisiere die Seite.
           </p>
@@ -161,6 +164,17 @@ export function StudentDashboard() {
             <MiniQuizStat value={quizStats.activeErrors} label="Aktive Fehler" />
           </div>
           <ArrowRight className="hidden h-4 w-4 shrink-0 text-brand-500 sm:block" aria-hidden="true" />
+        </Link>
+
+        <Link to="/review" className="mt-5 flex flex-col gap-4 rounded-2xl border border-brand-200 bg-white p-5 shadow-card transition-colors hover:border-brand-400 dark:border-brand-500/30 dark:bg-ink-900 dark:shadow-card-dark sm:flex-row sm:items-center">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-300">
+            <Sparkles className="h-5 w-5" aria-hidden="true" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-2"><h3 className="font-semibold text-ink-900 dark:text-white">Smart Review</h3><span className="rounded-full bg-brand-50 px-2.5 py-1 text-xs font-semibold text-brand-700 dark:bg-brand-500/10 dark:text-brand-300">{reviewLoading ? '…' : reviewPlan.recommendations.length} heute</span></div>
+            <p className="mt-1 line-clamp-2 text-sm text-ink-500 dark:text-ink-400">{reviewLoading ? 'Dein Tagesplan wird erstellt …' : reviewPlan.highestPriority ? `${reviewPlan.highestPriority.reason}: ${reviewPlan.highestPriority.title}` : 'Heute ist nichts dringend offen.'}</p>
+          </div>
+          <span className="inline-flex items-center gap-2 text-sm font-medium text-brand-600 dark:text-brand-400">Plan öffnen <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
         </Link>
 
         <div className="mt-5 grid gap-5 lg:grid-cols-2">
