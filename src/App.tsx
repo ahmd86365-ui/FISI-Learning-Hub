@@ -3,6 +3,7 @@ import { Layout } from './components/Layout'
 import { AuthProvider } from './contexts/AuthContext'
 import { SavedItemsProvider } from './contexts/SavedItemsContext'
 import { LearningProgressProvider } from './contexts/LearningProgressContext'
+import { StudyActivityProvider } from './contexts/StudyActivityContext'
 import { GuestOnlyRoute, ProtectedRoute } from './components/auth/AuthGuards'
 import Home from './pages/Home'
 import It from './pages/It'
@@ -26,23 +27,26 @@ import Auth from './pages/Auth'
 import Profile from './pages/Profile'
 import SavedItems from './pages/SavedItems'
 import LearningProgress from './pages/LearningProgress'
+import LearningStatistics from './pages/LearningStatistics'
 
 export default function App() {
   return (
     <AuthProvider>
       <SavedItemsProvider>
-        <LearningProgressProvider>
-          <Routes>
-        <Route element={<GuestOnlyRoute />}>
-          <Route path="auth" element={<Auth />} />
-        </Route>
+        <StudyActivityProvider>
+          <LearningProgressProvider>
+            <Routes>
+              <Route element={<GuestOnlyRoute />}>
+                <Route path="auth" element={<Auth />} />
+              </Route>
 
-        <Route element={<ProtectedRoute />}>
-          <Route element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="saved" element={<SavedItems />} />
-            <Route path="progress" element={<LearningProgress />} />
+              <Route element={<ProtectedRoute />}>
+                <Route element={<Layout />}>
+                  <Route index element={<Home />} />
+                  <Route path="profile" element={<Profile />} />
+                  <Route path="saved" element={<SavedItems />} />
+                  <Route path="progress" element={<LearningProgress />} />
+                  <Route path="stats" element={<LearningStatistics />} />
 
         <Route path="it" element={<It />} />
         <Route path="it/it-technical" element={<ItTechnicalPage />} />
@@ -75,12 +79,13 @@ export default function App() {
           element={<WisoIhkSimulation />}
         />
 
-        <Route path="suche" element={<Search />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Route>
-          </Routes>
-        </LearningProgressProvider>
+                  <Route path="suche" element={<Search />} />
+                  <Route path="*" element={<NotFound />} />
+                </Route>
+              </Route>
+            </Routes>
+          </LearningProgressProvider>
+        </StudyActivityProvider>
       </SavedItemsProvider>
     </AuthProvider>
   )

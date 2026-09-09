@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { useAuth } from './AuthContext'
 import { supabase } from '../lib/supabase'
+import { useStudyActivity } from './StudyActivityContext'
 
 interface LessonProgressRow {
   user_id: string
@@ -22,6 +23,7 @@ const LearningProgressContext = createContext<LearningProgressContextValue | und
 
 export function LearningProgressProvider({ children }: { children: ReactNode }) {
   const { session } = useAuth()
+  const { recordLessonCompleted } = useStudyActivity()
   const [progress, setProgress] = useState<LessonProgressRow[]>([])
   const [pendingIds, setPendingIds] = useState<Set<string>>(new Set())
   const [loading, setLoading] = useState(false)
@@ -98,6 +100,7 @@ export function LearningProgressProvider({ children }: { children: ReactNode }) 
         setError(saveError.message)
       } else {
         setProgress((current) => [data as LessonProgressRow, ...current.filter((entry) => entry.lesson_id !== lessonId)])
+        if (completed) await recordLessonCompleted(lessonId)
       }
 
       setPendingIds((current) => {
@@ -106,7 +109,7 @@ export function LearningProgressProvider({ children }: { children: ReactNode }) 
         return next
       })
     },
-    [pendingIds, progress, session?.user],
+    [pendingIds, progress, recordLessonCompleted, session?.user],
   )
 
   const value = useMemo(

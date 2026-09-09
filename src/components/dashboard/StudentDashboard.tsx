@@ -3,13 +3,18 @@ import {
   BarChart3,
   BookOpen,
   Bookmark,
+  CalendarDays,
   RotateCcw,
+  Flame,
+  Trophy,
   UserRound,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useLearningProgress } from '../../contexts/LearningProgressContext'
 import { useSavedItems, type SavedItem, type SavedItemKind } from '../../contexts/SavedItemsContext'
+import { useStudyActivity } from '../../contexts/StudyActivityContext'
 import { lessonCatalog } from '../../lib/lessonCatalog'
+import { calculateStudyStats } from '../../lib/studyStats'
 import { ButtonLink } from '../Button'
 
 const previewLimit = 3
@@ -17,6 +22,8 @@ const previewLimit = 3
 export function StudentDashboard() {
   const { progress, loading: progressLoading, error: progressError } = useLearningProgress()
   const { items, loading: savedLoading, error: savedError } = useSavedItems()
+  const { activities, loading: activityLoading, error: activityError } = useStudyActivity()
+  const studyStats = calculateStudyStats(activities)
   const completedIds = new Set(progress.filter((entry) => entry.completed).map((entry) => entry.lesson_id))
   const lessons = lessonCatalog.flatMap((module) => module.lessons)
   const completedLessons = lessons.filter((lesson) => completedIds.has(lesson.id)).length
@@ -50,11 +57,11 @@ export function StudentDashboard() {
             </h2>
           </div>
           <span className="font-mono text-xs uppercase tracking-wider text-ink-400 dark:text-ink-500" role="status">
-            {progressLoading || savedLoading ? 'Wird geladen …' : 'Aktueller Stand'}
+            {progressLoading || savedLoading || activityLoading ? 'Wird geladen …' : 'Aktueller Stand'}
           </span>
         </div>
 
-        {(progressError || savedError) && (
+        {(progressError || savedError || activityError) && (
           <p className="mb-6 rounded-xl border border-rose-300 bg-rose-50 p-4 text-sm text-rose-700 dark:border-rose-500/30 dark:bg-rose-500/10 dark:text-rose-300" role="alert">
             Einige persönliche Daten konnten nicht geladen werden. Bitte aktualisiere die Seite.
           </p>
@@ -129,18 +136,39 @@ export function StudentDashboard() {
           </article>
         </div>
 
+        <div className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
+          <DashboardStat icon={Flame} value={studyStats.currentStreak} label="Aktuelle Serie" suffix="Tage" />
+          <DashboardStat icon={Trophy} value={studyStats.longestStreak} label="Längste Serie" suffix="Tage" />
+          <DashboardStat icon={CalendarDays} value={studyStats.studyDaysLast7} label="Letzte 7 Tage" suffix="Lerntage" />
+          <DashboardStat icon={BookOpen} value={studyStats.lessonsCompletedThisWeek} label="Diese Woche" suffix="Lektionen" />
+        </div>
+
         <div className="mt-5 grid gap-5 lg:grid-cols-2">
           <SavedPreview kind="favorite" title="Favoriten" items={favoriteItems} loading={savedLoading} />
           <SavedPreview kind="review" title="Wiederholen" items={reviewItems} loading={savedLoading} />
         </div>
 
-        <div className="mt-5 grid gap-3 sm:grid-cols-3">
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <QuickLink to="/progress" icon={BarChart3} title="Mein Lernfortschritt" description="Alle Module im Überblick" />
           <QuickLink to="/saved" icon={Bookmark} title="Favoriten & Wiederholen" description="Gespeicherte Inhalte öffnen" />
+          <QuickLink to="/stats" icon={Flame} title="Lernstatistik" description="Serien und Aktivität ansehen" />
           <QuickLink to="/profile" icon={UserRound} title="Profil" description="Konto und Profilbild verwalten" />
         </div>
       </div>
     </section>
+  )
+}
+
+function DashboardStat({ icon: Icon, value, label, suffix }: { icon: typeof BarChart3; value: number; label: string; suffix: string }) {
+  return (
+    <Link to="/stats" className="rounded-xl border border-ink-200 bg-white p-4 transition-colors hover:border-brand-200 dark:border-ink-800 dark:bg-ink-900 dark:hover:border-brand-500/30">
+      <div className="flex items-center justify-between gap-3">
+        <Icon className="h-4 w-4 text-brand-500 dark:text-brand-400" aria-hidden="true" />
+        <span className="font-mono text-[0.65rem] uppercase text-ink-400 dark:text-ink-500">{suffix}</span>
+      </div>
+      <p className="mt-3 text-2xl font-bold text-ink-950 dark:text-white">{value}</p>
+      <p className="mt-1 text-xs font-medium text-ink-600 dark:text-ink-300">{label}</p>
+    </Link>
   )
 }
 
