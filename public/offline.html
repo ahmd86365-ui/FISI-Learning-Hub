@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#4A56E3" />
+    <title>Offline · FISI Learning Hub</title>
+    <style>
+      :root { font-family: system-ui, sans-serif; color: #172033; background: #f8fafc; color-scheme: light dark; }
+      body { margin: 0; min-height: 100vh; display: grid; place-items: center; }
+      main { max-width: 30rem; padding: 2rem; text-align: center; }
+      img { width: 64px; height: 64px; }
+      h1 { font-size: 1.6rem; }
+      p { line-height: 1.65; }
+      button { background: #4A56E3; color: white; border: 0; border-radius: .75rem; padding: .85rem 1.2rem; font: inherit; cursor: pointer; }
+      button:focus-visible { outline: 3px solid #8992ff; outline-offset: 4px; }
+      @media (prefers-color-scheme: dark) { :root { color: #e2e8f0; background: #0f172a; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img src="/favicon.svg" alt="" />
+      <p>FISI Learning Hub</p>
+      <h1>Du bist gerade offline</h1>
+      <p>Zum Lernen und für deine Kontodaten benötigst du eine Internetverbindung. Fortschritt, Favoriten und Prüfungsergebnisse können hier offline nicht geladen oder synchronisiert werden.</p>
+      <p>Verbinde dich erneut mit dem Internet und lade diese Seite neu.</p>
+      <button type="button" onclick="window.location.reload()">Erneut versuchen</button>
+    </main>
+  </body>
+</html>

@@ -4,6 +4,7 @@ dist-ssr
 *.local
 .DS_Store
 .env
+*.tsbuildinfo
 
 # Private IT Technical course source material
 /IT-Technik/

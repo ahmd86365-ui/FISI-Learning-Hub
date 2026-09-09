@@ -15,9 +15,17 @@ if (!fs.existsSync(distDir)) {
   process.exit(1)
 }
 
-app.use(express.static(distDir, { index: false }))
+app.use(express.static(distDir, {
+  index: false,
+  setHeaders(res, filePath) {
+    if (['sw.js', 'index.html', 'offline.html', 'manifest.webmanifest'].includes(path.basename(filePath))) {
+      res.setHeader('Cache-Control', 'no-cache')
+    }
+  },
+}))
 
 app.get('*', (req, res) => {
+  res.setHeader('Cache-Control', 'no-cache')
   res.sendFile(path.join(distDir, 'index.html'))
 })
 
