@@ -1,33 +1,21 @@
-import { ArrowRight, LayoutGrid, MonitorSmartphone, ShieldCheck, TerminalSquare } from 'lucide-react'
+import { ArrowRight, TerminalSquare } from 'lucide-react'
 import { SearchBar } from '../components/SearchBar'
 import { SubjectCard } from '../components/SubjectCard'
 import { SectionHeader } from '../components/SectionHeader'
 import { ButtonLink } from '../components/Button'
 import { HeroPattern } from '../components/HeroPattern'
+import { StudentDashboard } from '../components/dashboard/StudentDashboard'
+import { useAuth } from '../contexts/AuthContext'
 import { subjects } from '../data/subjects'
 
 const itSubject = subjects.find((s) => s.slug === 'it')!
 const otherSubjects = subjects.filter((s) => s.slug !== 'it')
 
-const features = [
-  {
-    icon: LayoutGrid,
-    title: 'Klar strukturiert',
-    description: 'Vier Lernbereiche, ein durchdachtes System – ohne Ablenkung vom Wesentlichen.',
-  },
-  {
-    icon: MonitorSmartphone,
-    title: 'Für jedes Gerät',
-    description: 'Ob am Desktop, Tablet oder Smartphone – die Plattform passt sich an.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Persönlich gespeichert',
-    description: 'Dein Konto hält Profil, Merklisten und Lernfortschritt für dich bereit.',
-  },
-]
-
 export default function Home() {
+  const { session } = useAuth()
+  const firstName = session?.user.user_metadata.first_name
+  const greeting = typeof firstName === 'string' && firstName.trim() ? `Willkommen zurück, ${firstName.trim()}.` : 'Willkommen zurück.'
+
   return (
     <div>
       <section className="relative overflow-hidden border-b border-ink-200 bg-white dark:border-ink-800 dark:bg-ink-950">
@@ -47,7 +35,7 @@ export default function Home() {
             <h1
               className="animate-fadeIn text-balance text-4xl font-extrabold leading-[1.08] tracking-tight text-ink-900 opacity-0 [animation-delay:80ms] [animation-fill-mode:forwards] dark:text-white sm:text-5xl lg:text-6xl"
             >
-              Lernen. Verstehen.
+              {greeting}
               <br />
               <span className="bg-gradient-to-r from-brand-600 to-brand-400 bg-clip-text text-transparent dark:from-brand-400 dark:to-brand-200">
                 Üben. Bestehen.
@@ -75,24 +63,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-b border-ink-200 bg-ink-50/60 dark:border-ink-800 dark:bg-ink-900/30">
-        <div className="mx-auto grid max-w-content grid-cols-1 gap-4 px-4 py-14 sm:grid-cols-3 sm:px-6 lg:px-8">
-          {features.map((f) => (
-            <div
-              key={f.title}
-              className="flex items-start gap-4 rounded-xl border border-transparent p-3 transition-colors duration-200 hover:border-ink-200 hover:bg-white dark:hover:border-ink-800 dark:hover:bg-ink-900"
-            >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white text-brand-600 shadow-soft ring-1 ring-ink-100 dark:bg-ink-900 dark:text-brand-400 dark:ring-ink-800">
-                <f.icon className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold text-ink-900 dark:text-white">{f.title}</h3>
-                <p className="mt-1 text-sm leading-relaxed text-ink-500 dark:text-ink-400">{f.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <StudentDashboard />
 
       <section className="mx-auto max-w-content px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <SectionHeader
