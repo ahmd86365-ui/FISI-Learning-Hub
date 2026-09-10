@@ -84,8 +84,6 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
                 Home
               </NavLink>
 
-              <NavLink to="/exams" onClick={onClose} className="rounded-xl px-4 py-3.5 font-medium text-brand-600 dark:text-brand-400">Prüfungsmodus & Verlauf</NavLink>
-
               {subjects.map((s) => {
                 const Icon = s.icon
                 return (
@@ -107,6 +105,8 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
                 )
               })}
 
+              <NavLink to="/exams" onClick={onClose} className="rounded-xl px-4 py-3.5 font-medium text-brand-600 dark:text-brand-400">Prüfungsmodus & Verlauf</NavLink>
+
               <NavLink
                 to="/suche"
                 onClick={onClose}
@@ -120,21 +120,6 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
               >
                 <Search className="h-5 w-5" aria-hidden="true" />
                 Suche
-              </NavLink>
-
-              <NavLink
-                to="/profile"
-                onClick={onClose}
-                className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-4 py-3.5 text-base font-medium transition-colors ${
-                    isActive
-                      ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-brand-400'
-                      : 'text-ink-700 hover:bg-ink-100 dark:text-ink-200 dark:hover:bg-ink-800'
-                  }`
-                }
-              >
-                <UserRound className="h-5 w-5" aria-hidden="true" />
-                Mein Profil
               </NavLink>
 
               <NavLink
@@ -195,6 +180,21 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
               >
                 <CircleAlert className="h-5 w-5" aria-hidden="true" />
                 Fehlertraining
+              </NavLink>
+
+              <NavLink
+                to="/profile"
+                onClick={onClose}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-xl px-4 py-3.5 text-base font-medium transition-colors ${
+                    isActive
+                      ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-brand-400'
+                      : 'text-ink-700 hover:bg-ink-100 dark:text-ink-200 dark:hover:bg-ink-800'
+                  }`
+                }
+              >
+                <UserRound className="h-5 w-5" aria-hidden="true" />
+                Mein Profil
               </NavLink>
             </div>
 
