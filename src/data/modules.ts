@@ -15,6 +15,9 @@ import { variablenRechnenTopic } from './java/variablenRechnen'
 import { variablenUebungenTopic } from './java/variablenUebungen'
 import { netzwerksystemeTopic } from './netzwerktechnik/netzwerksysteme'
 import { netzwerkarchitekturenTopic } from './netzwerktechnik/netzwerkarchitekturen'
+import { netzwerkgrundlagenTopic, strukturierteVerkabelungTopic } from './netzwerktechnik/grundlagenUndVerkabelung'
+import { adressierungTopic, subnettingTopic } from './netzwerktechnik/ipv4UndSubnetting'
+import { diagnoseTopic, diensteSicherheitTopic, routingTopic, vlanTopic } from './netzwerktechnik/routingUndDienste'
 import { wirtschaftssektorenTopic } from './wiso/wirtschaftssektoren'
 import { marktformenTopic } from './wiso/marktformen'
 import { sozialeMarktwirtschaftTopic } from './wiso/sozialeMarktwirtschaft'
@@ -132,25 +135,28 @@ const javaModule: Module = {
   topics: [einstiegTopic, variablenDeklarationTopic, variablenRechnenTopic, variablenUebungenTopic],
 }
 
-/**
- * Netzwerktechnik — built from the "Netzwerktechnik" course folder
- * (Desktop/Netzwerktechnik/Netzwerktechnik/Modul 1), transcribed from the
- * lesson HTML files and their accompanying "Arbeitsblatt" worksheets (which
- * include the author's own "Lösungen" answer keys). Only the topics that
- * have been transcribed so far are wired in here; further Modul 1/Modul 2
- * lessons are future work. No module-wide test is defined for the same
- * reason as itGrundlagen/java — nothing should be fabricated to fill it.
- */
+/** Netzwerktechnik — consolidated from the supplied course documents. */
 const netzwerktechnikModule: Module = {
   id: 'mod-netzwerktechnik',
   slug: 'netzwerktechnik',
   subjectSlug: 'it',
   title: 'Netzwerktechnik',
   description:
-    'Netzwerksysteme und Netzwerkarchitekturen – Server, Clients, Terminals und die grundlegenden Vernetzungsmodelle der Fachinformatiker-Ausbildung.',
+    'Von Netzwerksystemen und Verkabelung über IPv4, Subnetting und Routing bis zu VLAN, Diensten, VPN und systematischer Fehlerdiagnose.',
   icon: Network,
   order: 3,
-  topics: [netzwerksystemeTopic, netzwerkarchitekturenTopic],
+  topics: [
+    netzwerksystemeTopic,
+    netzwerkarchitekturenTopic,
+    netzwerkgrundlagenTopic,
+    strukturierteVerkabelungTopic,
+    adressierungTopic,
+    subnettingTopic,
+    routingTopic,
+    vlanTopic,
+    diensteSicherheitTopic,
+    diagnoseTopic,
+  ],
 }
 
 /**

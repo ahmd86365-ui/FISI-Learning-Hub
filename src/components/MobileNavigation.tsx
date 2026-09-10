@@ -1,7 +1,7 @@
-import { AnimatePresence, motion } from 'framer-motion'
-import { NavLink } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { NavLink, useLocation } from 'react-router-dom'
 import { BarChart3, BookmarkCheck, CircleAlert, Flame, X, Home, Search, UserRound, UserRoundX } from 'lucide-react'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Logo } from './Logo'
 import { subjects } from '../data/subjects'
 import { useAuth } from '../contexts/AuthContext'
@@ -13,27 +13,35 @@ interface MobileNavigationProps {
 
 export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
   const { signOut } = useAuth()
+  const location = useLocation()
+  const previousLocationKey = useRef(location.key)
+
+  useEffect(() => {
+    if (previousLocationKey.current !== location.key) {
+      previousLocationKey.current = location.key
+      if (open) onClose()
+    }
+  }, [location.key, onClose, open])
+
   useEffect(() => {
     if (!open) return
+    const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
     }
     document.addEventListener('keydown', handleKey)
     return () => {
-      document.body.style.overflow = ''
+      document.body.style.overflow = previousOverflow
       document.removeEventListener('keydown', handleKey)
     }
   }, [open, onClose])
 
-  return (
-    <AnimatePresence>
-      {open && (
+  return open ? (
         <div className="fixed inset-0 z-50 lg:hidden">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 bg-ink-950/50 backdrop-blur-sm dark:bg-black/70"
             onClick={onClose}
@@ -44,7 +52,6 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
             aria-label="Mobile Navigation"
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
-            exit={{ x: '100%' }}
             transition={{ type: 'spring', stiffness: 320, damping: 34 }}
             className="fixed inset-y-0 right-0 z-10 flex w-full max-w-xs flex-col bg-white shadow-card-hover dark:bg-ink-950"
           >
@@ -194,7 +201,10 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
             <div className="border-t border-ink-200 p-5 dark:border-ink-800">
               <button
                 type="button"
-                onClick={() => void signOut().catch((error: unknown) => console.error('Abmeldung fehlgeschlagen.', error))}
+                onClick={() => {
+                  onClose()
+                  void signOut().catch((error: unknown) => console.error('Abmeldung fehlgeschlagen.', error))
+                }}
                 className="mb-4 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-ink-700 transition-colors hover:bg-ink-100 dark:text-ink-200 dark:hover:bg-ink-800"
               >
                 <UserRoundX className="h-5 w-5" aria-hidden="true" />
@@ -206,7 +216,5 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
             </div>
           </motion.nav>
         </div>
-      )}
-    </AnimatePresence>
-  )
+  ) : null
 }
