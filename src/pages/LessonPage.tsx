@@ -77,6 +77,9 @@ export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }
             {topic.exercises.length > 0 && (
               <section className="mt-14">
                 <SectionHeader title="Übungen" description="Wende das Gelernte direkt an." />
+                {subjectSlug === 'it' && moduleSlug === 'netzwerktechnik' && (topicSlug === 'subnetting' || topicSlug === 'cidr-netzgrenzen') && (
+                  <ButtonLink to="/practice/subnetting" variant="secondary" className="mb-6">Subnetting Trainer öffnen</ButtonLink>
+                )}
                 <ExercisesSection exercises={topic.exercises} />
               </section>
             )}

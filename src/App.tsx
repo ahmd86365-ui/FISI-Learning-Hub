@@ -35,6 +35,7 @@ const LearningStatistics = lazy(() => import('./pages/LearningStatistics'))
 const ErrorTraining = lazy(() => import('./pages/ErrorTraining'))
 const Exams = lazy(() => import('./pages/Exams'))
 const SmartReview = lazy(() => import('./pages/SmartReview'))
+const SubnettingTrainer = lazy(() => import('./pages/SubnettingTrainer'))
 
 export default function App() {
   return (
@@ -60,6 +61,7 @@ export default function App() {
                   <Route path="errors" element={<ErrorTraining />} />
                   <Route path="exams" element={<Exams />} />
                   <Route path="review" element={<SmartReview />} />
+                  <Route path="practice/subnetting" element={<SubnettingTrainer />} />
 
         <Route path="it" element={<It />} />
         <Route path="it/it-technical" element={<ItTechnicalPage />} />
