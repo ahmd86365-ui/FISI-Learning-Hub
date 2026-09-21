@@ -14,6 +14,7 @@ import { variablenDeklarationTopic } from './java/variablenDeklaration'
 import { variablenRechnenTopic } from './java/variablenRechnen'
 import { variablenUebungenTopic } from './java/variablenUebungen'
 import { netzwerktechnikTopics } from './netzwerktechnik/course'
+import { linuxTopics } from './linux/course'
 import { wirtschaftssektorenTopic } from './wiso/wirtschaftssektoren'
 import { marktformenTopic } from './wiso/marktformen'
 import { sozialeMarktwirtschaftTopic } from './wiso/sozialeMarktwirtschaft'
@@ -144,6 +145,17 @@ const netzwerktechnikModule: Module = {
   topics: netzwerktechnikTopics,
 }
 
+const linuxModule: Module = {
+  id: 'mod-linux',
+  slug: 'linux',
+  subjectSlug: 'it',
+  title: 'Linux',
+  description: 'Linux verstehen, eine Debian-basierte Distribution auswählen und die ersten Schritte im Terminal gehen.',
+  icon: Terminal,
+  order: 4,
+  topics: linuxTopics,
+}
+
 /**
  * WISO – Wirtschafts- und Sozialkunde, built from WISO.md, the sole source
  * of truth for this content. No module-wide test is defined here since
@@ -258,6 +270,7 @@ export const modules: Module[] = [
   itGrundlagenModule,
   javaModule,
   netzwerktechnikModule,
+  linuxModule,
   wisoModule,
   itEnglishGrundlagenModule,
   technicalEnglishFisiModule,
