@@ -13,11 +13,7 @@ import { einstiegTopic } from './java/einstieg'
 import { variablenDeklarationTopic } from './java/variablenDeklaration'
 import { variablenRechnenTopic } from './java/variablenRechnen'
 import { variablenUebungenTopic } from './java/variablenUebungen'
-import { netzwerksystemeTopic } from './netzwerktechnik/netzwerksysteme'
-import { netzwerkarchitekturenTopic } from './netzwerktechnik/netzwerkarchitekturen'
-import { netzwerkgrundlagenTopic, strukturierteVerkabelungTopic } from './netzwerktechnik/grundlagenUndVerkabelung'
-import { adressierungTopic, subnettingTopic } from './netzwerktechnik/ipv4UndSubnetting'
-import { diagnoseTopic, diensteSicherheitTopic, routingTopic, vlanTopic } from './netzwerktechnik/routingUndDienste'
+import { netzwerktechnikTopics } from './netzwerktechnik/course'
 import { wirtschaftssektorenTopic } from './wiso/wirtschaftssektoren'
 import { marktformenTopic } from './wiso/marktformen'
 import { sozialeMarktwirtschaftTopic } from './wiso/sozialeMarktwirtschaft'
@@ -135,28 +131,17 @@ const javaModule: Module = {
   topics: [einstiegTopic, variablenDeklarationTopic, variablenRechnenTopic, variablenUebungenTopic],
 }
 
-/** Netzwerktechnik — consolidated from the supplied course documents. */
+/** Netzwerktechnik — rebuilt solely from Netzwerktechnik-Neu. */
 const netzwerktechnikModule: Module = {
   id: 'mod-netzwerktechnik',
   slug: 'netzwerktechnik',
   subjectSlug: 'it',
   title: 'Netzwerktechnik',
   description:
-    'Von Netzwerksystemen und Verkabelung über IPv4, Subnetting und Routing bis zu VLAN, Diensten, VPN und systematischer Fehlerdiagnose.',
+    'OSI und TCP/IP, Ethernet-LAN, IPv4 und CIDR, Subnetting, statisches Routing sowie TCP-Verbindungen.',
   icon: Network,
   order: 3,
-  topics: [
-    netzwerksystemeTopic,
-    netzwerkarchitekturenTopic,
-    netzwerkgrundlagenTopic,
-    strukturierteVerkabelungTopic,
-    adressierungTopic,
-    subnettingTopic,
-    routingTopic,
-    vlanTopic,
-    diensteSicherheitTopic,
-    diagnoseTopic,
-  ],
+  topics: netzwerktechnikTopics,
 }
 
 /**
