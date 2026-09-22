@@ -80,6 +80,9 @@ export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }
                 {subjectSlug === 'it' && moduleSlug === 'netzwerktechnik' && (topicSlug === 'subnetting' || topicSlug === 'cidr-netzgrenzen') && (
                   <ButtonLink to="/practice/subnetting" variant="secondary" className="mb-6">Subnetting Trainer öffnen</ButtonLink>
                 )}
+                {subjectSlug === 'it' && moduleSlug === 'linux' && topicSlug === 'was-ist-linux' && (
+                  <ButtonLink to="/practice/linux-terminal" variant="secondary" className="mb-6">Linux Terminal Trainer öffnen</ButtonLink>
+                )}
                 <ExercisesSection exercises={topic.exercises} />
               </section>
             )}
