@@ -25,6 +25,7 @@ const WisoIhkSimulation = lazy(() => import('./pages/wisoExam/WisoIhkSimulation'
 const ModulePage = lazy(() => import('./pages/ModulePage'))
 const LessonPage = lazy(() => import('./pages/LessonPage'))
 const Search = lazy(() => import('./pages/Search'))
+const Glossary = lazy(() => import('./pages/Glossary'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 const ItTechnicalPage = lazy(() => import('./pages/itTechnical/ItTechnicalPage'))
 const Auth = lazy(() => import('./pages/Auth'))
@@ -97,6 +98,7 @@ export default function App() {
         />
 
                   <Route path="suche" element={<Search />} />
+                  <Route path="glossary" element={<Glossary />} />
                   <Route path="*" element={<NotFound />} />
                 </Route>
               </Route>

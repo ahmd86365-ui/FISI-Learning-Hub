@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { ArrowRight, SearchX } from 'lucide-react'
+import { ArrowRight, BookOpen, SearchX } from 'lucide-react'
 import { SearchBar } from '../components/SearchBar'
 import { EmptyState } from '../components/EmptyState'
 import { SectionHeader } from '../components/SectionHeader'
@@ -39,6 +39,10 @@ export default function Search() {
       />
 
       <SearchBar size="lg" initialValue={query} onSubmitQuery={handleSubmit} className="max-w-2xl" />
+
+      <Link to="/glossary" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg border border-ink-200 px-4 py-2 text-sm font-medium text-brand-700 hover:bg-ink-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-500 dark:border-ink-700 dark:text-brand-300 dark:hover:bg-ink-900">
+        <BookOpen className="h-4 w-4" aria-hidden="true" /> FISI Glossar: Fachbegriffe nachschlagen
+      </Link>
 
       <div className="mt-10">
         {results.length > 0 ? (
