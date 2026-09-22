@@ -61,6 +61,12 @@ const { getModuleBySlug } = load('src/data/modules.ts')
   assert.ok(searchGlossary(glossaryEntries, 'Betriebssystemkern', 'Linux').some((entry) => entry.id === 'kernel'))
   assert.ok(!searchGlossary(glossaryEntries, 'Betriebssystemkern', 'Hardware').some((entry) => entry.id === 'kernel'))
   assert.ok(searchGlossary(glossaryEntries, 'übertragung').length > 0)
+  assert.equal(glossaryEntries.length, 53)
+  for (const id of ['terminal', 'shell', 'prompt', 'dateipfad']) {
+    const entry = glossaryEntries.find((item) => item.id === id)
+    assert.ok(entry, `Missing Tag 2 glossary term: ${id}`)
+    assert.ok(entry.lessons.some((lesson) => lesson.module === 'linux' && lesson.topic === 'terminal-und-erste-befehle'))
+  }
 
   const counts = Object.fromEntries(glossaryCategories.map((category) => [category, glossaryEntries.filter((entry) => entry.category === category).length]))
   console.log(`Glossary verification passed: ${glossaryEntries.length} terms, ${linked} with lesson links`)
