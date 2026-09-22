@@ -62,6 +62,7 @@ export default function App() {
                   <Route path="stats" element={<LearningStatistics />} />
                   <Route path="errors" element={<ErrorTraining />} />
                   <Route path="exams" element={<Exams />} />
+                  <Route path="exams/mixed" element={<Exams />} />
                   <Route path="review" element={<SmartReview />} />
                   <Route path="practice/subnetting" element={<SubnettingTrainer />} />
                   <Route path="practice/linux-terminal" element={<LinuxTerminalTrainer />} />

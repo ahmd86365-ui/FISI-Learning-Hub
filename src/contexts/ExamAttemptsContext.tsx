@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { supabase } from '../lib/supabase'
 import type { ExamMode, ExamResultData, SimulationQuestion } from '../lib/examSimulationCore'
-import { isSimulationAnswerCorrect, toPerformanceAttempt } from '../lib/examSimulationCore'
+import { examScore, isSimulationAnswerCorrect, toPerformanceAttempt } from '../lib/examSimulationCore'
 import { useAuth } from './AuthContext'
 import { useQuestionPerformance } from './QuestionPerformanceContext'
 
@@ -32,6 +32,7 @@ export interface SubmitExamInput {
   submittedAt?: string
   questions: SimulationQuestion[]
   answers: Record<string, string[]>
+  selectedSubjects?: string[]
 }
 
 interface ExamAttemptsContextValue {
@@ -81,11 +82,7 @@ export function ExamAttemptsProvider({ children }: { children: ReactNode }) {
   const submitExam = useCallback(async (input: SubmitExamInput) => {
     const userId = currentUser.current
     if (!userId) return null
-    const answeredQuestions = input.questions.filter((question) => (input.answers[question.questionKey] ?? []).some((value) => value.trim()))
-    const correct = answeredQuestions.filter((question) => isSimulationAnswerCorrect(question, input.answers[question.questionKey] ?? [])).length
-    const incorrect = answeredQuestions.length - correct
-    const unanswered = input.questions.length - answeredQuestions.length
-    const percentage = Math.round((correct / input.questions.length) * 100)
+    const { correct, incorrect, unanswered, percentage, passed } = examScore(input.questions, input.answers)
     const usedSeconds = Math.min(input.durationSeconds, Math.max(0, Math.round(((input.submittedAt ? Date.parse(input.submittedAt) : Date.now()) - Date.parse(input.startedAt)) / 1000)))
     const questionResults = input.questions.map((question) => {
       const answer = input.answers[question.questionKey] ?? []
@@ -116,8 +113,8 @@ export function ExamAttemptsProvider({ children }: { children: ReactNode }) {
       p_incorrect_answers: incorrect,
       p_unanswered_questions: unanswered,
       p_percentage: percentage,
-      p_passed: correct / input.questions.length >= 0.5,
-      p_result_data: { questions: input.questions, answers: input.answers },
+      p_passed: passed,
+      p_result_data: { questions: input.questions, answers: input.answers, selectedSubjects: input.selectedSubjects },
       p_question_results: questionResults,
     }).single()
     if (currentUser.current !== userId) return null

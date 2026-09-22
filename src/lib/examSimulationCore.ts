@@ -25,6 +25,7 @@ export interface ActiveExamSession {
   mode: ExamMode
   label: string
   questions: SimulationQuestion[]
+  selectedSubjects?: string[]
   answers: Record<string, string[]>
   startedAt: string
   endAt: string
@@ -36,6 +37,13 @@ export interface ActiveExamSession {
 export interface ExamResultData {
   questions: SimulationQuestion[]
   answers: Record<string, string[]>
+  selectedSubjects?: string[]
+}
+
+export function examScore(questions: SimulationQuestion[], answers: Record<string, string[]>) {
+  const correct = questions.filter((question) => (answers[question.questionKey] ?? []).some((value) => value.trim()) && isSimulationAnswerCorrect(question, answers[question.questionKey])).length
+  const answered = questions.filter((question) => (answers[question.questionKey] ?? []).some((value) => value.trim())).length
+  return { correct, incorrect: answered - correct, unanswered: questions.length - answered, percentage: Math.round(100 * correct / questions.length), passed: correct * 2 >= questions.length }
 }
 
 export function remainingExamSeconds(session: ActiveExamSession, now = Date.now()) {

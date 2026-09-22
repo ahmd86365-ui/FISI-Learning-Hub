@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Button } from '../components/Button'
 import { useAuth } from '../contexts/AuthContext'
 import { useExamAttempts } from '../contexts/ExamAttemptsContext'
 import { chooseQuestions, examPresets, freezeExam, remainingExamSeconds, getExamPool, isSimulationAnswerCorrect, type ActiveExamSession, type ExamMode, type ExamResultData } from '../lib/examSimulation'
+import { getMixedPool, mixedAvailability, mixedBreakdown, mixedCounts, mixedSecondsPerQuestion, mixedSubjectOf, mixedSubjects, selectMixedQuestions, type MixedSubject } from '../lib/mixedExam'
 
 const panel = 'rounded-2xl border border-ink-200 bg-white p-5 dark:border-ink-800 dark:bg-ink-900 sm:p-7'
 const answered = (values: string[] = []) => values.some((value) => value.trim())
@@ -18,6 +19,7 @@ function Review({ data }: { data: ExamResultData }) {
       <summary className="cursor-pointer font-semibold">{index + 1}. {question.title} — {!answered(answer) ? 'Unbeantwortet' : isSimulationAnswerCorrect(question, answer) ? 'Richtig' : 'Falsch'}</summary>
       <div className="mt-4 space-y-3 whitespace-pre-wrap break-words">
         {question.scenario && <p>{question.scenario}</p>}{question.referenceText && <p>{question.referenceText}</p>}
+        <p>{question.subjectLabel}{question.moduleLabel ? ` · ${question.moduleLabel}` : ''}</p>
         <p>Deine Antwort: {display(answer) || 'Keine Antwort'}</p>
         <p className="font-semibold">Lösung: {display(expected)}</p>
         {question.explanation && <p>{question.explanation}</p>}
@@ -33,6 +35,7 @@ export default function Exams() {
 }
 
 function ExamWorkspace({ userId }: { userId: string }) {
+  const isMixedRoute = useLocation().pathname === '/exams/mixed'
   const storageKey = `fisi:exam:v1:${userId}`
   const { attempts, loading, error, submitExam } = useExamAttempts()
   const [storageError, setStorageError] = useState('')
@@ -47,6 +50,11 @@ function ExamWorkspace({ userId }: { userId: string }) {
   })
   const [mode, setMode] = useState<ExamMode>('wiso_mixed')
   const [count, setCount] = useState(10)
+  const [mixedCount, setMixedCount] = useState(10)
+  const [subjects, setSubjects] = useState<MixedSubject[]>(mixedSubjects.map((subject) => subject.id))
+  const mixedPool = getMixedPool()
+  const available = mixedAvailability(mixedPool).filter((subject) => subject.count > 0)
+  const selectedPoolSize = mixedPool.filter((question) => { const subject = mixedSubjectOf(question); return subject !== null && subjects.includes(subject) }).length
   const [index, setIndex] = useState(0)
   const [now, setNow] = useState(Date.now())
   const [saving, setSaving] = useState(false)
@@ -101,6 +109,15 @@ function ExamWorkspace({ userId }: { userId: string }) {
     persist({ id: crypto.randomUUID(), userId, mode, label: examPresets[mode].label, questions, answers: {}, startedAt: new Date(started).toISOString(), endAt: new Date(started + durationSeconds * 1000).toISOString(), durationSeconds })
     setNow(started); setIndex(0); setReviewId(null); setSaveError('')
   }
+  const startMixed = () => {
+    try {
+      const questions = selectMixedQuestions(subjects, mixedCount, undefined, mixedPool)
+      const started = Date.now()
+      const durationSeconds = questions.length * mixedSecondsPerQuestion
+      persist({ id: crypto.randomUUID(), userId, mode: 'lesson_tests', label: 'Gemischte Prüfung', selectedSubjects: subjects, questions, answers: {}, startedAt: new Date(started).toISOString(), endAt: new Date(started + durationSeconds * 1000).toISOString(), durationSeconds })
+      setNow(started); setIndex(0); setReviewId(null); setSaveError('')
+    } catch (cause) { setSaveError(cause instanceof Error ? cause.message : 'Prüfung konnte nicht gestartet werden.') }
+  }
   const question = draft?.questions[Math.min(index, draft.questions.length - 1)]
   const locked = !!draft?.submittedAt || remaining === 0
   const changeAnswer = (values: string[]) => {
@@ -111,10 +128,18 @@ function ExamWorkspace({ userId }: { userId: string }) {
   const localCorrect = draft?.questions.filter((item) => answered(draft.answers[item.questionKey]) && isSimulationAnswerCorrect(item, draft.answers[item.questionKey])).length ?? 0
 
   return <main className="mx-auto max-w-5xl space-y-6 px-4 py-8 sm:px-6 sm:py-12">
-    <header><h1 className="text-3xl font-bold">Prüfungsmodus</h1><p className="mt-2 text-ink-500 dark:text-ink-400">Prüfung üben, Ergebnis prüfen und deinen Verlauf verfolgen.</p></header>
+    <header><h1 className="text-3xl font-bold">{isMixedRoute ? 'Gemischte Prüfung' : 'Prüfungsmodus'}</h1><p className="mt-2 text-ink-500 dark:text-ink-400">Prüfung üben, Ergebnis prüfen und deinen Verlauf verfolgen.</p>{isMixedRoute ? <Link className="mt-3 inline-block text-brand-600 underline" to="/exams">Zum Prüfungsmodus</Link> : <Link className="mt-3 inline-block text-brand-600 underline" to="/exams/mixed">Gemischte Prüfung einrichten</Link>}</header>
     {storageError && <p role="alert">{storageError}</p>}
     {(error || saveError) && <p role="alert" className={panel}>{saveError || `Prüfungsdaten konnten nicht geladen werden: ${error}`}</p>}
-    {!draft && <section className={panel} aria-label="Prüfung einrichten">
+    {!draft && isMixedRoute && <section className={panel} aria-label="Gemischte Prüfung einrichten">
+      <h2 className="text-xl font-semibold">Prüfung einrichten</h2>
+      <fieldset className="mt-5"><legend className="font-semibold">Themen / Lernbereiche</legend><div className="mt-3 grid gap-2 sm:grid-cols-2">{available.map((subject) => <label key={subject.id} className="flex min-h-11 items-center gap-3 rounded-xl border border-ink-200 p-3 dark:border-ink-700"><input type="checkbox" checked={subjects.includes(subject.id)} onChange={() => setSubjects((current) => current.includes(subject.id) ? current.filter((id) => id !== subject.id) : [...current, subject.id])} />{subject.label} ({subject.count} Fragen)</label>)}</div></fieldset>
+      <label className="mt-5 block font-semibold">Anzahl Fragen<select className="mt-2 w-full rounded-lg border p-3 dark:border-ink-700 dark:bg-ink-800" value={mixedCount} onChange={(event) => setMixedCount(Number(event.target.value))}>{mixedCounts.map((value) => <option key={value} value={value} disabled={selectedPoolSize < value}>{value} Fragen</option>)}</select></label>
+      <p className="my-4">{mixedCount * mixedSecondsPerQuestion / 60} Minuten · Bestanden ab 50 % · Ein Punkt je Frage, keine Teilpunkte.</p>
+      {selectedPoolSize < mixedCount && <p role="alert" className="mb-4">Diese Lernbereiche bieten {selectedPoolSize} geeignete Fragen. Bitte weitere Lernbereiche oder eine kleinere Fragenzahl wählen.</p>}
+      <Button onClick={startMixed} disabled={!subjects.length || selectedPoolSize < mixedCount}>Prüfung starten</Button>
+    </section>}
+    {!draft && !isMixedRoute && <section className={panel} aria-label="Prüfung einrichten">
       <h2 className="text-xl font-semibold">Neue Prüfung</h2>
       <div className="my-5 grid gap-4 sm:grid-cols-2">
         <label>Prüfungstyp<select className="mt-2 w-full rounded-lg border p-3 dark:border-ink-700 dark:bg-ink-800" value={mode} onChange={(event) => { setMode(event.target.value as ExamMode); setCount(10) }}>{Object.entries(examPresets).map(([key, preset]) => <option key={key} value={key}>{preset.label}</option>)}</select></label>
@@ -142,9 +167,13 @@ function ExamWorkspace({ userId }: { userId: string }) {
         </div>
         <Button disabled={locked || saving} onClick={() => { if (window.confirm('Prüfung verbindlich abgeben? Danach können Antworten nicht mehr geändert werden.')) void submit(Date.now() >= Date.parse(draft.endAt) ? 'timeout' : 'manual') }}>Prüfung abgeben</Button>
       </>}
-      {draft.submittedAt && <div className={panel}><h2 className="text-xl font-semibold">{draft.submissionReason === 'timeout' ? 'Zeit abgelaufen' : 'Prüfung abgegeben'} — {localCorrect} / {draft.questions.length} Punkte ({Math.round(localCorrect / draft.questions.length * 100)} %)</h2><p>{localCorrect / draft.questions.length >= 0.5 ? 'Bestanden' : 'Nicht bestanden'}</p><p className="my-3">{saving ? 'Ergebnis wird gespeichert …' : 'Ergebnis lokal gesichert. Übertragung noch ausstehend.'}</p><Button disabled={saving} onClick={() => void submit(draft.submissionReason ?? 'manual')}>Erneut speichern</Button><div className="mt-5"><Review data={draft} /></div></div>}
+      {draft.submittedAt && <div className={panel}><h2 className="text-xl font-semibold">{draft.submissionReason === 'timeout' ? 'Zeit abgelaufen' : 'Prüfung abgegeben'} — {localCorrect} / {draft.questions.length} Punkte ({Math.round(localCorrect / draft.questions.length * 100)} %)</h2><p>{localCorrect / draft.questions.length >= 0.5 ? 'Bestanden' : 'Nicht bestanden'}</p>{draft.label === 'Gemischte Prüfung' && <SubjectBreakdown data={draft} />}<p className="my-3">{saving ? 'Ergebnis wird gespeichert …' : 'Ergebnis lokal gesichert. Übertragung noch ausstehend.'}</p><Button disabled={saving} onClick={() => void submit(draft.submissionReason ?? 'manual')}>Erneut speichern</Button><div className="mt-5"><Review data={draft} /></div></div>}
     </section>}
-    {selected && <section className="space-y-4"><div className={panel}><h2 className="text-2xl font-bold">{selected.passed ? 'Bestanden' : 'Nicht bestanden'} · {selected.percentage} %</h2><p>{selected.correct_answers} / {selected.total_questions} Punkte · {selected.incorrect_answers} falsch · {selected.unanswered_questions} unbeantwortet · {clock(selected.used_seconds)} benötigt</p><p className="mt-2">In deinem Konto gespeichert.</p><Link className="text-brand-600 underline" to="/errors">Fehlertraining öffnen</Link></div><Review data={selected.result_data} /></section>}
+    {selected && <section className="space-y-4"><div className={panel}><h2 className="text-2xl font-bold">{selected.passed ? 'Bestanden' : 'Nicht bestanden'} · {selected.percentage} %</h2><p>{selected.correct_answers} / {selected.total_questions} Punkte · {selected.incorrect_answers} falsch · {selected.unanswered_questions} unbeantwortet · {clock(selected.used_seconds)} benötigt</p>{selected.exam_label === 'Gemischte Prüfung' && <SubjectBreakdown data={selected.result_data} />}<p className="mt-2">In deinem Konto gespeichert.</p><Link className="text-brand-600 underline" to="/errors">Fehlertraining öffnen</Link></div><Review data={selected.result_data} /></section>}
     <section className="space-y-3"><h2 className="text-2xl font-semibold">Prüfungsverlauf</h2>{loading && <p role="status">Verlauf wird geladen …</p>}{!loading && !attempts.length && <p>Noch keine gespeicherten Prüfungen.</p>}{attempts.map((attempt) => <button key={attempt.id} className={`${panel} flex w-full flex-wrap items-center justify-between gap-3 text-left`} onClick={() => setReviewId(attempt.id)}><span><strong>{attempt.exam_label}</strong><br />{new Date(attempt.submitted_at).toLocaleString('de-DE')} · {attempt.total_questions} Fragen</span><span>{attempt.percentage} % · {attempt.passed ? 'Bestanden' : 'Nicht bestanden'} · Antworten ansehen</span></button>)}</section>
   </main>
+}
+
+function SubjectBreakdown({ data }: { data: ExamResultData }) {
+  return <div className="mt-4"><h3 className="font-semibold">Ergebnis nach Lernbereich</h3><ul className="mt-2 space-y-1">{mixedBreakdown(data.questions, data.answers).map((item) => <li key={item.id}>{item.label}: {item.correct} / {item.total}</li>)}</ul></div>
 }
