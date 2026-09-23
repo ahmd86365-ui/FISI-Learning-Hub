@@ -29,7 +29,7 @@ const { linuxDayTwoTasks, examTaskIds } = load('src/data/linux/dayTwoExercises.t
 const { createDayTwoSession, createTaskFixture, deletionTargets, expandPaths, runDayTwoCommand } = load('src/lib/linuxDayTwoSimulator.ts')
 const linux = getModuleBySlug('it', 'linux')
 assert.ok(linux)
-assert.deepEqual(linux.topics.map(topic => [topic.title, topic.order]), [['Was ist Linux?', 1], ['Terminal und erste Befehle', 2]])
+assert.deepEqual(linux.topics.slice(0, 2).map(topic => [topic.title, topic.order]), [['Was ist Linux?', 1], ['Terminal und erste Befehle', 2]])
 const topic = linux.topics[1]
 assert.equal(topic.id, 'topic-linux-02-terminal-und-erste-befehle')
 assert.equal(topic.slug, 'terminal-und-erste-befehle')

@@ -86,6 +86,9 @@ export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }
                 {subjectSlug === 'it' && moduleSlug === 'linux' && topicSlug === 'terminal-und-erste-befehle' && (
                   <ButtonLink to="/practice/linux-tag-2" variant="secondary" className="mb-6">Linux Campus · Tag 2 üben</ButtonLink>
                 )}
+                {subjectSlug === 'it' && moduleSlug === 'linux' && topicSlug === 'das-dateisystem' && (
+                  <ButtonLink to="/practice/linux-tag-3" variant="secondary" className="mb-6">Linux Campus · Tag 3 üben</ButtonLink>
+                )}
                 <ExercisesSection exercises={topic.exercises} />
               </section>
             )}
