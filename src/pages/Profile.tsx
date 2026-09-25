@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'r
 import { Camera, Check, LogOut, UserRound } from 'lucide-react'
 import { Button } from '../components/Button'
 import { useAuth } from '../contexts/AuthContext'
+import { usePreferences } from '../contexts/PreferencesContext'
 import { supabase } from '../lib/supabase'
 
 const AVATAR_BUCKET = 'avatars'
@@ -40,6 +41,7 @@ function GuestProfile() {
 
 function Profile() {
   const { session, signOut } = useAuth()
+  const { translationEnabled, toggleTranslation } = usePreferences()
   const user = session!.user
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [firstName, setFirstName] = useState(String(user.user_metadata.first_name ?? ''))
@@ -212,6 +214,19 @@ function Profile() {
                 <span className="mt-1.5 block text-xs font-normal text-ink-500 dark:text-ink-400">
                   Die E-Mail-Adresse kann hier nicht geändert werden.
                 </span>
+              </label>
+
+              <label className="flex items-center gap-3 rounded-xl border border-ink-200 p-4 dark:border-ink-800">
+                <input
+                  type="checkbox"
+                  checked={translationEnabled}
+                  onChange={toggleTranslation}
+                  className="h-5 w-5 rounded border-ink-300 text-brand-600 focus:ring-brand-600 dark:border-ink-700 dark:bg-ink-900"
+                />
+                <div>
+                  <span className="block text-sm font-medium text-ink-900 dark:text-ink-100">Arabische Übersetzung beim Überfahren anzeigen</span>
+                  <span className="block text-xs text-ink-500 dark:text-ink-400">Zeigt eine kleine Übersetzung für ausgewählte technische Begriffe an.</span>
+                </div>
               </label>
 
               {feedback && (

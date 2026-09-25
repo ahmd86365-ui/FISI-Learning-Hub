@@ -1,5 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { HoverTranslator } from './components/HoverTranslator'
+import { PreferencesProvider } from './contexts/PreferencesContext'
 import { Layout } from './components/Layout'
 import { AuthProvider } from './contexts/AuthContext'
 import { SavedItemsProvider } from './contexts/SavedItemsContext'
@@ -44,14 +46,16 @@ const PracticalLabs = lazy(() => import('./pages/PracticalLabs'))
 
 export default function App() {
   return (
-    <AuthProvider>
-      <SavedItemsProvider>
-        <StudyActivityProvider>
-          <QuestionPerformanceProvider>
-            <ExamAttemptsProvider>
-            <LearningProgressProvider>
-            <Suspense fallback={<RouteLoading />}>
-            <Routes>
+    <PreferencesProvider>
+      <AuthProvider>
+        <SavedItemsProvider>
+          <StudyActivityProvider>
+            <QuestionPerformanceProvider>
+              <ExamAttemptsProvider>
+              <LearningProgressProvider>
+              <HoverTranslator />
+              <Suspense fallback={<RouteLoading />}>
+              <Routes>
               <Route element={<GuestOnlyRoute />}>
                 <Route path="auth" element={<Auth />} />
               </Route>
@@ -118,6 +122,7 @@ export default function App() {
         </StudyActivityProvider>
       </SavedItemsProvider>
     </AuthProvider>
+    </PreferencesProvider>
   )
 }
 
