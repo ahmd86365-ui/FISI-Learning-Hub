@@ -22,7 +22,7 @@ interface LearningProgressContextValue {
 const LearningProgressContext = createContext<LearningProgressContextValue | undefined>(undefined)
 
 export function LearningProgressProvider({ children }: { children: ReactNode }) {
-  const { session } = useAuth()
+  const { session, isGuest } = useAuth()
   const { recordLessonCompleted } = useStudyActivity()
   const [progress, setProgress] = useState<LessonProgressRow[]>([])
   const [pendingIds, setPendingIds] = useState<Set<string>>(new Set())
@@ -34,32 +34,44 @@ export function LearningProgressProvider({ children }: { children: ReactNode }) 
   useEffect(() => {
     let active = true
     setPendingIds(new Set())
-    if (!session?.user) {
+    
+    if (session?.user) {
+      setLoading(true)
+      setError(null)
+      void supabase
+        .from('lesson_progress')
+        .select('user_id,lesson_id,completed,updated_at')
+        .then(({ data, error: loadError }) => {
+          if (!active) return
+          if (loadError) {
+            setProgress([])
+            setError(loadError.message)
+          } else {
+            setProgress((data ?? []) as LessonProgressRow[])
+          }
+          setLoading(false)
+        })
+    } else if (isGuest) {
+      const local = localStorage.getItem('fisi_guest_progress')
+      if (local) {
+        try {
+          setProgress(JSON.parse(local))
+        } catch {
+          setProgress([])
+        }
+      } else {
+        setProgress([])
+      }
+      setLoading(false)
+    } else {
       setProgress([])
       setLoading(false)
-      return
     }
-
-    setLoading(true)
-    setError(null)
-    void supabase
-      .from('lesson_progress')
-      .select('user_id,lesson_id,completed,updated_at')
-      .then(({ data, error: loadError }) => {
-        if (!active) return
-        if (loadError) {
-          setProgress([])
-          setError(loadError.message)
-        } else {
-          setProgress((data ?? []) as LessonProgressRow[])
-        }
-        setLoading(false)
-      })
 
     return () => {
       active = false
     }
-  }, [session?.user.id])
+  }, [session?.user?.id, isGuest])
 
   const isCompleted = useCallback(
     (lessonId: string) => progress.some((entry) => entry.lesson_id === lessonId && entry.completed),
@@ -71,12 +83,13 @@ export function LearningProgressProvider({ children }: { children: ReactNode }) 
   const toggleCompleted = useCallback(
     async (lessonId: string) => {
       const user = session?.user
-      if (!user || pendingIds.has(lessonId)) return
+      if (!user && !isGuest) return
+      if (pendingIds.has(lessonId)) return
 
       const previous = progress.find((entry) => entry.lesson_id === lessonId)
       const completed = !previous?.completed
       const optimistic: LessonProgressRow = {
-        user_id: user.id,
+        user_id: user?.id ?? 'guest',
         lesson_id: lessonId,
         completed,
         updated_at: new Date().toISOString(),
@@ -84,26 +97,33 @@ export function LearningProgressProvider({ children }: { children: ReactNode }) 
 
       setError(null)
       setPendingIds((current) => new Set(current).add(lessonId))
-      setProgress((current) => [optimistic, ...current.filter((entry) => entry.lesson_id !== lessonId)])
+      
+      const newProgress = [optimistic, ...progress.filter((entry) => entry.lesson_id !== lessonId)]
+      setProgress(newProgress)
 
-      const { data, error: saveError } = await supabase
-        .from('lesson_progress')
-        .upsert(
-          { user_id: user.id, lesson_id: lessonId, completed },
-          { onConflict: 'user_id,lesson_id' },
-        )
-        .select('user_id,lesson_id,completed,updated_at')
-        .single()
-      if (currentUser.current !== user.id) return
+      if (user) {
+        const { data, error: saveError } = await supabase
+          .from('lesson_progress')
+          .upsert(
+            { user_id: user.id, lesson_id: lessonId, completed },
+            { onConflict: 'user_id,lesson_id' },
+          )
+          .select('user_id,lesson_id,completed,updated_at')
+          .single()
+        if (currentUser.current !== user.id) return
 
-      if (saveError) {
-        setProgress((current) => [
-          ...(previous ? [previous] : []),
-          ...current.filter((entry) => entry.lesson_id !== lessonId),
-        ])
-        setError(saveError.message)
-      } else {
-        setProgress((current) => [data as LessonProgressRow, ...current.filter((entry) => entry.lesson_id !== lessonId)])
+        if (saveError) {
+          setProgress((current) => [
+            ...(previous ? [previous] : []),
+            ...current.filter((entry) => entry.lesson_id !== lessonId),
+          ])
+          setError(saveError.message)
+        } else {
+          setProgress((current) => [data as LessonProgressRow, ...current.filter((entry) => entry.lesson_id !== lessonId)])
+          if (completed) await recordLessonCompleted(lessonId)
+        }
+      } else if (isGuest) {
+        localStorage.setItem('fisi_guest_progress', JSON.stringify(newProgress))
         if (completed) await recordLessonCompleted(lessonId)
       }
 
@@ -113,7 +133,7 @@ export function LearningProgressProvider({ children }: { children: ReactNode }) 
         return next
       })
     },
-    [pendingIds, progress, recordLessonCompleted, session?.user],
+    [pendingIds, progress, recordLessonCompleted, session?.user, isGuest],
   )
 
   const value = useMemo(

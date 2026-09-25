@@ -59,7 +59,7 @@ interface QuestionPerformanceContextValue {
 const QuestionPerformanceContext = createContext<QuestionPerformanceContextValue | undefined>(undefined)
 
 export function QuestionPerformanceProvider({ children }: { children: ReactNode }) {
-  const { session } = useAuth()
+  const { session, isGuest } = useAuth()
   const [performance, setPerformance] = useState<QuestionPerformance[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -68,57 +68,96 @@ export function QuestionPerformanceProvider({ children }: { children: ReactNode 
   const requestId = useRef(0)
 
   const refresh = useCallback(async () => {
-    const userId = session?.user.id
+    const userId = session?.user?.id
     const request = ++requestId.current
-    if (!session?.user) {
+    if (session?.user) {
+      setLoading(true)
+      setError(null)
+      const { data, error: loadError } = await supabase
+        .from('question_performance')
+        .select('user_id,question_key,question_id,question_type,source_id,title,subject_label,module_label,content_path,question_data,attempts,correct_answers,incorrect_answers,consecutive_correct,last_result,last_answered_at')
+        .order('last_answered_at', { ascending: false })
+      if (currentUser.current !== userId || request !== requestId.current) return
+      if (loadError) {
+        setPerformance([])
+        setError(loadError.message)
+      } else {
+        setPerformance((data ?? []) as QuestionPerformance[])
+      }
+      setLoading(false)
+    } else if (isGuest) {
+      const local = localStorage.getItem('fisi_guest_performance')
+      if (local) {
+        try {
+          setPerformance(JSON.parse(local))
+        } catch {
+          setPerformance([])
+        }
+      } else {
+        setPerformance([])
+      }
+      setLoading(false)
+    } else {
       setPerformance([])
       setLoading(false)
-      return
     }
-
-    setLoading(true)
-    setError(null)
-    const { data, error: loadError } = await supabase
-      .from('question_performance')
-      .select('user_id,question_key,question_id,question_type,source_id,title,subject_label,module_label,content_path,question_data,attempts,correct_answers,incorrect_answers,consecutive_correct,last_result,last_answered_at')
-      .order('last_answered_at', { ascending: false })
-    if (currentUser.current !== userId || request !== requestId.current) return
-    if (loadError) {
-      setPerformance([])
-      setError(loadError.message)
-    } else {
-      setPerformance((data ?? []) as QuestionPerformance[])
-    }
-    setLoading(false)
-  }, [session?.user.id])
+  }, [session?.user?.id, isGuest])
 
   useEffect(() => { void refresh() }, [refresh])
 
   const recordAttempt = useCallback(async (attempt: QuestionAttempt) => {
     const userId = currentUser.current
-    if (!userId) return
-    const { data, error: saveError } = await supabase.rpc('record_question_attempt', {
-      p_question_key: attempt.questionKey,
-      p_question_id: attempt.questionId,
-      p_question_type: attempt.questionType,
-      p_source_id: attempt.sourceId,
-      p_title: attempt.title,
-      p_subject_label: attempt.subjectLabel ?? null,
-      p_module_label: attempt.moduleLabel ?? null,
-      p_content_path: attempt.contentPath,
-      p_question_data: attempt.questionData,
-      p_correct: attempt.correct,
-    }).single()
-    if (currentUser.current !== userId) return
+    if (!userId && !isGuest) return
+    
+    if (userId) {
+      const { data, error: saveError } = await supabase.rpc('record_question_attempt', {
+        p_question_key: attempt.questionKey,
+        p_question_id: attempt.questionId,
+        p_question_type: attempt.questionType,
+        p_source_id: attempt.sourceId,
+        p_title: attempt.title,
+        p_subject_label: attempt.subjectLabel ?? null,
+        p_module_label: attempt.moduleLabel ?? null,
+        p_content_path: attempt.contentPath,
+        p_question_data: attempt.questionData,
+        p_correct: attempt.correct,
+      }).single()
+      if (currentUser.current !== userId) return
 
-    if (saveError) {
-      setError(saveError.message)
-      return
+      if (saveError) {
+        setError(saveError.message)
+        return
+      }
+      const updated = data as QuestionPerformance
+      setError(null)
+      setPerformance((current) => [updated, ...current.filter((entry) => entry.question_key !== updated.question_key)])
+    } else if (isGuest) {
+      setPerformance((current) => {
+        const existing = current.find((e) => e.question_key === attempt.questionKey)
+        const updated: QuestionPerformance = {
+          user_id: 'guest',
+          question_key: attempt.questionKey,
+          question_id: attempt.questionId,
+          question_type: attempt.questionType,
+          source_id: attempt.sourceId,
+          title: attempt.title,
+          subject_label: attempt.subjectLabel ?? null,
+          module_label: attempt.moduleLabel ?? null,
+          content_path: attempt.contentPath,
+          question_data: attempt.questionData,
+          attempts: (existing?.attempts ?? 0) + 1,
+          correct_answers: (existing?.correct_answers ?? 0) + (attempt.correct ? 1 : 0),
+          incorrect_answers: (existing?.incorrect_answers ?? 0) + (attempt.correct ? 0 : 1),
+          consecutive_correct: attempt.correct ? (existing?.consecutive_correct ?? 0) + 1 : 0,
+          last_result: attempt.correct,
+          last_answered_at: new Date().toISOString(),
+        }
+        const newPerformance = [updated, ...current.filter((entry) => entry.question_key !== attempt.questionKey)]
+        localStorage.setItem('fisi_guest_performance', JSON.stringify(newPerformance))
+        return newPerformance
+      })
     }
-    const updated = data as QuestionPerformance
-    setError(null)
-    setPerformance((current) => [updated, ...current.filter((entry) => entry.question_key !== updated.question_key)])
-  }, [])
+  }, [isGuest])
 
   const recordAttempts = useCallback(
     async (attempts: QuestionAttempt[]) => {

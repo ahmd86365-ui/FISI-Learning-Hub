@@ -1,8 +1,10 @@
 import { useState, type FormEvent } from 'react'
-import { LogIn, UserPlus } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { LogIn, UserPlus, UserCircle } from 'lucide-react'
 import { Button } from '../components/Button'
 import { LogoMark } from '../components/Logo'
 import { supabase } from '../lib/supabase'
+import { useAuth } from '../contexts/AuthContext'
 
 const getAuthRedirectUrl = () => new URL('/auth', window.location.origin).toString()
 
@@ -13,6 +15,8 @@ const fieldClassName =
   'mt-1.5 h-11 w-full rounded-lg border border-ink-700 bg-ink-950 px-3.5 text-sm text-white outline-none transition-colors placeholder:text-ink-500 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10'
 
 export default function Auth() {
+  const navigate = useNavigate()
+  const { enterGuestMode } = useAuth()
   const [mode, setMode] = useState<AuthMode>('login')
   const [submitting, setSubmitting] = useState(false)
   const [feedback, setFeedback] = useState<Feedback | null>(null)
@@ -195,6 +199,22 @@ export default function Auth() {
                 <GoogleMark />
                 Mit Google anmelden
               </Button>
+
+              <div className="mt-4">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="w-full text-ink-400 hover:text-white"
+                  disabled={submitting}
+                  onClick={() => {
+                    enterGuestMode()
+                    navigate('/')
+                  }}
+                  icon={<UserCircle />}
+                >
+                  Weiter als Gast
+                </Button>
+              </div>
           </>
 
           {feedback && (

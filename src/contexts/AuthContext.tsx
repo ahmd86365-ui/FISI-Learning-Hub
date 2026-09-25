@@ -6,6 +6,9 @@ interface AuthContextValue {
   session: Session | null
   loading: boolean
   signOut: () => Promise<void>
+  isGuest: boolean
+  enterGuestMode: () => void
+  exitGuestMode: () => void
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined)
@@ -13,6 +16,7 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined)
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
+  const [isGuest, setIsGuest] = useState(() => localStorage.getItem('fisi_guest_active') === 'true')
 
   useEffect(() => {
     let active = true
@@ -42,16 +46,36 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
+  // A real authenticated Supabase session must always take precedence over guest mode.
+  const activeSession = session
+  const activeIsGuest = isGuest && !session
+
+  useEffect(() => {
+    if (activeSession && isGuest) {
+      localStorage.removeItem('fisi_guest_active')
+      setIsGuest(false)
+    }
+  }, [activeSession, isGuest])
+
   const value = useMemo<AuthContextValue>(
     () => ({
-      session,
+      session: activeSession,
       loading,
       signOut: async () => {
         const { error } = await supabase.auth.signOut()
         if (error) throw error
       },
+      isGuest: activeIsGuest,
+      enterGuestMode: () => {
+        localStorage.setItem('fisi_guest_active', 'true')
+        setIsGuest(true)
+      },
+      exitGuestMode: () => {
+        localStorage.removeItem('fisi_guest_active')
+        setIsGuest(false)
+      },
     }),
-    [loading, session],
+    [loading, activeSession, activeIsGuest],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

@@ -30,8 +30,8 @@ function Review({ data }: { data: ExamResultData }) {
 }
 
 export default function Exams() {
-  const { session } = useAuth()
-  return session ? <ExamWorkspace key={session.user.id} userId={session.user.id} /> : null
+  const { session, isGuest } = useAuth()
+  const userId = session?.user?.id ?? (isGuest ? 'guest' : null); return userId ? <ExamWorkspace key={userId} userId={userId} /> : null
 }
 
 function ExamWorkspace({ userId }: { userId: string }) {

@@ -12,9 +12,9 @@ const itSubject = subjects.find((s) => s.slug === 'it')!
 const otherSubjects = subjects.filter((s) => s.slug !== 'it')
 
 export default function Home() {
-  const { session } = useAuth()
+  const { session, isGuest } = useAuth()
   const firstName = session?.user.user_metadata.first_name
-  const greeting = typeof firstName === 'string' && firstName.trim() ? `Willkommen zurück, ${firstName.trim()}.` : 'Willkommen zurück.'
+  const greeting = isGuest ? 'Willkommen, Gast.' : (typeof firstName === 'string' && firstName.trim() ? `Willkommen zurück, ${firstName.trim()}.` : 'Willkommen zurück.')
 
   return (
     <div>

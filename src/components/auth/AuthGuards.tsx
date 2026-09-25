@@ -3,11 +3,11 @@ import { LogoMark } from '../Logo'
 import { useAuth } from '../../contexts/AuthContext'
 
 export function ProtectedRoute() {
-  const { session, loading } = useAuth()
+  const { session, loading, isGuest } = useAuth()
   const location = useLocation()
 
   if (loading) return <SessionLoading />
-  if (!session) return <Navigate to="/auth" replace state={{ from: location }} />
+  if (!session && !isGuest) return <Navigate to="/auth" replace state={{ from: location }} />
   return <Outlet />
 }
 

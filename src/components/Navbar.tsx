@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { BarChart3, BookmarkCheck, CircleAlert, Flame, Menu, Search, UserRound, UserRoundX } from 'lucide-react'
+import { BarChart3, BookmarkCheck, CircleAlert, Flame, Menu, Search, UserRound, UserRoundX, LogIn } from 'lucide-react'
 import { Logo } from './Logo'
 import { ThemeToggle } from './ThemeToggle'
 import { IconButton } from './IconButton'
@@ -15,7 +15,7 @@ const navLinkBase =
 export function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const { signOut } = useAuth()
+  const { signOut, isGuest } = useAuth()
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -157,12 +157,22 @@ export function Navbar() {
               <CircleAlert className="h-[1.15rem] w-[1.15rem]" />
             </NavLink>
 
-            <IconButton
-              icon={<UserRoundX className="h-[1.15rem] w-[1.15rem]" />}
-              label="Benutzerkonto abmelden"
-              onClick={() => void signOut().catch((error: unknown) => console.error('Abmeldung fehlgeschlagen.', error))}
-              className="hidden lg:inline-flex"
-            />
+            {isGuest ? (
+              <NavLink
+                to="/auth"
+                className="hidden lg:inline-flex items-center gap-2 rounded-full bg-brand-50 px-4 py-2 text-sm font-medium text-brand-700 transition-colors hover:bg-brand-100 dark:bg-brand-500/10 dark:text-brand-400 dark:hover:bg-brand-500/20"
+              >
+                <LogIn className="h-[1.15rem] w-[1.15rem]" />
+                Anmelden
+              </NavLink>
+            ) : (
+              <IconButton
+                icon={<UserRoundX className="h-[1.15rem] w-[1.15rem]" />}
+                label="Benutzerkonto abmelden"
+                onClick={() => void signOut().catch((error: unknown) => console.error('Abmeldung fehlgeschlagen.', error))}
+                className="hidden lg:inline-flex"
+              />
+            )}
 
             <IconButton
               icon={<Menu className="h-5 w-5" />}

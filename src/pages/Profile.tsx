@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react'
 import { Camera, Check, LogOut, UserRound } from 'lucide-react'
 import { Button } from '../components/Button'
@@ -10,7 +11,34 @@ const ALLOWED_AVATAR_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp'])
 
 type Feedback = { type: 'success' | 'error'; message: string }
 
-export default function Profile() {
+export default function ProfileWrapper() {
+  const { session, isGuest } = useAuth()
+  if (isGuest && !session) return <GuestProfile />
+  return <Profile />
+}
+
+function GuestProfile() {
+  return (
+    <main className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-12">
+      <div className="rounded-2xl border border-ink-200 bg-white p-6 shadow-card dark:border-ink-800 dark:bg-ink-900 sm:p-10 text-center">
+        <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-brand-100 text-brand-600 dark:bg-brand-900/30 dark:text-brand-400">
+          <UserRound size={40} />
+        </div>
+        <h1 className="text-2xl font-bold text-ink-950 dark:text-white sm:text-3xl">Gast</h1>
+        <p className="mt-3 text-ink-600 dark:text-ink-400">
+          Du nutzt die App derzeit als Gast. Dein Fortschritt wird nur lokal auf diesem Gerät gespeichert.
+        </p>
+        <div className="mt-8 flex justify-center">
+          <Link to="/auth" className="inline-flex items-center justify-center rounded-xl bg-brand-600 px-5 py-3 font-semibold text-white transition-colors hover:bg-brand-700">
+            Anmelden oder Konto erstellen
+          </Link>
+        </div>
+      </div>
+    </main>
+  )
+}
+
+function Profile() {
   const { session, signOut } = useAuth()
   const user = session!.user
   const fileInputRef = useRef<HTMLInputElement>(null)

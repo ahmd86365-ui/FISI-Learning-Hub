@@ -23,7 +23,7 @@ const StudyActivityContext = createContext<StudyActivityContextValue | undefined
 const utcDateKey = () => new Date().toISOString().slice(0, 10)
 
 export function StudyActivityProvider({ children }: { children: ReactNode }) {
-  const { session } = useAuth()
+  const { session, isGuest } = useAuth()
   const [activities, setActivities] = useState<StudyActivity[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -32,74 +32,91 @@ export function StudyActivityProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let active = true
-    if (!session?.user) {
+    if (session?.user) {
+      setLoading(true)
+      setError(null)
+      void supabase
+        .from('study_activity')
+        .select('id,user_id,activity_type,lesson_id,activity_date,occurred_at')
+        .order('occurred_at', { ascending: false })
+        .then(({ data, error: loadError }) => {
+          if (!active) return
+          if (loadError) {
+            setActivities([])
+            setError(loadError.message)
+          } else {
+            setActivities((data ?? []) as StudyActivity[])
+          }
+          setLoading(false)
+        })
+    } else if (isGuest) {
+      const local = localStorage.getItem('fisi_guest_activity')
+      if (local) {
+        try {
+          setActivities(JSON.parse(local))
+        } catch {
+          setActivities([])
+        }
+      } else {
+        setActivities([])
+      }
+      setLoading(false)
+    } else {
       setActivities([])
       setLoading(false)
-      return
     }
-
-    setLoading(true)
-    setError(null)
-    void supabase
-      .from('study_activity')
-      .select('id,user_id,activity_type,lesson_id,activity_date,occurred_at')
-      .order('occurred_at', { ascending: false })
-      .then(({ data, error: loadError }) => {
-        if (!active) return
-        if (loadError) {
-          setActivities([])
-          setError(loadError.message)
-        } else {
-          setActivities((data ?? []) as StudyActivity[])
-        }
-        setLoading(false)
-      })
 
     return () => {
       active = false
     }
-  }, [session?.user.id])
+  }, [session?.user?.id, isGuest])
 
   const recordLessonCompleted = useCallback(
     async (lessonId: string) => {
       const user = session?.user
-      if (!user) return
+      if (!user && !isGuest) return
 
       const activityDate = utcDateKey()
       if (activities.some((activity) => activity.lesson_id === lessonId && activity.activity_date === activityDate)) return
 
       const optimistic: StudyActivity = {
         id: -Date.now(),
-        user_id: user.id,
+        user_id: user?.id ?? 'guest',
         activity_type: 'lesson_completed',
         lesson_id: lessonId,
         activity_date: activityDate,
         occurred_at: new Date().toISOString(),
       }
       setError(null)
-      setActivities((current) => [optimistic, ...current])
+      
+      const newActivities = [optimistic, ...activities]
+      setActivities(newActivities)
 
-      const { data, error: saveError } = await supabase
-        .from('study_activity')
-        .insert({
-          user_id: user.id,
-          activity_type: 'lesson_completed',
-          lesson_id: lessonId,
-          activity_date: activityDate,
-        })
-        .select('id,user_id,activity_type,lesson_id,activity_date,occurred_at')
-        .single()
-      if (currentUser.current !== user.id) return
+      if (user) {
+        const { data, error: saveError } = await supabase
+          .from('study_activity')
+          .insert({
+            user_id: user.id,
+            activity_type: 'lesson_completed',
+            lesson_id: lessonId,
+            activity_date: activityDate,
+          })
+          .select('id,user_id,activity_type,lesson_id,activity_date,occurred_at')
+          .single()
+        if (currentUser.current !== user.id) return
 
-      if (saveError) {
-        setActivities((current) => current.filter((activity) => activity.id !== optimistic.id))
-        if (saveError.code !== '23505') setError(saveError.message)
-        return
+        if (saveError) {
+          setActivities((current) => current.filter((activity) => activity.id !== optimistic.id))
+          if (saveError.code !== '23505') setError(saveError.message)
+          return
+        }
+
+        setActivities((current) => [data as StudyActivity, ...current.filter((activity) => activity.id !== optimistic.id)])
+      } else if (isGuest) {
+        localStorage.setItem('fisi_guest_activity', JSON.stringify(newActivities))
       }
-
-      setActivities((current) => [data as StudyActivity, ...current.filter((activity) => activity.id !== optimistic.id)])
     },
-    [activities, session?.user],
+    [activities, session?.user, isGuest],
   )
 
   const value = useMemo(
