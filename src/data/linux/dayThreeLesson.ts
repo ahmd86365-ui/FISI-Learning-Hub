@@ -10,7 +10,7 @@ const practice = (n: number, question: string): Exercise => ({ id: `linux-03-pra
 // Sole source: "Das Dateisystem - Linux Campus", available Teil 1 (13 pages).
 export const linuxDayThreeTopic: Topic = {
   id: 'topic-linux-03-das-dateisystem', slug: linuxDayThreeSlug, moduleSlug: 'linux', title: 'Das Dateisystem', order: 3,
-  shortIntro: 'FHS, Systemdateien, versteckte Dateien, ls -l, symbolische Links, nano und wc -l sicher üben.',
+  shortIntro: 'FHS, Systemdateien, versteckte Dateien, ls -l, symbolische Links, nano, sowie Umleitung, Pipes (|, >, >>), less, wc, df und du.',
   content: [
     h('Ein Baum für das ganze System'),
     p('Linux ordnet alles in einem einzigen Verzeichnisbaum an. Er beginnt bei /, dem Root- oder Wurzelverzeichnis. Der Filesystem Hierarchy Standard (FHS) beschreibt, welche Verzeichnisse vorgesehen sind und was dort liegt. Distributionen müssen diese Norm nicht verwenden, folgen ihr aber meist, damit Programme Dateien an erwarteten Orten finden.'),
@@ -49,15 +49,91 @@ export const linuxDayThreeTopic: Topic = {
     p('nano dateiname öffnet oder erstellt beim Speichern eine Textdatei. „Modified“ zeigt ungespeicherte Änderungen. Der Cursor wird mit den Pfeiltasten bewegt. ^ bedeutet Strg, M- bedeutet Alt.'),
     table(['Taste', 'Aktion'], [['Strg+O', 'speichern; Dateinamen danach mit Enter bestätigen'], ['Strg+X', 'beenden'], ['Strg+K', 'ganze Zeile ausschneiden'], ['Strg+U', 'Zeile einfügen'], ['Strg+W', 'suchen'], ['Alt+U', 'rückgängig'], ['Strg+G', 'Hilfe anzeigen; mit Strg+X zurück']]),
     { type: 'note', text: 'Sicherer Ablauf: öffnen, schreiben, Strg+O, Enter, Strg+X. Beim Beenden eines geänderten Puffers fragt nano nach dem Speichern; N verwirft die Änderungen.' },
-    h('Praxis aus Teil 1'),
-    p('Der Tag-3-Trainer verbindet die Unterrichtsfolge mit den drei verfügbaren Aufgaben: Verzeichnisbaum erkunden und fhs.txt schreiben, die Benutzerliste auswerten und meinuser.txt anlegen sowie notiz.txt mit nano erstellen und per wc -l prüfen. Alles läuft ausschließlich in einem simulierten Dateisystem.'),
-    { type: 'key-points', items: ['Ein Linux-System besitzt einen Baum ab /.', 'FHS macht Pfade zwischen Distributionen vorhersehbar.', '/etc/passwd hat sieben Felder; Passwörter stehen dort nicht.', 'Punktdateien sind verborgen, aber nicht geschützt.', 'Symbolische Links verweisen auf ein Ziel.', 'nano speichert erst mit Strg+O und Dateinamenbestätigung.', 'wc -l zählt Zeilen.'] },
-    { type: 'note', text: 'Teil 2 der Quelle ist noch gesperrt. Umleitung, Fehlerkanal, Pipe, sort, less, df und du werden deshalb hier nicht gelehrt oder geprüft.' },
+    
+    h('Umleitung und Pipe'),
+    p('Normalerweise schreibt ein Befehl seine Ausgabe auf den Bildschirm. Du kannst sie umleiten.'),
+    table(['Zeichen', 'Was es tut', 'Beispiel'], [
+      ['>', 'schreibt in eine Datei, überschreibt sie', 'ls > liste.txt'],
+      ['>>', 'hängt an eine Datei an', 'date >> liste.txt'],
+      ['|', 'gibt die Ausgabe an den nächsten Befehl weiter', 'ls | wc -l']
+    ]),
+    code('echo "Hallo Linux" > notizen.txt\ncat notizen.txt\necho "Zweite Zeile" >> notizen.txt\ncat notizen.txt\nls /bin | wc -l'),
+    { type: 'warning', text: 'Achtung: > löscht den alten Inhalt ohne Rückfrage. Willst du etwas ergänzen, nimm >>.' },
+    p('Die Pipe | verbindet zwei Befehle. Die Ausgabe des ersten wird zur Eingabe des zweiten. Das ist die Linux-Philosophie in einem Zeichen. Rechts von der Pipe kann jeder Befehl stehen, der Text liest. Du kannst auch mehr als zwei Befehle verbinden. Die Ausgabe wandert von links nach rechts durch alle:'),
+    code('cat /etc/passwd | head -n 20 | tail -n 5'),
+    
+    h('Drei Kanäle: Eingabe, Ausgabe, Fehler'),
+    p('Jeder Befehl hat drei Kanäle. Die Tastatur ist die Eingabe (0). Der Bildschirm ist die Ausgabe (1). Fehlermeldungen gehen über einen eigenen dritten Kanal, die Fehlerausgabe (2). Er landet normalerweise auch auf dem Bildschirm.'),
+    p('> leitet nur die Ausgabe um (Kanal 1). Fehler kommen weiter auf den Bildschirm. Mit 2> leitest du die Fehler um.'),
+    code('ls /gibtsnicht > liste.txt\n# ls: cannot access ...\nls /gibtsnicht 2> fehler.txt\nls /gibtsnicht 2> /dev/null'),
+    p('Manchmal willst du die Fehler gar nicht sehen. Dafür gibt es /dev/null, ein Gerät, das alles schluckt. Das brauchst du später oft, wenn viele "Permission denied"-Fehler stören.'),
+    p('Auch die Eingabe kannst du umleiten. Mit < liest ein Befehl aus einer Datei statt von der Tastatur (z.B. wc -l < /etc/passwd). Der Unterschied: Mit < kennt wc den Dateinamen nicht und gibt nur die Zahl aus.'),
+    table(['Zeichen', 'Was es tut', 'Beispiel'], [
+      ['>', 'Ausgabe in Datei, überschreibt', 'ls > liste.txt'],
+      ['>>', 'Ausgabe an Datei anhängen', 'date >> liste.txt'],
+      ['2>', 'Fehler in Datei', 'ls /x 2> fehler.txt'],
+      ['2> /dev/null', 'Fehler wegwerfen', 'ls /x 2> /dev/null'],
+      ['<', 'Eingabe aus Datei', 'wc -l < liste.txt'],
+      ['|', 'Ausgabe an nächsten Befehl', 'ls | wc -l']
+    ]),
+    
+    h('wc, sort und less'),
+    p('wc kennst du aus Teil 1. wc -l zählt Zeilen, wc -w zählt Wörter, wc -c zählt Zeichen. Ohne Option zeigt es alle drei Zahlen.'),
+    p('sort sortiert Zeilen alphabetisch. sort -r dreht die Reihenfolge um. Das passt gut hinter eine Pipe.'),
+    code('ls /etc | sort -r | head -n 3'),
+    p('less zeigt lange Dateien seitenweise. cat rauscht bei langen Dateien durch. less wartet auf dich (wie man).'),
+    table(['Taste (less/man)', 'Was passiert'], [
+      ['Leertaste', 'eine Seite weiter'],
+      ['b', 'eine Seite zurück'],
+      ['Pfeil hoch, Pfeil runter', 'eine Zeile'],
+      ['g', 'zum Anfang'],
+      ['G', 'zum Ende'],
+      ['/wort', 'nach wort suchen'],
+      ['n', 'nächster Treffer'],
+      ['q', 'beenden']
+    ]),
+    table(['Befehl', 'Was er tut', 'Beispiel'], [
+      ['cat', 'zeigt eine ganze Datei', 'cat /etc/passwd'],
+      ['less', 'zeigt eine Datei seitenweise', 'less /etc/services'],
+      ['head', 'zeigt die ersten Zeilen', 'head -n 5 /etc/passwd'],
+      ['tail', 'zeigt die letzten Zeilen', 'tail -n 5 /etc/passwd'],
+      ['wc -l', 'zählt Zeilen', 'wc -l /etc/passwd'],
+      ['sort', 'sortiert Zeilen', 'sort namen.txt'],
+      ['nano', 'öffnet den Editor', 'nano notizen.txt'],
+      ['ln -s', 'legt einen Link an', 'ln -s ziel name']
+    ]),
+    
+    h('Speicherplatz: df und du'),
+    p('Zwei Fragen stellt sich jeder Admin: Wie voll ist die Platte? Und was nimmt den Platz weg?'),
+    p('df -h zeigt alle eingehängten Laufwerke und wie voll sie sind. -h macht die Zahlen lesbar. Die wichtige Zeile ist die mit / ganz rechts. Das ist deine Festplatte. Die tmpfs-Zeilen sind Arbeitsspeicher, keine Platte.'),
+    p('du -sh zeigt, wie groß ein Ordner mit allem drin ist. -s fasst zusammen, -h macht die Zahl lesbar.'),
+    code('df -h\ndu -sh ~/linux-kurs\ndu -sh /var/log 2> /dev/null\ndu -sh *'),
+    p('Bei /var/log darfst du als normaler Benutzer nicht überall hineinsehen. Ohne 2> /dev/null kommen ein paar Zeilen "Permission denied". Die Zahl am Ende stimmt trotzdem. Mit du -sh * siehst du die Größe jedes Eintrags im aktuellen Ordner.'),
+    
+    h('Häufige Fehler'),
+    table(['Fehler', 'Erklärung / Auswirkung'], [
+      ['> statt >>', 'Die alte Datei ist ohne Rückfrage weg. Wenn du anhängen willst, immer >>.'],
+      ['cat datei > datei', 'Danach ist die Datei leer. Die Shell leert das Ziel, bevor cat liest. Schreibe immer in eine neue Datei.'],
+      ['ls > liste.txt zeigt liste.txt selbst', 'Kein Fehler. Die Shell legt die Datei an, bevor ls läuft. Darum steht sie mit in der Liste.'],
+      ['/root statt /', 'cd /root gibt Permission denied. Das ist richtig so, das ist das Zuhause des Administrators. Die Wurzel ist cd /.'],
+      ['In /etc schreiben', 'Permission denied. Lesen darfst du, ändern nur der Administrator (kommt an Tag 8 mit sudo).'],
+      ['nano nur mit Strg+X verlassen', 'nano fragt "Save modified buffer?". Mit N ist deine Arbeit weg. ß und Enter drücken.'],
+      ['less geht nicht zu', 'Die Taste ist q. Das gilt auch für man.'],
+      ['ln -s falsch herum', 'Erst das Ziel, dann der Name des Links. Wie bei cp.']
+    ]),
+
+    h('Praxis aus Teil 2 & Abschluss-Challenge'),
+    p('In Teil 2 des Trainings übst du das Umleiten von Ausgaben und Fehlern, das Zählen (wc) und Sortieren (sort) per Pipe, sowie die Speicherplatzprüfung mit df und du.'),
+    p('Die Abschluss-Challenge verlangt einen System-Steckbrief: Du baust eine Textdatei, die Hostname, Systemversion, Benutzeranzahl und Festplattenplatz enthält. Dabei darfst du nano nicht verwenden, sondern löst alles ausschließlich mit >, >> und Pipes.'),
+
+    { type: 'key-points', items: ['Ein Linux-System besitzt einen Baum ab /.', 'FHS macht Pfade zwischen Distributionen vorhersehbar.', '/etc/passwd hat sieben Felder; Passwörter stehen dort nicht.', 'Symbolische Links verweisen auf ein Ziel.', 'nano speichert erst mit Strg+O.', '> überschreibt, >> hängt an.', '| (Pipe) leitet Ausgabe an den nächsten Befehl.', '2> /dev/null wirft Fehler weg.', 'less blättert mit Leertaste und q.', 'df -h prüft Laufwerke, du -sh prüft Ordner.'] },
   ],
   exercises: [
     practice(1, 'Ordne /, /root, /etc, /home, /var/log, /dev und /proc ihren Aufgaben zu und erkläre den Unterschied zwischen / und /root.'),
     practice(2, 'Lies die sieben Felder der Beispielzeile andre:x:1000:1000:Andre,,,:/home/andre:/bin/bash von links nach rechts.'),
     practice(3, 'Öffne „Linux Campus · Tag 3 üben“ und bearbeite die verbundenen Teil-1-Aufgaben im sicheren Simulator.'),
-    practice(4, 'Starte anschließend die Tag-3-Abschlussprüfung mit 20 quellengebundenen Fragen.'),
+    practice(4, 'Löse die Pipes- und Umleitungsaufgaben (Sortieren, Zählen, Fehlerbehandlung).'),
+    practice(5, 'Meistere die Abschluss-Challenge: Erstelle einen System-Steckbrief per Pipe ohne nano.'),
+    practice(6, 'Starte anschließend die Tag-3-Abschlussprüfung mit den 20+ quellengebundenen Fragen.'),
   ],
 }
