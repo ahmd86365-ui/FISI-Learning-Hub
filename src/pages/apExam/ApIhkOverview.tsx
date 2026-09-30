@@ -48,7 +48,7 @@ export default function ApIhkOverview() {
         }
       />
 
-      <section className="mx-auto max-w-content px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+      <section className="mx-auto max-w-content px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
         <div className="mb-10 flex items-start gap-3 rounded-xl border border-brand-200 bg-brand-50/60 p-4 dark:border-brand-500/30 dark:bg-brand-500/10">
           <Info className="mt-0.5 h-5 w-5 shrink-0 text-brand-600 dark:text-brand-400" aria-hidden="true" />
           <p className="text-sm leading-relaxed text-ink-700 dark:text-ink-200">

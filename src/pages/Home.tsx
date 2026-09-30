@@ -3,7 +3,6 @@ import { SearchBar } from '../components/SearchBar'
 import { SubjectCard } from '../components/SubjectCard'
 import { SectionHeader } from '../components/SectionHeader'
 import { ButtonLink } from '../components/Button'
-import { HeroPattern } from '../components/HeroPattern'
 import { StudentDashboard } from '../components/dashboard/StudentDashboard'
 import { useAuth } from '../contexts/AuthContext'
 import { subjects } from '../data/subjects'
@@ -18,40 +17,28 @@ export default function Home() {
 
   return (
     <div>
-      <section className="relative overflow-hidden border-b border-ink-200 bg-white dark:border-ink-800 dark:bg-ink-950">
-        <HeroPattern />
-        <div
-          className="absolute left-1/2 top-[-10rem] h-[28rem] w-[52rem] -translate-x-1/2 rounded-full bg-brand-400/20 blur-3xl dark:bg-brand-500/10"
-          aria-hidden="true"
-        />
-
-        <div className="relative mx-auto max-w-content px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="animate-fadeIn mb-5 inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white/80 px-4 py-1.5 font-mono text-xs font-medium uppercase tracking-wider text-ink-500 shadow-soft backdrop-blur dark:border-ink-700 dark:bg-ink-900/80 dark:text-ink-400">
+      <section className="border-b border-ink-200 bg-white dark:border-ink-800 dark:bg-ink-900">
+        <div className="mx-auto max-w-content px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="mb-3 inline-flex items-center gap-2 rounded-md bg-brand-50 px-2.5 py-1 font-mono text-[0.7rem] font-semibold uppercase tracking-wider text-brand-700 dark:bg-brand-500/10 dark:text-brand-300">
               <TerminalSquare className="h-3.5 w-3.5 text-brand-500 dark:text-brand-400" aria-hidden="true" />
               Fachinformatiker für Systemintegration
             </p>
 
-            <h1
-              className="animate-fadeIn text-balance text-4xl font-extrabold leading-[1.08] tracking-tight text-ink-900 opacity-0 [animation-delay:80ms] [animation-fill-mode:forwards] dark:text-white sm:text-5xl lg:text-6xl"
-            >
-              {greeting}
-              <br />
-              <span className="bg-gradient-to-r from-brand-600 to-brand-400 bg-clip-text text-transparent dark:from-brand-400 dark:to-brand-200">
-                Üben. Bestehen.
-              </span>
+            <h1 className="text-3xl font-bold tracking-tight text-ink-950 dark:text-white sm:text-4xl">
+              {greeting} <span className="text-brand-600 dark:text-brand-400">Üben. Bestehen.</span>
             </h1>
 
-            <p className="animate-fadeIn mx-auto mt-6 max-w-xl text-balance text-lg leading-relaxed text-ink-500 opacity-0 [animation-delay:160ms] [animation-fill-mode:forwards] dark:text-ink-400">
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-ink-600 dark:text-ink-300">
               Die zentrale Lernplattform für deine Ausbildung zum Fachinformatiker für
               Systemintegration – klar strukturiert und auf das Wesentliche fokussiert.
             </p>
 
-            <div className="animate-fadeIn mx-auto mt-10 max-w-xl opacity-0 [animation-delay:240ms] [animation-fill-mode:forwards]">
+            <div className="mt-6 max-w-xl">
               <SearchBar size="lg" />
             </div>
 
-            <div className="animate-fadeIn mt-8 flex flex-wrap items-center justify-center gap-3 opacity-0 [animation-delay:300ms] [animation-fill-mode:forwards]">
+            <div className="mt-5 flex flex-wrap items-center gap-3">
               <ButtonLink to="/pruefungsvorbereitung" icon={<ArrowRight />} iconPosition="right">
                 Prüfungsvorbereitung ansehen
               </ButtonLink>
@@ -65,7 +52,7 @@ export default function Home() {
 
       <StudentDashboard />
 
-      <section className="mx-auto max-w-content px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <section className="mx-auto max-w-content px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
         <SectionHeader
           title="Deine Lernbereiche"
           description="Vier Bereiche, die dich durch deine Ausbildung begleiten."

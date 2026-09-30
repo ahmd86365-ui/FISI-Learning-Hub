@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 interface LogoProps {
   className?: string
   showWordmark?: boolean
+  inverse?: boolean
+  compactOnMobile?: boolean
 }
 
 export function LogoMark({ className = 'h-8 w-8' }: { className?: string }) {
@@ -21,7 +23,7 @@ export function LogoMark({ className = 'h-8 w-8' }: { className?: string }) {
   )
 }
 
-export function Logo({ className, showWordmark = true }: LogoProps) {
+export function Logo({ className, showWordmark = true, inverse = false, compactOnMobile = false }: LogoProps) {
   return (
     <Link
       to="/"
@@ -30,11 +32,11 @@ export function Logo({ className, showWordmark = true }: LogoProps) {
     >
       <LogoMark className="h-8 w-8 shrink-0 transition-transform duration-300 group-hover:scale-105" />
       {showWordmark && (
-        <span className="flex flex-col justify-center leading-none">
-          <span className="font-mono text-[0.95rem] font-semibold tracking-tight text-ink-900 dark:text-white">
+        <span className={`${compactOnMobile ? 'hidden sm:flex' : 'flex'} flex-col justify-center leading-none`}>
+          <span className={`font-mono text-[0.9rem] font-semibold tracking-tight ${inverse ? 'text-white' : 'text-ink-900 dark:text-white'}`}>
             FISI<span className="text-brand-600 dark:text-brand-400">.</span>
           </span>
-          <span className="mt-0.5 text-[0.62rem] font-medium uppercase tracking-[0.14em] text-ink-400 dark:text-ink-500">
+          <span className={`mt-0.5 text-[0.58rem] font-medium uppercase tracking-[0.14em] ${inverse ? 'text-blue-200' : 'text-ink-400 dark:text-ink-500'}`}>
             Learning Hub
           </span>
         </span>

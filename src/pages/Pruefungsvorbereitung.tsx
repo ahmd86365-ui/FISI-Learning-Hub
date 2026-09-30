@@ -18,7 +18,7 @@ export default function Pruefungsvorbereitung() {
         accent={subject.accent}
       />
 
-      <section className="mx-auto max-w-content px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+      <section className="mx-auto max-w-content px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
         <div className="mb-8"><ButtonLink to="/exams">Prüfungsmodus & Verlauf öffnen</ButtonLink></div>
         <div className="mb-8 rounded-2xl border border-ink-200 bg-white p-5 dark:border-ink-800 dark:bg-ink-900">
           <h2 className="text-xl font-semibold">Praktisch üben</h2>

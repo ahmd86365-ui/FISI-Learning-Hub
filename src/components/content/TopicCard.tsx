@@ -17,7 +17,7 @@ export function TopicCard({ topic, to, accent, index = 0 }: TopicCardProps) {
   return (
     <Link
       to={to}
-      className="group relative flex animate-fadeIn items-start gap-4 rounded-xl border border-ink-200 bg-white p-5 opacity-0 shadow-card transition-all duration-300 ease-out [animation-fill-mode:forwards] hover:-translate-y-0.5 hover:shadow-card-hover dark:border-ink-800 dark:bg-ink-900 dark:shadow-card-dark dark:hover:shadow-card-hover-dark"
+      className="group relative flex animate-fadeIn items-start gap-3 rounded-xl border border-ink-200 bg-white p-4 opacity-0 shadow-card transition-colors duration-200 [animation-fill-mode:forwards] hover:border-brand-300 hover:bg-brand-50/30 dark:border-ink-800 dark:bg-ink-900 dark:shadow-card-dark dark:hover:border-brand-500/50 dark:hover:bg-brand-500/5"
       style={{ animationDelay: `${index * 60}ms` }}
     >
       <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${accentCls.iconBg} ${accentCls.iconText}`}>

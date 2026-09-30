@@ -32,7 +32,7 @@ export function TerminalConsole({ session, entries, command, historyIndex, onCom
 
   const displayPath = session.cwd.replace('/home/student', '~') || '~'
   return (
-    <section className="min-w-0 overflow-hidden rounded-2xl border border-ink-700 bg-ink-950 shadow-card-dark" aria-label="Simuliertes Linux-Terminal">
+    <section data-no-translate className="min-w-0 overflow-hidden rounded-2xl border border-ink-700 bg-ink-950 shadow-card-dark" aria-label="Simuliertes Linux-Terminal">
       <div className="flex min-h-12 items-center justify-between gap-3 border-b border-ink-800 bg-ink-900 px-4">
         <div className="flex items-center gap-3">
           <div className="flex gap-1.5" aria-hidden="true"><span className="h-3 w-3 rounded-full bg-rose-400" /><span className="h-3 w-3 rounded-full bg-amber-300" /><span className="h-3 w-3 rounded-full bg-emerald-400" /></div>

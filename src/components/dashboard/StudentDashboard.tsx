@@ -53,7 +53,7 @@ export function StudentDashboard() {
 
   return (
     <section className="border-b border-ink-200 bg-ink-50/60 dark:border-ink-800 dark:bg-ink-900/30" aria-labelledby="dashboard-title">
-      <div className="mx-auto max-w-content px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+      <div className="mx-auto max-w-content px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
         <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-600 dark:text-brand-400">
@@ -79,7 +79,7 @@ export function StudentDashboard() {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-sm font-medium text-brand-600 dark:text-brand-400">Gesamtfortschritt</p>
-                <p className="mt-2 text-4xl font-bold tracking-tight text-ink-950 dark:text-white">{percentage}%</p>
+                <p className="mt-2 text-3xl font-bold tracking-tight text-ink-950 dark:text-white">{percentage}%</p>
               </div>
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-300">
                 <BarChart3 className="h-5 w-5" aria-hidden="true" />
@@ -108,7 +108,6 @@ export function StudentDashboard() {
           </article>
 
           <article className="relative overflow-hidden rounded-2xl border border-brand-200 bg-white p-5 shadow-card dark:border-brand-500/20 dark:bg-ink-900 dark:shadow-card-dark sm:p-6">
-            <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-brand-400/10 blur-2xl" aria-hidden="true" />
             <div className="relative flex h-full flex-col">
               <div className="flex items-center gap-2 text-sm font-medium text-brand-600 dark:text-brand-400">
                 <BookOpen className="h-4 w-4" aria-hidden="true" />
@@ -118,7 +117,7 @@ export function StudentDashboard() {
                 <p className="mt-6 text-sm text-ink-500 dark:text-ink-400">Nächste Lektion wird ermittelt …</p>
               ) : nextLesson ? (
                 <>
-                  <h3 className="mt-6 text-2xl font-bold leading-tight text-ink-950 dark:text-white sm:text-3xl">{nextLesson.title}</h3>
+                  <h3 className="mt-5 text-xl font-bold leading-tight text-ink-950 dark:text-white sm:text-2xl">{nextLesson.title}</h3>
                   <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-500 dark:text-ink-400">
                     Dies ist die erste noch offene Lektion in deinem Lernkatalog.
                   </p>

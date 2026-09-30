@@ -32,7 +32,7 @@ export default function Search() {
   }
 
   return (
-    <div className="mx-auto max-w-content px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+    <div className="mx-auto max-w-content px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
       <SectionHeader
         title="Suche"
         description="Durchsuche Themen, Begriffe und Lerninhalte der gesamten Plattform."

@@ -28,7 +28,7 @@ export default function PruefungWirtschaftGesellschaft() {
         }
       />
 
-      <section className="mx-auto max-w-content px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+      <section className="mx-auto max-w-content px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
         <SectionHeader title="Prüfungsbereiche" description="Wähle einen Bereich, um zu starten." />
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">

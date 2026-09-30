@@ -43,37 +43,37 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-ink-950/50 backdrop-blur-sm dark:bg-black/70"
+            className="fixed inset-0 bg-ink-950/55 dark:bg-black/70"
             onClick={onClose}
             aria-hidden="true"
           />
 
           <motion.nav
             aria-label="Mobile Navigation"
-            initial={{ x: '100%' }}
+            initial={{ x: '-100%' }}
             animate={{ x: 0 }}
             transition={{ type: 'spring', stiffness: 320, damping: 34 }}
-            className="fixed inset-y-0 right-0 z-10 flex w-full max-w-xs flex-col bg-white shadow-card-hover dark:bg-ink-950"
+            className="fixed inset-y-0 left-0 z-10 flex w-[min(88vw,20rem)] flex-col border-r border-ink-200 bg-white shadow-xl dark:border-ink-800 dark:bg-ink-950"
           >
-            <div className="flex h-16 items-center justify-between border-b border-ink-200 px-5 dark:border-ink-800">
-              <Logo />
+            <div className="flex h-14 items-center justify-between border-b border-ink-200 bg-ink-950 px-4 dark:border-ink-800">
+              <Logo inverse />
               <button
                 type="button"
                 onClick={onClose}
                 aria-label="Menü schließen"
-                className="rounded-full p-2 text-ink-500 hover:bg-ink-100 hover:text-ink-900 dark:text-ink-400 dark:hover:bg-ink-800 dark:hover:text-white"
+                className="rounded-md p-2 text-ink-300 hover:bg-white/10 hover:text-white"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="flex flex-1 flex-col gap-1 overflow-y-auto p-4">
+            <div className="flex flex-1 flex-col gap-1 overflow-y-auto p-3">
               <NavLink
                 to="/"
                 end
                 onClick={onClose}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-4 py-3.5 text-base font-medium transition-colors ${
+                  `flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${
                     isActive
                       ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-brand-400'
                       : 'text-ink-700 hover:bg-ink-100 dark:text-ink-200 dark:hover:bg-ink-800'
@@ -92,7 +92,7 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
                     to={s.path}
                     onClick={onClose}
                     className={({ isActive }) =>
-                      `flex items-center gap-3 rounded-xl px-4 py-3.5 text-base font-medium transition-colors ${
+                      `flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${
                         isActive
                           ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-brand-400'
                           : 'text-ink-700 hover:bg-ink-100 dark:text-ink-200 dark:hover:bg-ink-800'
@@ -105,13 +105,13 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
                 )
               })}
 
-              <NavLink to="/exams" onClick={onClose} className="rounded-xl px-4 py-3.5 font-medium text-brand-600 dark:text-brand-400">Prüfungsmodus & Verlauf</NavLink>
+              <NavLink to="/exams" onClick={onClose} className="rounded-md px-3 py-2.5 text-sm font-medium text-brand-600 hover:bg-brand-50 dark:text-brand-400 dark:hover:bg-brand-500/10">Prüfungsmodus & Verlauf</NavLink>
 
               <NavLink
                 to="/suche"
                 onClick={onClose}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-4 py-3.5 text-base font-medium transition-colors ${
+                  `flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${
                     isActive
                       ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-brand-400'
                       : 'text-ink-700 hover:bg-ink-100 dark:text-ink-200 dark:hover:bg-ink-800'
@@ -126,7 +126,7 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
                 to="/saved"
                 onClick={onClose}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-4 py-3.5 text-base font-medium transition-colors ${
+                  `flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${
                     isActive
                       ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-brand-400'
                       : 'text-ink-700 hover:bg-ink-100 dark:text-ink-200 dark:hover:bg-ink-800'
@@ -141,7 +141,7 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
                 to="/progress"
                 onClick={onClose}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-4 py-3.5 text-base font-medium transition-colors ${
+                  `flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${
                     isActive
                       ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-brand-400'
                       : 'text-ink-700 hover:bg-ink-100 dark:text-ink-200 dark:hover:bg-ink-800'
@@ -156,7 +156,7 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
                 to="/stats"
                 onClick={onClose}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-4 py-3.5 text-base font-medium transition-colors ${
+                  `flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${
                     isActive
                       ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-brand-400'
                       : 'text-ink-700 hover:bg-ink-100 dark:text-ink-200 dark:hover:bg-ink-800'
@@ -171,7 +171,7 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
                 to="/errors"
                 onClick={onClose}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-4 py-3.5 text-base font-medium transition-colors ${
+                  `flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${
                     isActive
                       ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-brand-400'
                       : 'text-ink-700 hover:bg-ink-100 dark:text-ink-200 dark:hover:bg-ink-800'
@@ -186,7 +186,7 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
                 to="/profile"
                 onClick={onClose}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-4 py-3.5 text-base font-medium transition-colors ${
+                  `flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${
                     isActive
                       ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-brand-400'
                       : 'text-ink-700 hover:bg-ink-100 dark:text-ink-200 dark:hover:bg-ink-800'
@@ -198,14 +198,14 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
               </NavLink>
             </div>
 
-            <div className="border-t border-ink-200 p-5 dark:border-ink-800">
+            <div className="border-t border-ink-200 p-3 dark:border-ink-800">
               <button
                 type="button"
                 onClick={() => {
                   onClose()
                   void signOut().catch((error: unknown) => console.error('Abmeldung fehlgeschlagen.', error))
                 }}
-                className="mb-4 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-ink-700 transition-colors hover:bg-ink-100 dark:text-ink-200 dark:hover:bg-ink-800"
+                className="mb-3 flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-ink-700 transition-colors hover:bg-ink-100 dark:text-ink-200 dark:hover:bg-ink-800"
               >
                 <UserRoundX className="h-5 w-5" aria-hidden="true" />
                 Benutzerkonto abmelden

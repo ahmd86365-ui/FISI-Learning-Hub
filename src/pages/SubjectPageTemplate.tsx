@@ -30,7 +30,7 @@ export function SubjectPageTemplate({ subject, pageSubtitle, intro, modules = []
         accent={subject.accent}
       />
 
-      <section className="mx-auto max-w-content px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+      <section className="mx-auto max-w-content px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
         {modules.length === 0 ? (
           <EmptyState
             icon={PackageOpen}

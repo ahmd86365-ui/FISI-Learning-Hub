@@ -18,18 +18,13 @@ export function SubjectCard({ subject, index = 0, featured = false, className = 
     return (
       <Link
         to={subject.path}
-        className={`group relative flex animate-fadeIn flex-col overflow-hidden rounded-2xl border border-ink-200 bg-white p-8 opacity-0 shadow-card transition-all duration-300 ease-out [animation-fill-mode:forwards] hover:-translate-y-1 hover:shadow-card-hover dark:border-ink-800 dark:bg-ink-900 dark:shadow-card-dark dark:hover:shadow-card-hover-dark sm:flex-row sm:items-center sm:gap-10 sm:p-10 ${className}`}
+        className={`group relative flex animate-fadeIn flex-col rounded-xl border border-ink-200 bg-white p-5 opacity-0 shadow-card transition-colors duration-200 [animation-fill-mode:forwards] hover:border-brand-300 dark:border-ink-800 dark:bg-ink-900 dark:shadow-card-dark dark:hover:border-brand-500/50 sm:flex-row sm:items-center sm:gap-6 sm:p-6 ${className}`}
         style={{ animationDelay: `${index * 80}ms` }}
       >
         <div
-          className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-brand-400/10 blur-3xl transition-opacity duration-300 group-hover:opacity-80 dark:bg-brand-500/10"
-          aria-hidden="true"
-        />
-
-        <div
-          className={`relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl transition-colors duration-300 ${accent.iconBg} ${accent.iconText}`}
+          className={`relative flex h-12 w-12 shrink-0 items-center justify-center rounded-lg transition-colors ${accent.iconBg} ${accent.iconText}`}
         >
-          <Icon className="h-8 w-8" strokeWidth={1.5} aria-hidden="true" />
+          <Icon className="h-6 w-6" strokeWidth={1.75} aria-hidden="true" />
         </div>
 
         <div className="relative mt-6 flex-1 sm:mt-0">
@@ -38,14 +33,14 @@ export function SubjectCard({ subject, index = 0, featured = false, className = 
           >
             Kernbereich
           </span>
-          <h3 className="mt-3 text-2xl font-bold tracking-tight text-ink-900 dark:text-white">{subject.name}</h3>
-          <p className="mt-2 max-w-xl text-base leading-relaxed text-ink-500 dark:text-ink-400">
+          <h3 className="mt-2 text-xl font-semibold tracking-tight text-ink-900 dark:text-white">{subject.name}</h3>
+          <p className="mt-1 max-w-xl text-sm leading-relaxed text-ink-500 dark:text-ink-400">
             {subject.description}
           </p>
         </div>
 
         <div
-          className={`relative mt-6 inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold sm:mt-0 ${accent.text}`}
+          className={`relative mt-5 inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold sm:mt-0 ${accent.text}`}
         >
           Entdecken
           <ArrowRight
@@ -55,7 +50,7 @@ export function SubjectCard({ subject, index = 0, featured = false, className = 
         </div>
 
         <div
-          className={`pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-transparent transition-all duration-300 ${accent.ring} ${accent.glowShadow}`}
+          className={`pointer-events-none absolute inset-0 rounded-xl ring-1 ring-transparent transition-colors ${accent.ring}`}
           aria-hidden="true"
         />
       </Link>
@@ -65,7 +60,7 @@ export function SubjectCard({ subject, index = 0, featured = false, className = 
   return (
     <Link
       to={subject.path}
-      className={`group relative flex animate-fadeIn flex-col rounded-2xl border border-ink-200 bg-white p-6 opacity-0 shadow-card transition-all duration-300 ease-out [animation-fill-mode:forwards] hover:-translate-y-1 hover:shadow-card-hover dark:border-ink-800 dark:bg-ink-900 dark:shadow-card-dark dark:hover:shadow-card-hover-dark sm:p-7 ${className}`}
+      className={`group relative flex animate-fadeIn flex-col rounded-xl border border-ink-200 bg-white p-5 opacity-0 shadow-card transition-colors duration-200 [animation-fill-mode:forwards] hover:border-brand-300 dark:border-ink-800 dark:bg-ink-900 dark:shadow-card-dark dark:hover:border-brand-500/50 ${className}`}
       style={{ animationDelay: `${index * 80}ms` }}
     >
       <div
@@ -88,7 +83,7 @@ export function SubjectCard({ subject, index = 0, featured = false, className = 
       </div>
 
       <div
-        className={`pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-transparent transition-all duration-300 ${accent.ring}`}
+        className={`pointer-events-none absolute inset-0 rounded-xl ring-1 ring-transparent transition-colors ${accent.ring}`}
         aria-hidden="true"
       />
     </Link>

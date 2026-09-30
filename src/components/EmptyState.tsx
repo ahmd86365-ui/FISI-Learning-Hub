@@ -21,7 +21,7 @@ export function EmptyState({
 }: EmptyStateProps) {
   return (
     <div
-      className={`relative flex animate-fadeIn flex-col items-center rounded-2xl border border-dashed border-ink-200 bg-ink-50/60 px-6 py-16 text-center dark:border-ink-800 dark:bg-ink-900/40 sm:py-20 ${className}`}
+      className={`relative flex animate-fadeIn flex-col items-center rounded-xl border border-dashed border-ink-300 bg-white px-6 py-12 text-center shadow-card dark:border-ink-700 dark:bg-ink-900 sm:py-14 ${className}`}
     >
       <div className="relative mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-soft ring-1 ring-ink-100 dark:bg-ink-900 dark:ring-ink-800">
         <Icon className="h-7 w-7 text-brand-500 dark:text-brand-400" strokeWidth={1.5} aria-hidden="true" />

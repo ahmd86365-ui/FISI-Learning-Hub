@@ -55,7 +55,7 @@ export default function ModulePage({ subjectSlug }: { subjectSlug: SubjectSlug }
         }
       />
 
-      <section className="mx-auto max-w-content px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+      <section className="mx-auto max-w-content px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
         {subjectSlug === 'it' && mod.slug === 'linux' && (
           <div className="mb-10 overflow-hidden rounded-2xl border border-brand-200 bg-white shadow-card dark:border-brand-500/20 dark:bg-ink-900">
             <div className="grid gap-6 p-6 sm:p-8 md:grid-cols-[1fr_auto] md:items-center">

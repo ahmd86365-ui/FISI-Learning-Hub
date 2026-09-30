@@ -4,8 +4,8 @@ import { subjects } from '../data/subjects'
 
 export function Footer() {
   return (
-    <footer className="border-t border-ink-200 bg-white dark:border-ink-800 dark:bg-ink-950">
-      <div className="mx-auto max-w-content px-4 py-12 sm:px-6 lg:px-8">
+    <footer className="border-t border-ink-200 bg-white dark:border-ink-800 dark:bg-ink-900">
+      <div className="mx-auto max-w-content px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
           <div className="max-w-sm">
             <Logo />
@@ -35,7 +35,7 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-ink-200 pt-6 text-xs text-ink-400 dark:border-ink-800 dark:text-ink-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 flex flex-col gap-3 border-t border-ink-200 pt-5 text-xs text-ink-400 dark:border-ink-800 dark:text-ink-500 sm:flex-row sm:items-center sm:justify-between">
           <p>&copy; {new Date().getFullYear()} FISI Learning Hub</p>
           <p className="font-mono">Fachinformatiker für Systemintegration</p>
         </div>

@@ -68,7 +68,7 @@ export default function ItTechnicalPage() {
           </nav>
         </div>
       ) : (
-        <section className="mx-auto max-w-content px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+        <section className="mx-auto max-w-content px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
           <SectionHeader title={chapter ? 'Lektionen' : 'Kapitel'} description={chapter ? 'Die Lektionen dieses Kapitels im Überblick.' : 'Der Unterricht ist in sieben zusammenhängende Kapitel gegliedert.'} />
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {topics.map((topic, index) => <TopicCard key={topic.id} topic={topic} to={`${base}/${topic.slug}`} accent={subject.accent} index={index} />)}

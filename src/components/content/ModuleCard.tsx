@@ -18,19 +18,19 @@ export function ModuleCard({ module, subjectPath, accent, index = 0 }: ModuleCar
   return (
     <Link
       to={`${subjectPath}/${module.slug}`}
-      className="group relative flex animate-fadeIn flex-col rounded-2xl border border-ink-200 bg-white p-6 opacity-0 shadow-card transition-all duration-300 ease-out [animation-fill-mode:forwards] hover:-translate-y-1 hover:shadow-card-hover dark:border-ink-800 dark:bg-ink-900 dark:shadow-card-dark dark:hover:shadow-card-hover-dark sm:p-7"
+      className="group relative flex animate-fadeIn flex-col rounded-xl border border-ink-200 bg-white p-5 opacity-0 shadow-card transition-colors duration-200 [animation-fill-mode:forwards] hover:border-brand-300 hover:bg-brand-50/30 dark:border-ink-800 dark:bg-ink-900 dark:shadow-card-dark dark:hover:border-brand-500/50 dark:hover:bg-brand-500/5"
       style={{ animationDelay: `${index * 80}ms` }}
     >
       <div
-        className={`mb-5 flex h-12 w-12 items-center justify-center rounded-xl transition-colors duration-300 ${accentCls.iconBg} ${accentCls.iconText}`}
+        className={`mb-4 flex h-10 w-10 items-center justify-center rounded-lg transition-colors duration-200 ${accentCls.iconBg} ${accentCls.iconText}`}
       >
-        <Icon className="h-6 w-6" strokeWidth={1.75} aria-hidden="true" />
+        <Icon className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
       </div>
 
       <h3 className="text-lg font-semibold tracking-tight text-ink-900 dark:text-white">{module.title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-ink-500 dark:text-ink-400">{module.description}</p>
 
-      <div className="mt-6 flex items-center justify-between">
+      <div className="mt-5 flex items-center justify-between">
         <span className={`inline-flex items-center gap-1.5 text-sm font-medium ${accentCls.text}`}>
           Öffnen
           <ArrowRight
@@ -46,7 +46,7 @@ export function ModuleCard({ module, subjectPath, accent, index = 0 }: ModuleCar
       </div>
 
       <div
-        className={`pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-transparent transition-all duration-300 ${accentCls.ring} ${accentCls.glowShadow}`}
+        className={`pointer-events-none absolute inset-0 rounded-xl ring-1 ring-transparent transition-all duration-200 ${accentCls.ring}`}
         aria-hidden="true"
       />
     </Link>
