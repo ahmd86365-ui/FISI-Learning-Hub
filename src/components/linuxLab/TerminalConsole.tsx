@@ -1,6 +1,6 @@
 import { useEffect, useRef, type FormEvent, type KeyboardEvent } from 'react'
 import { CornerDownLeft, RotateCcw, ShieldCheck } from 'lucide-react'
-import type { LinuxLabSession } from '../../lib/linuxTerminal'
+import { completeLinuxCommand, type LinuxLabSession } from '../../lib/linuxTerminal'
 
 export interface TerminalEntry { id: number; prompt: string; command: string; output: string; error?: boolean }
 
@@ -13,14 +13,20 @@ interface TerminalConsoleProps {
   onHistoryIndexChange: (value: number) => void
   onSubmit: () => void
   onReset: () => void
+  onClear: () => void
+  focusMode?: boolean
+  welcome?: string
 }
 
-export function TerminalConsole({ session, entries, command, historyIndex, onCommandChange, onHistoryIndexChange, onSubmit, onReset }: TerminalConsoleProps) {
+export function TerminalConsole({ session, entries, command, historyIndex, onCommandChange, onHistoryIndexChange, onSubmit, onReset, onClear, focusMode = false, welcome = 'FISI Linux Lab — sichere Simulation\nTippe einen Befehl oder nutze die Hilfe.' }: TerminalConsoleProps) {
   const outputRef = useRef<HTMLDivElement>(null)
   useEffect(() => { outputRef.current?.scrollTo({ top: outputRef.current.scrollHeight, behavior: 'smooth' }) }, [entries])
 
   function submit(event: FormEvent) { event.preventDefault(); onSubmit() }
   function navigateHistory(event: KeyboardEvent<HTMLInputElement>) {
+    if (event.key === 'Tab') { event.preventDefault(); onCommandChange(completeLinuxCommand(session, command)); return }
+    if (event.ctrlKey && event.key.toLowerCase() === 'l') { event.preventDefault(); onClear(); return }
+    if (event.ctrlKey && event.key.toLowerCase() === 'c') { event.preventDefault(); onCommandChange(''); onHistoryIndexChange(-1); return }
     if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return
     event.preventDefault()
     const history = session.commandHistory
@@ -43,8 +49,8 @@ export function TerminalConsole({ session, entries, command, historyIndex, onCom
         </button>
       </div>
 
-      <div ref={outputRef} className="h-[25rem] overflow-y-auto px-4 py-5 font-mono text-sm leading-6 text-ink-100 sm:h-[30rem]" role="log" aria-live="polite" aria-label="Terminalausgabe">
-        <pre className="whitespace-pre-wrap text-emerald-300">FISI Linux Lab 1.0 — sichere Simulation{`\n`}Tippe einen Befehl oder nutze die Schnellhilfe.</pre>
+      <div ref={outputRef} className={`${focusMode ? 'h-[calc(100vh-15rem)] min-h-[32rem]' : 'h-[30rem] lg:h-[36rem]'} overflow-y-auto px-4 py-5 font-mono text-sm leading-6 text-ink-100`} role="log" aria-live="polite" aria-label="Terminalausgabe">
+        <pre className="whitespace-pre-wrap text-emerald-300">{welcome}</pre>
         {entries.map((entry) => (
           <div key={entry.id} className="mt-3">
             <div className="break-all"><code className="text-emerald-300">{entry.prompt}$</code> <code className="text-white">{entry.command}</code></div>
@@ -59,7 +65,7 @@ export function TerminalConsole({ session, entries, command, historyIndex, onCom
           <input id="linux-lab-command" value={command} onChange={(event) => onCommandChange(event.target.value)} onKeyDown={navigateHistory} autoComplete="off" autoCapitalize="off" spellCheck={false} className="min-h-12 min-w-0 flex-1 bg-transparent font-mono text-base text-white outline-none placeholder:text-ink-600" placeholder="Befehl eingeben …" aria-label="Linux-Befehl eingeben" />
           <button type="submit" disabled={!command.trim()} className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500 text-ink-950 transition-colors hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-40" aria-label="Befehl ausführen"><CornerDownLeft className="h-4 w-4" aria-hidden="true" /></button>
         </div>
-        <p className="mt-2 flex items-center gap-2 text-xs text-ink-400"><ShieldCheck className="h-4 w-4 text-emerald-400" aria-hidden="true" /> Nur simulierte Befehle · Pfeiltasten durchsuchen den Verlauf</p>
+        <p className="mt-2 flex items-center gap-2 text-xs text-ink-400"><ShieldCheck className="h-4 w-4 text-emerald-400" aria-hidden="true" /> Sicher simuliert · Tab vervollständigt · ↑/↓ Verlauf · Strg+L leeren · Strg+C abbrechen</p>
       </form>
     </section>
   )

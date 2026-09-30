@@ -77,11 +77,11 @@ export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }
             {topic.exercises.length > 0 && (
               <section className="mt-14">
                 <SectionHeader title="Übungen" description="Wende das Gelernte direkt an." />
+                {subjectSlug === 'it' && moduleSlug === 'linux' && (
+                  <ButtonLink to={`/it/linux/lab?lesson=${topicSlug}`} variant="secondary" className="mb-6">Im Linux Lab üben</ButtonLink>
+                )}
                 {subjectSlug === 'it' && moduleSlug === 'netzwerktechnik' && (topicSlug === 'subnetting' || topicSlug === 'cidr-netzgrenzen') && (
                   <ButtonLink to="/practice/subnetting" variant="secondary" className="mb-6">Subnetting Trainer öffnen</ButtonLink>
-                )}
-                {subjectSlug === 'it' && moduleSlug === 'linux' && topicSlug === 'was-ist-linux' && (
-                  <ButtonLink to="/it/linux/lab" variant="secondary" className="mb-6">Linux Lab · Terminal Praxis öffnen</ButtonLink>
                 )}
                 {subjectSlug === 'it' && moduleSlug === 'linux' && topicSlug === 'terminal-und-erste-befehle' && (
                   <ButtonLink to="/practice/linux-tag-2" variant="secondary" className="mb-6">Linux Campus · Tag 2 üben</ButtonLink>
