@@ -3,8 +3,11 @@ import { linuxDayTwoTopic } from './dayTwoLesson'
 import { linuxDayThreeTopic } from './dayThreeLesson'
 import { linuxDayFourTopic } from './dayFourLesson'
 import { linuxDayFiveTopic } from './dayFiveLesson'
+import { linuxGitTopic } from './gitLesson'
+import { linuxUsersGroupsTopic } from './usersGroupsLesson'
+import { linuxPermissionsTopic } from './permissionsLesson'
 
-// Source: Linux/Was ist Linux.pdf (12 pages). Add later PDF lessons as separate topics here.
+// Source: Linux/Was ist Linux.pdf (12 pages). Later source lessons are imported below as separate topics.
 const slug = 'was-ist-linux'
 const h = (text: string): ContentBlock => ({ type: 'heading', level: 2, text })
 const p = (text: string): ContentBlock => ({ type: 'paragraph', text })
@@ -94,4 +97,4 @@ export const linuxTopics: Topic[] = [{
     choice(7, 'Welche Tastenkombination öffnet in den beschriebenen Ubuntu-Varianten das Terminal?', ['Strg+Alt+T', 'Strg+T', 'Alt+F4', 'Strg+Shift+Esc'], 0, 'Die Quelle nennt Strg+Alt+T.'),
     { id: 'linux-01-quiz-8', topicSlug: slug, type: 'text', difficulty: 'easy', question: 'Welcher Befehl zeigt deinen eigenen Benutzernamen?', correctAnswer: 'whoami', explanation: 'Der Befehl lautet whoami.' },
   ],
-}, linuxDayTwoTopic, linuxDayThreeTopic, linuxDayFourTopic, linuxDayFiveTopic]
+}, linuxDayTwoTopic, linuxDayThreeTopic, linuxDayFourTopic, linuxDayFiveTopic, linuxGitTopic, linuxUsersGroupsTopic, linuxPermissionsTopic]

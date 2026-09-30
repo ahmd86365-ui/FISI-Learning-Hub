@@ -18,7 +18,7 @@ const { modules, getModuleBySlug } = load('src/data/modules.ts')
 const { linuxDayThreeTasks, linuxDayThreeExam } = load('src/data/linux/dayThreeExercises.ts')
 const { createDayThreeSession, runDayThreeCommand, saveNanoFile, isBrokenLink } = load('src/lib/linuxDayThreeSimulator.ts')
 const linux = getModuleBySlug('it', 'linux')
-assert.deepEqual(linux.topics.map(topic => [topic.title, topic.order]), [['Was ist Linux?', 1], ['Terminal und erste Befehle', 2], ['Das Dateisystem', 3]])
+assert.deepEqual(linux.topics.slice(0, 3).map(topic => [topic.title, topic.order]), [['Was ist Linux?', 1], ['Terminal und erste Befehle', 2], ['Das Dateisystem', 3]])
 const topic = linux.topics[2]
 assert.equal(topic.id, 'topic-linux-03-das-dateisystem'); assert.equal(topic.slug, 'das-dateisystem')
 assert.match(readFileSync('src/App.tsx', 'utf8'), /path="practice\/linux-tag-3"/)
@@ -28,7 +28,7 @@ for (const [label, ids] of [['topic', topicIds], ['exercise', exerciseIds], ['tr
 assert.ok(topic.exercises.every(exercise => exercise.topicSlug === topic.slug))
 const curriculum = JSON.stringify([topic.content, linuxDayThreeTasks, linuxDayThreeExam])
 for (const phrase of ['Filesystem Hierarchy Standard', '/root', '/dev/sda', '/dev/vda', '/dev/sdb', '/etc/hostname', '/etc/hosts', '/etc/os-release', '/etc/passwd', '/etc/shadow', 'UID', 'GID', '.bashrc', 'ls -lh', 'ls -lt', 'ls -ld', 'ln -s', 'Strg+O', 'Strg+K', 'Strg+U', 'Strg+W', 'Alt+U', 'Strg+G', 'wc -l']) assert.ok(curriculum.includes(phrase), `Coverage: ${phrase}`)
-for (const unsupported of ['sort ', 'less ', 'df ', 'du ', '| ', '2>']) assert.ok(!linuxDayThreeTasks.some(task => task.answers.some(answer => answer.includes(unsupported))), `Locked content: ${unsupported}`)
+for (const taught of ['sort ', 'df ', '| ', '2>']) assert.ok(linuxDayThreeTasks.some(task => task.answers.some(answer => answer.includes(taught))), `Missing taught command: ${taught}`)
 
 const initial = createDayThreeSession(); assert.ok(initial.nodes['/']); assert.ok(initial.nodes['/etc']); assert.ok(initial.nodes['/proc/cpuinfo'])
 for (const path of ['/etc/hostname', '/etc/hosts', '/etc/os-release', '/etc/passwd']) assert.equal(initial.nodes[path].type, 'file')
@@ -54,10 +54,10 @@ state = saveNanoFile(state, 'notizen.txt', 'Geändert\nStudent'); assert.equal(r
 assert.deepEqual(createDayThreeSession(), initial, 'Reset deterministic')
 
 for (const wanted of ['cd /', 'ls -l /bin/ls /bin/cp', 'ls /var/log', 'tail -n 3 /etc/passwd', 'head -n 5 /proc/cpuinfo', 'mkdir -p ~/linux-kurs/tag03', 'nano ~/linux-kurs/tag03/fhs.txt', 'nano ~/linux-kurs/tag03/meinuser.txt', 'nano ~/linux-kurs/tag03/notiz.txt']) assert.ok(linuxDayThreeTasks.some(task => task.answers.includes(wanted)), `Connected sequence: ${wanted}`)
-assert.ok(linuxDayThreeTasks.length >= 30); assert.equal(linuxDayThreeExam.length, 20); assert.equal(new Set(linuxDayThreeExam.map(question => question.id)).size, 20)
+assert.ok(linuxDayThreeTasks.length >= 30); assert.equal(linuxDayThreeExam.length, 24); assert.equal(new Set(linuxDayThreeExam.map(question => question.id)).size, 24)
 const trainer = readFileSync('src/pages/LinuxDayThreeTrainer.tsx', 'utf8'), simulator = readFileSync('src/lib/linuxDayThreeSimulator.ts', 'utf8')
 for (const source of [trainer, simulator, readFileSync('src/data/linux/dayThreeExercises.ts', 'utf8')]) assert.doesNotMatch(source, /child_process|execSync|execFile|\bspawn\s*\(|\bfetch\s*\(/)
 assert.match(trainer, /Während der Prüfung werden keine Hinweise oder Lösungen angezeigt/); assert.match(trainer, /!correct &&/); assert.match(trainer, /attempts >= 2/)
 const glossary = load('src/data/glossary.ts').glossaryEntries
 for (const id of ['fhs', 'root-verzeichnis', 'symbolischer-link', 'uid-gid', 'nano']) assert.ok(glossary.find(entry => entry.id === id)?.lessons.some(lesson => lesson.topic === topic.slug))
-console.log(`Linux Tag 3: official topic, ${linuxDayThreeTasks.length} connected tasks, 20-question assessment, virtual FHS, passwd, hidden files, metadata, symlinks, nano persistence, reset, glossary and repository IDs verified.`)
+console.log(`Linux Tag 3: official topic, ${linuxDayThreeTasks.length} connected tasks, ${linuxDayThreeExam.length}-question assessment, virtual FHS, passwd, hidden files, metadata, symlinks, nano persistence, reset, glossary and repository IDs verified.`)
