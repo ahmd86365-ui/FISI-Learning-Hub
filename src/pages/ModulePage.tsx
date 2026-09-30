@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { PackageSearch } from 'lucide-react'
+import { PackageSearch, ShieldCheck, TerminalSquare } from 'lucide-react'
 import { PageHeader } from '../components/PageHeader'
 import { SectionHeader } from '../components/SectionHeader'
 import { EmptyState } from '../components/EmptyState'
@@ -56,6 +56,19 @@ export default function ModulePage({ subjectSlug }: { subjectSlug: SubjectSlug }
       />
 
       <section className="mx-auto max-w-content px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+        {subjectSlug === 'it' && mod.slug === 'linux' && (
+          <div className="mb-10 overflow-hidden rounded-2xl border border-brand-200 bg-white shadow-card dark:border-brand-500/20 dark:bg-ink-900">
+            <div className="grid gap-6 p-6 sm:p-8 md:grid-cols-[1fr_auto] md:items-center">
+              <div>
+                <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-brand-700 dark:text-brand-300"><TerminalSquare className="h-4 w-4" aria-hidden="true" /> Praktische Ergänzung</p>
+                <h2 className="mt-2 text-2xl font-bold text-ink-950 dark:text-white">Linux Lab · Terminal Praxis</h2>
+                <p className="mt-2 max-w-2xl leading-7 text-ink-600 dark:text-ink-300">Wende die Lektionen in einem sicheren simulierten Terminal an – mit Dateisystem, Aufgaben, Git-Grundlagen und gespeichertem Fortschritt.</p>
+                <p className="mt-3 flex items-center gap-2 text-sm text-emerald-700 dark:text-emerald-300"><ShieldCheck className="h-4 w-4" aria-hidden="true" /> Keine echten Systembefehle werden ausgeführt.</p>
+              </div>
+              <ButtonLink to="/it/linux/lab" size="lg" icon={<TerminalSquare />}>Linux Lab öffnen</ButtonLink>
+            </div>
+          </div>
+        )}
         <SectionHeader title="Themen" description="Die Themen dieses Moduls im Überblick." />
         {topics.length === 0 ? (
           <EmptyState

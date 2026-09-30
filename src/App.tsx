@@ -79,6 +79,7 @@ export default function App() {
                   <Route path="practice/labs/:labId" element={<PracticalLabs />} />
 
         <Route path="it" element={<It />} />
+        <Route path="it/linux/lab" element={<LinuxTerminalTrainer />} />
         <Route path="it/it-technical" element={<ItTechnicalPage />} />
         <Route path="it/it-technical/:chapterSlug" element={<ItTechnicalPage />} />
         <Route path="it/it-technical/:chapterSlug/:lessonSlug" element={<ItTechnicalPage />} />
