@@ -10,6 +10,7 @@ import { StudyActivityProvider } from './contexts/StudyActivityContext'
 import { QuestionPerformanceProvider } from './contexts/QuestionPerformanceContext'
 import { GuestOnlyRoute, ProtectedRoute } from './components/auth/AuthGuards'
 import { ExamAttemptsProvider } from './contexts/ExamAttemptsContext'
+import { FlashcardProgressProvider } from './contexts/FlashcardProgressContext'
 
 const Home = lazy(() => import('./pages/Home'))
 const It = lazy(() => import('./pages/It'))
@@ -43,6 +44,7 @@ const LinuxTerminalTrainer = lazy(() => import('./pages/LinuxTerminalTrainer'))
 const LinuxDayTwoTrainer = lazy(() => import('./pages/LinuxDayTwoTrainer'))
 const LinuxDayThreeTrainer = lazy(() => import('./pages/LinuxDayThreeTrainer'))
 const PracticalLabs = lazy(() => import('./pages/PracticalLabs'))
+const Flashcards = lazy(() => import('./pages/Flashcards'))
 
 export default function App() {
   return (
@@ -52,6 +54,7 @@ export default function App() {
           <StudyActivityProvider>
             <QuestionPerformanceProvider>
               <ExamAttemptsProvider>
+              <FlashcardProgressProvider>
               <LearningProgressProvider>
               <HoverTranslator />
               <Suspense fallback={<RouteLoading />}>
@@ -77,6 +80,7 @@ export default function App() {
                   <Route path="practice/linux-tag-3" element={<LinuxDayThreeTrainer />} />
                   <Route path="practice/labs" element={<PracticalLabs />} />
                   <Route path="practice/labs/:labId" element={<PracticalLabs />} />
+                  <Route path="lernkarten/:lessonId" element={<Flashcards />} />
 
         <Route path="it" element={<It />} />
         <Route path="it/linux/lab" element={<LinuxTerminalTrainer />} />
@@ -118,6 +122,7 @@ export default function App() {
             </Routes>
             </Suspense>
             </LearningProgressProvider>
+            </FlashcardProgressProvider>
             </ExamAttemptsProvider>
           </QuestionPerformanceProvider>
         </StudyActivityProvider>

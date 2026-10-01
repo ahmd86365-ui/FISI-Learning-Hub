@@ -281,6 +281,32 @@ export interface TestResult {
   answers: Record<string, string[]>
 }
 
+/* Lesson flashcards --------------------------------------------------------- */
+
+export type FlashcardQuestionType = 'multiple-choice' | 'true-false' | 'short-answer'
+
+export interface FlashcardQuestion {
+  id: string
+  lessonId: string
+  type: FlashcardQuestionType
+  question: string
+  answers?: AnswerOption[]
+  correctAnswer: string | string[]
+  explanation: string
+  difficulty: Difficulty
+  tags: string[]
+  /** Prevents answer-order shuffling for semantic pairs such as Richtig/Falsch. */
+  fixedAnswerOrder?: boolean
+}
+
+export interface LessonFlashcardBank {
+  lessonId: string
+  lessonTitle: string
+  moduleSlug: string
+  subjectSlug: SubjectSlug
+  questions: FlashcardQuestion[]
+}
+
 /* Search ------------------------------------------------------------------------ */
 
 /**

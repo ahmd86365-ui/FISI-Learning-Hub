@@ -12,6 +12,7 @@ import { itTechnicalChapters, itTechnicalModule as mod } from '../../data/itTech
 import { getSubjectBySlug } from '../../data/subjects'
 import type { Topic } from '../../types/content'
 import NotFound from '../NotFound'
+import { FlashcardLessonAction } from '../../components/flashcards/FlashcardLessonAction'
 
 const base = '/it/it-technical'
 const subject = getSubjectBySlug('it')!
@@ -55,6 +56,7 @@ export default function ItTechnicalPage() {
             <LessonCompletionButton lessonId={lesson.id} />
           </div>
           <LessonContent blocks={lesson.content} />
+          <FlashcardLessonAction lessonId={lesson.id} />
           {lesson.exercises.length > 0 && (
             <section className="mt-14">
               <SectionHeader title="Übungen / Kontrollfragen" description="Formuliere deine Antwort und vergleiche sie anschließend mit der Quellenlösung oder dem Quellenhinweis." />

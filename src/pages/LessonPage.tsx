@@ -14,6 +14,7 @@ import { getSubjectBySlug } from '../data/subjects'
 import { getModuleBySlug } from '../data/modules'
 import { getTopicBySlug } from '../lib/content'
 import type { SubjectSlug } from '../types/content'
+import { FlashcardLessonAction } from '../components/flashcards/FlashcardLessonAction'
 
 export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }) {
   const { moduleSlug, topicSlug } = useParams<{ moduleSlug: string; topicSlug: string }>()
@@ -73,6 +74,8 @@ export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }
         ) : (
           <>
             <LessonContent blocks={topic.content} />
+
+            <FlashcardLessonAction lessonId={topic.id} />
 
             {topic.exercises.length > 0 && (
               <section className="mt-14">
