@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowLeft, ArrowRight, Brain, Check, CheckCircle2, RotateCcw, X, XCircle } from 'lucide-react'
 import { useParams } from 'react-router-dom'
 import { Button, ButtonLink } from '../components/Button'
@@ -7,6 +7,7 @@ import { EmptyState } from '../components/EmptyState'
 import { PageHeader } from '../components/PageHeader'
 import { getSubjectBySlug } from '../data/subjects'
 import {
+  flashcardBanks,
   getFlashcardBank,
   getLessonForFlashcards,
   isFlashcardAnswerCorrect,
@@ -16,6 +17,7 @@ import {
 } from '../lib/flashcards'
 import { useFlashcardProgress } from '../contexts/FlashcardProgressContext'
 import type { FlashcardQuestion } from '../types/content'
+import { dueFlashcards, formatDueLabel, getDueStatus, orderFlashcardsForLesson } from '../lib/flashcardSrs'
 
 type AnswerState = { answer: string[]; correct: boolean }
 
@@ -25,18 +27,19 @@ function answerText(question: FlashcardQuestion) {
   return ids.map((id) => question.answers?.find((answer) => answer.id === id)?.text ?? id).join(', ')
 }
 
-function newRound(questions: FlashcardQuestion[]) {
-  return shuffle(questions).map(prepareQuestion)
+function newRound(questions: FlashcardQuestion[], prioritized?: FlashcardQuestion[]) {
+  return (prioritized ?? shuffle(questions)).map(prepareQuestion)
 }
 
-export default function Flashcards() {
+export default function Flashcards({ dueReview = false }: { dueReview?: boolean }) {
   const { lessonId } = useParams<{ lessonId: string }>()
   const bank = getFlashcardBank(lessonId ? decodeURIComponent(lessonId) : undefined)
+  const { saveResult, getProgress, cardProgress, recordCardReview, loading } = useFlashcardProgress()
+  const reviewCards = useMemo(() => dueReview ? dueFlashcards(flashcardBanks.flatMap((entry) => entry.questions), cardProgress) : [], [cardProgress, dueReview])
   const found = getLessonForFlashcards(bank?.lessonId)
   const subject = found ? getSubjectBySlug(found.module.subjectSlug)! : undefined
   const returnPath = found && subject ? lessonPath(subject.path, found.module.slug, found.topic.slug) : '/'
-  const { saveResult, getProgress } = useFlashcardProgress()
-  const [questions, setQuestions] = useState<FlashcardQuestion[]>(() => bank ? newRound(bank.questions) : [])
+  const [questions, setQuestions] = useState<FlashcardQuestion[]>([])
   const [current, setCurrent] = useState(0)
   const [answers, setAnswers] = useState<Record<string, AnswerState>>({})
   const [selected, setSelected] = useState<string[]>([])
@@ -46,6 +49,20 @@ export default function Flashcards() {
   const [reviewMode, setReviewMode] = useState(false)
   const [originalResult, setOriginalResult] = useState<{ correct: number; total: number } | null>(null)
   const savedRound = useRef(false)
+  const initialized = useRef(false)
+  const initiallyDueIds = useRef(new Set<string>())
+
+  useEffect(() => {
+    if (loading || initialized.current) return
+    const source = dueReview ? reviewCards : bank?.questions ?? []
+    const ordered = dueReview ? source : orderFlashcardsForLesson(source, cardProgress)
+    initiallyDueIds.current = new Set(source.filter((card) => {
+      const entry = cardProgress.find((progressEntry) => progressEntry.card_id === card.id)
+      return entry ? getDueStatus(entry) !== 'future' : false
+    }).map((card) => card.id))
+    setQuestions(newRound(source, ordered))
+    initialized.current = true
+  }, [bank, cardProgress, dueReview, loading, reviewCards])
 
   const correctCount = Object.values(answers).filter((answer) => answer.correct).length
   const incorrectCount = Object.values(answers).filter((answer) => !answer.correct).length
@@ -57,7 +74,15 @@ export default function Flashcards() {
 
   const wrongQuestions = useMemo(() => questions.filter((item) => answers[item.id] && !answers[item.id].correct), [answers, questions])
 
-  if (!bank || !found || !subject || bank.questions.length === 0) {
+  if (loading || !initialized.current) {
+    return <div className="mx-auto flex min-h-[50vh] max-w-content items-center justify-center px-4" role="status">Lernkarten werden vorbereitet …</div>
+  }
+
+  if (dueReview && questions.length === 0) {
+    return <div className="mx-auto max-w-content px-4 py-24 sm:px-6"><EmptyState icon={CheckCircle2} title="Heute keine Lernkarten fällig" description="Dein Wiederholungsplan ist für heute erledigt."><ButtonLink to="/review" size="sm">Zurück zu Smart Review</ButtonLink></EmptyState></div>
+  }
+
+  if ((!dueReview && (!bank || !found || !subject || bank.questions.length === 0)) || questions.length === 0) {
     return <div className="mx-auto max-w-content px-4 py-24 sm:px-6"><EmptyState icon={Brain} title="Lernkarten nicht gefunden" description="Für diese Lektion ist kein bewertbarer Fragenpool verfügbar."><ButtonLink to="/" size="sm">Zur Startseite</ButtonLink></EmptyState></div>
   }
 
@@ -67,6 +92,8 @@ export default function Flashcards() {
     if (!answer[0]) return
     const correct = isFlashcardAnswerCorrect(question, answer)
     setAnswers((previous) => ({ ...previous, [question.id]: { answer, correct } }))
+    const questionBank = getFlashcardBank(question.lessonId)
+    if (questionBank) void recordCardReview(question, questionBank, correct)
   }
 
   const selectOption = (id: string) => {
@@ -90,15 +117,16 @@ export default function Flashcards() {
     const result = { correct: correctCount, total: questions.length }
     if (!reviewMode) setOriginalResult(result)
     setFinished(true)
-    if (!reviewMode && !savedRound.current) {
+    if (!dueReview && !reviewMode && bank && !savedRound.current) {
       savedRound.current = true
       void saveResult(bank.lessonId, result.correct, result.total)
     }
   }
 
   const restart = (onlyWrong: boolean) => {
-    const source = onlyWrong ? wrongQuestions : bank.questions
-    setQuestions(newRound(source))
+    const source = onlyWrong ? wrongQuestions : dueReview ? dueFlashcards(flashcardBanks.flatMap((entry) => entry.questions), cardProgress) : bank?.questions ?? []
+    const ordered = onlyWrong || dueReview ? undefined : orderFlashcardsForLesson(source, cardProgress)
+    setQuestions(newRound(source, ordered))
     setAnswers({})
     setSelected([])
     setShortAnswer('')
@@ -116,7 +144,7 @@ export default function Flashcards() {
     const score = Math.round((correctCount / questions.length) * 100)
     return (
       <div>
-        <PageHeader eyebrow={found.module.title} title="Lernkarten abgeschlossen" description={found.topic.title} accent={subject.accent} breadcrumb={<Breadcrumb items={[{ label: 'Home', to: '/' }, { label: found.topic.title, to: returnPath }, { label: 'Lernkarten' }]} />} />
+        <PageHeader eyebrow={dueReview ? 'Spaced Repetition' : found!.module.title} title={dueReview ? 'Wiederholung abgeschlossen' : 'Lernkarten abgeschlossen'} description={dueReview ? 'Fällige Lernkarten' : found!.topic.title} accent={subject?.accent ?? 'brand'} breadcrumb={<Breadcrumb items={dueReview ? [{ label: 'Home', to: '/' }, { label: 'Smart Review', to: '/review' }, { label: 'Lernkarten' }] : [{ label: 'Home', to: '/' }, { label: found!.topic.title, to: returnPath }, { label: 'Lernkarten' }]} />} />
         <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
           <section className="rounded-2xl border border-ink-200 bg-white p-6 text-center shadow-card dark:border-ink-800 dark:bg-ink-900 sm:p-10" aria-labelledby="result-title">
             <CheckCircle2 className="mx-auto h-10 w-10 text-brand-500" aria-hidden="true" />
@@ -127,12 +155,18 @@ export default function Flashcards() {
               <span className="flex items-center gap-2 text-sm font-semibold text-teal-700 dark:text-teal-300"><Check className="h-4 w-4" />{correctCount} richtig</span>
               <span className="flex items-center gap-2 text-sm font-semibold text-rose-700 dark:text-rose-300"><X className="h-4 w-4" />{incorrectCount} falsch</span>
             </div>
+            <div className="mx-auto mt-5 grid max-w-lg gap-2 text-sm text-ink-600 dark:text-ink-300 sm:grid-cols-3">
+              <span>{questions.length} Karten gelernt</span>
+              <span>{questions.filter((item) => initiallyDueIds.current.has(item.id)).length} heute fällig erledigt</span>
+              <span>{incorrectCount} Karten erneut in Kürze</span>
+            </div>
+            {cardProgress.filter((entry) => answers[entry.card_id]).sort((a, b) => a.due_at.localeCompare(b.due_at))[0] && <p className="mt-3 text-xs text-ink-500 dark:text-ink-400">Nächste Wiederholung: {formatDueLabel(cardProgress.filter((entry) => answers[entry.card_id]).sort((a, b) => a.due_at.localeCompare(b.due_at))[0].due_at)}</p>}
             {reviewMode && originalResult && <p className="mt-5 text-sm text-ink-500 dark:text-ink-400">Ursprüngliches Ergebnis: {originalResult.correct} / {originalResult.total}. Dieses Ergebnis bleibt gespeichert.</p>}
-            {!reviewMode && persisted && <p className="mt-5 text-xs text-ink-500 dark:text-ink-400">Bisheriger Bestwert: {Math.max(persisted.best_score, score)} %</p>}
+            {!dueReview && !reviewMode && persisted && <p className="mt-5 text-xs text-ink-500 dark:text-ink-400">Bisheriger Bestwert: {Math.max(persisted.best_score, score)} %</p>}
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
               {incorrectCount > 0 && <Button onClick={() => restart(true)} icon={<RotateCcw />}>Fehler wiederholen</Button>}
-              <Button onClick={() => restart(false)} variant="secondary" icon={<RotateCcw />}>Alle Fragen erneut</Button>
-              <ButtonLink to={returnPath} variant="ghost" icon={<ArrowLeft />}>Zurück zur Lektion</ButtonLink>
+              {!dueReview && <Button onClick={() => restart(false)} variant="secondary" icon={<RotateCcw />}>Alle Fragen erneut</Button>}
+              <ButtonLink to={dueReview ? '/review' : returnPath} variant="ghost" icon={<ArrowLeft />}>{dueReview ? 'Zurück zu Smart Review' : 'Zurück zur Lektion'}</ButtonLink>
             </div>
           </section>
         </main>
@@ -143,7 +177,7 @@ export default function Flashcards() {
   const selectedIds = submitted?.answer ?? selected
   return (
     <div>
-      <PageHeader eyebrow={found.module.title} title={found.topic.title} description="Lernkarten" accent={subject.accent} breadcrumb={<Breadcrumb items={[{ label: 'Home', to: '/' }, { label: found.topic.title, to: returnPath }, { label: 'Lernkarten' }]} />} />
+      <PageHeader eyebrow={dueReview ? 'Spaced Repetition' : found!.module.title} title={dueReview ? 'Fällige Lernkarten' : found!.topic.title} description={dueReview ? `${questions.length} Karten für heute` : 'Lernkarten'} accent={subject?.accent ?? 'brand'} breadcrumb={<Breadcrumb items={dueReview ? [{ label: 'Home', to: '/' }, { label: 'Smart Review', to: '/review' }, { label: 'Lernkarten' }] : [{ label: 'Home', to: '/' }, { label: found!.topic.title, to: returnPath }, { label: 'Lernkarten' }]} />} />
       <main className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3 text-sm" aria-live="polite">
           <span className="font-semibold text-ink-700 dark:text-ink-200">Frage {current + 1} / {questions.length}</span>
@@ -156,7 +190,7 @@ export default function Flashcards() {
         <section className="rounded-2xl border border-ink-200 bg-white p-5 shadow-card dark:border-ink-800 dark:bg-ink-900 sm:p-8" aria-labelledby="question-title">
           <div className="mb-5 flex items-center justify-between gap-3">
             <span className="rounded-full bg-ink-100 px-3 py-1 text-xs font-semibold text-ink-600 dark:bg-ink-800 dark:text-ink-300">{question.difficulty === 'easy' ? 'Einfach' : question.difficulty === 'medium' ? 'Mittel' : 'Anspruchsvoll'}</span>
-            {reviewMode && <span className="text-xs font-semibold text-amber-700 dark:text-amber-300">Fehlerrunde</span>}
+            {(reviewMode || dueReview) && <span className="text-xs font-semibold text-amber-700 dark:text-amber-300">{dueReview ? 'Fällige Wiederholung' : 'Fehlerrunde'}</span>}
           </div>
           <h2 id="question-title" className="text-lg font-bold leading-relaxed text-ink-900 dark:text-white sm:text-xl">{question.question}</h2>
 

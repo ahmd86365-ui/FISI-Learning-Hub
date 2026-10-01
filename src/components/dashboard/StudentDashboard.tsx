@@ -172,6 +172,7 @@ export function StudentDashboard() {
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2"><h3 className="font-semibold text-ink-900 dark:text-white">Smart Review</h3><span className="rounded-full bg-brand-50 px-2.5 py-1 text-xs font-semibold text-brand-700 dark:bg-brand-500/10 dark:text-brand-300">{reviewLoading ? '…' : reviewPlan.recommendations.length} heute</span></div>
             <p className="mt-1 line-clamp-2 text-sm text-ink-500 dark:text-ink-400">{reviewLoading ? 'Dein Tagesplan wird erstellt …' : reviewPlan.highestPriority ? `${reviewPlan.highestPriority.reason}: ${reviewPlan.highestPriority.title}` : 'Heute ist nichts dringend offen.'}</p>
+            {!reviewLoading && <p className="mt-2 text-xs font-medium text-brand-700 dark:text-brand-300">{reviewPlan.dueFlashcards > 0 ? `Lernkarten heute: ${reviewPlan.dueFlashcards}` : 'Heute keine Lernkarten fällig'}</p>}
           </div>
           <span className="inline-flex items-center gap-2 text-sm font-medium text-brand-600 dark:text-brand-400">Plan öffnen <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
         </Link>

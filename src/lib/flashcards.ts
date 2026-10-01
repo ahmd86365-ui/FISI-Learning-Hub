@@ -15,6 +15,15 @@ const MAX_QUESTIONS_PER_LESSON = 40
 const clean = (value: string) => value.replace(/\s+/g, ' ').trim()
 const unique = <T,>(values: T[]) => [...new Set(values)]
 
+function stableContentKey(value: string) {
+  let hash = 2166136261
+  for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index)
+    hash = Math.imul(hash, 16777619)
+  }
+  return (hash >>> 0).toString(36)
+}
+
 function exerciseQuestion(lesson: Topic, exercise: Exercise): FlashcardQuestion | null {
   if (classifyExercise(exercise) === 'practical') return null
   if (exercise.correctAnswer === undefined) {
@@ -54,7 +63,7 @@ function exerciseQuestion(lesson: Topic, exercise: Exercise): FlashcardQuestion 
   }
 }
 
-function tableQuestions(lesson: Topic, table: TableBlock, tableIndex: number): FlashcardQuestion[] {
+function tableQuestions(lesson: Topic, table: TableBlock): FlashcardQuestion[] {
   if (table.headers.length < 2 || table.rows.length < 2) return []
   const result: FlashcardQuestion[] = []
   const rowLabels = table.rows.map((row) => clean(row[0] ?? '')).filter(Boolean)
@@ -63,7 +72,7 @@ function tableQuestions(lesson: Topic, table: TableBlock, tableIndex: number): F
     const columnValues = table.rows.map((row) => clean(row[column] ?? '')).filter(Boolean)
     if (unique(columnValues).length < 2) continue
 
-    table.rows.forEach((row, rowIndex) => {
+    table.rows.forEach((row) => {
       const label = clean(row[0] ?? '')
       const correct = clean(row[column] ?? '')
       if (!label || !correct) return
@@ -74,7 +83,7 @@ function tableQuestions(lesson: Topic, table: TableBlock, tableIndex: number): F
         text,
       }))
       result.push({
-        id: `fc-${lesson.id}-table-${tableIndex}-${column}-${rowIndex}`,
+        id: `fc-${lesson.id}-table-${stableContentKey(`${table.headers[column]}\u0000${label}\u0000${correct}`)}`,
         lessonId: lesson.id,
         type: 'multiple-choice',
         question: `Welche Angabe gehört bei „${label}“ zur Kategorie „${clean(table.headers[column])}“?`,
@@ -87,14 +96,14 @@ function tableQuestions(lesson: Topic, table: TableBlock, tableIndex: number): F
     })
 
     if (unique(rowLabels).length >= 3) {
-      table.rows.forEach((row, rowIndex) => {
+      table.rows.forEach((row) => {
         const label = clean(row[0] ?? '')
         const value = clean(row[column] ?? '')
         if (!label || !value || columnValues.filter((entry) => entry === value).length !== 1) return
         const answers = [label, ...unique(rowLabels.filter((entry) => entry !== label)).slice(0, 3)]
           .map((text, index): AnswerOption => ({ id: `a${index}`, text }))
         result.push({
-          id: `fc-${lesson.id}-table-reverse-${tableIndex}-${column}-${rowIndex}`,
+          id: `fc-${lesson.id}-table-reverse-${stableContentKey(`${table.headers[column]}\u0000${value}\u0000${label}`)}`,
           lessonId: lesson.id,
           type: 'multiple-choice',
           question: `Welcher Eintrag gehört in der Lektion zu „${value}“?`,
@@ -110,7 +119,7 @@ function tableQuestions(lesson: Topic, table: TableBlock, tableIndex: number): F
   return result
 }
 
-function statementQuestions(lesson: Topic, startIndex: number): FlashcardQuestion[] {
+function statementQuestions(lesson: Topic): FlashcardQuestion[] {
   const statements = lesson.content.flatMap((block) => {
     if (block.type === 'key-points') return block.items
     if (block.type === 'list') return block.items
@@ -126,8 +135,8 @@ function statementQuestions(lesson: Topic, startIndex: number): FlashcardQuestio
     return []
   }).map(clean).filter((text) => text.length >= 20 && text.length <= 260)
 
-  return unique(statements).slice(0, 15).map((statement, index) => ({
-    id: `fc-${lesson.id}-statement-${startIndex + index}`,
+  return unique(statements).slice(0, 15).map((statement) => ({
+    id: `fc-${lesson.id}-statement-${stableContentKey(statement)}`,
     lessonId: lesson.id,
     type: 'true-false',
     question: statement,
@@ -154,9 +163,9 @@ function deduplicate(questions: FlashcardQuestion[]) {
 
 export function createFlashcardBank(topic: Topic, subjectSlug: LessonFlashcardBank['subjectSlug']): LessonFlashcardBank {
   const fromExercises = topic.exercises.map((exercise) => exerciseQuestion(topic, exercise)).filter(Boolean) as FlashcardQuestion[]
-  const fromTables = topic.content.flatMap((block, index) => block.type === 'table' ? tableQuestions(topic, block, index) : [])
+  const fromTables = topic.content.flatMap((block) => block.type === 'table' ? tableQuestions(topic, block) : [])
   const combined = deduplicate([...fromExercises, ...fromTables])
-  const withStatements = combined.length >= 10 ? combined : deduplicate([...combined, ...statementQuestions(topic, combined.length)])
+  const withStatements = combined.length >= 10 ? combined : deduplicate([...combined, ...statementQuestions(topic)])
   return {
     lessonId: topic.id,
     lessonTitle: topic.title,

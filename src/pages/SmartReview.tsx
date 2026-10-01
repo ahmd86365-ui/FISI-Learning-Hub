@@ -63,7 +63,7 @@ export default function SmartReview() {
 }
 
 function RecommendationCard({ recommendation }: { recommendation: SmartReviewRecommendation }) {
-  const Icon = recommendation.kind.includes('error') ? CircleAlert : recommendation.kind === 'saved-review' ? RotateCcw : BookOpen
+  const Icon = recommendation.kind.includes('error') ? CircleAlert : recommendation.kind === 'saved-review' || recommendation.kind.startsWith('flashcards-') ? RotateCcw : BookOpen
   return <article className="flex flex-col rounded-2xl border border-ink-200 bg-white p-5 shadow-card dark:border-ink-800 dark:bg-ink-900 dark:shadow-card-dark sm:p-6">
     <div className="flex items-start justify-between gap-3"><span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${priorityStyle[recommendation.priority]}`}>{recommendation.priority}</span><Icon className="h-5 w-5 text-brand-500 dark:text-brand-400" aria-hidden="true" /></div>
     <p className="mt-4 flex items-center gap-2 text-sm font-medium text-ink-600 dark:text-ink-300"><Sparkles className="h-4 w-4 shrink-0 text-amber-500" aria-hidden="true" />{recommendation.reason}</p>

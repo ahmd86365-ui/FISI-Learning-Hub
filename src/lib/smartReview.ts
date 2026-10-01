@@ -4,9 +4,11 @@ import type { SavedItem } from '../contexts/SavedItemsContext'
 import type { StudyActivity } from '../contexts/StudyActivityContext'
 import { isSimulationAnswerCorrect } from './examSimulationCore'
 import { lessonCatalog } from './lessonCatalog'
+import { getDueStatus, isWeak, type FlashcardCardProgress } from './flashcardSrs'
+import { flashcardBanks } from './flashcards'
 
 export type ReviewPriority = 'Sehr hoch' | 'Hoch' | 'Mittel' | 'Niedrig'
-export type ReviewKind = 'repeated-error' | 'exam-error' | 'active-error' | 'saved-review' | 'weak-lesson' | 'next-lesson'
+export type ReviewKind = 'repeated-error' | 'exam-error' | 'active-error' | 'saved-review' | 'weak-lesson' | 'next-lesson' | 'flashcards-due' | 'flashcards-weak'
 
 export interface SmartReviewRecommendation {
   id: string
@@ -39,6 +41,7 @@ export interface SmartReviewPlan {
   reviewItems: number
   recommendedLessons: number
   urgentItems: number
+  dueFlashcards: number
 }
 
 interface ProgressLike { lesson_id: string; completed: boolean }
@@ -48,6 +51,7 @@ interface SmartReviewInput {
   progress: ProgressLike[]
   activities: StudyActivity[]
   examAttempts: ExamAttempt[]
+  cardProgress?: FlashcardCardProgress[]
   now?: Date
   limit?: number
 }
@@ -55,6 +59,7 @@ interface SmartReviewInput {
 const priorityFor = (score: number): ReviewPriority => score >= 500 ? 'Sehr hoch' : score >= 350 ? 'Hoch' : score >= 200 ? 'Mittel' : 'Niedrig'
 const compareRecommendations = (a: SmartReviewRecommendation, b: SmartReviewRecommendation) => b.score - a.score || a.id.localeCompare(b.id, 'de')
 const activeError = (entry: QuestionPerformance) => entry.incorrect_answers > 0 && entry.consecutive_correct < 2
+const flashcardCatalogIds = new Set(flashcardBanks.flatMap((bank) => bank.questions.map((card) => card.id)))
 
 function deriveWeakAreas(performance: QuestionPerformance[]) {
   const groups = new Map<string, { subject?: string; module?: string; attempts: number; correct: number; activeErrors: number }>()
@@ -75,12 +80,25 @@ function deriveWeakAreas(performance: QuestionPerformance[]) {
     .sort((a, b) => b.activeErrors - a.activeErrors || a.accuracy - b.accuracy || a.key.localeCompare(b.key, 'de'))
 }
 
-export function buildSmartReviewPlan({ performance, savedItems, progress, activities, examAttempts, now = new Date(), limit = 10 }: SmartReviewInput): SmartReviewPlan {
+export function buildSmartReviewPlan({ performance, savedItems, progress, activities, examAttempts, cardProgress = [], now = new Date(), limit = 10 }: SmartReviewInput): SmartReviewPlan {
   const completed = new Set(progress.filter((entry) => entry.completed).map((entry) => entry.lesson_id))
   const lessons = lessonCatalog.flatMap((module) => module.lessons.map((lesson) => ({ ...lesson, module: module.title, subject: module.subjectTitle })))
   const incomplete = lessons.filter((lesson) => !completed.has(lesson.id))
   const weakAreas = deriveWeakAreas(performance)
   const candidates: SmartReviewRecommendation[] = []
+
+  const catalogCardProgress = cardProgress.filter((entry) => flashcardCatalogIds.has(entry.card_id))
+  const dueCards = catalogCardProgress.filter((entry) => getDueStatus(entry, now) !== 'future')
+  const overdueCards = dueCards.filter((entry) => getDueStatus(entry, now) === 'overdue')
+  const weakDueCards = dueCards.filter(isWeak)
+  if (dueCards.length > 0) {
+    const score = overdueCards.length > 0 ? 470 + Math.min(20, weakDueCards.length) : 330 + Math.min(20, weakDueCards.length)
+    candidates.push({
+      id: 'flashcards:due', kind: 'flashcards-due', title: `${dueCards.length} Lernkarten heute fällig`,
+      reason: overdueCards.length > 0 ? `${overdueCards.length} davon überfällig${weakDueCards.length ? ` · ${weakDueCards.length} schwierig` : ''}` : weakDueCards.length ? `${weakDueCards.length} davon zuletzt schwierig` : 'Im Wiederholungsplan fällig',
+      path: '/lernkarten/review', actionLabel: 'Lernkarten wiederholen', priority: priorityFor(score), score,
+    })
+  }
 
   for (const entry of performance.filter(activeError)) {
     const repeated = entry.incorrect_answers >= 2
@@ -140,5 +158,6 @@ export function buildSmartReviewPlan({ performance, savedItems, progress, activi
     reviewItems: savedItems.filter((item) => item.item_kind === 'review').length,
     recommendedLessons: recommendations.filter((item) => item.kind === 'weak-lesson' || item.kind === 'next-lesson').length,
     urgentItems: recommendations.filter((item) => item.kind !== 'next-lesson').length,
+    dueFlashcards: dueCards.length,
   }
 }

@@ -80,6 +80,7 @@ export default function App() {
                   <Route path="practice/linux-tag-3" element={<LinuxDayThreeTrainer />} />
                   <Route path="practice/labs" element={<PracticalLabs />} />
                   <Route path="practice/labs/:labId" element={<PracticalLabs />} />
+                  <Route path="lernkarten/review" element={<Flashcards dueReview />} />
                   <Route path="lernkarten/:lessonId" element={<Flashcards />} />
 
         <Route path="it" element={<It />} />
