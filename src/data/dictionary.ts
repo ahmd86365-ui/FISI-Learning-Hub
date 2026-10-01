@@ -1,4 +1,5 @@
 import { dictionaryExpansion } from './dictionaryExpansion'
+import { dictionaryExpansionSecond } from './dictionaryExpansionSecond'
 
 const baseDictionary: Record<string, string> = {
   'repositories': 'مستودعات برمجية',
@@ -1892,6 +1893,7 @@ const baseDictionary: Record<string, string> = {
 }
 
 export const dictionary: Record<string, string> = Object.freeze({
+  ...dictionaryExpansionSecond,
   ...dictionaryExpansion,
   ...baseDictionary,
 })
