@@ -1,4 +1,6 @@
-export const dictionary: Record<string, string> = {
+import { dictionaryExpansion } from './dictionaryExpansion'
+
+const baseDictionary: Record<string, string> = {
   'repositories': 'مستودعات برمجية',
   'commit': 'حفظ نسخة (Commit)',
   'commits': 'نسخ محفوظة (Commits)',
@@ -1888,3 +1890,8 @@ export const dictionary: Record<string, string> = {
   'nicht verfügbar': 'غير متاح',
   'fehlgeschlagen': 'فشل',
 }
+
+export const dictionary: Record<string, string> = Object.freeze({
+  ...dictionaryExpansion,
+  ...baseDictionary,
+})
