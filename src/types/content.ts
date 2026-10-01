@@ -283,7 +283,7 @@ export interface TestResult {
 
 /* Lesson flashcards --------------------------------------------------------- */
 
-export type FlashcardQuestionType = 'multiple-choice' | 'true-false' | 'short-answer'
+export type FlashcardQuestionType = 'multiple-choice' | 'true-false' | 'short-answer' | 'self-assessment'
 
 export interface FlashcardQuestion {
   id: string

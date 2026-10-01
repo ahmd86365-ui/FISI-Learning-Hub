@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "verify:pwa": "node scripts/verifyPwa.mjs",
     "verify:flashcards": "node scripts/verifyFlashcards.mjs",
+    "verify:exercise-consolidation": "node scripts/verifyExerciseConsolidation.mjs",
     "start": "node server/index.js",
     "lint": "eslint ."
   },

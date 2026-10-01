@@ -39,7 +39,7 @@ for (const bank of flashcardBanks) {
     if (!['easy', 'medium', 'hard'].includes(question.difficulty)) failures.push(`${question.id}: invalid difficulty`)
     typeCounts[question.type] = (typeCounts[question.type] ?? 0) + 1
 
-    if (question.type !== 'short-answer') {
+    if (question.type !== 'short-answer' && question.type !== 'self-assessment') {
       if (!question.answers || question.answers.length < 2) failures.push(`${question.id}: fewer than two answers`)
       const optionIds = new Set(question.answers?.map((answer) => answer.id))
       const correct = Array.isArray(question.correctAnswer) ? question.correctAnswer : [question.correctAnswer]

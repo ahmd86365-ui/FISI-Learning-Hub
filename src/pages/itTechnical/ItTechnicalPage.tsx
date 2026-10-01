@@ -13,9 +13,16 @@ import { getSubjectBySlug } from '../../data/subjects'
 import type { Topic } from '../../types/content'
 import NotFound from '../NotFound'
 import { FlashcardLessonAction } from '../../components/flashcards/FlashcardLessonAction'
+import { practicalExercises } from '../../lib/exerciseConsolidation'
 
 const base = '/it/it-technical'
 const subject = getSubjectBySlug('it')!
+const legacyExercisePlaceholder = /^(Für dieses Thema sind keine eigenständigen Aufgaben|Zu diesem Themenblock enthalten die bereitgestellten Unterlagen keine eigenständigen Kontrollfragen)/
+
+const consolidatedLessonContent = (lesson: Topic) => lesson.content.filter((block) =>
+  !(block.type === 'heading' && block.text === 'Übungen / Kontrollfragen')
+  && !((block.type === 'note' || block.type === 'paragraph') && legacyExercisePlaceholder.test(block.text)),
+)
 
 export default function ItTechnicalPage() {
   const { chapterSlug, lessonSlug } = useParams<{ chapterSlug: string; lessonSlug: string }>()
@@ -38,6 +45,7 @@ export default function ItTechnicalPage() {
         content: [], exercises: [],
       }))
   const lessonIndex = lesson ? topics.findIndex((entry) => entry.id === lesson.id) : -1
+  const appliedExercises = lesson ? practicalExercises(lesson.exercises) : []
 
   return (
     <div>
@@ -55,12 +63,15 @@ export default function ItTechnicalPage() {
             <ContentActions contentType="lesson" contentId={lesson.id} title={lesson.title} />
             <LessonCompletionButton lessonId={lesson.id} />
           </div>
-          <LessonContent blocks={lesson.content} />
+          <LessonContent blocks={consolidatedLessonContent(lesson)} />
           <FlashcardLessonAction lessonId={lesson.id} />
-          {lesson.exercises.length > 0 && (
+          {appliedExercises.length > 0 && (
             <section className="mt-14">
-              <SectionHeader title="Übungen / Kontrollfragen" description="Formuliere deine Antwort und vergleiche sie anschließend mit der Quellenlösung oder dem Quellenhinweis." />
-              <ExercisesSection key={lesson.id} exercises={lesson.exercises} />
+              <SectionHeader
+                title={appliedExercises.length === 1 ? 'Praxisübung' : 'Praktische Übungen'}
+                description="Wende das Gelernte in Aufgaben, Berechnungen und realistischen Szenarien an."
+              />
+              <ExercisesSection key={lesson.id} exercises={appliedExercises} />
             </section>
           )}
           <nav aria-label="Lektionsnavigation" className="mt-14 flex flex-wrap gap-3">

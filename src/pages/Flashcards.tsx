@@ -41,6 +41,7 @@ export default function Flashcards() {
   const [answers, setAnswers] = useState<Record<string, AnswerState>>({})
   const [selected, setSelected] = useState<string[]>([])
   const [shortAnswer, setShortAnswer] = useState('')
+  const [selfAssessmentRevealed, setSelfAssessmentRevealed] = useState(false)
   const [finished, setFinished] = useState(false)
   const [reviewMode, setReviewMode] = useState(false)
   const [originalResult, setOriginalResult] = useState<{ correct: number; total: number } | null>(null)
@@ -83,6 +84,7 @@ export default function Flashcards() {
       setCurrent((value) => value + 1)
       setSelected([])
       setShortAnswer('')
+      setSelfAssessmentRevealed(false)
       return
     }
     const result = { correct: correctCount, total: questions.length }
@@ -100,6 +102,7 @@ export default function Flashcards() {
     setAnswers({})
     setSelected([])
     setShortAnswer('')
+    setSelfAssessmentRevealed(false)
     setCurrent(0)
     setFinished(false)
     setReviewMode(onlyWrong)
@@ -157,7 +160,23 @@ export default function Flashcards() {
           </div>
           <h2 id="question-title" className="text-lg font-bold leading-relaxed text-ink-900 dark:text-white sm:text-xl">{question.question}</h2>
 
-          {question.type === 'short-answer' ? (
+          {question.type === 'self-assessment' ? (
+            <div className="mt-6">
+              {!selfAssessmentRevealed ? (
+                <Button onClick={() => setSelfAssessmentRevealed(true)} className="w-full sm:w-auto">Musterlösung zeigen</Button>
+              ) : (
+                <div className="rounded-xl border border-brand-200 bg-brand-50 p-4 dark:border-brand-500/30 dark:bg-brand-500/10">
+                  <p className="text-sm font-semibold text-ink-900 dark:text-white">Musterlösung</p>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-700 dark:text-ink-200">{question.correctAnswer}</p>
+                  <p className="mt-4 text-sm font-semibold text-ink-800 dark:text-ink-100">Konntest du die Kernaussage selbst nennen?</p>
+                  <div className="mt-3 flex flex-col gap-3 sm:flex-row">
+                    <Button onClick={() => submit(['known'])} icon={<Check />}>Gewusst</Button>
+                    <Button onClick={() => submit(['review'])} variant="secondary" icon={<RotateCcw />}>Noch üben</Button>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : question.type === 'short-answer' ? (
             <form className="mt-6" onSubmit={(event) => { event.preventDefault(); submit() }}>
               <label htmlFor="flashcard-answer" className="text-sm font-semibold text-ink-700 dark:text-ink-200">Deine Antwort</label>
               <input id="flashcard-answer" value={shortAnswer} onChange={(event) => setShortAnswer(event.target.value)} disabled={Boolean(submitted)} autoComplete="off" className="mt-2 min-h-12 w-full rounded-xl border border-ink-300 bg-white px-4 py-3 text-base text-ink-900 outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 disabled:opacity-70 dark:border-ink-700 dark:bg-ink-850 dark:text-white" />

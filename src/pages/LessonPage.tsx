@@ -15,6 +15,7 @@ import { getModuleBySlug } from '../data/modules'
 import { getTopicBySlug } from '../lib/content'
 import type { SubjectSlug } from '../types/content'
 import { FlashcardLessonAction } from '../components/flashcards/FlashcardLessonAction'
+import { practicalExercises } from '../lib/exerciseConsolidation'
 
 export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }) {
   const { moduleSlug, topicSlug } = useParams<{ moduleSlug: string; topicSlug: string }>()
@@ -40,6 +41,12 @@ export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }
   }
 
   const hasNothing = topic.content.length === 0 && topic.exercises.length === 0 && !topic.test
+  const appliedExercises = practicalExercises(topic.exercises)
+  const hasLinkedPractice = subjectSlug === 'it' && (
+    moduleSlug === 'linux'
+    || (moduleSlug === 'netzwerktechnik' && (topicSlug === 'subnetting' || topicSlug === 'cidr-netzgrenzen'))
+  )
+  const showPracticalSection = appliedExercises.length > 0 || hasLinkedPractice
 
   return (
     <div>
@@ -77,9 +84,12 @@ export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }
 
             <FlashcardLessonAction lessonId={topic.id} />
 
-            {topic.exercises.length > 0 && (
+            {showPracticalSection && (
               <section className="mt-14">
-                <SectionHeader title="Übungen" description="Wende das Gelernte direkt an." />
+                <SectionHeader
+                  title={appliedExercises.length === 1 ? 'Praxisübung' : 'Praktische Übungen'}
+                  description="Wende das Gelernte in Aufgaben, Berechnungen und realistischen Szenarien an."
+                />
                 {subjectSlug === 'it' && moduleSlug === 'linux' && (
                   <ButtonLink to={`/it/linux/lab?lesson=${topicSlug}`} variant="secondary" className="mb-6">Im Linux Lab üben</ButtonLink>
                 )}
@@ -92,7 +102,7 @@ export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }
                 {subjectSlug === 'it' && moduleSlug === 'linux' && topicSlug === 'das-dateisystem' && (
                   <ButtonLink to="/practice/linux-tag-3" variant="secondary" className="mb-6">Linux Campus · Tag 3 üben</ButtonLink>
                 )}
-                <ExercisesSection exercises={topic.exercises} />
+                <ExercisesSection exercises={appliedExercises} />
               </section>
             )}
 

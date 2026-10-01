@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, FileText } from 'lucide-react'
 import type { AccentKey, Topic } from '../../types/content'
 import { accentClasses } from '../../lib/accent'
+import { practicalExercises } from '../../lib/exerciseConsolidation'
 
 interface TopicCardProps {
   topic: Topic
@@ -12,7 +13,7 @@ interface TopicCardProps {
 
 export function TopicCard({ topic, to, accent, index = 0 }: TopicCardProps) {
   const accentCls = accentClasses[accent]
-  const exerciseCount = topic.exercises.length
+  const exerciseCount = practicalExercises(topic.exercises).length
 
   return (
     <Link
@@ -30,7 +31,7 @@ export function TopicCard({ topic, to, accent, index = 0 }: TopicCardProps) {
         )}
         {exerciseCount > 0 && (
           <p className="mt-2 text-xs font-medium text-ink-400 dark:text-ink-500">
-            {exerciseCount} {exerciseCount === 1 ? 'Übung' : 'Übungen'}
+            {exerciseCount} {exerciseCount === 1 ? 'Praxisübung' : 'praktische Übungen'}
           </p>
         )}
       </div>

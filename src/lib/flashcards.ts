@@ -8,6 +8,7 @@ import type {
   TableBlock,
   Topic,
 } from '../types/content'
+import { classifyExercise, modelAnswerFromExplanation } from './exerciseConsolidation'
 
 const MAX_QUESTIONS_PER_LESSON = 40
 
@@ -15,7 +16,21 @@ const clean = (value: string) => value.replace(/\s+/g, ' ').trim()
 const unique = <T,>(values: T[]) => [...new Set(values)]
 
 function exerciseQuestion(lesson: Topic, exercise: Exercise): FlashcardQuestion | null {
-  if (exercise.correctAnswer === undefined) return null
+  if (classifyExercise(exercise) === 'practical') return null
+  if (exercise.correctAnswer === undefined) {
+    const modelAnswer = modelAnswerFromExplanation(exercise)
+    if (!modelAnswer) return null
+    return {
+      id: `fc-${lesson.id}-exercise-${exercise.id}`,
+      lessonId: lesson.id,
+      type: 'self-assessment',
+      question: exercise.question,
+      correctAnswer: modelAnswer,
+      explanation: modelAnswer,
+      difficulty: exercise.difficulty,
+      tags: ['Migrierte Wissensfrage'],
+    }
+  }
   const supported = ['single-choice', 'multiple-choice', 'true-false', 'text'].includes(exercise.type)
   if (!supported) return null
 
@@ -192,6 +207,7 @@ export function normalizeShortAnswer(value: string) {
 
 export function isFlashcardAnswerCorrect(question: FlashcardQuestion, answer: string | string[]) {
   const given = Array.isArray(answer) ? answer : [answer]
+  if (question.type === 'self-assessment') return given[0] === 'known'
   const correct = Array.isArray(question.correctAnswer) ? question.correctAnswer : [question.correctAnswer]
   if (question.type === 'short-answer') {
     return correct.some((entry) => normalizeShortAnswer(entry) === normalizeShortAnswer(given[0] ?? ''))
