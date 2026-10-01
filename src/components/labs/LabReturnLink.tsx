@@ -1,0 +1,3 @@
+import { ArrowLeft } from 'lucide-react'
+import { Link, useSearchParams } from 'react-router-dom'
+export function LabReturnLink(){const [params]=useSearchParams();const source=params.get('source');if(!source||!source.startsWith('/')||source.startsWith('//'))return null;return <Link to={source} className="mb-4 inline-flex min-h-11 items-center gap-2 rounded-lg text-sm font-semibold text-brand-700 underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 dark:text-brand-300"><ArrowLeft className="h-4 w-4" aria-hidden="true"/>Zurück zur Lektion</Link>}

@@ -44,6 +44,7 @@ const LinuxTerminalTrainer = lazy(() => import('./pages/LinuxTerminalTrainer'))
 const LinuxDayTwoTrainer = lazy(() => import('./pages/LinuxDayTwoTrainer'))
 const LinuxDayThreeTrainer = lazy(() => import('./pages/LinuxDayThreeTrainer'))
 const PracticalLabs = lazy(() => import('./pages/PracticalLabs'))
+const Labs = lazy(() => import('./pages/Labs'))
 const Flashcards = lazy(() => import('./pages/Flashcards'))
 
 export default function App() {
@@ -74,6 +75,7 @@ export default function App() {
                   <Route path="exams" element={<Exams />} />
                   <Route path="exams/mixed" element={<Exams />} />
                   <Route path="review" element={<SmartReview />} />
+                  <Route path="labs" element={<Labs />} />
                   <Route path="practice/subnetting" element={<SubnettingTrainer />} />
                   <Route path="practice/linux-terminal" element={<LinuxTerminalTrainer />} />
                   <Route path="practice/linux-tag-2" element={<LinuxDayTwoTrainer />} />

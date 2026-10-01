@@ -11,6 +11,7 @@
     "verify:flashcards": "node scripts/verifyFlashcards.mjs",
     "verify:flashcard-srs": "node scripts/verifyFlashcardSrs.mjs",
     "verify:exercise-consolidation": "node scripts/verifyExerciseConsolidation.mjs",
+    "verify:labs-hub": "node scripts/verifyLabsHub.mjs",
     "start": "node server/index.js",
     "lint": "eslint ."
   },

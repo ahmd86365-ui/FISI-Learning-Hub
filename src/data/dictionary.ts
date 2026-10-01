@@ -2,6 +2,18 @@ import { dictionaryExpansion } from './dictionaryExpansion'
 import { dictionaryExpansionSecond } from './dictionaryExpansionSecond'
 
 const baseDictionary: Record<string, string> = {
+  'labs': 'مختبرات عملية',
+  'praktisches training': 'تدريب عملي',
+  'praxis im lab': 'تطبيق عملي في المختبر',
+  'im lab üben': 'تدرّب في المختبر',
+  'passende labs': 'المختبرات المناسبة',
+  'lab starten': 'ابدأ المختبر',
+  'trainer öffnen': 'افتح المدرّب',
+  'praxis starten': 'ابدأ التدريب العملي',
+  'zurück zur lektion': 'العودة إلى الدرس',
+  'geführte aufgaben': 'مهام موجّهة',
+  'freies terminal': 'طرفية حرة',
+  'szenarien': 'سيناريوهات',
   'repositories': 'مستودعات برمجية',
   'commit': 'حفظ نسخة (Commit)',
   'commits': 'نسخ محفوظة (Commits)',

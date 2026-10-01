@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { Button } from '../components/Button'
 import { labs, gradeLabStep, labCommandOutput, labSolution, newLabSession, nextLabStep, revealLabSolution, submitLabAnswer, type LabSession } from '../lib/labs'
 import { lessonCatalog } from '../lib/lessonCatalog'
+import { LabReturnLink } from '../components/labs/LabReturnLink'
 
 const panel = 'rounded-2xl border border-ink-200 bg-white p-5 dark:border-ink-800 dark:bg-ink-900 sm:p-7'
 const link = 'font-medium text-brand-700 underline underline-offset-2 dark:text-brand-400'
@@ -39,6 +40,7 @@ function LabRunner({ lab }: { lab: (typeof labs)[number] }) {
     setFeedback(correct ? 'Richtig. Du kannst zum nächsten Schritt gehen.' : 'Noch nicht richtig. Prüfe die Angaben und versuche es erneut.')
   }
   return <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
+    <LabReturnLink />
     <Link className={link} to="/practice/labs">← Zurück zu den Labs</Link>
     <h1 className="mt-5 text-3xl font-bold">{lab.title}</h1>
     <p className="mt-2 text-sm text-ink-600 dark:text-ink-300">{lab.subject} · {lab.difficulty}</p>

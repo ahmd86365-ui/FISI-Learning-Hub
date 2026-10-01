@@ -14,6 +14,7 @@ import type { Topic } from '../../types/content'
 import NotFound from '../NotFound'
 import { FlashcardLessonAction } from '../../components/flashcards/FlashcardLessonAction'
 import { practicalExercises } from '../../lib/exerciseConsolidation'
+import { LessonLabAction } from '../../components/labs/LessonLabAction'
 
 const base = '/it/it-technical'
 const subject = getSubjectBySlug('it')!
@@ -74,6 +75,7 @@ export default function ItTechnicalPage() {
               <ExercisesSection key={lesson.id} exercises={appliedExercises} />
             </section>
           )}
+          <LessonLabAction lessonId={lesson.id} lessonPath={`${base}/${lesson.slug}`} />
           <nav aria-label="Lektionsnavigation" className="mt-14 flex flex-wrap gap-3">
             {lessonIndex > 0 && <ButtonLink to={`${base}/${topics[lessonIndex - 1].slug}`} size="sm">Vorherige Lektion</ButtonLink>}
             <ButtonLink to={`${base}/${chapter!.slug}`} size="sm">Kapitelübersicht</ButtonLink>

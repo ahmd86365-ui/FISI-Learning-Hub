@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { NavLink, useLocation } from 'react-router-dom'
-import { BarChart3, BookmarkCheck, CircleAlert, Flame, X, Home, Languages, Search, UserRound, UserRoundX } from 'lucide-react'
+import { BarChart3, BookmarkCheck, CircleAlert, Flame, FlaskConical, X, Home, Languages, Search, UserRound, UserRoundX } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import { Logo } from './Logo'
 import { subjects } from '../data/subjects'
@@ -106,6 +106,11 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
                   </NavLink>
                 )
               })}
+
+              <NavLink to="/labs" onClick={onClose} className={({ isActive }) => `flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${isActive ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-brand-400' : 'text-ink-700 hover:bg-ink-100 dark:text-ink-200 dark:hover:bg-ink-800'}`}>
+                <FlaskConical className="h-5 w-5" aria-hidden="true" />
+                Labs
+              </NavLink>
 
               <NavLink to="/exams" onClick={onClose} className="rounded-md px-3 py-2.5 text-sm font-medium text-brand-600 hover:bg-brand-50 dark:text-brand-400 dark:hover:bg-brand-500/10">Prüfungsmodus & Verlauf</NavLink>
 

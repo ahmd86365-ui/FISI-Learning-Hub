@@ -12,6 +12,7 @@ const navigation = [
   { to: '/it', label: 'IT Lernen' },
   { to: '/wirtschaft-gesellschaft', label: 'Wirtschaft' },
   { to: '/it-english', label: 'IT English' },
+  { to: '/labs', label: 'Labs' },
   { to: '/pruefungsvorbereitung', label: 'Prüfung' },
 ]
 const navLink = 'flex h-9 items-center rounded-lg px-3 text-xs font-semibold transition-colors'

@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
-import { Button, ButtonLink } from '../components/Button'
+import { Button } from '../components/Button'
 import { answerMatches, calculateSubnet, generateSubnetProblem, type Difficulty } from '../lib/subnetting'
+import { LabReturnLink } from '../components/labs/LabReturnLink'
 
 const fields = [
   ['mask', 'Subnetzmaske'], ['network', 'Netzadresse'], ['broadcast', 'Broadcast-Adresse'],
@@ -41,7 +42,7 @@ export default function SubnettingTrainer() {
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-      <ButtonLink to="/it/netzwerktechnik/subnetting" variant="ghost" size="sm">← Zur Lektion</ButtonLink>
+      <LabReturnLink />
       <header className="mt-5 mb-8">
         <h1 className="text-3xl font-bold text-ink-950 dark:text-white">Subnetting Trainer</h1>
         <p className="mt-2 text-ink-600 dark:text-ink-400">Berechne die Netzgrenzen und den nutzbaren Hostbereich.</p>
