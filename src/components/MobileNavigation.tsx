@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion'
 import { NavLink, useLocation } from 'react-router-dom'
-import { BarChart3, BookmarkCheck, CircleAlert, Flame, X, Home, Search, UserRound, UserRoundX } from 'lucide-react'
+import { BarChart3, BookmarkCheck, CircleAlert, Flame, X, Home, Languages, Search, UserRound, UserRoundX } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import { Logo } from './Logo'
 import { subjects } from '../data/subjects'
 import { useAuth } from '../contexts/AuthContext'
+import { usePreferences } from '../contexts/PreferencesContext'
 
 interface MobileNavigationProps {
   open: boolean
@@ -13,6 +14,7 @@ interface MobileNavigationProps {
 
 export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
   const { signOut } = useAuth()
+  const { translationEnabled, toggleTranslation } = usePreferences()
   const location = useLocation()
   const previousLocationKey = useRef(location.key)
 
@@ -38,7 +40,7 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
   }, [open, onClose])
 
   return open ? (
-        <div className="fixed inset-0 z-50 lg:hidden">
+        <div className="fixed inset-0 z-50">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -196,6 +198,29 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
                 <UserRound className="h-5 w-5" aria-hidden="true" />
                 Mein Profil
               </NavLink>
+
+              <div className="mt-2 border-t border-ink-200 pt-2 dark:border-ink-800">
+                <button
+                  type="button"
+                  onClick={toggleTranslation}
+                  aria-label={`Arabische Wortübersetzung ${translationEnabled ? 'deaktivieren' : 'aktivieren'}`}
+                  aria-pressed={translationEnabled}
+                  className="flex min-h-11 w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-ink-700 transition-colors hover:bg-ink-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 dark:text-ink-200 dark:hover:bg-ink-800 dark:focus-visible:ring-brand-400 dark:focus-visible:ring-offset-ink-950"
+                >
+                  <Languages className="h-5 w-5" aria-hidden="true" />
+                  <span>Übersetzung</span>
+                  <span
+                    className={`ml-auto min-w-10 rounded-full px-2 py-1 text-center text-[0.65rem] font-bold uppercase tracking-wide ${
+                      translationEnabled
+                        ? 'bg-brand-600 text-white'
+                        : 'bg-ink-100 text-ink-600 dark:bg-ink-800 dark:text-ink-300'
+                    }`}
+                    aria-hidden="true"
+                  >
+                    {translationEnabled ? 'An' : 'Aus'}
+                  </span>
+                </button>
+              </div>
             </div>
 
             <div className="border-t border-ink-200 p-3 dark:border-ink-800">
