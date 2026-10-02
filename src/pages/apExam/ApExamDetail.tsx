@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { CheckCircle2, Dumbbell, FileQuestion, HelpCircle, Info, Timer } from 'lucide-react'
 import { PageHeader } from '../../components/PageHeader'
+import { ShareLinkButton } from '../../components/ShareLinkButton'
 import { EmptyState } from '../../components/EmptyState'
 import { ButtonLink } from '../../components/Button'
 import { Breadcrumb } from '../../components/content/Breadcrumb'
@@ -78,7 +79,7 @@ export default function ApExamDetail() {
           />
         }
       >
-        <div className="flex flex-col gap-3 sm:flex-row">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <ButtonLink to={`/pruefungsvorbereitung/it-ap/${exam.id}/uebung`} icon={<Dumbbell />}>
             Übungsmodus starten
           </ButtonLink>
@@ -89,6 +90,7 @@ export default function ApExamDetail() {
           >
             Prüfungssimulation starten
           </ButtonLink>
+          <ShareLinkButton />
         </div>
       </PageHeader>
 

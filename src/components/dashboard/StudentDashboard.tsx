@@ -10,6 +10,7 @@ import {
   Trophy,
   UserRound,
   Sparkles,
+  History,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useLearningProgress } from '../../contexts/LearningProgressContext'
@@ -20,6 +21,9 @@ import { calculateStudyStats } from '../../lib/studyStats'
 import { questionStats, useQuestionPerformance } from '../../contexts/QuestionPerformanceContext'
 import { ButtonLink } from '../Button'
 import { useSmartReviewPlan } from '../../hooks/useSmartReviewPlan'
+import { useRecentPages } from '../../hooks/useRecentPages'
+import { recentTypeLabel } from '../../lib/recentPages'
+import { SkeletonCard } from '../loading/Skeleton'
 
 const previewLimit = 3
 
@@ -29,6 +33,7 @@ export function StudentDashboard() {
   const { activities, loading: activityLoading, error: activityError } = useStudyActivity()
   const { performance: questionPerformance, loading: questionLoading, error: questionError } = useQuestionPerformance()
   const { plan: reviewPlan, loading: reviewLoading, error: reviewError } = useSmartReviewPlan()
+  const recentPages = useRecentPages()
   const studyStats = calculateStudyStats(activities)
   const quizStats = questionStats(questionPerformance)
   const completedIds = new Set(progress.filter((entry) => entry.completed).map((entry) => entry.lesson_id))
@@ -36,6 +41,7 @@ export function StudentDashboard() {
   const completedLessons = lessons.filter((lesson) => completedIds.has(lesson.id)).length
   const percentage = lessons.length > 0 ? Math.round((completedLessons / lessons.length) * 100) : 0
   const nextLesson = lessons.find((lesson) => !completedIds.has(lesson.id))
+  const lastLearning = recentPages.find((item) => ['lesson', 'flashcards', 'lab'].includes(item.type))
   const favoriteItems = items.filter((item) => item.item_kind === 'favorite').slice(0, previewLimit)
   const reviewItems = items.filter((item) => item.item_kind === 'review').slice(0, previewLimit)
   const subjects = Array.from(new Set(lessonCatalog.map((module) => module.subjectSlug))).map((subjectSlug) => {
@@ -74,7 +80,7 @@ export function StudentDashboard() {
           </p>
         )}
 
-        <div className="grid gap-5 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1.4fr)]">
+        {progressLoading ? <div className="grid gap-5 lg:grid-cols-2"><SkeletonCard rows={5} /><SkeletonCard rows={4} /></div> : <div className="grid gap-5 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1.4fr)]">
           <article className="rounded-2xl border border-ink-200 bg-white p-5 shadow-card dark:border-ink-800 dark:bg-ink-900 dark:shadow-card-dark sm:p-6">
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -140,6 +146,16 @@ export function StudentDashboard() {
               )}
             </div>
           </article>
+        </div>}
+
+        <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,.8fr)_minmax(0,1.2fr)]">
+          <article className="rounded-2xl border border-ink-200 bg-white p-5 shadow-card dark:border-ink-800 dark:bg-ink-900 dark:shadow-card-dark">
+            <div className="flex items-center gap-2 text-sm font-medium text-brand-600 dark:text-brand-400"><History className="h-4 w-4" aria-hidden="true" />Zuletzt gelernt</div>
+            <h3 className="mt-4 line-clamp-2 font-semibold text-ink-950 dark:text-white">{lastLearning?.title ?? nextLesson?.title ?? 'Lernbereich öffnen'}</h3>
+            <p className="mt-2 text-sm text-ink-500 dark:text-ink-400">{lastLearning ? `Zuletzt geöffnet · ${recentTypeLabel[lastLearning.type]}` : 'Noch kein letzter Lernort gespeichert.'}</p>
+            {(lastLearning || nextLesson) && <Link to={lastLearning?.path ?? nextLesson!.path} className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg text-sm font-semibold text-brand-600 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 dark:text-brand-400">Weiter an dieser Stelle <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>}
+          </article>
+          {recentPages.length > 0 && <section className="overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-card dark:border-ink-800 dark:bg-ink-900 dark:shadow-card-dark" aria-labelledby="recent-pages-title"><div className="border-b border-ink-100 px-5 py-4 dark:border-ink-800"><h3 id="recent-pages-title" className="font-semibold text-ink-950 dark:text-white">Zuletzt besucht</h3></div><ul className="divide-y divide-ink-100 dark:divide-ink-800">{recentPages.slice(0, 4).map((item) => <li key={item.path}><Link to={item.path} className="flex min-h-12 items-center gap-3 px-5 py-3 text-sm hover:bg-ink-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-600 dark:hover:bg-ink-800"><span className="min-w-0 flex-1 truncate font-medium text-ink-800 dark:text-ink-100">{item.title}</span><span className="shrink-0 rounded-full bg-ink-100 px-2 py-1 text-[.68rem] text-ink-500 dark:bg-ink-800 dark:text-ink-300">{recentTypeLabel[item.type]}</span></Link></li>)}</ul></section>}
         </div>
 
         <div className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4">

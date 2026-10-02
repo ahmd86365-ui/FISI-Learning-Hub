@@ -4,6 +4,7 @@ import { Camera, Check, LogOut, UserRound } from 'lucide-react'
 import { Button } from '../components/Button'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
+import { useToast } from '../contexts/ToastContext'
 
 const AVATAR_BUCKET = 'avatars'
 const MAX_AVATAR_SIZE = 5 * 1024 * 1024
@@ -48,6 +49,7 @@ function Profile() {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null)
   const [saving, setSaving] = useState(false)
   const [feedback, setFeedback] = useState<Feedback | null>(null)
+  const { showToast } = useToast()
 
   useEffect(
     () => () => {
@@ -119,7 +121,8 @@ function Profile() {
       if (error) throw error
 
       setAvatarFile(null)
-      setFeedback({ type: 'success', message: 'Dein Profil wurde gespeichert.' })
+      setFeedback(null)
+      showToast('Profil gespeichert', 'success')
     } catch (error) {
       setFeedback({
         type: 'error',

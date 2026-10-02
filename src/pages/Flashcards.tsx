@@ -20,6 +20,10 @@ import type { FlashcardQuestion } from '../types/content'
 import { dueFlashcards, formatDueLabel, getDueStatus, orderFlashcardsForLesson } from '../lib/flashcardSrs'
 import { SmartBackButton } from '../components/navigation/SmartBackButton'
 import { BackToTop } from '../components/navigation/BackToTop'
+import { PageLoadingState } from '../components/loading/Skeleton'
+import { HomeShortcut } from '../components/navigation/HomeShortcut'
+import { ShareLinkButton } from '../components/ShareLinkButton'
+import { useToast } from '../contexts/ToastContext'
 
 type AnswerState = { answer: string[]; correct: boolean }
 
@@ -37,6 +41,7 @@ export default function Flashcards({ dueReview = false }: { dueReview?: boolean 
   const { lessonId } = useParams<{ lessonId: string }>()
   const bank = getFlashcardBank(lessonId ? decodeURIComponent(lessonId) : undefined)
   const { saveResult, getProgress, cardProgress, recordCardReview, loading } = useFlashcardProgress()
+  const { showToast } = useToast()
   const reviewCards = useMemo(() => dueReview ? dueFlashcards(flashcardBanks.flatMap((entry) => entry.questions), cardProgress) : [], [cardProgress, dueReview])
   const found = getLessonForFlashcards(bank?.lessonId)
   const subject = found ? getSubjectBySlug(found.module.subjectSlug)! : undefined
@@ -77,7 +82,7 @@ export default function Flashcards({ dueReview = false }: { dueReview?: boolean 
   const wrongQuestions = useMemo(() => questions.filter((item) => answers[item.id] && !answers[item.id].correct), [answers, questions])
 
   if (loading || !initialized.current) {
-    return <div className="mx-auto flex min-h-[50vh] max-w-content items-center justify-center px-4" role="status">Lernkarten werden vorbereitet …</div>
+    return <div className="mx-auto min-h-[50vh] max-w-5xl px-4 py-12"><PageLoadingState label="Lernkarten werden vorbereitet …" /></div>
   }
 
   if (dueReview && questions.length === 0) {
@@ -119,6 +124,7 @@ export default function Flashcards({ dueReview = false }: { dueReview?: boolean 
     const result = { correct: correctCount, total: questions.length }
     if (!reviewMode) setOriginalResult(result)
     setFinished(true)
+    showToast('Fortschritt gespeichert', 'success')
     if (!dueReview && !reviewMode && bank && !savedRound.current) {
       savedRound.current = true
       void saveResult(bank.lessonId, result.correct, result.total)
@@ -148,7 +154,7 @@ export default function Flashcards({ dueReview = false }: { dueReview?: boolean 
       <div>
         <PageHeader eyebrow={dueReview ? 'Spaced Repetition' : found!.module.title} title={dueReview ? 'Wiederholung abgeschlossen' : 'Lernkarten abgeschlossen'} description={dueReview ? 'Fällige Lernkarten' : found!.topic.title} accent={subject?.accent ?? 'brand'} breadcrumb={<Breadcrumb items={dueReview ? [{ label: 'Home', to: '/' }, { label: 'Smart Review', to: '/review' }, { label: 'Lernkarten' }] : [{ label: 'Home', to: '/' }, { label: found!.topic.title, to: returnPath }, { label: 'Lernkarten' }]} />} />
         <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
-          <SmartBackButton label={dueReview ? 'Zurück zu Smart Review' : 'Zurück zur Lektion'} fallback={dueReview ? '/review' : returnPath} className="mb-4 -ml-3" />
+          <div className="mb-4 flex flex-wrap items-center gap-1"><SmartBackButton label={dueReview ? 'Zurück zu Smart Review' : 'Zurück zur Lektion'} fallback={dueReview ? '/review' : returnPath} className="-ml-3" /><HomeShortcut />{!dueReview && <ShareLinkButton />}</div>
           <section className="rounded-2xl border border-ink-200 bg-white p-6 text-center shadow-card dark:border-ink-800 dark:bg-ink-900 sm:p-10" aria-labelledby="result-title">
             <CheckCircle2 className="mx-auto h-10 w-10 text-brand-500" aria-hidden="true" />
             <h2 id="result-title" className="mt-4 text-2xl font-bold text-ink-900 dark:text-white">{reviewMode ? 'Fehlerrunde abgeschlossen' : 'Lernkarten abgeschlossen'}</h2>
@@ -182,7 +188,7 @@ export default function Flashcards({ dueReview = false }: { dueReview?: boolean 
     <div>
       <PageHeader eyebrow={dueReview ? 'Spaced Repetition' : found!.module.title} title={dueReview ? 'Fällige Lernkarten' : found!.topic.title} description={dueReview ? `${questions.length} Karten für heute` : 'Lernkarten'} accent={subject?.accent ?? 'brand'} breadcrumb={<Breadcrumb items={dueReview ? [{ label: 'Home', to: '/' }, { label: 'Smart Review', to: '/review' }, { label: 'Lernkarten' }] : [{ label: 'Home', to: '/' }, { label: found!.topic.title, to: returnPath }, { label: 'Lernkarten' }]} />} />
       <main className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-        <SmartBackButton label={dueReview ? 'Zurück zu Smart Review' : 'Zurück zur Lektion'} fallback={dueReview ? '/review' : returnPath} className="mb-4 -ml-3" />
+        <div className="mb-4 flex flex-wrap items-center gap-1"><SmartBackButton label={dueReview ? 'Zurück zu Smart Review' : 'Zurück zur Lektion'} fallback={dueReview ? '/review' : returnPath} className="-ml-3" /><HomeShortcut />{!dueReview && <ShareLinkButton />}</div>
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3 text-sm" aria-live="polite">
           <span className="font-semibold text-ink-700 dark:text-ink-200">Frage {current + 1} / {questions.length}</span>
           <div className="flex gap-3"><span className="font-semibold text-teal-700 dark:text-teal-300">{correctCount} richtig</span><span className="font-semibold text-rose-700 dark:text-rose-300">{incorrectCount} falsch</span></div>

@@ -4,6 +4,7 @@ import { BarChart3, BookmarkCheck, BookOpen, ChevronRight, FlaskConical, Graduat
 import { getModulesBySubject } from '../data/modules'
 import { subjects } from '../data/subjects'
 import type { SubjectSlug } from '../types/content'
+import { SIDEBAR_MODULE_KEY, validStoredModule } from '../lib/sidebarState'
 
 const linkBase = 'flex min-h-9 items-center gap-2.5 rounded-lg px-3 py-2 text-[0.82rem] font-medium transition-colors'
 
@@ -24,20 +25,27 @@ export function LearningSidebar() {
     const modulePath = `${subject?.path}/${module.slug}`
     return pathname === modulePath || pathname.startsWith(`${modulePath}/`)
   })?.slug ?? null
-  const [expandedModule, setExpandedModule] = useState<string | null>(routeModuleSlug)
+  const [expandedModule, setExpandedModule] = useState<string | null>(() => routeModuleSlug ?? validStoredModule(sessionStorage.getItem(SIDEBAR_MODULE_KEY), modules.map((module) => module.slug)))
 
   useEffect(() => {
-    setExpandedModule(routeModuleSlug)
-  }, [pathname, routeModuleSlug, subjectSlug])
+    const stored = validStoredModule(sessionStorage.getItem(SIDEBAR_MODULE_KEY), modules.map((module) => module.slug))
+    setExpandedModule(routeModuleSlug ?? stored)
+  }, [routeModuleSlug, subjectSlug])
+
+  const rememberExpanded = (moduleSlug: string | null) => {
+    setExpandedModule(moduleSlug)
+    if (moduleSlug) sessionStorage.setItem(SIDEBAR_MODULE_KEY, moduleSlug)
+    else sessionStorage.removeItem(SIDEBAR_MODULE_KEY)
+  }
 
   function toggleModule(event: MouseEvent<HTMLAnchorElement>, moduleSlug: string, expanded: boolean, routeInModule: boolean) {
     if (expanded) {
       event.preventDefault()
-      setExpandedModule(null)
+      rememberExpanded(null)
       return
     }
     if (routeInModule) event.preventDefault()
-    setExpandedModule(moduleSlug)
+    rememberExpanded(moduleSlug)
   }
 
   return (

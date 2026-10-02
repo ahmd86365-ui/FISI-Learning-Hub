@@ -1,6 +1,8 @@
-import { useLayoutEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 import { useLocation, useNavigationType } from 'react-router-dom'
 import { consumePathScrollRestoration, readInternalHistory, SCROLL_POSITIONS_KEY, writeInternalHistory } from '../../lib/navigation'
+import { canonicalRecentPath, recentPagesScope, recentPageType, recordRecentPage } from '../../lib/recentPages'
+import { useAuth } from '../../contexts/AuthContext'
 
 function readPositions(): Record<string, number> { try { return JSON.parse(sessionStorage.getItem(SCROLL_POSITIONS_KEY) ?? '{}') } catch { return {} } }
 function savePosition(key: string, y: number) { const values = readPositions(); values[key] = y; sessionStorage.setItem(SCROLL_POSITIONS_KEY, JSON.stringify(values)) }
@@ -8,7 +10,10 @@ function savePosition(key: string, y: number) { const values = readPositions(); 
 export function NavigationManager() {
   const location = useLocation()
   const navigationType = useNavigationType()
+  const { session, isGuest, loading: authLoading } = useAuth()
+  const recentScope = authLoading ? null : recentPagesScope(session?.user.id, isGuest)
   const active = useRef({ key: location.key, path: `${location.pathname}${location.search}${location.hash}` })
+  const recentVisit = useRef<{ scope: typeof recentScope; route: string } | null>(null)
 
   useLayoutEffect(() => {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
@@ -63,5 +68,19 @@ export function NavigationManager() {
       window.removeEventListener('scroll', rememberCurrent)
     }
   }, [location.hash, location.key, location.pathname, location.search, navigationType])
+  useEffect(() => {
+    const route = `${location.pathname}${location.search}`
+    const previousVisit = recentVisit.current
+    recentVisit.current = { scope: recentScope, route }
+    if (previousVisit?.scope && recentScope !== previousVisit.scope && route === previousVisit.route) return
+    const path = canonicalRecentPath(location.pathname, location.search)
+    const type = recentPageType(location.pathname)
+    if (!path || !type || !recentScope) return
+    const timer = window.setTimeout(() => {
+      const title = document.querySelector('h1')?.textContent?.trim() || document.title.split('|')[0]?.trim() || path
+      recordRecentPage(recentScope, { path, title, type, visitedAt: new Date().toISOString() })
+    }, 250)
+    return () => window.clearTimeout(timer)
+  }, [location.pathname, location.search, recentScope])
   return null
 }

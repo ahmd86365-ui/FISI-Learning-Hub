@@ -11,6 +11,8 @@ import { QuestionPerformanceProvider } from './contexts/QuestionPerformanceConte
 import { GuestOnlyRoute, ProtectedRoute } from './components/auth/AuthGuards'
 import { ExamAttemptsProvider } from './contexts/ExamAttemptsContext'
 import { FlashcardProgressProvider } from './contexts/FlashcardProgressContext'
+import { ToastProvider } from './contexts/ToastContext'
+import { PageLoadingState } from './components/loading/Skeleton'
 
 const Home = lazy(() => import('./pages/Home'))
 const It = lazy(() => import('./pages/It'))
@@ -57,6 +59,7 @@ export default function App() {
               <ExamAttemptsProvider>
               <FlashcardProgressProvider>
               <LearningProgressProvider>
+              <ToastProvider>
               <HoverTranslator />
               <Suspense fallback={<RouteLoading />}>
               <Routes>
@@ -123,7 +126,8 @@ export default function App() {
                 </Route>
               </Route>
             </Routes>
-            </Suspense>
+              </Suspense>
+              </ToastProvider>
             </LearningProgressProvider>
             </FlashcardProgressProvider>
             </ExamAttemptsProvider>
@@ -136,5 +140,5 @@ export default function App() {
 }
 
 function RouteLoading() {
-  return <div className="flex min-h-[50vh] items-center justify-center px-4" role="status" aria-live="polite">Seite wird geladen …</div>
+  return <div className="mx-auto min-h-[50vh] w-full max-w-5xl px-4 py-12 sm:px-6"><PageLoadingState label="Seite wird geladen …" /></div>
 }

@@ -2,6 +2,7 @@ import { Bookmark, BookOpen, RotateCcw } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { EmptyState } from '../components/EmptyState'
 import { useSavedItems, type SavedItem, type SavedItemKind } from '../contexts/SavedItemsContext'
+import { PageLoadingState } from '../components/loading/Skeleton'
 
 export default function SavedItems() {
   const { items, loading, error } = useSavedItems()
@@ -25,9 +26,7 @@ export default function SavedItems() {
       )}
 
       {loading ? (
-        <div className="rounded-2xl border border-ink-200 bg-white p-10 text-center text-sm text-ink-500 dark:border-ink-800 dark:bg-ink-900 dark:text-ink-400" role="status">
-          Persönliche Listen werden geladen …
-        </div>
+        <PageLoadingState label="Persönliche Listen werden geladen …" />
       ) : (
         <div className="grid gap-6 lg:grid-cols-2">
           <SavedSection kind="favorite" title="Meine Favoriten" items={items} />

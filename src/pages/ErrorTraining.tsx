@@ -6,6 +6,7 @@ import {
   useQuestionPerformance,
   type QuestionPerformance,
 } from '../contexts/QuestionPerformanceContext'
+import { PageLoadingState } from '../components/loading/Skeleton'
 
 const typeLabels: Record<QuestionPerformance['question_type'], string> = {
   lesson_exercise: 'Lektionsübung',
@@ -57,9 +58,7 @@ export default function ErrorTraining() {
         </div>
 
         {loading ? (
-          <div className="rounded-2xl border border-ink-200 bg-white p-10 text-center text-sm text-ink-500 dark:border-ink-800 dark:bg-ink-900 dark:text-ink-400" role="status">
-            Fehlertraining wird geladen …
-          </div>
+          <PageLoadingState label="Fehlertraining wird geladen …" />
         ) : activeErrors.length === 0 ? (
           <div className="rounded-2xl border border-ink-200 bg-white px-5 py-12 text-center shadow-card dark:border-ink-800 dark:bg-ink-900 dark:shadow-card-dark">
             <CheckCircle2 className="mx-auto h-8 w-8 text-teal-500 dark:text-teal-400" aria-hidden="true" />

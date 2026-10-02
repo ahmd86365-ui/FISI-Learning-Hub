@@ -5,6 +5,8 @@ import { useAuth } from '../contexts/AuthContext'
 import { useExamAttempts } from '../contexts/ExamAttemptsContext'
 import { chooseQuestions, examPresets, freezeExam, remainingExamSeconds, getExamPool, isSimulationAnswerCorrect, type ActiveExamSession, type ExamMode, type ExamResultData } from '../lib/examSimulation'
 import { getMixedPool, mixedAvailability, mixedBreakdown, mixedCounts, mixedSecondsPerQuestion, mixedSubjectOf, mixedSubjects, selectMixedQuestions, type MixedSubject } from '../lib/mixedExam'
+import { SkeletonCard } from '../components/loading/Skeleton'
+import { useToast } from '../contexts/ToastContext'
 
 const panel = 'rounded-2xl border border-ink-200 bg-white p-5 dark:border-ink-800 dark:bg-ink-900 sm:p-7'
 const answered = (values: string[] = []) => values.some((value) => value.trim())
@@ -35,6 +37,7 @@ export default function Exams() {
 }
 
 function ExamWorkspace({ userId }: { userId: string }) {
+  const { showToast } = useToast()
   const location = useLocation()
   const [params, setParams] = useSearchParams()
   const isMixedRoute = location.pathname === '/exams/mixed'
@@ -94,7 +97,7 @@ function ExamWorkspace({ userId }: { userId: string }) {
     setSaveError('')
     try {
       const result = await submitExam(frozen)
-      if (result) { persist(null); setReviewId(result.id) }
+      if (result) { persist(null); setReviewId(result.id); showToast('Prüfung gespeichert', 'success') }
       else setSaveError('Abgabe noch nicht gespeichert. Antworten bleiben gesperrt und können erneut übertragen werden.')
     } catch { setSaveError('Verbindung fehlgeschlagen. Bitte erneut speichern.') }
     finally { setSaving(false); inFlight.current = false }
@@ -185,7 +188,7 @@ function ExamWorkspace({ userId }: { userId: string }) {
       {draft.submittedAt && <div className={panel}><h2 className="text-xl font-semibold">{draft.submissionReason === 'timeout' ? 'Zeit abgelaufen' : 'Prüfung abgegeben'} — {localCorrect} / {draft.questions.length} Punkte ({Math.round(localCorrect / draft.questions.length * 100)} %)</h2><p>{localCorrect / draft.questions.length >= 0.5 ? 'Bestanden' : 'Nicht bestanden'}</p>{draft.label === 'Gemischte Prüfung' && <SubjectBreakdown data={draft} />}<p className="my-3">{saving ? 'Ergebnis wird gespeichert …' : 'Ergebnis lokal gesichert. Übertragung noch ausstehend.'}</p><Button disabled={saving} onClick={() => void submit(draft.submissionReason ?? 'manual')}>Erneut speichern</Button><div className="mt-5"><Review data={draft} /></div></div>}
     </section>}
     {selected && <section className="space-y-4"><div className={panel}><h2 className="text-2xl font-bold">{selected.passed ? 'Bestanden' : 'Nicht bestanden'} · {selected.percentage} %</h2><p>{selected.correct_answers} / {selected.total_questions} Punkte · {selected.incorrect_answers} falsch · {selected.unanswered_questions} unbeantwortet · {clock(selected.used_seconds)} benötigt</p>{selected.exam_label === 'Gemischte Prüfung' && <SubjectBreakdown data={selected.result_data} />}<p className="mt-2">In deinem Konto gespeichert.</p><Link className="text-brand-600 underline" to="/errors">Fehlertraining öffnen</Link></div><Review data={selected.result_data} /></section>}
-    <section className="space-y-3"><h2 className="text-2xl font-semibold">Prüfungsverlauf</h2>{loading && <p role="status">Verlauf wird geladen …</p>}{!loading && !attempts.length && <p>Noch keine gespeicherten Prüfungen.</p>}{attempts.map((attempt) => <button key={attempt.id} className={`${panel} flex w-full flex-wrap items-center justify-between gap-3 text-left`} onClick={() => setReviewId(attempt.id)}><span><strong>{attempt.exam_label}</strong><br />{new Date(attempt.submitted_at).toLocaleString('de-DE')} · {attempt.total_questions} Fragen</span><span>{attempt.percentage} % · {attempt.passed ? 'Bestanden' : 'Nicht bestanden'} · Antworten ansehen</span></button>)}</section>
+    <section className="space-y-3"><h2 className="text-2xl font-semibold">Prüfungsverlauf</h2>{loading && <div role="status" aria-label="Verlauf wird geladen"><SkeletonCard rows={2} /></div>}{!loading && !attempts.length && <p>Noch keine gespeicherten Prüfungen.</p>}{attempts.map((attempt) => <button key={attempt.id} className={`${panel} flex w-full flex-wrap items-center justify-between gap-3 text-left`} onClick={() => setReviewId(attempt.id)}><span><strong>{attempt.exam_label}</strong><br />{new Date(attempt.submitted_at).toLocaleString('de-DE')} · {attempt.total_questions} Fragen</span><span>{attempt.percentage} % · {attempt.passed ? 'Bestanden' : 'Nicht bestanden'} · Antworten ansehen</span></button>)}</section>
   </main>
 }
 

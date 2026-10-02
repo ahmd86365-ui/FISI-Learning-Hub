@@ -13,6 +13,7 @@
     "verify:exercise-consolidation": "node scripts/verifyExerciseConsolidation.mjs",
     "verify:labs-hub": "node scripts/verifyLabsHub.mjs",
     "verify:navigation-ux": "node scripts/verifyNavigationUx.mjs",
+    "verify:usability-pack": "node scripts/verifyUsabilityPack.mjs",
     "start": "node server/index.js",
     "lint": "eslint ."
   },

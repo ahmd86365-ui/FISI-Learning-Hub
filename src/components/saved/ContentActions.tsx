@@ -1,6 +1,8 @@
 import { Bookmark, RotateCcw } from 'lucide-react'
 import { useLocation } from 'react-router-dom'
 import { useSavedItems, type SavedContentType, type SavedItemKind } from '../../contexts/SavedItemsContext'
+import { useToast } from '../../contexts/ToastContext'
+import { ShareLinkButton } from '../ShareLinkButton'
 
 interface ContentActionsProps {
   contentType: SavedContentType
@@ -18,6 +20,7 @@ const actions: { kind: SavedItemKind; label: string; icon: typeof Bookmark }[] =
 export function ContentActions({ contentType, contentId, title, path, compact = false }: ContentActionsProps) {
   const location = useLocation()
   const { isSaved, isPending, toggle } = useSavedItems()
+  const { showToast } = useToast()
   const contentPath = path ?? `${location.pathname}${location.search}`
 
   return (
@@ -29,7 +32,7 @@ export function ContentActions({ contentType, contentId, title, path, compact = 
           <button
             key={kind}
             type="button"
-            onClick={() => void toggle(kind, { contentType, contentId, title, path: contentPath })}
+            onClick={() => void toggle(kind, { contentType, contentId, title, path: contentPath }).then(() => showToast(active ? kind === 'favorite' ? 'Aus Favoriten entfernt' : 'Aus Wiederholen entfernt' : kind === 'favorite' ? 'Als Favorit gespeichert' : 'Für Wiederholen gespeichert', 'success'))}
             disabled={pending}
             aria-pressed={active}
             className={`inline-flex items-center gap-1.5 rounded-full border font-medium transition-colors disabled:opacity-60 ${
@@ -47,6 +50,7 @@ export function ContentActions({ contentType, contentId, title, path, compact = 
           </button>
         )
       })}
+      {contentType === 'lesson' && <ShareLinkButton path={contentPath} compact />}
     </div>
   )
 }

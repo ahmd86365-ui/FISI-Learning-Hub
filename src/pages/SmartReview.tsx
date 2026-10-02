@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useSmartReviewPlan } from '../hooks/useSmartReviewPlan'
 import type { ReviewPriority, SmartReviewRecommendation } from '../lib/smartReview'
 import { withReturnPath } from '../lib/navigation'
+import { PageLoadingState } from '../components/loading/Skeleton'
 
 const priorityStyle: Record<ReviewPriority, string> = {
   'Sehr hoch': 'bg-rose-50 text-rose-700 dark:bg-rose-500/10 dark:text-rose-300',
@@ -34,7 +35,7 @@ export default function SmartReview() {
       </section>
 
       {loading ? (
-        <div role="status" className="mt-8 rounded-2xl border border-ink-200 bg-white p-10 text-center text-ink-500 dark:border-ink-800 dark:bg-ink-900 dark:text-ink-400">Dein Tagesplan wird erstellt …</div>
+        <div className="mt-8"><PageLoadingState label="Dein Tagesplan wird erstellt …" /></div>
       ) : plan.urgentItems === 0 ? (
         <section className="mt-8 rounded-2xl border border-teal-200 bg-teal-50/70 p-6 text-center dark:border-teal-500/20 dark:bg-teal-500/10 sm:p-8">
           <CheckCircle2 className="mx-auto h-9 w-9 text-teal-600 dark:text-teal-400" aria-hidden="true" />

@@ -1,16 +1,18 @@
 import { CheckCircle2, Circle } from 'lucide-react'
 import { useLearningProgress } from '../../contexts/LearningProgressContext'
+import { useToast } from '../../contexts/ToastContext'
 
 export function LessonCompletionButton({ lessonId }: { lessonId: string }) {
   const { isCompleted, isPending, toggleCompleted } = useLearningProgress()
   const completed = isCompleted(lessonId)
   const pending = isPending(lessonId)
   const Icon = completed ? CheckCircle2 : Circle
+  const { showToast } = useToast()
 
   return (
     <button
       type="button"
-      onClick={() => void toggleCompleted(lessonId)}
+      onClick={() => void toggleCompleted(lessonId).then(() => showToast(completed ? 'Fortschritt aktualisiert' : 'Fortschritt gespeichert', 'success'))}
       disabled={pending}
       aria-pressed={completed}
       className={`inline-flex h-9 items-center gap-2 rounded-full border px-3.5 text-sm font-medium transition-colors disabled:opacity-60 ${
