@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { ArrowRight, BookOpen, SearchX } from 'lucide-react'
 import { SearchBar } from '../components/SearchBar'
 import { EmptyState } from '../components/EmptyState'
@@ -9,6 +9,7 @@ import type { SearchResultItem } from '../types/content'
 
 export default function Search() {
   const [params, setParams] = useSearchParams()
+  const location = useLocation()
   const query = params.get('q') ?? ''
   const [results, setResults] = useState<SearchResultItem[]>([])
   const [hasSearched, setHasSearched] = useState(Boolean(query))
@@ -51,6 +52,7 @@ export default function Search() {
               <li key={r.id}>
                 <Link
                   to={r.path}
+                  state={{ returnTo: `${location.pathname}${location.search}` }}
                   className="group flex items-center justify-between gap-4 rounded-xl border border-ink-200 p-4 transition-colors hover:border-ink-300 hover:bg-ink-50 dark:border-ink-800 dark:hover:border-ink-700 dark:hover:bg-ink-900"
                 >
                   <div>

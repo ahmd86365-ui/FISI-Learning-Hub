@@ -15,6 +15,10 @@ import NotFound from '../NotFound'
 import { FlashcardLessonAction } from '../../components/flashcards/FlashcardLessonAction'
 import { practicalExercises } from '../../lib/exerciseConsolidation'
 import { LessonLabAction } from '../../components/labs/LessonLabAction'
+import { SmartBackButton } from '../../components/navigation/SmartBackButton'
+import { MobileQuickActions, type QuickAction } from '../../components/navigation/MobileQuickActions'
+import { BackToTop } from '../../components/navigation/BackToTop'
+import { getLessonLabs, labHref } from '../../data/labs'
 
 const base = '/it/it-technical'
 const subject = getSubjectBySlug('it')!
@@ -47,6 +51,11 @@ export default function ItTechnicalPage() {
       }))
   const lessonIndex = lesson ? topics.findIndex((entry) => entry.id === lesson.id) : -1
   const appliedExercises = lesson ? practicalExercises(lesson.exercises) : []
+  const lessonPath = lesson ? `${base}/${lesson.slug}` : ''
+  const quickActions: QuickAction[] = lesson ? [{ to: `/lernkarten/${encodeURIComponent(lesson.id)}?source=${encodeURIComponent(lessonPath)}`, label: 'Lernkarten', kind: 'cards' }] : []
+  const firstLab = lesson ? getLessonLabs(lesson.id)[0] : undefined
+  if (firstLab) quickActions.push({ to: labHref(firstLab.lab, firstLab.mapping, lessonPath), label: 'Lab', kind: 'lab' })
+  if (lesson && lessonIndex < topics.length - 1) quickActions.push({ to: `${base}/${topics[lessonIndex + 1].slug}`, label: 'Weiter', kind: 'next' })
 
   return (
     <div>
@@ -60,12 +69,13 @@ export default function ItTechnicalPage() {
       />
       {lesson ? (
         <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+          <SmartBackButton fallback={`${base}/${chapter!.slug}`} className="mb-4 -ml-3" />
           <div className="mb-6 flex flex-wrap gap-2">
             <ContentActions contentType="lesson" contentId={lesson.id} title={lesson.title} />
             <LessonCompletionButton lessonId={lesson.id} />
           </div>
           <LessonContent blocks={consolidatedLessonContent(lesson)} />
-          <FlashcardLessonAction lessonId={lesson.id} />
+          <FlashcardLessonAction lessonId={lesson.id} lessonPath={lessonPath} />
           {appliedExercises.length > 0 && (
             <section className="mt-14">
               <SectionHeader
@@ -75,7 +85,7 @@ export default function ItTechnicalPage() {
               <ExercisesSection key={lesson.id} exercises={appliedExercises} />
             </section>
           )}
-          <LessonLabAction lessonId={lesson.id} lessonPath={`${base}/${lesson.slug}`} />
+          <LessonLabAction lessonId={lesson.id} lessonPath={lessonPath} />
           <nav aria-label="Lektionsnavigation" className="mt-14 flex flex-wrap gap-3">
             {lessonIndex > 0 && <ButtonLink to={`${base}/${topics[lessonIndex - 1].slug}`} size="sm">Vorherige Lektion</ButtonLink>}
             <ButtonLink to={`${base}/${chapter!.slug}`} size="sm">Kapitelübersicht</ButtonLink>
@@ -90,6 +100,8 @@ export default function ItTechnicalPage() {
           </div>
         </section>
       )}
+      {lesson && <MobileQuickActions actions={quickActions} fallback={`${base}/${chapter!.slug}`} />}
+      {lesson && <BackToTop aboveMobileBar />}
     </div>
   )
 }

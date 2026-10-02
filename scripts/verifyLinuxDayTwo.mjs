@@ -34,7 +34,8 @@ const topic = linux.topics[1]
 assert.equal(topic.id, 'topic-linux-02-terminal-und-erste-befehle')
 assert.equal(topic.slug, 'terminal-und-erste-befehle')
 assert.ok(readFileSync('src/App.tsx', 'utf8').includes('path="it/:moduleSlug/:topicSlug"'))
-assert.ok(readFileSync('src/pages/LessonPage.tsx', 'utf8').includes('to="/practice/linux-tag-2"'))
+const { lessonLabMap } = load('src/data/labs.ts')
+assert.ok(lessonLabMap[topic.id]?.some(mapping => mapping.labId === 'linux-tag-2'))
 assert.ok(readFileSync('src/App.tsx', 'utf8').includes('path="practice/linux-tag-2"'))
 
 const topicIds = modules.flatMap(module => module.topics.map(topic => topic.id))

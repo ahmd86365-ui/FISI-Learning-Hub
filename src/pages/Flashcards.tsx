@@ -18,6 +18,8 @@ import {
 import { useFlashcardProgress } from '../contexts/FlashcardProgressContext'
 import type { FlashcardQuestion } from '../types/content'
 import { dueFlashcards, formatDueLabel, getDueStatus, orderFlashcardsForLesson } from '../lib/flashcardSrs'
+import { SmartBackButton } from '../components/navigation/SmartBackButton'
+import { BackToTop } from '../components/navigation/BackToTop'
 
 type AnswerState = { answer: string[]; correct: boolean }
 
@@ -146,6 +148,7 @@ export default function Flashcards({ dueReview = false }: { dueReview?: boolean 
       <div>
         <PageHeader eyebrow={dueReview ? 'Spaced Repetition' : found!.module.title} title={dueReview ? 'Wiederholung abgeschlossen' : 'Lernkarten abgeschlossen'} description={dueReview ? 'Fällige Lernkarten' : found!.topic.title} accent={subject?.accent ?? 'brand'} breadcrumb={<Breadcrumb items={dueReview ? [{ label: 'Home', to: '/' }, { label: 'Smart Review', to: '/review' }, { label: 'Lernkarten' }] : [{ label: 'Home', to: '/' }, { label: found!.topic.title, to: returnPath }, { label: 'Lernkarten' }]} />} />
         <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+          <SmartBackButton label={dueReview ? 'Zurück zu Smart Review' : 'Zurück zur Lektion'} fallback={dueReview ? '/review' : returnPath} className="mb-4 -ml-3" />
           <section className="rounded-2xl border border-ink-200 bg-white p-6 text-center shadow-card dark:border-ink-800 dark:bg-ink-900 sm:p-10" aria-labelledby="result-title">
             <CheckCircle2 className="mx-auto h-10 w-10 text-brand-500" aria-hidden="true" />
             <h2 id="result-title" className="mt-4 text-2xl font-bold text-ink-900 dark:text-white">{reviewMode ? 'Fehlerrunde abgeschlossen' : 'Lernkarten abgeschlossen'}</h2>
@@ -169,7 +172,7 @@ export default function Flashcards({ dueReview = false }: { dueReview?: boolean 
               <ButtonLink to={dueReview ? '/review' : returnPath} variant="ghost" icon={<ArrowLeft />}>{dueReview ? 'Zurück zu Smart Review' : 'Zurück zur Lektion'}</ButtonLink>
             </div>
           </section>
-        </main>
+        </main><BackToTop />
       </div>
     )
   }
@@ -179,6 +182,7 @@ export default function Flashcards({ dueReview = false }: { dueReview?: boolean 
     <div>
       <PageHeader eyebrow={dueReview ? 'Spaced Repetition' : found!.module.title} title={dueReview ? 'Fällige Lernkarten' : found!.topic.title} description={dueReview ? `${questions.length} Karten für heute` : 'Lernkarten'} accent={subject?.accent ?? 'brand'} breadcrumb={<Breadcrumb items={dueReview ? [{ label: 'Home', to: '/' }, { label: 'Smart Review', to: '/review' }, { label: 'Lernkarten' }] : [{ label: 'Home', to: '/' }, { label: found!.topic.title, to: returnPath }, { label: 'Lernkarten' }]} />} />
       <main className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <SmartBackButton label={dueReview ? 'Zurück zu Smart Review' : 'Zurück zur Lektion'} fallback={dueReview ? '/review' : returnPath} className="mb-4 -ml-3" />
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3 text-sm" aria-live="polite">
           <span className="font-semibold text-ink-700 dark:text-ink-200">Frage {current + 1} / {questions.length}</span>
           <div className="flex gap-3"><span className="font-semibold text-teal-700 dark:text-teal-300">{correctCount} richtig</span><span className="font-semibold text-rose-700 dark:text-rose-300">{incorrectCount} falsch</span></div>
@@ -244,7 +248,7 @@ export default function Flashcards({ dueReview = false }: { dueReview?: boolean 
           )}
           {submitted && <div className="mt-6 flex justify-end"><Button onClick={next} icon={<ArrowRight />} iconPosition="right" className="w-full sm:w-auto">{current < questions.length - 1 ? 'Nächste Frage' : 'Ergebnis anzeigen'}</Button></div>}
         </section>
-      </main>
+      </main><BackToTop />
     </div>
   )
 }

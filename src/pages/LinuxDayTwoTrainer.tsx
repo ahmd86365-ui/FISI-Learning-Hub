@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
-import { Link } from 'react-router-dom'
 import { AlertTriangle, CheckCircle2, RotateCcw, Terminal } from 'lucide-react'
 import { examTaskIds, linuxDayTwoTasks, type DayTwoExercise } from '../data/linux/dayTwoExercises'
 import { createDayTwoSession, createTaskFixture, deletionTargets, HOME, parseCommand, runDayTwoCommand, type DayTwoSession } from '../lib/linuxDayTwoSimulator'
+import { LabReturnLink } from '../components/labs/LabReturnLink'
+import { BackToTop } from '../components/navigation/BackToTop'
 
 type Mode = 'learn' | 'exam'
 type ExamAnswer = { task: DayTwoExercise; input: string; correct: boolean }
@@ -80,6 +81,7 @@ export default function LinuxDayTwoTrainer() {
   if (examFinished) {
     const correct = examAnswers.filter(item => item.correct).length
     return <main className="mx-auto max-w-4xl px-4 py-8 sm:py-12">
+      <LabReturnLink />
       <h1 className="text-3xl font-bold text-ink-950 dark:text-white">Prüfungsauswertung</h1>
       <p className="mt-2 text-ink-700 dark:text-ink-200">{correct} richtig · {examAnswers.length - correct} falsch · {Math.round(correct / examAnswers.length * 100)} %</p>
       <div className="mt-7 space-y-4">{examAnswers.map((item, i) => <section key={item.task.id} className="rounded-2xl border border-ink-200 bg-white p-5 dark:border-ink-800 dark:bg-ink-900">
@@ -90,11 +92,12 @@ export default function LinuxDayTwoTrainer() {
         <p lang="ar" dir="rtl" className="mt-2 text-sm leading-7 text-ink-700 dark:text-ink-200">{item.task.ar}</p>
       </section>)}</div>
       <button onClick={() => reset('exam')} className="mt-6 min-h-11 rounded-full bg-brand-600 px-6 py-3 font-semibold text-white">Prüfung wiederholen</button>
+      <BackToTop />
     </main>
   }
 
   return <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-    <Link to="/it/linux/terminal-und-erste-befehle" className="text-sm font-medium text-brand-700 hover:underline dark:text-brand-300">← Zur Tag-2-Lektion</Link>
+    <LabReturnLink />
     <header className="mt-5 flex flex-wrap items-start justify-between gap-5">
       <div><p className="text-sm font-semibold uppercase tracking-wider text-brand-700 dark:text-brand-300">Linux Campus · Tag 2</p><h1 className="mt-2 text-3xl font-bold text-ink-950 dark:text-white sm:text-4xl">Terminal und erste Befehle</h1><p className="mt-3 text-ink-700 dark:text-ink-200">Befehle ändern nur das simulierte Dateisystem im Browser. Hier läuft keine echte Shell.</p></div>
       <div className="flex gap-2 rounded-full border border-ink-200 bg-white p-1 dark:border-ink-700 dark:bg-ink-900" role="group" aria-label="Übungsmodus"><button onClick={() => reset('learn')} aria-pressed={mode === 'learn'} className={`min-h-11 rounded-full px-4 py-2 text-sm font-semibold ${mode === 'learn' ? 'bg-brand-600 text-white' : 'text-ink-700 dark:text-ink-200'}`}>Lernen</button><button onClick={() => reset('exam')} aria-pressed={mode === 'exam'} className={`min-h-11 rounded-full px-4 py-2 text-sm font-semibold ${mode === 'exam' ? 'bg-brand-600 text-white' : 'text-ink-700 dark:text-ink-200'}`}>Prüfungsmodus</button></div>
@@ -109,5 +112,6 @@ export default function LinuxDayTwoTrainer() {
       <div aria-live="polite" className="mt-4">{result === 'correct' && <div className="rounded-xl border border-teal-300 bg-teal-50 p-4 text-teal-950"><p className="flex items-center gap-2 font-semibold"><CheckCircle2 size={18} /> Richtig!</p><p className="mt-2 text-sm">{task.reason}</p><p lang="ar" dir="rtl" className="mt-2 text-sm leading-7">{task.ar}</p></div>}{error && <div className="rounded-xl border border-rose-300 bg-rose-50 p-4 text-rose-950"><p className="font-semibold">Noch nicht richtig</p><p className="mt-2 text-sm">{error.de}</p><p lang="ar" dir="rtl" className="mt-2 text-sm leading-7">{error.ar}</p><p className="mt-2 text-sm"><strong>Hinweis:</strong> {task.hint}</p></div>}{showSolution && result !== 'correct' && <div className="rounded-xl bg-ink-100 p-4 text-ink-900 dark:bg-ink-800 dark:text-white"><strong>Mögliche Eingabe:</strong> <code>{task.answers[0]}</code><p className="mt-2 text-sm">Gib sie selbst ein, damit der simulierte Zustand fortgesetzt wird.</p></div>}</div>
       <div className="mt-5 flex flex-wrap gap-3">{result !== 'correct' && <button type="submit" form="day-two-form" className="min-h-11 rounded-full bg-brand-600 px-5 py-2 font-semibold text-white hover:bg-brand-700">{pendingDeletion ? 'Löschen bestätigen' : mode === 'exam' ? 'Antwort abgeben' : 'Befehl prüfen'}</button>}{mode === 'learn' && attempts >= 2 && result !== 'correct' && !showSolution && <button onClick={() => setShowSolution(true)} className="min-h-11 rounded-full border px-5 py-2 font-medium">Lösung anzeigen</button>}{mode === 'learn' && result === 'correct' && <button onClick={complete ? () => reset('exam') : next} className="min-h-11 rounded-full bg-brand-600 px-5 py-2 font-semibold text-white">{complete ? 'Prüfungsmodus starten' : 'Nächste Aufgabe'}</button>}{mode === 'learn' && index > 0 && <button onClick={() => reset('learn')} className="inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm text-ink-600 dark:text-ink-300"><RotateCcw size={16} /> Von vorn beginnen</button>}</div>
     </section>
+    <BackToTop />
   </main>
 }

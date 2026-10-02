@@ -11,7 +11,7 @@ interface TooltipState {
   visible: boolean
 }
 
-const IGNORED_TAGS = ['A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT', 'CODE', 'PRE', 'SVG']
+const IGNORED_TAGS = ['INPUT', 'TEXTAREA', 'SELECT', 'CODE', 'PRE', 'SVG']
 const IGNORED_SELECTOR = [...IGNORED_TAGS, '[data-no-translate]'].join(',')
 
 export function HoverTranslator() {
@@ -27,8 +27,8 @@ export function HoverTranslator() {
     }
 
     const handlePointerMove = (e: PointerEvent) => {
-      // For mobile tap fallback, we can use the pointer type. But here we just handle general pointer.
-      // Do not process if dragging or hovering over interactive elements.
+      // Keep editable, code and icon surfaces excluded while allowing translated
+      // navigation labels inside links and buttons.
       const target = e.target as HTMLElement
       if (!target || target.closest(IGNORED_SELECTOR) || target.isContentEditable) {
         clearTooltip()

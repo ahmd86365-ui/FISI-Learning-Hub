@@ -111,7 +111,8 @@ assert.match(consoleSource, /event\.key === 'Tab'/)
 assert.match(consoleSource, /event\.ctrlKey && event\.key\.toLowerCase\(\) === 'l'/)
 assert.match(toolPanel, /Dateien/)
 assert.match(toolPanel, /In Terminal einfügen/)
-assert.match(lessonPage, /Im Linux Lab üben/)
+const linuxLabMappings = readFileSync('src/data/labs.ts', 'utf8').match(/'topic-linux-01-was-ist-linux':\s*\[([\s\S]*?)\n\s*\],/)?.[1] ?? ''
+assert.match(linuxLabMappings, /labId:'linux-lab'/)
 assert.match(translator, /'INPUT'.*'CODE'.*'PRE'/)
 for (const file of ['src/lib/linuxTerminal.ts', 'src/data/linux/terminalExercises.ts', 'src/pages/LinuxTerminalTrainer.tsx']) {
   assert.doesNotMatch(readFileSync(file, 'utf8'), /\b(child_process|execSync|execFile|spawn|fetch|XMLHttpRequest)\b/, file)

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { Button } from '../components/Button'
 import { useAuth } from '../contexts/AuthContext'
 import { useExamAttempts } from '../contexts/ExamAttemptsContext'
@@ -35,7 +35,9 @@ export default function Exams() {
 }
 
 function ExamWorkspace({ userId }: { userId: string }) {
-  const isMixedRoute = useLocation().pathname === '/exams/mixed'
+  const location = useLocation()
+  const [params, setParams] = useSearchParams()
+  const isMixedRoute = location.pathname === '/exams/mixed'
   const storageKey = `fisi:exam:v1:${userId}`
   const { attempts, loading, error, submitExam } = useExamAttempts()
   const [storageError, setStorageError] = useState('')
@@ -48,10 +50,14 @@ function ExamWorkspace({ userId }: { userId: string }) {
       return value
     } catch { return null }
   })
-  const [mode, setMode] = useState<ExamMode>('wiso_mixed')
-  const [count, setCount] = useState(10)
-  const [mixedCount, setMixedCount] = useState(10)
-  const [subjects, setSubjects] = useState<MixedSubject[]>(mixedSubjects.map((subject) => subject.id))
+  const requestedMode = params.get('mode')
+  const initialMode = requestedMode && requestedMode in examPresets ? requestedMode as ExamMode : 'wiso_mixed'
+  const initialCount = Number(params.get('count'))
+  const [mode, setMode] = useState<ExamMode>(initialMode)
+  const [count, setCount] = useState(examPresets[initialMode].counts.includes(initialCount) ? initialCount : 10)
+  const [mixedCount, setMixedCount] = useState([10, 20, 30].includes(initialCount) ? initialCount : 10)
+  const requestedSubjects = (params.get('subjects') ?? '').split(',').filter((value): value is MixedSubject => mixedSubjects.some((subject) => subject.id === value))
+  const [subjects, setSubjects] = useState<MixedSubject[]>(requestedSubjects.length ? requestedSubjects : mixedSubjects.map((subject) => subject.id))
   const mixedPool = getMixedPool()
   const available = mixedAvailability(mixedPool).filter((subject) => subject.count > 0)
   const selectedPoolSize = mixedPool.filter((question) => { const subject = mixedSubjectOf(question); return subject !== null && subjects.includes(subject) }).length
@@ -126,6 +132,15 @@ function ExamWorkspace({ userId }: { userId: string }) {
   }
   const selected = attempts.find((attempt) => attempt.id === reviewId)
   const localCorrect = draft?.questions.filter((item) => answered(draft.answers[item.questionKey]) && isSimulationAnswerCorrect(item, draft.answers[item.questionKey])).length ?? 0
+
+  useEffect(() => {
+    if (draft) return
+    const next = new URLSearchParams()
+    next.set('mode', mode)
+    next.set('count', String(isMixedRoute ? mixedCount : count))
+    if (isMixedRoute && subjects.length !== mixedSubjects.length) next.set('subjects', subjects.join(','))
+    if (next.toString() !== params.toString()) setParams(next, { replace: true })
+  }, [count, draft, isMixedRoute, mixedCount, mode, params, setParams, subjects])
 
   return <main className="mx-auto max-w-5xl space-y-6 px-4 py-8 sm:px-6 sm:py-12">
     <header><h1 className="text-3xl font-bold">{isMixedRoute ? 'Gemischte Prüfung' : 'Prüfungsmodus'}</h1><p className="mt-2 text-ink-500 dark:text-ink-400">Prüfung üben, Ergebnis prüfen und deinen Verlauf verfolgen.</p>{isMixedRoute ? <Link className="mt-3 inline-block text-brand-600 underline" to="/exams">Zum Prüfungsmodus</Link> : <Link className="mt-3 inline-block text-brand-600 underline" to="/exams/mixed">Gemischte Prüfung einrichten</Link>}</header>

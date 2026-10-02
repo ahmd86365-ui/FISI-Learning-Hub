@@ -16,15 +16,15 @@ const dictionaryBeforeSecondPass = { ...expansionDictionary, ...baseDictionary }
 const dictionary = { ...secondExpansionDictionary, ...dictionaryBeforeSecondPass }
 const keys = Object.keys(dictionary)
 
-assert.equal(baseEntries.length, 1882, 'Unexpected base dictionary entry count')
-assert.equal(Object.keys(dictionaryBeforeSecondPass).length, 3401, 'Unexpected pre-second-pass entry count')
+assert.equal(baseEntries.length, 1888, 'Unexpected base dictionary entry count')
+assert.equal(Object.keys(dictionaryBeforeSecondPass).length, 3407, 'Unexpected pre-second-pass entry count')
 assert.ok(keys.length - Object.keys(dictionaryBeforeSecondPass).length >= 1200, 'Second pass must contain at least 1,200 new unique entries')
-assert.equal(keys.length, 5359, 'Unexpected merged dictionary entry count')
+assert.equal(keys.length, 5365, 'Unexpected merged dictionary entry count')
 assert.equal(keys.length - Object.keys(dictionaryBeforeSecondPass).length, 1958, 'Unexpected second-pass unique expansion count')
 assert.equal(expansionEntries.length, new Set(expansionEntries.map((match) => match[1])).size, 'Duplicate expansion key')
 assert.equal(secondExpansionEntries.length, new Set(secondExpansionEntries.map((match) => match[1])).size, 'Duplicate second expansion key')
 assert.equal(new Set(keys).size, keys.length, 'Duplicate dictionary key')
-assert.equal(keys.filter((key) => key.includes(' ')).length, 892, 'Unexpected phrase count')
+assert.equal(keys.filter((key) => key.includes(' ')).length, 896, 'Unexpected phrase count')
 assert.ok(keys.every((key) => key === key.toLowerCase()), 'Dictionary keys must be lowercase')
 assert.ok(keys.every((key) => key === key.trim()), 'Dictionary keys must be trimmed')
 assert.ok(Object.values(dictionary).every((value) => value.trim().length > 0), 'Translations must not be empty')
@@ -71,7 +71,8 @@ for (const phrase of ['zugriff verweigert', 'datei erstellen', 'datei löschen',
 }
 
 assert.match(translatorSource, /if \(!translationEnabled\)/, 'Disabled translation must hide the tooltip')
-assert.match(translatorSource, /const IGNORED_TAGS = \['A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT', 'CODE', 'PRE', 'SVG'\]/)
+assert.match(translatorSource, /const IGNORED_TAGS = \['INPUT', 'TEXTAREA', 'SELECT', 'CODE', 'PRE', 'SVG'\]/, 'Editable, code and icon surfaces must remain excluded')
+assert.doesNotMatch(translatorSource, /const IGNORED_TAGS = \[[^\]]*'(?:A|BUTTON)'/, 'Navigation links and buttons must remain hover-translatable')
 assert.match(translatorSource, /\[data-no-translate\]/, 'Explicit translation exclusions must remain supported')
 assert.match(translatorSource, /for \(let len = tokens\.length; len > 0; len--\)/, 'Longest phrase must be checked first')
 assert.match(translatorSource, /if \(dictionary\[phraseWord\]\)/, 'Dictionary lookup must remain constant-time')

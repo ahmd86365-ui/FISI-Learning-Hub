@@ -22,7 +22,8 @@ assert.deepEqual(linux.topics.slice(0, 3).map(topic => [topic.title, topic.order
 const topic = linux.topics[2]
 assert.equal(topic.id, 'topic-linux-03-das-dateisystem'); assert.equal(topic.slug, 'das-dateisystem')
 assert.match(readFileSync('src/App.tsx', 'utf8'), /path="practice\/linux-tag-3"/)
-assert.match(readFileSync('src/pages/LessonPage.tsx', 'utf8'), /Linux Campus · Tag 3 üben/)
+const { lessonLabMap } = load('src/data/labs.ts')
+assert.ok(lessonLabMap[topic.id]?.some(mapping => mapping.labId === 'linux-tag-3'))
 const topicIds = modules.flatMap(module => module.topics.map(item => item.id)), exerciseIds = modules.flatMap(module => module.topics.flatMap(item => item.exercises.map(exercise => exercise.id))), taskIds = linuxDayThreeTasks.map(task => task.id)
 for (const [label, ids] of [['topic', topicIds], ['exercise', exerciseIds], ['trainer', taskIds]]) assert.equal(new Set(ids).size, ids.length, `Duplicate ${label} ID`)
 assert.ok(topic.exercises.every(exercise => exercise.topicSlug === topic.slug))

@@ -3,7 +3,7 @@ import { ButtonLink } from '../Button'
 import { getFlashcardBank } from '../../lib/flashcards'
 import { useFlashcardProgress } from '../../contexts/FlashcardProgressContext'
 
-export function FlashcardLessonAction({ lessonId }: { lessonId: string }) {
+export function FlashcardLessonAction({ lessonId, lessonPath }: { lessonId: string; lessonPath?: string }) {
   const bank = getFlashcardBank(lessonId)
   const { getProgress } = useFlashcardProgress()
   const saved = getProgress(lessonId)
@@ -26,7 +26,7 @@ export function FlashcardLessonAction({ lessonId }: { lessonId: string }) {
               </p>
             </div>
           </div>
-          <ButtonLink to={`/lernkarten/${encodeURIComponent(lessonId)}`} size="lg" icon={<ArrowRight />} iconPosition="right" className="w-full sm:w-auto">
+          <ButtonLink to={`/lernkarten/${encodeURIComponent(lessonId)}${lessonPath ? `?source=${encodeURIComponent(lessonPath)}` : ''}`} size="lg" icon={<ArrowRight />} iconPosition="right" className="w-full sm:w-auto">
             Lernkarten starten
           </ButtonLink>
         </div>

@@ -41,7 +41,6 @@ function LabRunner({ lab }: { lab: (typeof labs)[number] }) {
   }
   return <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
     <LabReturnLink />
-    <Link className={link} to="/practice/labs">← Zurück zu den Labs</Link>
     <h1 className="mt-5 text-3xl font-bold">{lab.title}</h1>
     <p className="mt-2 text-sm text-ink-600 dark:text-ink-300">{lab.subject} · {lab.difficulty}</p>
     {step ? <>

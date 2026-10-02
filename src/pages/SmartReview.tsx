@@ -2,6 +2,7 @@ import { BookOpen, CheckCircle2, CircleAlert, RotateCcw, Sparkles, Target } from
 import { Link } from 'react-router-dom'
 import { useSmartReviewPlan } from '../hooks/useSmartReviewPlan'
 import type { ReviewPriority, SmartReviewRecommendation } from '../lib/smartReview'
+import { withReturnPath } from '../lib/navigation'
 
 const priorityStyle: Record<ReviewPriority, string> = {
   'Sehr hoch': 'bg-rose-50 text-rose-700 dark:bg-rose-500/10 dark:text-rose-300',
@@ -69,7 +70,7 @@ function RecommendationCard({ recommendation }: { recommendation: SmartReviewRec
     <p className="mt-4 flex items-center gap-2 text-sm font-medium text-ink-600 dark:text-ink-300"><Sparkles className="h-4 w-4 shrink-0 text-amber-500" aria-hidden="true" />{recommendation.reason}</p>
     <h3 className="mt-2 line-clamp-3 text-lg font-semibold leading-snug text-ink-950 dark:text-white">{recommendation.title}</h3>
     {(recommendation.subject || recommendation.module) && <p className="mt-2 text-xs text-ink-500 dark:text-ink-400">{[recommendation.subject, recommendation.module].filter(Boolean).join(' · ')}</p>}
-    <div className="mt-auto pt-5"><Link to={recommendation.path} className="inline-flex h-10 items-center justify-center rounded-full bg-brand-600 px-5 text-sm font-medium text-white transition-colors hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-400">{recommendation.actionLabel}</Link></div>
+    <div className="mt-auto pt-5"><Link to={recommendation.path === '/lernkarten/review' ? withReturnPath(recommendation.path, '/review') : recommendation.path} className="inline-flex h-10 items-center justify-center rounded-full bg-brand-600 px-5 text-sm font-medium text-white transition-colors hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-400">{recommendation.actionLabel}</Link></div>
   </article>
 }
 

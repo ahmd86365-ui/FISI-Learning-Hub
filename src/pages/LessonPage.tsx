@@ -17,6 +17,10 @@ import type { SubjectSlug } from '../types/content'
 import { FlashcardLessonAction } from '../components/flashcards/FlashcardLessonAction'
 import { practicalExercises } from '../lib/exerciseConsolidation'
 import { LessonLabAction } from '../components/labs/LessonLabAction'
+import { SmartBackButton } from '../components/navigation/SmartBackButton'
+import { MobileQuickActions, type QuickAction } from '../components/navigation/MobileQuickActions'
+import { BackToTop } from '../components/navigation/BackToTop'
+import { getLessonLabs, labHref } from '../data/labs'
 
 export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }) {
   const { moduleSlug, topicSlug } = useParams<{ moduleSlug: string; topicSlug: string }>()
@@ -43,6 +47,13 @@ export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }
 
   const hasNothing = topic.content.length === 0 && topic.exercises.length === 0 && !topic.test
   const appliedExercises = practicalExercises(topic.exercises)
+  const lessonPath = `${subject.path}/${mod.slug}/${topic.slug}`
+  const topicIndex = mod.topics.findIndex((entry) => entry.id === topic.id)
+  const nextTopic = mod.topics[topicIndex + 1]
+  const quickActions: QuickAction[] = [{ to: `/lernkarten/${encodeURIComponent(topic.id)}?source=${encodeURIComponent(lessonPath)}`, label: 'Lernkarten', kind: 'cards' }]
+  const firstLab = getLessonLabs(topic.id)[0]
+  if (firstLab) quickActions.push({ to: labHref(firstLab.lab, firstLab.mapping, lessonPath), label: 'Lab', kind: 'lab' })
+  if (nextTopic) quickActions.push({ to: `${subject.path}/${mod.slug}/${nextTopic.slug}`, label: 'Weiter', kind: 'next' })
 
   return (
     <div>
@@ -64,6 +75,7 @@ export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }
       />
 
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+        <SmartBackButton fallback={`${subject.path}/${mod.slug}`} className="mb-4 -ml-3" />
         <div className="mb-6 flex flex-wrap gap-2">
           <ContentActions contentType="lesson" contentId={topic.id} title={topic.title} />
           <LessonCompletionButton lessonId={topic.id} />
@@ -78,7 +90,7 @@ export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }
           <>
             <LessonContent blocks={topic.content} />
 
-            <FlashcardLessonAction lessonId={topic.id} />
+            <FlashcardLessonAction lessonId={topic.id} lessonPath={lessonPath} />
 
             {appliedExercises.length > 0 && (
               <section className="mt-14">
@@ -90,7 +102,7 @@ export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }
               </section>
             )}
 
-            <LessonLabAction lessonId={topic.id} lessonPath={`${subject.path}/${mod.slug}/${topic.slug}`} />
+            <LessonLabAction lessonId={topic.id} lessonPath={lessonPath} />
 
             {topic.test && (
               <section className="mt-14">
@@ -101,6 +113,8 @@ export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }
           </>
         )}
       </div>
+      <MobileQuickActions actions={quickActions} fallback={`${subject.path}/${mod.slug}`} />
+      <BackToTop aboveMobileBar />
     </div>
   )
 }
