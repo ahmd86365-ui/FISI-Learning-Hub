@@ -70,6 +70,8 @@ export interface Topic {
   content: ContentBlock[]
   keyPoints?: string[]
   exercises: Exercise[]
+  /** Optional source-curated cards used instead of mechanically generated table cards. */
+  flashcards?: FlashcardQuestion[]
   test?: Test
 }
 
@@ -319,7 +321,7 @@ export interface SearchResultItem {
   id: string
   title: string
   excerpt: string
-  type: 'subject' | 'module' | 'lesson' | 'topic' | 'glossary' | 'exercise' | 'question' | 'exam'
+  type: 'subject' | 'module' | 'lesson' | 'topic' | 'reference' | 'glossary' | 'exercise' | 'question' | 'exam'
   subject: SubjectSlug
   path: string
   /** Ancestor labels for display, e.g. ["IT", "Netzwerktechnik"]. */

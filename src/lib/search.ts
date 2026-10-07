@@ -1,6 +1,7 @@
 import type { SearchResultItem } from '../types/content'
 import { subjects, getSubjectBySlug } from '../data/subjects'
 import { modules } from '../data/modules'
+import { linuxCheatSheetSections } from '../data/linux/cheatSheet'
 
 function matches(query: string, ...fields: string[]): boolean {
   return fields.some((field) => field.toLowerCase().includes(query))
@@ -104,6 +105,22 @@ export async function search(query: string): Promise<SearchResultItem[]> {
           breadcrumb: [subjectName, mod.title],
         })
       }
+    }
+  }
+
+  for (const section of linuxCheatSheetSections) {
+    const matchingEntries = section.entries.filter((entry) => matches(q, entry.purpose, ...entry.commands))
+    if (matches(q, 'Linux Spickzettel', `Tag ${section.tag}`, section.title) || matchingEntries.length > 0) {
+      const preview = matchingEntries.slice(0, 2).map((entry) => `${entry.purpose}: ${entry.commands.join(', ')}`).join(' · ')
+      results.push({
+        id: `linux-spickzettel-${section.tag}`,
+        title: `Linux Spickzettel · Tag ${section.tag}`,
+        excerpt: preview || section.title,
+        type: 'reference',
+        subject: 'it',
+        path: `/it/linux/spickzettel?tag=${section.tag}`,
+        breadcrumb: ['IT', 'Linux', 'Spickzettel'],
+      })
     }
   }
 

@@ -4,7 +4,7 @@ export const RECENT_PAGES_KEY = 'fisi_recent_pages'
 export const RECENT_PAGES_EVENT = 'fisi:recent-pages'
 export const RECENT_PAGES_LIMIT = 10
 export type RecentPagesScope = 'guest' | `user:${string}`
-export type RecentPageType = 'lesson' | 'lab' | 'flashcards' | 'glossary' | 'exam' | 'review' | 'errors'
+export type RecentPageType = 'lesson' | 'reference' | 'lab' | 'flashcards' | 'glossary' | 'exam' | 'review' | 'errors'
 export interface RecentPage { path: string; title: string; type: RecentPageType; visitedAt: string }
 type RecentPagesStorage = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>
 
@@ -18,6 +18,7 @@ export function recentPagesStorageKey(scope: RecentPagesScope) {
 }
 
 export function recentPageType(pathname: string): RecentPageType | undefined {
+  if (pathname === '/it/linux/spickzettel') return 'reference'
   if (/^\/(it|it-english|wirtschaft-gesellschaft)\/[^/]+\/[^/]+/.test(pathname) || /^\/it\/it-technical\/[^/]+\/[^/]+/.test(pathname)) return 'lesson'
   if (pathname.startsWith('/lernkarten/') && pathname !== '/lernkarten/review') return 'flashcards'
   if (pathname === '/labs' || pathname.startsWith('/practice/') || pathname === '/it/linux/lab') return 'lab'
@@ -33,6 +34,7 @@ export function canonicalRecentPath(pathname: string, search = '') {
   const params = new URLSearchParams(search)
   const safe = new URLSearchParams()
   if (pathname === '/glossary') for (const key of ['q', 'category']) { const value = params.get(key); if (value) safe.set(key, value) }
+  if (pathname === '/it/linux/spickzettel') { const tag = params.get('tag'); if (tag) safe.set('tag', tag) }
   const path = `${pathname}${safe.size ? `?${safe}` : ''}`
   return isSafeInternalPath(path) ? path : undefined
 }
@@ -68,4 +70,4 @@ export function recordRecentPage(scope: RecentPagesScope, item: RecentPage, stor
   return next
 }
 
-export const recentTypeLabel: Record<RecentPageType, string> = { lesson: 'Lektion', lab: 'Lab', flashcards: 'Lernkarten', glossary: 'Glossar', exam: 'Prüfung', review: 'Review', errors: 'Fehlertraining' }
+export const recentTypeLabel: Record<RecentPageType, string> = { lesson: 'Lektion', reference: 'Spickzettel', lab: 'Lab', flashcards: 'Lernkarten', glossary: 'Glossar', exam: 'Prüfung', review: 'Review', errors: 'Fehlertraining' }

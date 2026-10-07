@@ -75,6 +75,7 @@ export function fallbackForPath(pathname: string) {
   if (pathname.startsWith('/lernkarten/review')) return '/review'
   if (pathname.startsWith('/lernkarten/')) return '/'
   if (pathname.startsWith('/practice/') || pathname === '/it/linux/lab') return '/labs'
+  if (pathname === '/it/linux/spickzettel') return '/it/linux'
   if (pathname.startsWith('/pruefungsvorbereitung/it-ap/')) return '/pruefungsvorbereitung/it-ap'
   if (pathname.includes('/wiso-ihk/')) return '/pruefungsvorbereitung/wirtschaft-gesellschaft/wiso-ihk'
   if (pathname.startsWith('/exams/')) return '/exams'

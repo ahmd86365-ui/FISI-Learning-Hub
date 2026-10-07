@@ -163,6 +163,15 @@ function deduplicate(questions: FlashcardQuestion[]) {
 
 export function createFlashcardBank(topic: Topic, subjectSlug: LessonFlashcardBank['subjectSlug']): LessonFlashcardBank {
   const fromExercises = topic.exercises.map((exercise) => exerciseQuestion(topic, exercise)).filter(Boolean) as FlashcardQuestion[]
+  if (topic.flashcards) {
+    return {
+      lessonId: topic.id,
+      lessonTitle: topic.title,
+      moduleSlug: topic.moduleSlug,
+      subjectSlug,
+      questions: deduplicate([...fromExercises, ...topic.flashcards]).slice(0, MAX_QUESTIONS_PER_LESSON),
+    }
+  }
   const fromTables = topic.content.flatMap((block) => block.type === 'table' ? tableQuestions(topic, block) : [])
   const combined = deduplicate([...fromExercises, ...fromTables])
   const withStatements = combined.length >= 10 ? combined : deduplicate([...combined, ...statementQuestions(topic)])

@@ -1,6 +1,6 @@
 import { useEffect, useState, type MouseEvent } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import { BarChart3, BookmarkCheck, BookOpen, ChevronRight, FlaskConical, GraduationCap, Home, LayoutGrid } from 'lucide-react'
+import { BarChart3, BookmarkCheck, BookMarked, BookOpen, ChevronRight, FlaskConical, GraduationCap, Home, LayoutGrid } from 'lucide-react'
 import { getModulesBySubject } from '../data/modules'
 import { subjects } from '../data/subjects'
 import type { SubjectSlug } from '../types/content'
@@ -82,6 +82,7 @@ export function LearningSidebar() {
               </NavLink>
               {expanded && <div className="ml-5 mt-1 space-y-0.5 border-l border-ink-200 pl-2 dark:border-ink-700">
                 {module.topics.map((topic) => <NavLink key={topic.slug} to={`${modulePath}/${topic.slug}`} className={({ isActive }) => `block rounded-md px-2.5 py-1.5 text-[0.76rem] leading-4 transition-colors ${isActive ? 'bg-brand-50 font-semibold text-brand-700 dark:bg-brand-500/10 dark:text-brand-300' : 'text-ink-500 hover:bg-ink-100 hover:text-ink-800 dark:text-ink-400 dark:hover:bg-ink-800 dark:hover:text-ink-100'}`}>{topic.title}</NavLink>)}
+                {module.slug === 'linux' && <NavLink to="/it/linux/spickzettel" className={({ isActive }) => `flex items-center gap-2 rounded-md px-2.5 py-2 text-[0.76rem] font-semibold transition-colors ${isActive ? 'bg-brand-100 text-brand-700 dark:bg-brand-500/15 dark:text-brand-300' : 'text-brand-600 hover:bg-brand-50 dark:text-brand-400 dark:hover:bg-brand-500/10'}`}><BookMarked className="h-3.5 w-3.5" aria-hidden="true" /> Spickzettel</NavLink>}
                 {module.slug === 'linux' && <NavLink to="/it/linux/lab" className={({ isActive }) => `flex items-center gap-2 rounded-md px-2.5 py-2 text-[0.76rem] font-semibold transition-colors ${isActive ? 'bg-brand-100 text-brand-700 dark:bg-brand-500/15 dark:text-brand-300' : 'text-brand-600 hover:bg-brand-50 dark:text-brand-400 dark:hover:bg-brand-500/10'}`}><FlaskConical className="h-3.5 w-3.5" aria-hidden="true" /> Linux Lab</NavLink>}
               </div>}
             </div>

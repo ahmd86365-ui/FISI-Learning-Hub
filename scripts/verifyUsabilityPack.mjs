@@ -34,6 +34,8 @@ for (const unsafe of ['https://example.com', '//example.com', 'javascript:alert(
 assert.equal(recent.recentPageType('/profile'), undefined)
 assert.equal(recent.recentPageType('/auth'), undefined)
 assert.equal(recent.recentPageType('/it/linux/was-ist-linux'), 'lesson')
+assert.equal(recent.recentPageType('/it/linux/spickzettel'), 'reference')
+assert.equal(recent.canonicalRecentPath('/it/linux/spickzettel', '?tag=11&source=%2Fit%2Flinux'), '/it/linux/spickzettel?tag=11')
 assert.equal(recent.canonicalRecentPath('/glossary', '?q=IP&category=Linux&token=secret'), '/glossary?q=IP&category=Linux')
 
 const storage = memoryStorage()

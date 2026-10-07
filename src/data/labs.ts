@@ -39,6 +39,9 @@ export const lessonLabMap: Record<string, LessonLabMapping[]> = {
   'topic-linux-06-git-und-github': [{ labId:'linux-lab', reason:'Ein Repository initialisieren und den Git-Arbeitsablauf praktisch starten.', deepLink:{ challenge:'git-init' } }],
   'topic-linux-07-benutzer-und-gruppen': [{ labId:'linux-lab', reason:'UID und Gruppenmitgliedschaften des aktuellen Benutzers untersuchen.', deepLink:{ challenge:'inspect-user' } }],
   'topic-linux-08-dateirechte-und-sudo': [{ labId:'linux-lab', reason:'Dateirechte anhand eines konkreten Zugriffsfalls korrigieren.', deepLink:{ challenge:'report-permission' } }],
+  'topic-linux-10-wiederholung-woche-2-support': [
+    { labId:'linux-lab', reason:'Einen Supportfall mit fehlerhaften Eigentümern und Dateirechten diagnostizieren.', deepLink:{ scenario:'access-denied', mode:'scenarios' } },
+  ],
   'topic-netz-neu-osi-tcp-ip': [{ labId:'praxis-osi-diagnosis', reason:'Adressinformationen entlang eines realistischen Mailwegs einordnen.' }],
   'topic-netz-neu-ipv4-adressen': [{ labId:'praxis-workstation-ipv4', reason:'Eine IPv4-Konfiguration in einem Diagnosefall beurteilen.' }],
   'topic-netz-neu-cidr-netzgrenzen': [

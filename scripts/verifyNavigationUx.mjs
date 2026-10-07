@@ -8,6 +8,7 @@ const compiled = ts.transpileModule(navigationSource, { compilerOptions: { modul
 const navigation = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`)
 
 const accepted = ['/labs', '/it/linux/lab?source=%2Fit%2Flinux', '/lernkarten/topic-1', '/review', '/exams']
+accepted.push('/it/linux/spickzettel?tag=11&source=%2Fit%2Flinux%2Fsuchen-aliase-und-variablen')
 const rejected = ['https://example.com', '//example.com', 'javascript:alert(1)', 'data:text/html,test', '/%2F%2Fexample.com', '/javascript%3Aalert(1)', '/data%3Atext/html,test', '/%E0%A4%A', '/%5C%5Cexample.com']
 accepted.forEach((path) => assert.equal(navigation.isSafeInternalPath(path), true, `expected accepted: ${path}`))
 rejected.forEach((path) => assert.equal(navigation.isSafeInternalPath(path), false, `expected rejected: ${path}`))
@@ -16,6 +17,7 @@ assert.equal(navigation.getReturnDestination('?source=https%3A%2F%2Fexample.com'
 assert.equal(navigation.fallbackForPath('/practice/subnetting'), '/labs')
 assert.equal(navigation.fallbackForPath('/lernkarten/review'), '/review')
 assert.equal(navigation.fallbackForPath('/pruefungsvorbereitung/it-ap/ap1'), '/pruefungsvorbereitung/it-ap')
+assert.equal(navigation.fallbackForPath('/it/linux/spickzettel'), '/it/linux')
 
 const app = await read('src/App.tsx')
 const labs = await read('src/data/labs.ts')
@@ -31,7 +33,7 @@ const required = [
 await Promise.all(required.map(read))
 
 const appRoutes = new Set([...app.matchAll(/<Route\s+(?:index\s+)?path="([^"]+)"/g)].map((match) => `/${match[1]}`))
-for (const route of ['/labs', '/practice/subnetting', '/practice/linux-tag-2', '/practice/linux-tag-3', '/practice/labs/:labId', '/lernkarten/review', '/lernkarten/:lessonId']) {
+for (const route of ['/labs', '/practice/subnetting', '/practice/linux-tag-2', '/practice/linux-tag-3', '/practice/labs/:labId', '/lernkarten/review', '/lernkarten/:lessonId', '/it/linux/spickzettel']) {
   assert(appRoutes.has(route), `missing app route ${route}`)
 }
 for (const route of [...labs.matchAll(/route:'([^']+)'/g)].map((match) => match[1])) {

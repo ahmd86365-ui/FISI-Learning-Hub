@@ -45,6 +45,7 @@ const SubnettingTrainer = lazy(() => import('./pages/SubnettingTrainer'))
 const LinuxTerminalTrainer = lazy(() => import('./pages/LinuxTerminalTrainer'))
 const LinuxDayTwoTrainer = lazy(() => import('./pages/LinuxDayTwoTrainer'))
 const LinuxDayThreeTrainer = lazy(() => import('./pages/LinuxDayThreeTrainer'))
+const LinuxCheatSheet = lazy(() => import('./pages/LinuxCheatSheet'))
 const PracticalLabs = lazy(() => import('./pages/PracticalLabs'))
 const Labs = lazy(() => import('./pages/Labs'))
 const Flashcards = lazy(() => import('./pages/Flashcards'))
@@ -90,6 +91,7 @@ export default function App() {
 
         <Route path="it" element={<It />} />
         <Route path="it/linux/lab" element={<LinuxTerminalTrainer />} />
+        <Route path="it/linux/spickzettel" element={<LinuxCheatSheet />} />
         <Route path="it/it-technical" element={<ItTechnicalPage />} />
         <Route path="it/it-technical/:chapterSlug" element={<ItTechnicalPage />} />
         <Route path="it/it-technical/:chapterSlug/:lessonSlug" element={<ItTechnicalPage />} />

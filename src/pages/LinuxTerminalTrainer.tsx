@@ -19,8 +19,10 @@ export default function LinuxTerminalTrainer(){
  const [params,setParams]=useSearchParams(); const requestedMode=params.get('mode') as LabMode|null
  const [mode,setMode]=useState<LabMode>(requestedMode&&['guided','free','scenarios'].includes(requestedMode)?requestedMode:'guided')
  const initialChallenge=Math.max(0,terminalExercises.findIndex(item=>item.id===params.get('challenge')||item.lessonSlug===params.get('lesson')))
- const [activeIndex,setActiveIndex]=useState(initialChallenge);const [scenarioIndex,setScenarioIndex]=useState(0)
- const [session,setSession]=useState<LinuxLabSession>(createLinuxLabSession);const [snapshot,setSnapshot]=useState<LinuxLabSession>(createLinuxLabSession)
+ const initialScenario=Math.max(0,linuxScenarios.findIndex(item=>item.id===params.get('scenario')))
+ const initialSession=()=>requestedMode==='scenarios'?linuxScenarios[initialScenario].prepare(createLinuxLabSession()):createLinuxLabSession()
+ const [activeIndex,setActiveIndex]=useState(initialChallenge);const [scenarioIndex,setScenarioIndex]=useState(initialScenario)
+ const [session,setSession]=useState<LinuxLabSession>(initialSession);const [snapshot,setSnapshot]=useState<LinuxLabSession>(()=>structuredClone(initialSession()))
  const [entries,setEntries]=useState<TerminalEntry[]>([]);const [command,setCommand]=useState('');const [historyIndex,setHistoryIndex]=useState(-1)
  const [hintLevel,setHintLevel]=useState(0);const [focusMode,setFocusMode]=useState(false);const [listOpen,setListOpen]=useState(false)
  const [attempts,setAttempts]=useState(0);const [commandsAtStart,setCommandsAtStart]=useState(0);const [lastOutput,setLastOutput]=useState('')

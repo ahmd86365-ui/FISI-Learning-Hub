@@ -61,7 +61,7 @@ const { getModuleBySlug } = load('src/data/modules.ts')
   assert.ok(searchGlossary(glossaryEntries, 'Betriebssystemkern', 'Linux').some((entry) => entry.id === 'kernel'))
   assert.ok(!searchGlossary(glossaryEntries, 'Betriebssystemkern', 'Hardware').some((entry) => entry.id === 'kernel'))
   assert.ok(searchGlossary(glossaryEntries, 'übertragung').length > 0)
-  assert.equal(glossaryEntries.length, 58)
+  assert.equal(glossaryEntries.length, 68)
   for (const id of ['terminal', 'shell', 'prompt', 'dateipfad']) {
     const entry = glossaryEntries.find((item) => item.id === id)
     assert.ok(entry, `Missing Tag 2 glossary term: ${id}`)
@@ -72,6 +72,13 @@ const { getModuleBySlug } = load('src/data/modules.ts')
     assert.ok(entry, `Missing Tag 3 glossary term: ${id}`)
     assert.ok(entry.lessons.some((lesson) => lesson.module === 'linux' && lesson.topic === 'das-dateisystem'))
   }
+  for (const id of ['prozess', 'pid', 'signal', 'paketmanager', 'abhaengigkeit']) {
+    const entry = glossaryEntries.find((item) => item.id === id)
+    assert.ok(entry, `Missing Tag 9 glossary term: ${id}`)
+    assert.ok(entry.lessons.some((lesson) => lesson.module === 'linux' && lesson.topic === 'prozesse-und-pakete'))
+  }
+  for (const id of ['alias-shell', 'umgebungsvariable']) assert.ok(glossaryEntries.find((item) => item.id === id)?.lessons.some((lesson) => lesson.topic === 'suchen-aliase-und-variablen'))
+  for (const id of ['cron', 'cronjob', 'crontab']) assert.ok(glossaryEntries.find((item) => item.id === id)?.lessons.some((lesson) => lesson.topic === 'cronjobs'))
 
   const counts = Object.fromEntries(glossaryCategories.map((category) => [category, glossaryEntries.filter((entry) => entry.category === category).length]))
   console.log(`Glossary verification passed: ${glossaryEntries.length} terms, ${linked} with lesson links`)

@@ -49,7 +49,7 @@ for (const bank of flashcardBanks) {
   }
 }
 
-if (globalIds.size !== 2797) failures.push(`expected 2797 globally unique card ids, received ${globalIds.size}`)
+if (globalIds.size !== 2929) failures.push(`expected 2929 globally unique card ids, received ${globalIds.size}`)
 
 if (failures.length) {
   console.error(failures.join('\n'))
@@ -73,6 +73,9 @@ console.log(JSON.stringify({
   maximum: Math.max(...counts),
   questionTypes: typeCounts,
   byModule,
+  newLinuxLessons: flashcardBanks
+    .filter((bank) => ['topic-linux-09-prozesse-und-pakete', 'topic-linux-10-wiederholung-woche-2-support', 'topic-linux-11-suchen-aliase-und-variablen', 'topic-linux-12-cronjobs'].includes(bank.lessonId))
+    .map((bank) => ({ lessonId: bank.lessonId, questions: bank.questions.length })),
   belowTarget: flashcardBanks.filter((bank) => bank.questions.length < 10).map((bank) => ({
     lesson: bank.lessonTitle,
     module: bank.moduleSlug,
