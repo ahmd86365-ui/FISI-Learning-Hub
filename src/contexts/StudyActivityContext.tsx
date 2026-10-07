@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from './AuthContext'
+import { isFiniteNumber, isIsoDate, isRecord, readValidatedArray, safeStorageSet } from '../lib/browserStorage'
 
 export interface StudyActivity {
   id: number
@@ -10,6 +11,11 @@ export interface StudyActivity {
   activity_date: string
   occurred_at: string
 }
+
+const isStudyActivity = (value: unknown): value is StudyActivity =>
+  isRecord(value) && isFiniteNumber(value.id) && typeof value.user_id === 'string' &&
+  value.activity_type === 'lesson_completed' && typeof value.lesson_id === 'string' &&
+  isIsoDate(value.activity_date) && isIsoDate(value.occurred_at)
 
 interface StudyActivityContextValue {
   activities: StudyActivity[]
@@ -50,16 +56,7 @@ export function StudyActivityProvider({ children }: { children: ReactNode }) {
           setLoading(false)
         })
     } else if (isGuest) {
-      const local = localStorage.getItem('fisi_guest_activity')
-      if (local) {
-        try {
-          setActivities(JSON.parse(local))
-        } catch {
-          setActivities([])
-        }
-      } else {
-        setActivities([])
-      }
+      setActivities(readValidatedArray('local', 'fisi_guest_activity', isStudyActivity))
       setLoading(false)
     } else {
       setActivities([])
@@ -113,7 +110,7 @@ export function StudyActivityProvider({ children }: { children: ReactNode }) {
 
         setActivities((current) => [data as StudyActivity, ...current.filter((activity) => activity.id !== optimistic.id)])
       } else if (isGuest) {
-        localStorage.setItem('fisi_guest_activity', JSON.stringify(newActivities))
+        safeStorageSet('local', 'fisi_guest_activity', JSON.stringify(newActivities))
       }
     },
     [activities, session?.user, isGuest],

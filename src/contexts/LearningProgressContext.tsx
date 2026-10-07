@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { useAuth } from './AuthContext'
 import { supabase } from '../lib/supabase'
 import { useStudyActivity } from './StudyActivityContext'
+import { isIsoDate, isRecord, readValidatedArray, safeStorageSet } from '../lib/browserStorage'
 
 interface LessonProgressRow {
   user_id: string
@@ -9,6 +10,10 @@ interface LessonProgressRow {
   completed: boolean
   updated_at: string
 }
+
+const isLessonProgressRow = (value: unknown): value is LessonProgressRow =>
+  isRecord(value) && typeof value.user_id === 'string' && typeof value.lesson_id === 'string' &&
+  typeof value.completed === 'boolean' && isIsoDate(value.updated_at)
 
 interface LearningProgressContextValue {
   progress: LessonProgressRow[]
@@ -52,16 +57,7 @@ export function LearningProgressProvider({ children }: { children: ReactNode }) 
           setLoading(false)
         })
     } else if (isGuest) {
-      const local = localStorage.getItem('fisi_guest_progress')
-      if (local) {
-        try {
-          setProgress(JSON.parse(local))
-        } catch {
-          setProgress([])
-        }
-      } else {
-        setProgress([])
-      }
+      setProgress(readValidatedArray('local', 'fisi_guest_progress', isLessonProgressRow))
       setLoading(false)
     } else {
       setProgress([])
@@ -123,7 +119,7 @@ export function LearningProgressProvider({ children }: { children: ReactNode }) 
           if (completed) await recordLessonCompleted(lessonId)
         }
       } else if (isGuest) {
-        localStorage.setItem('fisi_guest_progress', JSON.stringify(newProgress))
+        safeStorageSet('local', 'fisi_guest_progress', JSON.stringify(newProgress))
         if (completed) await recordLessonCompleted(lessonId)
       }
 

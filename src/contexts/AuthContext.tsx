@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 import type { Session } from '@supabase/supabase-js'
 import { supabase } from '../lib/supabase'
+import { safeStorageGet, safeStorageRemove, safeStorageSet } from '../lib/browserStorage'
 
 interface AuthContextValue {
   session: Session | null
@@ -16,7 +17,7 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined)
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
-  const [isGuest, setIsGuest] = useState(() => localStorage.getItem('fisi_guest_active') === 'true')
+  const [isGuest, setIsGuest] = useState(() => safeStorageGet('local', 'fisi_guest_active') === 'true')
 
   useEffect(() => {
     let active = true
@@ -52,7 +53,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (activeSession && isGuest) {
-      localStorage.removeItem('fisi_guest_active')
+      safeStorageRemove('local', 'fisi_guest_active')
       setIsGuest(false)
     }
   }, [activeSession, isGuest])
@@ -67,11 +68,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
       isGuest: activeIsGuest,
       enterGuestMode: () => {
-        localStorage.setItem('fisi_guest_active', 'true')
+        safeStorageSet('local', 'fisi_guest_active', 'true')
         setIsGuest(true)
       },
       exitGuestMode: () => {
-        localStorage.removeItem('fisi_guest_active')
+        safeStorageRemove('local', 'fisi_guest_active')
         setIsGuest(false)
       },
     }),

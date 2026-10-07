@@ -3,8 +3,9 @@ import { readFile } from 'node:fs/promises'
 import ts from 'typescript'
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), 'utf8')
-const navigationSource = await read('src/lib/navigation.ts')
-const compiled = ts.transpileModule(navigationSource, { compilerOptions: { module: ts.ModuleKind.ES2022, target: ts.ScriptTarget.ES2022 } }).outputText
+const storageSource = await read('src/lib/browserStorage.ts')
+const navigationSource = (await read('src/lib/navigation.ts')).replace(/^import .*$/gm, '')
+const compiled = ts.transpileModule(`${storageSource}\n${navigationSource}`, { compilerOptions: { module: ts.ModuleKind.ES2022, target: ts.ScriptTarget.ES2022 } }).outputText
 const navigation = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`)
 
 const accepted = ['/labs', '/it/linux/lab?source=%2Fit%2Flinux', '/lernkarten/topic-1', '/review', '/exams']

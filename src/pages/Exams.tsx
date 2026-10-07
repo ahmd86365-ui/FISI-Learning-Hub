@@ -7,10 +7,23 @@ import { chooseQuestions, examPresets, freezeExam, remainingExamSeconds, getExam
 import { getMixedPool, mixedAvailability, mixedBreakdown, mixedCounts, mixedSecondsPerQuestion, mixedSubjectOf, mixedSubjects, selectMixedQuestions, type MixedSubject } from '../lib/mixedExam'
 import { SkeletonCard } from '../components/loading/Skeleton'
 import { useToast } from '../contexts/ToastContext'
+import { isFiniteNumber, isIsoDate, isRecord, readValidatedJson, safeStorageRemove, safeStorageSet } from '../lib/browserStorage'
 
 const panel = 'rounded-2xl border border-ink-200 bg-white p-5 dark:border-ink-800 dark:bg-ink-900 sm:p-7'
 const answered = (values: string[] = []) => values.some((value) => value.trim())
 const clock = (seconds: number) => `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`
+
+function isActiveExamSession(value: unknown): value is ActiveExamSession {
+  if (!isRecord(value) || typeof value.id !== 'string' || typeof value.userId !== 'string' ||
+    (value.mode !== 'wiso_mixed' && value.mode !== 'lesson_tests') || typeof value.label !== 'string' ||
+    !Array.isArray(value.questions) || value.questions.length === 0 || !isRecord(value.answers) ||
+    !isIsoDate(value.startedAt) || !isIsoDate(value.endAt) || !isFiniteNumber(value.durationSeconds)) return false
+  if (!value.questions.every((question) => isRecord(question) && typeof question.questionKey === 'string' &&
+    typeof question.questionId === 'string' && typeof question.title === 'string' && typeof question.contentPath === 'string')) return false
+  if (!Object.values(value.answers).every((answer) => Array.isArray(answer) && answer.every((item) => typeof item === 'string'))) return false
+  return (value.submittedAt === undefined || isIsoDate(value.submittedAt)) &&
+    (value.submissionReason === undefined || value.submissionReason === 'manual' || value.submissionReason === 'timeout')
+}
 
 function Review({ data }: { data: ExamResultData }) {
   return <div className="space-y-3">{data.questions.map((question, index) => {
@@ -45,13 +58,10 @@ function ExamWorkspace({ userId }: { userId: string }) {
   const { attempts, loading, error, submitExam } = useExamAttempts()
   const [storageError, setStorageError] = useState('')
   const [draft, setDraft] = useState<ActiveExamSession | null>(() => {
-    try {
-      const raw = localStorage.getItem(storageKey)
-      if (!raw) return null
-      const value = JSON.parse(raw) as ActiveExamSession
-      if (value.userId !== userId || !value.id || !Array.isArray(value.questions) || !value.questions.length || !value.answers || !Number.isFinite(Date.parse(value.endAt))) return null
-      return value
-    } catch { return null }
+    const value = readValidatedJson<ActiveExamSession | null>('local', storageKey, (candidate): candidate is ActiveExamSession | null => candidate === null || isActiveExamSession(candidate), null)
+    if (value?.userId === userId) return value
+    if (value) safeStorageRemove('local', storageKey)
+    return null
   })
   const requestedMode = params.get('mode')
   const initialMode = requestedMode && requestedMode in examPresets ? requestedMode as ExamMode : 'wiso_mixed'
@@ -73,11 +83,10 @@ function ExamWorkspace({ userId }: { userId: string }) {
   const autoTried = useRef<string | null>(null)
   const remaining = draft ? remainingExamSeconds(draft, now) : 0
   const persist = (value: ActiveExamSession | null) => {
-    try {
-      if (value) localStorage.setItem(storageKey, JSON.stringify(value))
-      else localStorage.removeItem(storageKey)
-      setStorageError('')
-    } catch { setStorageError('Lokales Speichern nicht möglich. Bitte diese Seite bis zur erfolgreichen Abgabe geöffnet lassen.') }
+    const stored = value
+      ? safeStorageSet('local', storageKey, JSON.stringify(value))
+      : safeStorageRemove('local', storageKey)
+    setStorageError(stored ? '' : 'Lokales Speichern nicht möglich. Bitte diese Seite bis zur erfolgreichen Abgabe geöffnet lassen.')
     setDraft(value)
   }
 

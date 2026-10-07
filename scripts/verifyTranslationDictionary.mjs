@@ -81,8 +81,8 @@ assert.doesNotMatch(translatorSource, /const IGNORED_TAGS = \[[^\]]*'(?:A|BUTTON
 assert.match(translatorSource, /\[data-no-translate\]/, 'Explicit translation exclusions must remain supported')
 assert.match(translatorSource, /for \(let len = tokens\.length; len > 0; len--\)/, 'Longest phrase must be checked first')
 assert.match(translatorSource, /if \(dictionary\[phraseWord\]\)/, 'Dictionary lookup must remain constant-time')
-assert.match(preferencesSource, /localStorage\.getItem\('fisi_translation_enabled'\)/, 'Translation preference must be restored')
-assert.match(preferencesSource, /localStorage\.setItem\('fisi_translation_enabled'/, 'Translation preference must be persisted')
+assert.match(preferencesSource, /safeStorageGet\('local', 'fisi_translation_enabled'\)/, 'Translation preference must be restored safely')
+assert.match(preferencesSource, /safeStorageSet\('local', 'fisi_translation_enabled'/, 'Translation preference must be persisted safely')
 const allDictionarySource = `${dictionarySource}\n${expansionSource}\n${secondExpansionSource}`
 assert.doesNotMatch(allDictionarySource, /^(sudo|chmod|chown|ls -la|\/etc\/passwd|192\.168\.1\.1|git commit|npm install|--force|readme\.md)[|'\s:]/gmi)
 

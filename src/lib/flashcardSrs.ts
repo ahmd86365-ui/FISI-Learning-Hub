@@ -1,4 +1,5 @@
 import type { FlashcardQuestion } from '../types/content'
+import { isFiniteNumber, isIsoDate, isRecord } from './browserStorage'
 
 export const FLASHCARD_SRS_VERSION = 1
 export const DEFAULT_EASE_FACTOR = 2.4
@@ -37,6 +38,14 @@ export interface SrsSchedule {
 
 interface StoredCardProgress { version: number; cards: Record<string, FlashcardCardProgress> }
 
+export const isFlashcardCardProgress = (value: unknown): value is FlashcardCardProgress =>
+  isRecord(value) && typeof value.user_id === 'string' && typeof value.card_id === 'string' &&
+  typeof value.lesson_id === 'string' && typeof value.subject_id === 'string' && typeof value.module_id === 'string' &&
+  isFiniteNumber(value.attempts) && isFiniteNumber(value.correct_count) && isFiniteNumber(value.incorrect_count) &&
+  isFiniteNumber(value.consecutive_correct) && isFiniteNumber(value.repetitions) &&
+  isFiniteNumber(value.interval_days) && isFiniteNumber(value.ease_factor) && typeof value.last_result === 'boolean' &&
+  isIsoDate(value.last_reviewed_at) && isIsoDate(value.due_at) && isIsoDate(value.created_at) && isIsoDate(value.updated_at)
+
 export function serializeGuestCardProgress(progress: FlashcardCardProgress[]) {
   const cards = Object.fromEntries(progress.map((entry) => [entry.card_id, entry]))
   return JSON.stringify({ version: FLASHCARD_SRS_VERSION, cards } satisfies StoredCardProgress)
@@ -45,9 +54,10 @@ export function serializeGuestCardProgress(progress: FlashcardCardProgress[]) {
 export function parseGuestCardProgress(value: string | null, validCardIds?: Set<string>) {
   if (!value) return []
   try {
-    const stored = JSON.parse(value) as StoredCardProgress
-    if (stored.version !== FLASHCARD_SRS_VERSION || !stored.cards || typeof stored.cards !== 'object') return []
-    return Object.values(stored.cards).filter((entry) => entry?.card_id && (!validCardIds || validCardIds.has(entry.card_id)))
+    const stored: unknown = JSON.parse(value)
+    if (!isRecord(stored) || stored.version !== FLASHCARD_SRS_VERSION || !isRecord(stored.cards)) return []
+    return Object.values(stored.cards).filter((entry): entry is FlashcardCardProgress =>
+      isFlashcardCardProgress(entry) && (!validCardIds || validCardIds.has(entry.card_id)))
   } catch {
     return []
   }

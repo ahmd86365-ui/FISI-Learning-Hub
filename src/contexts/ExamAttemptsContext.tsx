@@ -4,6 +4,7 @@ import type { ExamMode, ExamResultData, SimulationQuestion } from '../lib/examSi
 import { examScore, isSimulationAnswerCorrect, toPerformanceAttempt } from '../lib/examSimulationCore'
 import { useAuth } from './AuthContext'
 import { useQuestionPerformance } from './QuestionPerformanceContext'
+import { isFiniteNumber, isIsoDate, isRecord, readValidatedArray, safeStorageSet } from '../lib/browserStorage'
 
 export interface ExamAttempt {
   id: string
@@ -22,6 +23,21 @@ export interface ExamAttempt {
   passed: boolean
   result_data: ExamResultData
 }
+
+const examModes: ExamMode[] = ['wiso_mixed', 'lesson_tests']
+const isExamResultData = (value: unknown): value is ExamResultData =>
+  isRecord(value) && Array.isArray(value.questions) && value.questions.every((question) =>
+    isRecord(question) && typeof question.questionKey === 'string' && typeof question.title === 'string') &&
+  isRecord(value.answers) && Object.values(value.answers).every((answer) =>
+    Array.isArray(answer) && answer.every((item) => typeof item === 'string'))
+const isExamAttempt = (value: unknown): value is ExamAttempt =>
+  isRecord(value) && typeof value.id === 'string' && typeof value.user_id === 'string' &&
+  examModes.includes(value.exam_mode as ExamMode) && typeof value.exam_label === 'string' &&
+  isIsoDate(value.started_at) && isIsoDate(value.submitted_at) &&
+  isFiniteNumber(value.duration_seconds) && isFiniteNumber(value.used_seconds) &&
+  isFiniteNumber(value.total_questions) && isFiniteNumber(value.correct_answers) &&
+  isFiniteNumber(value.incorrect_answers) && isFiniteNumber(value.unanswered_questions) &&
+  isFiniteNumber(value.percentage) && typeof value.passed === 'boolean' && isExamResultData(value.result_data)
 
 export interface SubmitExamInput {
   id: string
@@ -73,16 +89,7 @@ export function ExamAttemptsProvider({ children }: { children: ReactNode }) {
           setLoading(false)
         })
     } else if (isGuest) {
-      const local = localStorage.getItem('fisi_guest_exams')
-      if (local) {
-        try {
-          setAttempts(JSON.parse(local))
-        } catch {
-          setAttempts([])
-        }
-      } else {
-        setAttempts([])
-      }
+      setAttempts(readValidatedArray('local', 'fisi_guest_exams', isExamAttempt))
       setLoading(false)
     } else {
       setAttempts([])
@@ -164,7 +171,7 @@ export function ExamAttemptsProvider({ children }: { children: ReactNode }) {
       
       setAttempts((current) => {
         const newAttempts = [saved, ...current.filter((attempt) => attempt.id !== saved.id)]
-        localStorage.setItem('fisi_guest_exams', JSON.stringify(newAttempts))
+        safeStorageSet('local', 'fisi_guest_exams', JSON.stringify(newAttempts))
         return newAttempts
       })
 

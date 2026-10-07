@@ -3,9 +3,17 @@ import { useLocation, useNavigationType } from 'react-router-dom'
 import { consumePathScrollRestoration, readInternalHistory, SCROLL_POSITIONS_KEY, writeInternalHistory } from '../../lib/navigation'
 import { canonicalRecentPath, recentPagesScope, recentPageType, recordRecentPage } from '../../lib/recentPages'
 import { useAuth } from '../../contexts/AuthContext'
+import { isFiniteNumber, isRecord, readValidatedJson, safeStorageSet } from '../../lib/browserStorage'
 
-function readPositions(): Record<string, number> { try { return JSON.parse(sessionStorage.getItem(SCROLL_POSITIONS_KEY) ?? '{}') } catch { return {} } }
-function savePosition(key: string, y: number) { const values = readPositions(); values[key] = y; sessionStorage.setItem(SCROLL_POSITIONS_KEY, JSON.stringify(values)) }
+function isScrollPositions(value: unknown): value is Record<string, number> {
+  return isRecord(value) && Object.values(value).every(isFiniteNumber)
+}
+function readPositions() { return readValidatedJson('session', SCROLL_POSITIONS_KEY, isScrollPositions, {}) }
+function savePosition(key: string, y: number) {
+  const values = readPositions()
+  values[key] = y
+  safeStorageSet('session', SCROLL_POSITIONS_KEY, JSON.stringify(values))
+}
 
 export function NavigationManager() {
   const location = useLocation()

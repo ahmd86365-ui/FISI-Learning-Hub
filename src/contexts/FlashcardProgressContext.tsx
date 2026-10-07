@@ -3,12 +3,13 @@ import { useAuth } from './AuthContext'
 import { supabase } from '../lib/supabase'
 import {
   CARD_PROGRESS_STORAGE_KEY,
-  parseGuestCardProgress,
+  isFlashcardCardProgress,
   scheduleFlashcardReview,
   serializeGuestCardProgress,
   type FlashcardCardProgress,
 } from '../lib/flashcardSrs'
 import type { FlashcardQuestion, LessonFlashcardBank } from '../types/content'
+import { isFiniteNumber, isIsoDate, isRecord, readValidatedArray, safeStorageGet, safeStorageRemove, safeStorageSet } from '../lib/browserStorage'
 
 export interface FlashcardProgress {
   user_id: string
@@ -18,6 +19,27 @@ export interface FlashcardProgress {
   last_score: number
   last_total: number
   updated_at: string
+}
+
+const isFlashcardProgress = (value: unknown): value is FlashcardProgress =>
+  isRecord(value) && typeof value.user_id === 'string' && typeof value.lesson_id === 'string' &&
+  isFiniteNumber(value.completed_sessions) && isFiniteNumber(value.best_score) &&
+  isFiniteNumber(value.last_score) && isFiniteNumber(value.last_total) && isIsoDate(value.updated_at)
+
+function readGuestCardProgress() {
+  const raw = safeStorageGet('local', CARD_PROGRESS_STORAGE_KEY)
+  if (raw === null) return []
+  try {
+    const parsed: unknown = JSON.parse(raw)
+    if (!isRecord(parsed) || parsed.version !== 1 || !isRecord(parsed.cards)) throw new TypeError('Invalid card progress')
+    const values = Object.values(parsed.cards)
+    const valid = values.filter(isFlashcardCardProgress)
+    if (valid.length !== values.length) safeStorageSet('local', CARD_PROGRESS_STORAGE_KEY, serializeGuestCardProgress(valid))
+    return valid
+  } catch {
+    safeStorageRemove('local', CARD_PROGRESS_STORAGE_KEY)
+    return []
+  }
 }
 
 interface FlashcardProgressValue {
@@ -58,16 +80,8 @@ export function FlashcardProgressProvider({ children }: { children: ReactNode })
           setLoading(false)
         })
     } else if (isGuest) {
-      try {
-        setProgress(JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '[]'))
-      } catch {
-        setProgress([])
-      }
-      try {
-        setCardProgress(parseGuestCardProgress(localStorage.getItem(CARD_PROGRESS_STORAGE_KEY)))
-      } catch {
-        setCardProgress([])
-      }
+      setProgress(readValidatedArray('local', STORAGE_KEY, isFlashcardProgress))
+      setCardProgress(readGuestCardProgress())
       setError(false)
       setLoading(false)
     } else {
@@ -107,7 +121,7 @@ export function FlashcardProgressProvider({ children }: { children: ReactNode })
       }
     } else if (isGuest) {
       const nextProgress = [next, ...progress.filter((entry) => entry.lesson_id !== lessonId)]
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(nextProgress))
+      safeStorageSet('local', STORAGE_KEY, JSON.stringify(nextProgress))
     }
   }, [isGuest, progress, session?.user])
 
@@ -140,7 +154,7 @@ export function FlashcardProgressProvider({ children }: { children: ReactNode })
     } else if (isGuest) {
       setCardProgress((current) => {
         const next = [optimistic, ...current.filter((entry) => entry.card_id !== card.id)]
-        localStorage.setItem(CARD_PROGRESS_STORAGE_KEY, serializeGuestCardProgress(next))
+        safeStorageSet('local', CARD_PROGRESS_STORAGE_KEY, serializeGuestCardProgress(next))
         return next
       })
     }

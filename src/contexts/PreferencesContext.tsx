@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
+import { safeStorageGet, safeStorageSet } from '../lib/browserStorage'
 
 interface PreferencesContextValue {
   translationEnabled: boolean
@@ -9,12 +10,12 @@ const PreferencesContext = createContext<PreferencesContextValue | undefined>(un
 
 export function PreferencesProvider({ children }: { children: ReactNode }) {
   const [translationEnabled, setTranslationEnabled] = useState(() => {
-    const stored = localStorage.getItem('fisi_translation_enabled')
+    const stored = safeStorageGet('local', 'fisi_translation_enabled')
     return stored === 'true'
   })
 
   useEffect(() => {
-    localStorage.setItem('fisi_translation_enabled', String(translationEnabled))
+    safeStorageSet('local', 'fisi_translation_enabled', String(translationEnabled))
   }, [translationEnabled])
 
   const toggleTranslation = () => setTranslationEnabled((prev) => !prev)

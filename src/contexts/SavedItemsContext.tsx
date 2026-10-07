@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useAuth } from './AuthContext'
 import { supabase } from '../lib/supabase'
+import { isIsoDate, isRecord, readValidatedArray, safeStorageSet } from '../lib/browserStorage'
 
 export type SavedItemKind = 'favorite' | 'review'
 export type SavedContentType = 'lesson' | 'exercise'
@@ -14,6 +15,13 @@ export interface SavedItem {
   content_path: string
   created_at: string
 }
+
+const isSavedItem = (value: unknown): value is SavedItem =>
+  isRecord(value) && typeof value.user_id === 'string' &&
+  (value.item_kind === 'favorite' || value.item_kind === 'review') &&
+  (value.content_type === 'lesson' || value.content_type === 'exercise') &&
+  typeof value.content_id === 'string' && typeof value.content_title === 'string' &&
+  typeof value.content_path === 'string' && isIsoDate(value.created_at)
 
 export interface SavedContent {
   contentType: SavedContentType
@@ -67,16 +75,7 @@ export function SavedItemsProvider({ children }: { children: ReactNode }) {
           setLoading(false)
         })
     } else if (isGuest) {
-      const local = localStorage.getItem('fisi_guest_saved')
-      if (local) {
-        try {
-          setItems(JSON.parse(local))
-        } catch {
-          setItems([])
-        }
-      } else {
-        setItems([])
-      }
+      setItems(readValidatedArray('local', 'fisi_guest_saved', isSavedItem))
       setLoading(false)
     } else {
       setItems([])
@@ -161,7 +160,7 @@ export function SavedItemsProvider({ children }: { children: ReactNode }) {
           setError(saveError.message)
         }
       } else if (isGuest) {
-        localStorage.setItem('fisi_guest_saved', JSON.stringify(newItems))
+        safeStorageSet('local', 'fisi_guest_saved', JSON.stringify(newItems))
       }
 
       setPendingKeys((current) => {

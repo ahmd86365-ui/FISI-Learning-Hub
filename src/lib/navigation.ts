@@ -1,3 +1,5 @@
+import { readValidatedArray, safeStorageGet, safeStorageRemove, safeStorageSet } from './browserStorage'
+
 export const INTERNAL_HISTORY_KEY = 'fisi_internal_navigation_v1'
 export const SCROLL_POSITIONS_KEY = 'fisi_scroll_positions_v1'
 export const SCROLL_RETURN_PATH_KEY = 'fisi_scroll_return_path_v1'
@@ -5,13 +7,13 @@ export const SCROLL_RETURN_PATH_KEY = 'fisi_scroll_return_path_v1'
 export interface InternalHistoryEntry { key: string; path: string }
 
 export function requestPathScrollRestoration(path: string) {
-  if (isSafeInternalPath(path)) sessionStorage.setItem(SCROLL_RETURN_PATH_KEY, path)
+  if (isSafeInternalPath(path)) safeStorageSet('session', SCROLL_RETURN_PATH_KEY, path)
 }
 
 export function consumePathScrollRestoration(path: string) {
-  const requested = sessionStorage.getItem(SCROLL_RETURN_PATH_KEY)
+  const requested = safeStorageGet('session', SCROLL_RETURN_PATH_KEY)
   if (requested !== path) return false
-  sessionStorage.removeItem(SCROLL_RETURN_PATH_KEY)
+  safeStorageRemove('session', SCROLL_RETURN_PATH_KEY)
   return true
 }
 
@@ -53,15 +55,13 @@ export function withReturnPath(path: string, returnPath: string, parameter = 'so
 }
 
 export function readInternalHistory(): InternalHistoryEntry[] {
-  try {
-    const parsed = JSON.parse(sessionStorage.getItem(INTERNAL_HISTORY_KEY) ?? '[]')
-    return Array.isArray(parsed) ? parsed.filter((entry): entry is InternalHistoryEntry =>
-      Boolean(entry && typeof entry.key === 'string' && isSafeInternalPath(entry.path))) : []
-  } catch { return [] }
+  return readValidatedArray('session', INTERNAL_HISTORY_KEY, (entry): entry is InternalHistoryEntry =>
+    Boolean(entry && typeof entry === 'object' && typeof (entry as InternalHistoryEntry).key === 'string' &&
+      isSafeInternalPath((entry as InternalHistoryEntry).path)))
 }
 
 export function writeInternalHistory(entries: InternalHistoryEntry[]) {
-  sessionStorage.setItem(INTERNAL_HISTORY_KEY, JSON.stringify(entries.slice(-50)))
+  safeStorageSet('session', INTERNAL_HISTORY_KEY, JSON.stringify(entries.slice(-50)))
 }
 
 export function getPreviousInternalPath(currentKey: string, allowLatestEntry = false) {

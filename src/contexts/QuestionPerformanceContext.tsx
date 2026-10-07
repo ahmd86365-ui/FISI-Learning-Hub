@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from './AuthContext'
+import { isFiniteNumber, isIsoDate, isRecord, readValidatedArray, safeStorageSet } from '../lib/browserStorage'
 
 export type TrackedQuestionType = 'lesson_exercise' | 'lesson_test' | 'ap_exam' | 'wiso_exam'
 
@@ -47,6 +48,18 @@ export interface QuestionPerformance {
   last_answered_at: string
 }
 
+const trackedQuestionTypes: TrackedQuestionType[] = ['lesson_exercise', 'lesson_test', 'ap_exam', 'wiso_exam']
+const isQuestionPerformance = (value: unknown): value is QuestionPerformance =>
+  isRecord(value) && typeof value.user_id === 'string' && typeof value.question_key === 'string' &&
+  typeof value.question_id === 'string' && trackedQuestionTypes.includes(value.question_type as TrackedQuestionType) &&
+  typeof value.source_id === 'string' && typeof value.title === 'string' &&
+  (value.subject_label === null || typeof value.subject_label === 'string') &&
+  (value.module_label === null || typeof value.module_label === 'string') &&
+  typeof value.content_path === 'string' && isRecord(value.question_data) && typeof value.question_data.prompt === 'string' &&
+  isFiniteNumber(value.attempts) && isFiniteNumber(value.correct_answers) &&
+  isFiniteNumber(value.incorrect_answers) && isFiniteNumber(value.consecutive_correct) &&
+  typeof value.last_result === 'boolean' && isIsoDate(value.last_answered_at)
+
 interface QuestionPerformanceContextValue {
   performance: QuestionPerformance[]
   loading: boolean
@@ -86,16 +99,7 @@ export function QuestionPerformanceProvider({ children }: { children: ReactNode 
       }
       setLoading(false)
     } else if (isGuest) {
-      const local = localStorage.getItem('fisi_guest_performance')
-      if (local) {
-        try {
-          setPerformance(JSON.parse(local))
-        } catch {
-          setPerformance([])
-        }
-      } else {
-        setPerformance([])
-      }
+      setPerformance(readValidatedArray('local', 'fisi_guest_performance', isQuestionPerformance))
       setLoading(false)
     } else {
       setPerformance([])
@@ -153,7 +157,7 @@ export function QuestionPerformanceProvider({ children }: { children: ReactNode 
           last_answered_at: new Date().toISOString(),
         }
         const newPerformance = [updated, ...current.filter((entry) => entry.question_key !== attempt.questionKey)]
-        localStorage.setItem('fisi_guest_performance', JSON.stringify(newPerformance))
+        safeStorageSet('local', 'fisi_guest_performance', JSON.stringify(newPerformance))
         return newPerformance
       })
     }

@@ -11,10 +11,11 @@ const compile = async (path, stripImports = false) => {
 }
 
 const sidebar = await compile('src/lib/sidebarState.ts')
-const navigationSource = await read('src/lib/navigation.ts')
+const storageSource = await read('src/lib/browserStorage.ts')
+const navigationSource = (await read('src/lib/navigation.ts')).replace(/^import .*$/gm, '')
 const recentSource = (await read('src/lib/recentPages.ts')).replace(/^import .*$/gm, '')
 const shareSource = (await read('src/lib/share.ts')).replace(/^import .*$/gm, '')
-const combined = ts.transpileModule(`${navigationSource}\n${recentSource}\n${shareSource}`, { compilerOptions: { module: ts.ModuleKind.ES2022, target: ts.ScriptTarget.ES2022 } }).outputText
+const combined = ts.transpileModule(`${storageSource}\n${navigationSource}\n${recentSource}\n${shareSource}`, { compilerOptions: { module: ts.ModuleKind.ES2022, target: ts.ScriptTarget.ES2022 } }).outputText
 const usability = await import(`data:text/javascript;base64,${Buffer.from(combined).toString('base64')}`)
 const recent = usability
 const share = usability
@@ -63,6 +64,12 @@ assert.equal(legacyStorage.getItem(recent.RECENT_PAGES_KEY) !== null, true)
 assert.equal(recent.readRecentPages(guestScope, legacyStorage)[0].title, 'Legacy Gast')
 assert.equal(recent.readRecentPages(guestScope, legacyStorage).length, 1)
 assert.equal(legacyStorage.getItem(recent.RECENT_PAGES_KEY), null, 'Legacy key must be removed after guest migration')
+
+const fullStorage = memoryStorage()
+fullStorage.setItem(recent.RECENT_PAGES_KEY, JSON.stringify([item('/it/linux/terminal-und-erste-befehle', 'Bleibt erhalten', 'lesson')]))
+fullStorage.setItem = () => { throw new DOMException('full', 'QuotaExceededError') }
+assert.equal(recent.readRecentPages(guestScope, fullStorage)[0].title, 'Bleibt erhalten')
+assert.notEqual(fullStorage.getItem(recent.RECENT_PAGES_KEY), null, 'Legacy data must remain when scoped migration cannot be saved')
 
 assert.equal(sidebar.validStoredModule('linux', ['linux', 'netzwerk']), 'linux')
 assert.equal(sidebar.validStoredModule('stale', ['linux', 'netzwerk']), null)

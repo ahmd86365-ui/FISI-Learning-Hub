@@ -1,4 +1,5 @@
 import { isSafeInternalPath } from './navigation'
+import { safeStorageGet, safeStorageRemove, safeStorageSet, type StorageLike } from './browserStorage'
 
 export const RECENT_PAGES_KEY = 'fisi_recent_pages'
 export const RECENT_PAGES_EVENT = 'fisi:recent-pages'
@@ -6,7 +7,6 @@ export const RECENT_PAGES_LIMIT = 10
 export type RecentPagesScope = 'guest' | `user:${string}`
 export type RecentPageType = 'lesson' | 'reference' | 'lab' | 'flashcards' | 'glossary' | 'exam' | 'review' | 'errors'
 export interface RecentPage { path: string; title: string; type: RecentPageType; visitedAt: string }
-type RecentPagesStorage = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>
 
 export function recentPagesScope(userId: string | null | undefined, isGuest: boolean): RecentPagesScope | null {
   if (userId?.trim()) return `user:${encodeURIComponent(userId.trim())}`
@@ -52,20 +52,32 @@ export function addRecentPage(current: RecentPage[], item: RecentPage) {
   return [item, ...current.filter((entry) => entry.path !== item.path)].slice(0, RECENT_PAGES_LIMIT)
 }
 
-export function readRecentPages(scope: RecentPagesScope, storage: RecentPagesStorage = localStorage) {
+export function readRecentPages(scope: RecentPagesScope, storage?: StorageLike) {
   const scopedKey = recentPagesStorageKey(scope)
-  const scopedRaw = storage.getItem(scopedKey)
-  if (scope === 'guest' && storage.getItem(RECENT_PAGES_KEY) !== null) {
-    if (scopedRaw === null) storage.setItem(scopedKey, JSON.stringify(parseRecentPages(storage.getItem(RECENT_PAGES_KEY))))
-    storage.removeItem(RECENT_PAGES_KEY)
-    return parseRecentPages(storage.getItem(scopedKey))
+  const scopedRaw = safeStorageGet('local', scopedKey, storage)
+  const legacyRaw = scope === 'guest' ? safeStorageGet('local', RECENT_PAGES_KEY, storage) : null
+  if (legacyRaw !== null) {
+    const legacyPages = parseRecentPages(legacyRaw)
+    const migrated = scopedRaw !== null || safeStorageSet('local', scopedKey, JSON.stringify(legacyPages), storage)
+    if (!migrated) return legacyPages
+    safeStorageRemove('local', RECENT_PAGES_KEY, storage)
+    return parseRecentPages(safeStorageGet('local', scopedKey, storage))
   }
-  return parseRecentPages(scopedRaw)
+  const parsed = parseRecentPages(scopedRaw)
+  if (scopedRaw !== null) {
+    try {
+      const source = JSON.parse(scopedRaw)
+      if (!Array.isArray(source) || source.length !== parsed.length) safeStorageSet('local', scopedKey, JSON.stringify(parsed), storage)
+    } catch {
+      safeStorageRemove('local', scopedKey, storage)
+    }
+  }
+  return parsed
 }
 
-export function recordRecentPage(scope: RecentPagesScope, item: RecentPage, storage: RecentPagesStorage = localStorage) {
+export function recordRecentPage(scope: RecentPagesScope, item: RecentPage, storage?: StorageLike) {
   const next = addRecentPage(readRecentPages(scope, storage), item)
-  storage.setItem(recentPagesStorageKey(scope), JSON.stringify(next))
+  safeStorageSet('local', recentPagesStorageKey(scope), JSON.stringify(next), storage)
   if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent(RECENT_PAGES_EVENT, { detail: { scope } }))
   return next
 }

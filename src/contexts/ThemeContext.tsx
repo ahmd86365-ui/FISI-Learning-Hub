@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { safeStorageGet, safeStorageSet } from '../lib/browserStorage'
 
 export type Theme = 'light' | 'dark' | 'system'
 export type ResolvedTheme = 'light' | 'dark'
@@ -8,7 +9,7 @@ const STORAGE_KEY = 'fisi-theme'
 
 function getInitialTheme(): Theme {
   if (typeof window === 'undefined') return 'system'
-  const stored = window.sessionStorage.getItem(STORAGE_KEY)
+  const stored = safeStorageGet('session', STORAGE_KEY)
   return stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'system'
 }
 function systemTheme(): ResolvedTheme { return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light' }
@@ -29,7 +30,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     root.classList.toggle('dark', resolvedTheme === 'dark')
     root.style.colorScheme = resolvedTheme
     root.dataset.theme = theme
-    window.sessionStorage.setItem(STORAGE_KEY, theme)
+    safeStorageSet('session', STORAGE_KEY, theme)
   }, [resolvedTheme, theme])
 
   const value = useMemo<ThemeContextValue>(() => ({
