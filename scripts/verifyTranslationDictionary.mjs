@@ -16,10 +16,10 @@ const dictionaryBeforeSecondPass = { ...expansionDictionary, ...baseDictionary }
 const dictionary = { ...secondExpansionDictionary, ...dictionaryBeforeSecondPass }
 const keys = Object.keys(dictionary)
 
-assert.equal(baseEntries.length, 1907, 'Unexpected base dictionary entry count')
-assert.equal(Object.keys(dictionaryBeforeSecondPass).length, 3426, 'Unexpected pre-second-pass entry count')
+assert.equal(baseEntries.length, 1916, 'Unexpected base dictionary entry count')
+assert.equal(Object.keys(dictionaryBeforeSecondPass).length, 3435, 'Unexpected pre-second-pass entry count')
 assert.ok(keys.length - Object.keys(dictionaryBeforeSecondPass).length >= 1200, 'Second pass must contain at least 1,200 new unique entries')
-assert.equal(keys.length, 5384, 'Unexpected merged dictionary entry count')
+assert.equal(keys.length, 5393, 'Unexpected merged dictionary entry count')
 assert.equal(keys.length - Object.keys(dictionaryBeforeSecondPass).length, 1958, 'Unexpected second-pass unique expansion count')
 assert.equal(expansionEntries.length, new Set(expansionEntries.map((match) => match[1])).size, 'Duplicate expansion key')
 assert.equal(secondExpansionEntries.length, new Set(secondExpansionEntries.map((match) => match[1])).size, 'Duplicate second expansion key')
@@ -70,6 +70,7 @@ for (const term of ['jobnummer', 'paketliste', 'prozess-id', 'signal']) {
   assert.ok(dictionary[term], `Missing Linux Tag 9/10 translation: ${term}`)
 }
 for (const term of ['alias', 'aliase', 'cron', 'cronjob', 'cronjobs', 'crontab', 'platzhalter', 'rekursiv']) assert.ok(dictionary[term], `Missing Linux Tag 11/12 translation: ${term}`)
+for (const term of ['werkzeugkasten', 'rechnerzustand', 'zeitstempel', 'dienstmanager', 'webserver', 'statuscode', 'statuscodes', 'logdatei', 'logdateien']) assert.ok(dictionary[term], `Missing Linux Tag 13 translation: ${term}`)
 
 for (const phrase of ['zugriff verweigert', 'datei erstellen', 'datei löschen', 'benutzer hinzufügen', 'rechte ändern', 'verbindung herstellen', 'netzwerk konfigurieren', 'fehler beheben', 'dienst starten', 'dienst stoppen', 'paket installieren', 'aktuelle version', 'lokale adresse', 'öffentliche ip-adresse', 'ausführbare datei', 'versteckte datei', 'rekursiv löschen', 'sicheren zugriff', 'administratorrechte', 'grundlegende kenntnisse']) {
   assert.ok(dictionary[phrase], `Missing requested phrase: ${phrase}`)

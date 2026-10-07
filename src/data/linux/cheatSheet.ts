@@ -124,6 +124,19 @@ export const linuxCheatSheetSections: LinuxCheatSheetSection[] = [
     entry('Datei als Crontab von rosa', 'crontab -u rosa rosa-jobs.txt im Skript mit sudo'),
     entry('Erst Crontab, dann Benutzer löschen', 'sudo crontab -u rosa -r und sudo userdel -r rosa'),
   ] },
+  { tag: 13, title: 'Dein Werkzeugkasten', entries: [
+    entry('Name des Rechners', 'hostname'),
+    entry('Wie lange läuft er schon?', 'uptime -p'),
+    entry('Arbeitsspeicher', 'free -h'),
+    entry('Platz auf der Festplatte', 'df -h /'),
+    entry('Ausgabe mitten im Text', 'echo "Rechner: $(hostname)"'),
+    entry('Datum und Uhrzeit für Namen', 'date +%Y-%m-%d_%H-%M-%S'),
+    entry('Ordner kopieren', 'cp -r quelle ziel'),
+    entry('Alias für immer', 'echo "alias platz=\'~/linux-kurs/tag13/platz.sh\'" >> ~/.bashrc'),
+    entry('.bashrc neu einlesen', 'source ~/.bashrc'),
+    entry('Jeden Tag um 12 Uhr', '0 12 * * * ~/linux-kurs/tag13/platz.sh >> ~/linux-kurs/tag13/platz.log 2>&1'),
+    entry('Skript startet Skript', 'ganzer Pfad, zum Beispiel ~/linux-kurs/tag13/platz.sh'),
+  ] },
 ]
 
 export const linuxCheatSheetTags = new Set(linuxCheatSheetSections.map((section) => section.tag))

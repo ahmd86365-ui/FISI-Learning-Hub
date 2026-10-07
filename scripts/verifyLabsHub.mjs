@@ -17,7 +17,7 @@ const labIds = new Set(labRegistry.map((lab) => lab.id))
 const guidedIds = ['workstation-ipv4', 'routing-next-hop', 'osi-diagnosis', 'linux-orientation']
 const validRoutes = new Set(['/it/linux/lab', '/practice/linux-tag-2', '/practice/linux-tag-3', '/practice/subnetting', ...guidedIds.map((id) => `/practice/labs/${id}`)])
 
-assert.equal(lessons.length, 106, 'Der vollständige Katalog muss 106 Lektionen enthalten')
+assert.equal(lessons.length, 108, 'Der vollständige Katalog muss 108 Lektionen enthalten')
 assert.equal(labRegistry.length, 8)
 assert.equal(labIds.size, labRegistry.length, 'Lab-IDs müssen eindeutig sein')
 for (const lab of labRegistry) assert.ok(validRoutes.has(lab.route), `Ungültige Lab-Route: ${lab.route}`)
@@ -41,9 +41,11 @@ for (const [lessonId, mappings] of Object.entries(lessonLabMap)) {
 
 const mappedIds = Object.keys(lessonLabMap)
 assert.equal(mappedIds.length, 14)
-assert.equal(lessons.length - mappedIds.length, 92)
+assert.equal(lessons.length - mappedIds.length, 94)
 assert.ok(!lessonLabMap['topic-linux-11-suchen-aliase-und-variablen'], 'Tag 11 darf ohne passende Simulation kein Lab-Mapping erhalten')
 assert.ok(!lessonLabMap['topic-linux-12-cronjobs'], 'Tag 12 darf ohne cron-Simulation kein Lab-Mapping erhalten')
+assert.ok(!lessonLabMap['topic-linux-13-dein-werkzeugkasten'], 'Tag 13 darf ohne verlässliche Skript-/cron-Simulation kein Lab-Mapping erhalten')
+assert.ok(!lessonLabMap['topic-linux-13-extra-linux-als-server'], 'Das Server-Extra darf ohne systemd/nginx-Simulation kein Lab-Mapping erhalten')
 assert.equal(lessonLabMap['topic-netz-neu-subnetting'][0].labId, 'subnetting-trainer')
 assert.equal(lessonLabMap['topic-netz-neu-statisches-routing'][0].labId, 'praxis-routing-next-hop')
 assert.equal(lessonLabMap['topic-linux-08-dateirechte-und-sudo'][0].deepLink.challenge, 'report-permission')
