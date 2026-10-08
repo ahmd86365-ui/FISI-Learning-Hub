@@ -46,7 +46,7 @@ export default function LinuxCheatSheet() {
       <PageHeader
         eyebrow="Linux"
         title="Linux Spickzettel"
-        description="Befehle und Fehlerhilfen aus den Linux-Tagen 2 bis 13 – kompakt, durchsuchbar und direkt bei der passenden Lektion erreichbar."
+        description="Befehle und Fehlerhilfen aus den Linux-Tagen 2 bis 14 – kompakt, durchsuchbar und direkt bei der passenden Lektion erreichbar."
         accent="brand"
         breadcrumb={<Breadcrumb items={[{ label: 'Home', to: '/' }, { label: 'IT', to: '/it' }, { label: 'Linux', to: '/it/linux' }, { label: 'Spickzettel' }]} />}
       />

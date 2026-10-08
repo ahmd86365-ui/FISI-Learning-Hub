@@ -2,9 +2,20 @@ import type { SearchResultItem } from '../types/content'
 import { subjects, getSubjectBySlug } from '../data/subjects'
 import { modules } from '../data/modules'
 import { linuxCheatSheetSections } from '../data/linux/cheatSheet'
+import type { ContentBlock } from '../types/content'
 
 function matches(query: string, ...fields: string[]): boolean {
   return fields.some((field) => field.toLowerCase().includes(query))
+}
+
+function contentText(block: ContentBlock): string {
+  if ('text' in block) return block.text
+  if (block.type === 'list' || block.type === 'key-points') return block.items.join(' ')
+  if (block.type === 'table') return [...block.headers, ...block.rows.flat()].join(' ')
+  if (block.type === 'code') return block.code
+  if (block.type === 'image' || block.type === 'diagram') return `${block.alt} ${block.caption ?? ''}`
+  if (block.type === 'illustration' || block.type === 'interactive') return `${block.component} ${block.caption ?? ''}`
+  return ''
 }
 
 /**
@@ -52,11 +63,12 @@ export async function search(query: string): Promise<SearchResultItem[]> {
     for (const topic of mod.topics) {
       const topicPath = `${subjectPath}/${mod.slug}/${topic.slug}`
 
-      if (matches(q, topic.title, topic.shortIntro ?? '')) {
+      const matchingContent = topic.content.filter((block) => matches(q, contentText(block)))
+      if (matches(q, topic.title, topic.shortIntro ?? '') || matchingContent.length > 0) {
         results.push({
           id: `topic-${topic.id}`,
           title: topic.title,
-          excerpt: topic.shortIntro ?? '',
+          excerpt: matchingContent.length > 0 ? contentText(matchingContent[0]).slice(0, 180) : topic.shortIntro ?? '',
           type: 'topic',
           subject: mod.subjectSlug,
           path: topicPath,

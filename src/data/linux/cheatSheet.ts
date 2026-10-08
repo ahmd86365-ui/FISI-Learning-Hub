@@ -137,6 +137,17 @@ export const linuxCheatSheetSections: LinuxCheatSheetSection[] = [
     entry('Jeden Tag um 12 Uhr', '0 12 * * * ~/linux-kurs/tag13/platz.sh >> ~/linux-kurs/tag13/platz.log 2>&1'),
     entry('Skript startet Skript', 'ganzer Pfad, zum Beispiel ~/linux-kurs/tag13/platz.sh'),
   ] },
+  { tag: 14, title: 'Übungsskript und Ablauf der Klausur', entries: [
+    entry('Langes Skript als root starten', 'chmod +x firma.sh', 'sudo ./firma.sh'),
+    entry('Passwort im Skript setzen', "echo 'lena:Start123' | chpasswd"),
+    entry('Benutzer mit Home anlegen', 'useradd -m lena'),
+    entry('Benutzer zu Gruppe ergänzen', 'usermod -aG devteam lena'),
+    entry('Besitzer und Gruppe setzen', 'chown lena:devteam /srv/projekte'),
+    entry('Crontab eines Benutzers bearbeiten', 'crontab -u timo -e'),
+    entry('Crontab eines Benutzers zeigen', 'crontab -u timo -l'),
+    entry('Kurzen Git-Verlauf prüfen', 'git log --oneline'),
+    entry('Rechner neu starten', 'reboot'),
+  ] },
 ]
 
 export const linuxCheatSheetTags = new Set(linuxCheatSheetSections.map((section) => section.tag))

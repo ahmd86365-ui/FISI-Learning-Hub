@@ -1934,6 +1934,13 @@ const baseDictionary: Record<string, string> = {
   'schwierig': 'صعب',
   'unvollständig': 'غير كامل',
   'optional': 'اختياري',
+  'erreichbarkeit': 'إمكانية الوصول',
+  'host-schlüssel': 'مفتاح المضيف',
+  'fernbefehl': 'أمر عن بُعد',
+  'kommentarkopf': 'رأس التعليقات',
+  'abschnittskommentar': 'تعليق القسم',
+  'nicht-idempotent': 'غير قابل للتكرار بنفس النتيجة',
+  'imperativ': 'صيغة الأمر',
   'nicht verfügbar': 'غير متاح',
   'fehlgeschlagen': 'فشل',
 }

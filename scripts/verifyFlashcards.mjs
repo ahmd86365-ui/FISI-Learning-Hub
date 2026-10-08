@@ -49,7 +49,7 @@ for (const bank of flashcardBanks) {
   }
 }
 
-if (globalIds.size !== 2987) failures.push(`expected 2987 globally unique card ids, received ${globalIds.size}`)
+if (globalIds.size !== 3023) failures.push(`expected 3023 globally unique card ids, received ${globalIds.size}`)
 
 if (failures.length) {
   console.error(failures.join('\n'))
@@ -74,7 +74,7 @@ console.log(JSON.stringify({
   questionTypes: typeCounts,
   byModule,
   newLinuxLessons: flashcardBanks
-    .filter((bank) => ['topic-linux-09-prozesse-und-pakete', 'topic-linux-10-wiederholung-woche-2-support', 'topic-linux-11-suchen-aliase-und-variablen', 'topic-linux-12-cronjobs', 'topic-linux-13-dein-werkzeugkasten', 'topic-linux-13-extra-linux-als-server'].includes(bank.lessonId))
+    .filter((bank) => ['topic-linux-09-prozesse-und-pakete', 'topic-linux-10-wiederholung-woche-2-support', 'topic-linux-11-suchen-aliase-und-variablen', 'topic-linux-12-cronjobs', 'topic-linux-13-dein-werkzeugkasten', 'topic-linux-13-extra-linux-als-server', 'topic-linux-14-uebungsskript-und-ablauf-der-klausur'].includes(bank.lessonId))
     .map((bank) => ({ lessonId: bank.lessonId, questions: bank.questions.length })),
   belowTarget: flashcardBanks.filter((bank) => bank.questions.length < 10).map((bank) => ({
     lesson: bank.lessonTitle,

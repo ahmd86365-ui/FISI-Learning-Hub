@@ -53,8 +53,9 @@ export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }
   const topicIndex = mod.topics.findIndex((entry) => entry.id === topic.id)
   const nextTopic = mod.topics[topicIndex + 1]
   const quickActions: QuickAction[] = [{ to: `/lernkarten/${encodeURIComponent(topic.id)}?source=${encodeURIComponent(lessonPath)}`, label: 'Lernkarten', kind: 'cards' }]
-  const linuxCheatSheet = mod.slug === 'linux' ? linuxCheatSheetSectionForTag(topic.order) : undefined
-  if (linuxCheatSheet) quickActions.push({ to: `/it/linux/spickzettel?tag=${topic.order}&source=${encodeURIComponent(lessonPath)}`, label: 'Spickzettel', kind: 'reference' })
+  const linuxCheatSheetTag = topic.slug === 'uebungsskript-und-ablauf-der-klausur' ? 14 : topic.order
+  const linuxCheatSheet = mod.slug === 'linux' && topic.slug !== 'extra-linux-als-server' ? linuxCheatSheetSectionForTag(linuxCheatSheetTag) : undefined
+  if (linuxCheatSheet) quickActions.push({ to: `/it/linux/spickzettel?tag=${linuxCheatSheetTag}&source=${encodeURIComponent(lessonPath)}`, label: 'Spickzettel', kind: 'reference' })
   const firstLab = getLessonLabs(topic.id)[0]
   if (firstLab) quickActions.push({ to: labHref(firstLab.lab, firstLab.mapping, lessonPath), label: 'Lab', kind: 'lab' })
   if (nextTopic) quickActions.push({ to: `${subject.path}/${mod.slug}/${nextTopic.slug}`, label: 'Weiter', kind: 'next' })
@@ -96,7 +97,7 @@ export default function LessonPage({ subjectSlug }: { subjectSlug: SubjectSlug }
 
             <FlashcardLessonAction lessonId={topic.id} lessonPath={lessonPath} />
 
-            {linuxCheatSheet && <LinuxCheatSheetAction tag={topic.order} lessonPath={lessonPath} />}
+            {linuxCheatSheet && <LinuxCheatSheetAction tag={linuxCheatSheetTag} lessonPath={lessonPath} />}
 
             {appliedExercises.length > 0 && (
               <section className="mt-14">

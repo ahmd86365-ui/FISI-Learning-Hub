@@ -164,12 +164,15 @@ function deduplicate(questions: FlashcardQuestion[]) {
 export function createFlashcardBank(topic: Topic, subjectSlug: LessonFlashcardBank['subjectSlug']): LessonFlashcardBank {
   const fromExercises = topic.exercises.map((exercise) => exerciseQuestion(topic, exercise)).filter(Boolean) as FlashcardQuestion[]
   if (topic.flashcards) {
+    const questionLimit = topic.id === 'topic-linux-13-extra-linux-als-server'
+      ? fromExercises.length + topic.flashcards.length
+      : MAX_QUESTIONS_PER_LESSON
     return {
       lessonId: topic.id,
       lessonTitle: topic.title,
       moduleSlug: topic.moduleSlug,
       subjectSlug,
-      questions: deduplicate([...fromExercises, ...topic.flashcards]).slice(0, MAX_QUESTIONS_PER_LESSON),
+      questions: deduplicate([...fromExercises, ...topic.flashcards]).slice(0, questionLimit),
     }
   }
   const fromTables = topic.content.flatMap((block) => block.type === 'table' ? tableQuestions(topic, block) : [])
