@@ -1997,6 +1997,44 @@ handhabung|طريقة الاستخدام والتعامل
 abfallvermeidung|تجنب النفايات
 ausbildungszeit|وقت التدريب المهني
 brandschutz|الوقاية من الحريق
+rip|بروتوكول معلومات التوجيه (RIP)
+ripv1|الإصدار الأول من بروتوكول RIP
+ripv2|الإصدار الثاني من بروتوكول RIP
+ospf|بروتوكول أقصر مسار أولاً (OSPF)
+distance vector|متجه المسافة
+link state|حالة الوصلة
+link-state-datenbank|قاعدة بيانات حالة الوصلات
+shortest path tree|شجرة أقصر المسارات
+area border router|موجّه حدود المنطقة
+ethertype|نوع بروتوكول الحمولة في إطار إيثرنت
+frameanalyse|تحليل إطار البيانات
+next header|الترويسة التالية
+hop limit|حد القفزات
+flow label|معرّف تدفق البيانات
+slaac|التهيئة الذاتية عديمة الحالة لعناوين IPv6
+interface-teil|جزء الواجهة من عنوان IPv6
+adresslebensdauer|مدة صلاحية العنوان
+vlan|شبكة محلية افتراضية
+access-port|منفذ وصول لشبكة افتراضية واحدة
+trunk-port|منفذ جذع لنقل عدة شبكات افتراضية
+vlan-tag|وسم الشبكة المحلية الافتراضية
+inter-vlan-routing|التوجيه بين الشبكات المحلية الافتراضية
+broadcast-domäne|نطاق البث
+strukturierte verkabelung|كابلات شبكية مهيكلة
+primärverkabelung|كابلات المستوى الأساسي بين المباني
+sekundärverkabelung|كابلات المستوى الثانوي داخل المبنى
+tertiärverkabelung|كابلات المستوى الثالث في الطابق
+lichtwellenleiter|ألياف ضوئية
+patchfeld|لوحة توصيل
+stateful inspection|فحص اتصالات ذو حالة
+default deny|المنع الافتراضي
+portknocking|فتح منفذ بعد تسلسل طرق متفق عليه
+remote-access-vpn|شبكة افتراضية خاصة للوصول عن بعد
+site-to-site-vpn|شبكة افتراضية خاصة بين موقعين
+split tunneling|تقسيم حركة المرور بين النفق والمسار المحلي
+vlsm|أقنعة شبكات فرعية بأطوال متغيرة
+supernetting|تجميع عدة شبكات في بادئة مشتركة
+übertragungsdauer|مدة نقل البيانات
 `.trim().split('\n')
 
 export const dictionaryExpansionSecond: Record<string, string> = Object.freeze(

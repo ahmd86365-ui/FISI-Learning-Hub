@@ -1,7 +1,7 @@
-import type { ContentBlock, Exercise, Topic } from '../../types/content'
+import type { ContentBlock, Exercise, FlashcardQuestion, Topic } from '../../types/content'
 
-// The only educational sources for this module are in Netzwerktechnik-Neu.
-// Worksheet answers below are calculated from the printed inputs; the PDFs contain no answer key.
+// Educational sources live in 2_Netzwerktechnik, including the hash-preserved legacy archive.
+// Where no official answer exists, exercises stay open and are explicitly labelled as transfer tasks.
 const h = (text: string): ContentBlock => ({ type: 'heading', level: 2, text })
 const p = (text: string): ContentBlock => ({ type: 'paragraph', text })
 const list = (...items: string[]): ContentBlock => ({ type: 'list', style: 'bullet', items })
@@ -20,8 +20,12 @@ const calc = (id: string, topicSlug: string, question: string, answer: string, e
 const open = (id: string, topicSlug: string, question: string, hint: string): Exercise => ({
   id: `netz-neu-${id}`, topicSlug, type: 'technical-problem', difficulty: 'hard', question, explanation: hint,
 })
-const topic = (slug: string, title: string, order: number, shortIntro: string, content: ContentBlock[], exercises: Exercise[]): Topic => ({
-  id: `topic-netz-neu-${slug}`, slug, moduleSlug: 'netzwerktechnik', title, order, shortIntro, content, exercises,
+const card = (lessonSlug: string, id: string, question: string, answer: string, explanation: string, tags: string[]): FlashcardQuestion => ({
+  id: `fc-netz-neu-${lessonSlug}-${id}`, lessonId: `topic-netz-neu-${lessonSlug}`, type: 'short-answer', difficulty: 'medium',
+  question, correctAnswer: answer, explanation, tags,
+})
+const topic = (slug: string, title: string, order: number, shortIntro: string, content: ContentBlock[], exercises: Exercise[], flashcards?: FlashcardQuestion[]): Topic => ({
+  id: `topic-netz-neu-${slug}`, slug, moduleSlug: 'netzwerktechnik', title, order, shortIntro, content, exercises, ...(flashcards ? { flashcards } : {}),
 })
 
 const model = 'osi-tcp-ip'
@@ -31,6 +35,16 @@ const cidr = 'cidr-netzgrenzen'
 const subnet = 'subnetting'
 const routing = 'statisches-routing'
 const tcp = 'tcp-verbindungen'
+const rip = 'rip-dynamisches-routing'
+const ospf = 'ospf-link-state'
+const headers = 'protokoll-header-frameanalyse'
+const ipv6 = 'ipv6-adressierung'
+const infrastructure = 'netzwerkformen-verkabelung'
+const vlan = 'vlan-switching'
+const diagnostics = 'netzwerkdienste-diagnose'
+const firewall = 'firewall-ports'
+const vpn = 'vpn-tunneling'
+const planning = 'netzwerkplanung-uebertragungsrechnung'
 
 export const netzwerktechnikTopics: Topic[] = [
   topic(model, 'OSI-Modell, TCP/IP und Protokollstapel', 1,
@@ -205,5 +219,370 @@ export const netzwerktechnikTopics: Topic[] = [
       calc('tcp-2', tcp, 'T07: Ein Segment ab Seq 10001 enthält 30 Datenbytes. Welche Ack-Nummer bestätigt es vollständig?', '10031', '10001 + 30 = 10031.'),
       calc('tcp-3', tcp, 'T07: Zwei Segmente ab Seq 5401 mit je 400 Bytes werden kumulativ bestätigt. Wie lautet Ack?', '6201', '5401 + 400 + 400 = 6201.'),
       choice('tcp-4', tcp, 'Was verbraucht beim TCP-Abbau eine Sequenznummer?', ['Ein reines ACK', 'FIN', 'Weder FIN noch ACK'], 1, 'FIN zählt eine Sequenznummer; ein reines ACK ohne Daten zählt null.'),
+    ]),
+  topic(rip, 'RIP: Dynamisches Distance-Vector-Routing', 8,
+    'Routingtabellen austauschen, Metriken bewerten und RIPv1 von RIPv2 unterscheiden.',
+    [
+      p('RIP ist ein dynamisches Intra-AS-Routingprotokoll. Router teilen ihren Nachbarn mit, welche Netze sie mit welcher Hop-Anzahl erreichen. Ein autonomes System (AS) umfasst Netze, die von einer gemeinsamen Instanz verwaltet werden; das Material nennt AS3320 als Beispiel.'),
+      ...goals('Distance Vector und Hop-Metrik erklären.', 'RIP-Updates korrekt in eine Routingtabelle übernehmen.', 'RIPv1 und RIPv2 anhand ihrer Felder unterscheiden.', 'Langsame Konvergenz und Count to Infinity nachvollziehen.'),
+      h('RIP-Updates auswerten'),
+      list('Direkt angeschlossene Netze stehen im Material mit Metrik 1 und Gateway 0.0.0.0.', 'Ein neu gelerntes Ziel übernimmt den Absender als Gateway; zur übermittelten Metrik wird 1 addiert.', 'Ein vorhandener Weg wird ersetzt, wenn der neue Weg eine kleinere Metrik besitzt.', 'Metrik 16 bedeutet unerreichbar; RIP kann daher nur kleine Netze abbilden.'),
+      ex('A13 / Lösung 13', 'Der Nachbar 192.168.7.1 meldet 10.0.0.0 mit Metrik 1. Mit dem zusätzlichen Hop ergibt sich Metrik 2; der bisherige Weg mit Metrik 3 wird durch Gateway 192.168.7.1 über eth1 ersetzt. Das neue Netz 172.16.0.0 wird mit Metrik 2 ergänzt. Schlechtere Meldungen zu bestehenden Netzen ändern nichts.'),
+      h('Zeitverhalten und langsame Konvergenz'),
+      p('Laut T08 sendet jeder Router alle 30 Sekunden seine Tabelle. Bleibt eine Nachricht aus, setzt das dargestellte Unterrichtsbeispiel betroffene Wege nach 180 Sekunden zunächst auf 15 und nach weiteren 180 Sekunden auf 16. Bei widersprüchlichen Nachbarinformationen kann die Metrik schrittweise hochgezählt werden (Count to Infinity); das Beispiel benötigt dadurch mehr als sieben Minuten bis zur Bereinigung.'),
+      h('RIPv1 und RIPv2'),
+      table(['Merkmal', 'RIPv1', 'RIPv2'], [
+        ['Transport', 'UDP, Port 520', 'UDP, Port 520'],
+        ['Verteilung laut Quelle', '255.255.255.255 Broadcast', '255.255.255.255 oder 224.0.0.9 Multicast'],
+        ['Routeneintrag', 'IP-Adresse und Metrik; Maskenfelder unbenutzt', 'Zusätzlich Route Tag, Subnetzmaske und Next Hop'],
+        ['Paketgröße', 'Bis 25 Einträge à 20 Byte; mit Headern 512 Byte', 'Bis 25 Einträge à 20 Byte; mit Headern 512 Byte'],
+      ]),
+      note('T09 beschreibt RIPv2 als Erweiterung in zuvor genullten Feldern. Für Prüfungsaufgaben ist entscheidend: RIPv2 überträgt die Subnetzmaske, RIPv1 nicht.'),
+      { type: 'key-points', items: ['RIP ist Distance Vector und bewertet Wege nach Hop-Anzahl.', 'Ein empfangener Weg kostet aus Sicht des Empfängers einen zusätzlichen Hop.', '16 ist unendlich beziehungsweise unerreichbar.', 'RIPv2 kann Subnetzmaske und Next Hop übertragen.'] },
+    ],
+    [
+      choice('rip-metric', rip, 'Ein Nachbar meldet ein neues Netz mit RIP-Metrik 1. Welche Metrik trägt der empfangende Router ein?', ['1', '2', '16'], 1, 'Der Weg zum Nachbarn kommt als zusätzlicher Hop hinzu.'),
+      choice('rip-unreachable', rip, 'Welche RIP-Metrik kennzeichnet ein unerreichbares Ziel?', ['0', '15', '16'], 2, 'Bei RIP gilt 16 als unendlich und damit als unerreichbar.'),
+      choice('rip-a13', rip, 'A13: Welcher Weg ersetzt die bestehende Route zu 10.0.0.0?', ['192.168.20.2, Metrik 3', '192.168.7.1, Metrik 2', '0.0.0.0, Metrik 1'], 1, 'Der Nachbar meldet Metrik 1; inklusive des zusätzlichen Hops ergibt sich der bessere Wert 2.'),
+      choice('rip-version', rip, 'Welches Feld ist ein wesentlicher Unterschied von RIPv2 gegenüber RIPv1?', ['Subnetzmaske im Routeneintrag', 'TCP-Sequenznummer', 'Ethernet-Präambel'], 0, 'RIPv2 überträgt unter anderem die Subnetzmaske.'),
+      open('a14', rip, 'A14: Werte die Tabelle des Nachbarn 200.20.20.9 aus. Begründe für 60.0.0.0, 33.33.0.0, 180.80.0.0 und 40.40.0.0 jeweils, ob und wie der lokale Eintrag geändert wird.', 'Lösung 14: 60.0.0.0 wird über 200.20.20.9 mit Metrik 2 besser; 33.33.0.0 bleibt über denselben Nachbarn und steigt auf 3; die Rückmeldung zu 180.80.0.0 zeigt auf den Empfänger selbst und wird nicht übernommen; 40.40.0.0 ist neu und wird mit Metrik 2 ergänzt.'),
+    ],
+    [
+      card(rip, 'metric', 'Welche Metrik bedeutet bei RIP „unerreichbar“?', '16', 'RIP begrenzt nutzbare Wege auf höchstens 15 Hops.', ['RIP', 'Metrik']),
+      card(rip, 'update', 'Wie wird die Metrik eines vom Nachbarn gemeldeten Wegs berechnet?', 'Übermittelte Metrik plus 1', 'Der zusätzliche Wert steht für den Hop zum meldenden Nachbarn.', ['RIP', 'Routingtabelle']),
+      card(rip, 'timer', 'In welchem Abstand sendet RIP laut T08 reguläre Tabellenupdates?', 'Alle 30 Sekunden', 'T08 verwendet periodische Updates im 30-Sekunden-Abstand.', ['RIP', 'Timer']),
+      card(rip, 'ripv2', 'Welche wichtige Adressinformation überträgt RIPv2 zusätzlich zu RIPv1?', 'Die Subnetzmaske', 'Dadurch kann RIPv2 präfixbezogene, nicht nur classful Routen austauschen.', ['RIPv2', 'Subnetzmaske']),
+      card(rip, 'count', 'Was beschreibt „Count to Infinity“ bei RIP?', 'Router erhöhen eine fehlerhafte Wegmetrik gegenseitig schrittweise bis 16.', 'Das ist eine Ursache langsamer Konvergenz im gezeigten Ausfallbeispiel.', ['RIP', 'Konvergenz']),
+    ]),
+  topic(ospf, 'OSPF: Link State und Shortest Path Tree', 9,
+    'Topologiewissen, Link-Kosten, Areas und kürzeste Pfade im autonomen System.',
+    [
+      p('OSPF ist ein dynamisches Intra-AS-Protokoll nach dem Link-State-Prinzip. Anders als bei RIP kennt ein Router nicht nur den ersten Schritt und die Hop-Anzahl, sondern baut aus Link-State-Informationen ein Modell der Topologie auf.'),
+      ...goals('Distance Vector und Link State unterscheiden.', 'OSPF-Kosten entlang eines Pfades addieren.', 'Link-State-Datenbank und Shortest Path Tree erklären.', 'Areas, Backbone und Area Border Router einordnen.'),
+      table(['Eigenschaft', 'RIP / Distance Vector', 'OSPF / Link State'], [
+        ['Wissen', 'Erster Schritt und gesamte Hop-Anzahl', 'Topologie des eigenen AS bzw. der Area'],
+        ['Metrik', 'Anzahl Hops', 'Konfigurierbare Link-Kosten'],
+        ['Wegwahl', 'Wenigste Router-Hops', 'Niedrigste aufsummierte Kosten'],
+        ['IP-Protokoll', 'UDP-Port 520', 'IP-Protokollnummer 89'],
+      ]),
+      h('Vom LSA zur Routingtabelle'),
+      list('Router- und Netzwerk-LSAs bilden die Link-State-Datenbank.', 'Jeder Router berechnet mit sich selbst als Wurzel einen Shortest Path Tree.', 'Aus dem Baum leitet der Router seine Routingtabelle ab.', 'Im Material verursacht der Ausgang eines Routers in ein Netz Kosten; die Richtung zurück zum Router wird mit 0 angesetzt. Gegenrichtungen dürfen unterschiedliche Kosten haben.'),
+      h('Areas strukturieren ein großes AS'),
+      p('Zusammengehörige Router und Netze bilden eine Area mit eigener Link-State-Datenbank. Die Backbone Area verbindet die übrigen Areas. Router mit Schnittstellen in mehreren Areas heißen Area Border Router. Das Material unterscheidet außerdem Stub-Netze mit nur einem angeschlossenen Router und Transit-Netze, die Verkehr weitertragen können.'),
+      ex('A16: RIP und OSPF wählen verschieden', 'Vom Berliner Fileserver zum Spiegel in Frankfurt führt RIP direkt Berlin → Frankfurt, weil dies nur ein Router-Hop ist. OSPF berücksichtigt die im Bild angegebenen Bandbreiten beziehungsweise daraus abgeleitete Kosten und kann den schnelleren Weg Berlin → Köln → Frankfurt über zwei 10-Gbit/s-Verbindungen bevorzugen statt der direkten 1-Gbit/s-Verbindung.'),
+      ex('A15: Shortest Path Tree', 'Die Musterlösung beginnt bei R1 mit Kosten 0 und erweitert immer den aktuell günstigsten Ast. Entscheidend ist nicht die optisch kürzeste Linie, sondern die kleinste Summe der gerichteten Kantenkosten. Bereits erreichte Knoten können über einen günstigeren Kandidaten ersetzt werden.'),
+      { type: 'exam-tip', text: 'Bei einem Shortest Path Tree alle Kandidatenkosten notieren und jeweils nur den kleinsten noch offenen Knoten fest übernehmen. Linkkosten werden addiert, nicht die Anzahl der gezeichneten Linien.' },
+    ],
+    [
+      choice('ospf-protocol', ospf, 'Welche IP-Protokollnummer verwendet OSPF laut T10?', ['17', '89', '520'], 1, 'OSPF trägt die IP-Protokollnummer 89; 17 steht für UDP und 520 ist der UDP-Port von RIP.'),
+      choice('ospf-database', ospf, 'Woraus berechnet ein OSPF-Router seinen Shortest Path Tree?', ['Aus der Link-State-Datenbank', 'Nur aus der ARP-Tabelle', 'Aus TCP-Bestätigungen'], 0, 'Router- und Netzwerk-LSAs bilden die Link-State-Datenbank.'),
+      choice('ospf-area', ospf, 'Wie heißt ein Router mit Schnittstellen in mehr als einer OSPF-Area?', ['Default Router', 'Area Border Router', 'Distance-Vector-Router'], 1, 'Er verbindet Areas und wird Area Border Router genannt.'),
+      choice('a16-path', ospf, 'A16: Welchen Weg kann OSPF wegen der höheren Bandbreite bevorzugen?', ['Berlin → Frankfurt direkt (1 Gbit/s)', 'Berlin → Köln → Frankfurt (je 10 Gbit/s)', 'Berlin → Internet → Frankfurt'], 1, 'OSPF bewertet Kosten und kann den zweihopfigen, aber schnelleren 10-Gbit/s-Weg wählen.'),
+    ],
+    [
+      card(ospf, 'principle', 'Welches Routingprinzip verwendet OSPF?', 'Link State', 'Jeder Router arbeitet mit einem Topologiemodell aus Link-State-Informationen.', ['OSPF', 'Link State']),
+      card(ospf, 'number', 'Welche IP-Protokollnummer gehört zu OSPF?', '89', 'Die Protokollnummer steht im IP-Header.', ['OSPF', 'Protokollnummer']),
+      card(ospf, 'lsa', 'Was bilden Router- und Netzwerk-LSAs gemeinsam?', 'Die Link-State-Datenbank', 'Aus dieser Datenbank wird der Shortest Path Tree berechnet.', ['OSPF', 'LSA']),
+      card(ospf, 'tree', 'Was ist die Wurzel des Shortest Path Tree?', 'Der berechnende Router selbst', 'Jeder Router berechnet seinen eigenen Baum.', ['OSPF', 'Shortest Path Tree']),
+      card(ospf, 'abr', 'Was ist ein Area Border Router?', 'Ein Router mit Schnittstellen in mehr als einer Area', 'Er verbindet OSPF-Areas miteinander.', ['OSPF', 'Area']),
+    ]),
+  topic(headers, 'Protokoll-Header und Ethernet-Frames analysieren', 10,
+    'Ethernet-, ARP-, IPv4-, TCP-, UDP- und ICMP-Felder aus Bytefolgen lesen.',
+    [
+      p('Ein Frame lässt sich schichtweise analysieren: Zuerst bestimmt der Ethernet-Ethertype die Nutzlast, dann benennt das Protocol-Feld des IP-Headers das Transportprotokoll, und dort führen Ports zur Anwendung. A17 und A18 liefern vollständige Hex-Traces mit Musterlösungen.'),
+      ...goals('Feldgrenzen der wichtigsten Header benennen.', 'Mehrbytewerte im Hex-Trace korrekt lesen.', 'Ein Ethernet/IPv4/TCP-Frame bis zur Anwendungsnutzlast dekodieren.', 'Protokollnummern und Ports an der richtigen Schicht einordnen.'),
+      h('Header im Überblick'),
+      table(['Einheit', 'Zentrale Felder aus T11', 'Länge / Grenze'], [
+        ['Ethernet-Frame', 'Ziel-MAC, Quell-MAC, Ethertype, Daten, CRC', 'Nutzlast 46 bis 1500 Byte; bei Bedarf Padding'],
+        ['ARP', 'Hardware-/Protokolltyp, Längen, Operation, Sender- und Zieladressen', 'Im Blatt: 28 Byte für Ethernet/IPv4 ohne Ethernet-Header'],
+        ['IPv4', 'Version, IHL, Länge, Fragmentierung, TTL, Protocol, Prüfsumme, Adressen', '20 bis 60 Byte'],
+        ['IPv6', 'Version, Traffic Class, Flow Label, Payload Length, Next Header, Hop Limit, Adressen', 'Fester Basisheader: 40 Byte'],
+        ['TCP', 'Ports, Seq, Ack, HLEN, Flags, Window, Prüfsumme, Urgent Pointer', 'Mindestens 20 Byte'],
+        ['UDP', 'Ports, Länge, Prüfsumme', '8 Byte'],
+        ['ICMP Echo', 'Type, Code, Prüfsumme, Identifier, Sequenznummer, Daten', 'Variabel'],
+      ]),
+      h('Schlüsselnummern richtig lesen'),
+      table(['Feld', 'Beispiele aus T12'], [
+        ['Ethernet Ethertype', '0x0800 IPv4, 0x0806 ARP, 0x86DD IPv6'],
+        ['IPv4 Protocol / IPv6 Next Header', '1 ICMP, 6 TCP, 17 UDP, 50 ESP, 51 AH, 89 OSPF'],
+        ['TCP/UDP Destination Port', '20/21 FTP, 23 Telnet, 25 SMTP, 53 DNS, 80 HTTP, 110 POP3, 443 HTTPS'],
+      ]),
+      ex('A17 vollständig einordnen', 'Ziel-MAC 00:60:08:6E:BD:35, Quell-MAC 00:20:AF:91:C3:6B, Ethertype 0x0800 = IPv4. IPv4: IHL 5 = 20 Byte, Gesamtlänge 66, TTL 60, Protocol 6 = TCP, Quelle 194.25.134.89, Ziel 217.251.174.212. TCP: Quelle Port 25, Ziel Port 2110, Flags ACK+PSH, Window 5840. Die ASCII-Nutzlast lautet „354 Ok, start with data.\r\n“.'),
+      ex('A18 vollständig einordnen', 'Ziel-MAC 00:20:AF:91:C3:6B, Quell-MAC 00:60:08:6E:BD:35, IPv4 von 192.168.1.1 nach 192.168.1.12 mit TTL 128 und TCP. Quellport 1026, Zielport 23 (Telnet), Flags ACK+PSH, Window 7528. Die Nutzlast 0x6C ist das Zeichen „l“.'),
+      note('T11 bezeichnet das IPv4-Protocol-Feld zusätzlich als „Next Header“. In IPv4 heißt das Feld üblicherweise Protocol; im IPv6-Basisheader heißt das entsprechende Feld Next Header.'),
+      { type: 'exam-tip', text: 'Mehrbytewerte stehen im Netzwerk in Big-Endian-Reihenfolge. Beispiel: 00 42 hex = 66 dezimal. Erst Feldlängen markieren, dann umrechnen.' },
+    ],
+    [
+      choice('header-ethertype', headers, 'Welcher Ethertype kennzeichnet IPv4?', ['0x0800', '0x0806', '0x86DD'], 0, '0x0800 steht für IPv4; 0x0806 für ARP und 0x86DD für IPv6.'),
+      choice('header-protocol', headers, 'A17 enthält im IPv4-Protocol-Feld 0x06. Was folgt?', ['UDP', 'TCP', 'OSPF'], 1, 'Die Protokollnummer 6 steht für TCP.'),
+      calc('header-length', headers, 'A17: Das IPv4-Feld Total Length enthält 00 42 hex. Wie viele Byte sind das dezimal?', '66', '0x42 = 4×16 + 2 = 66.'),
+      choice('header-a18', headers, 'A18: Welche Anwendung deutet Zielport 23 an?', ['SMTP', 'Telnet', 'DNS'], 1, 'Port 23 ist im Quellblatt Telnet zugeordnet.'),
+      open('a19', headers, 'A19: Ein IPv4-Paket kommt mit TTL 127 von Client 172.16.10.1 zum Router und verlässt ihn Richtung 51.38.104.145 über die öffentliche Adresse 203.0.113.65. Welche Felder ändern sich sicher?', 'TTL sinkt auf 126. Durch Source NAT wird die Quelladresse 203.0.113.65; die Zieladresse bleibt 51.38.104.145. Die IPv4-Header-Prüfsumme muss wegen der Änderungen neu berechnet werden.'),
+    ],
+    [
+      card(headers, 'ethertype', 'Welcher Ethertype kennzeichnet IPv6?', '0x86DD', 'Das Feld steht im Ethernet-Header.', ['Ethernet', 'IPv6']),
+      card(headers, 'ihl', 'Was bedeutet IPv4-IHL 5?', '5 × 4 Byte = 20 Byte Headerlänge', 'IHL zählt 32-Bit-Wörter.', ['IPv4', 'Header']),
+      card(headers, 'ttl', 'Was geschieht mit der IPv4-TTL an jedem Router?', 'Sie wird um 1 verringert.', 'Erreicht TTL null, darf das Paket nicht weitergeleitet werden.', ['IPv4', 'TTL']),
+      card(headers, 'protocol', 'Welche IPv4-Protokollnummer steht für TCP?', '6', 'Die Nummer 6 im Protocol-Feld kündigt einen TCP-Header an.', ['IPv4', 'TCP']),
+      card(headers, 'order', 'In welcher Byte-Reihenfolge werden Mehrbytewerte im Netz übertragen?', 'Big Endian (höchstwertiges Byte zuerst)', 'Darum ist 00 42 hex als 66 zu lesen.', ['Frameanalyse', 'Big Endian']),
+    ]),
+  topic(ipv6, 'IPv6: Adressen, Header und SLAAC', 11,
+    '128-Bit-Adressen kürzen, Präfix und Interface-ID trennen und den Basisheader lesen.',
+    [
+      p('IPv6 erweitert den Adressraum auf 128 Bit und schreibt Adressen hexadezimal in acht Gruppen. Das vorhandene T13-Material umfasst nur die Seiten 1 bis 9 einer als 20-seitig nummerierten Präsentation; diese Lektion beschränkt sich bewusst auf die tatsächlich vorhandenen Inhalte.'),
+      ...goals('IPv6-Adressen korrekt ausschreiben und kürzen.', 'Präfix und Interface-Teil unterscheiden.', 'Felder des 40-Byte-Basisheaders lesen.', 'Die im Material gezeigte SLAAC/EUI-64-Bildung nachvollziehen.'),
+      h('Warum IPv6?'),
+      list('Größerer Adressraum', 'Vereinfachte Basisheaderstruktur', 'Kürzere Routingtabellen durch Aggregation', 'Automatische Adressvergabe', 'Multicast statt IPv4-Broadcast'),
+      h('Schreibweise und Kürzung'),
+      p('Eine Adresse besteht aus acht Gruppen zu je 16 Bit. Führende Nullen einer Gruppe dürfen entfallen. Eine zusammenhängende Folge reiner Nullgruppen darf einmal durch :: ersetzt werden.'),
+      ex('Quelle T13', '2001:0000:0000:0000:0000:0000:C0A8:0E02 wird zu 2001::C0A8:E02. Das doppelte Doppelpunktzeichen darf nur einmal vorkommen, damit die Zahl der ausgelassenen Gruppen eindeutig bleibt.'),
+      h('Präfix und Interface-Teil'),
+      p('Das Beispiel 2001:0638:0500:0001:0204:75FF:FE73:64DF trennt die ersten 64 Bit als Gesamtpräfix vom 64-Bit-Interface-Teil. Die Quelle zeigt darin hierarchische Vergaben von IANA über RIPE und DFN bis zum Organisations- und Subnetzpräfix.'),
+      h('IPv6-Basisheader'),
+      table(['Feld', 'Bedeutung'], [
+        ['Version', '4 Bit; Wert 6'],
+        ['Traffic Class', '8 Bit für Verkehrsklasse/Priorisierung'],
+        ['Flow Label', '20 Bit zur Kennzeichnung eines Datenflusses'],
+        ['Payload Length', '16 Bit für die Länge nach dem Basisheader'],
+        ['Next Header', '8 Bit; nachfolgendes Protokoll oder Erweiterungsheader'],
+        ['Hop Limit', '8 Bit; entspricht funktional der IPv4-TTL'],
+        ['Source / Destination Address', 'Je 128 Bit'],
+      ]),
+      ex('A20: Next Header aus dem Trace', 'Die ersten acht Bytes lauten 60 00 00 00 00 40 11 40. Nach Version/Traffic Class/Flow Label (4 Byte) und Payload Length (2 Byte) folgt 0x11. Dezimal ist das 17 und kennzeichnet UDP.'),
+      h('SLAAC-Beispiel mit modifiziertem EUI-64'),
+      p('T13 bildet aus der MAC-Adresse 00-04-75-73-64-DF einen Interface-Identifier: Die MAC wird geteilt, FF:FE wird eingefügt und im ersten Byte das Universal/Local-Bit umgeschaltet. Aus 00 wird 02. Mit FE80:: ergibt sich FE80::0204:75FF:FE73:64DF.'),
+      note('Moderne Klarstellung: Das gezeigte modifizierte EUI-64-Verfahren ist ein nachvollziehbares Lehrbeispiel. Geräte können für SLAAC auch andere, nicht direkt aus der MAC ableitbare Interface-Identifier verwenden.'),
+      h('Adresslebensdauer'),
+      p('Nach Ablauf der bevorzugten Lebensdauer soll die Adresse nicht mehr für neue Verbindungen gewählt werden. Bis zum Ende der gültigen Lebensdauer können bestehende Verbindungen weiterlaufen; danach ist die Adresse nicht mehr gültig.'),
+      { type: 'key-points', items: ['IPv6 hat 128 Bit und acht Hex-Gruppen.', 'Ein /64 trennt im gezeigten Beispiel Präfix und Interface-Teil.', 'Der Basisheader ist 40 Byte lang.', 'Next Header 17 bedeutet UDP.', 'IPv6 verwendet keinen Broadcast.'] },
+    ],
+    [
+      choice('ipv6-bits', ipv6, 'Wie lang ist eine IPv6-Adresse?', ['32 Bit', '64 Bit', '128 Bit'], 2, 'IPv6-Adressen bestehen aus 128 Bit.'),
+      choice('ipv6-short', ipv6, 'Welche Kürzung ist für 2001:0000:0000:0000:0000:0000:C0A8:0E02 korrekt?', ['2001::C0A8:E02', '2001:::C0A8:E02', '2001:C0A8:E02::'], 0, 'Die zusammenhängenden Nullgruppen werden einmal durch :: ersetzt; die führende Null in 0E02 entfällt.'),
+      choice('ipv6-next', ipv6, 'A20: Das Next-Header-Byte ist 0x11. Welches Protokoll folgt?', ['TCP', 'UDP', 'ICMPv6'], 1, '0x11 ist dezimal 17 und steht für UDP.'),
+      choice('ipv6-hop', ipv6, 'Welches IPv6-Feld entspricht funktional der IPv4-TTL?', ['Flow Label', 'Payload Length', 'Hop Limit'], 2, 'Router verringern das Hop Limit auf dem Paketweg.'),
+      calc('ipv6-eui', ipv6, 'T13: Welches erste Byte entsteht beim U/L-Bit-Umschalten aus 00 hex?', '02', '00 binär wird durch Umschalten des betreffenden Bits zu 02 hex.'),
+    ],
+    [
+      card(ipv6, 'bits', 'Wie viele Bit hat eine IPv6-Adresse?', '128 Bit', 'Das entspricht acht Gruppen mit je 16 Bit.', ['IPv6', 'Adressierung']),
+      card(ipv6, 'compression', 'Welche zwei Kürzungsregeln gelten für IPv6-Adressen?', 'Führende Nullen weglassen; eine Folge von Nullgruppen einmal durch :: ersetzen.', 'Das :: darf nur einmal je Adresse verwendet werden.', ['IPv6', 'Schreibweise']),
+      card(ipv6, 'header', 'Wie groß ist der IPv6-Basisheader?', '40 Byte', 'Optionale Informationen folgen als Erweiterungsheader.', ['IPv6', 'Header']),
+      card(ipv6, 'next', 'Was bedeutet Next Header 17?', 'UDP', '0x11 beziehungsweise dezimal 17 kennzeichnet UDP.', ['IPv6', 'UDP']),
+      card(ipv6, 'slaac', 'Welche Bytefolge wird beim gezeigten EUI-64-Verfahren in die MAC-Adresse eingefügt?', 'FF:FE', 'Zusätzlich wird im ersten Byte das Universal/Local-Bit umgeschaltet.', ['IPv6', 'SLAAC']),
+    ]),
+  topic(infrastructure, 'Netzwerkformen, Medien und strukturierte Verkabelung', 12,
+    'Netzwerkdimensionen, Übertragungsmedien und die drei Ebenen einer Gebäudeverkabelung.',
+    [
+      p('Der ältere Grundlagenbestand ordnet Netze nach Ausdehnung und beschreibt die passive Infrastruktur, auf der Ethernet, WLAN und weitere Dienste betrieben werden. Eine gute Planung trennt dabei logische Kommunikation von Kabelwegen und aktiven Komponenten.'),
+      ...goals('PAN, LAN, MAN, WAN und GAN unterscheiden.', 'Kupfer, Lichtwellenleiter und Funk passend auswählen.', 'Primär-, Sekundär- und Tertiärverkabelung erklären.', 'Patchfeld, Datendose und Netzwerkadapter einordnen.'),
+      h('Netzwerkdimensionen und Betriebsformen'),
+      table(['Begriff', 'Typischer Bereich', 'Beispiel'], [
+        ['PAN / WPAN', 'Unmittelbare persönliche Umgebung', 'USB beziehungsweise Bluetooth'],
+        ['LAN / WLAN', 'Raum, Etage oder Gebäude', 'Geswitchtes Ethernet beziehungsweise IEEE 802.11'],
+        ['MAN', 'Stadtgebiet', 'Standortverbund innerhalb einer Stadt'],
+        ['WAN', 'Regionen und Länder', 'Provider-Verbindung zwischen Standorten'],
+        ['GAN', 'Weltweit', 'Globaler Unternehmensverbund / Internet'],
+      ]),
+      p('Ein WLAN kann als Infrastruktur-Netz mit Access Point oder als Ad-hoc-Verbindung zwischen Stationen betrieben werden. Funk ist flexibel, teilt aber das Medium und benötigt eine sorgfältige Funk- und Sicherheitsplanung.'),
+      h('Strukturierte Verkabelung'),
+      table(['Ebene', 'Auch genannt', 'Verbindet'], [
+        ['Primär', 'Geländeverkabelung / Campus Backbone', 'Gebäude untereinander'],
+        ['Sekundär', 'Gebäudeverkabelung / Building Backbone', 'Etagenverteiler mit Gebäudeverteiler'],
+        ['Tertiär', 'Etagenverkabelung / Horizontalverkabelung', 'Etagenverteiler, Datendosen und Arbeitsplätze'],
+      ]),
+      p('Patchfelder bilden feste Leitungen übersichtlich ab; kurze Patchkabel verbinden sie mit Switches oder Endgeräten. Die Quelle nennt ältere Normstände. Moderne Projekte müssen die aktuell vertraglich und normativ geltenden Ausgaben prüfen.'),
+      h('Medien auswählen'),
+      table(['Medium', 'Stärken', 'Grenzen'], [
+        ['Twisted Pair', 'Günstig, einfach zu installieren, unterstützt PoE', 'Entfernung und Störeinflüsse; Schirmung/Kategorie beachten'],
+        ['Lichtwellenleiter', 'Hohe Bandbreite, große Reichweite, unempfindlich gegen elektromagnetische Störungen', 'Aufwendigere Anschlusstechnik; Faser- und Steckertyp müssen passen'],
+        ['Funk', 'Mobilität und schnelle Erweiterung', 'Geteiltes Medium, Reichweite, Interferenzen und Schutzbedarf'],
+      ]),
+      note('Historische Begriffe wie „Westernstecker“ kommen in den Altunterlagen vor. Für Ethernet-Verkabelungen ist die präzise Bezeichnung des modularen Stecksystems und der konkreten Schnittstelle vorzuziehen.'),
+      { type: 'key-points', items: ['Eine strukturierte Verkabelung ist anwendungsneutral, dokumentierbar und erweiterbar.', 'Primär, Sekundär und Tertiär beschreiben unterschiedliche Hierarchieebenen.', 'Aktive Komponenten und passive Infrastruktur müssen getrennt geplant werden.'] },
+    ],
+    [
+      choice('infra-level', infrastructure, 'Welche Ebene verbindet typischerweise mehrere Gebäude?', ['Primärverkabelung', 'Sekundärverkabelung', 'Tertiärverkabelung'], 0, 'Die Primärverkabelung bildet den Campus- beziehungsweise Geländebackbone.'),
+      choice('infra-medium', infrastructure, 'Welches Medium ist gegenüber elektromagnetischen Störungen besonders unempfindlich?', ['Ungeschirmtes Kupfer', 'Lichtwellenleiter', 'Koaxialkabel'], 1, 'Licht überträgt das Signal ohne elektrische Einkopplung.'),
+      choice('infra-wlan', infrastructure, 'Welche Komponente kennzeichnet ein WLAN im Infrastrukturmodus?', ['Access Point', 'Token', 'Patchpanel'], 0, 'Stationen kommunizieren im Infrastrukturmodus über einen Access Point.'),
+      open('infra-plan', infrastructure, 'Quellen-Transferaufgabe: Entwirf für ein Gebäude mit drei Etagen eine Primär-/Sekundär-/Tertiärstruktur und begründe Medien, Verteiler und Reserven.', 'Für diese offene Planungsaufgabe liegt keine eindeutige Musterlösung vor. Prüfe Hierarchie, Kabellängen, Redundanz, Dokumentation und Erweiterbarkeit.'),
+    ],
+    [
+      card(infrastructure, 'levels', 'Wie heißen die drei Ebenen strukturierter Verkabelung?', 'Primär-, Sekundär- und Tertiärverkabelung', 'Sie verbinden Gelände, Gebäude und Etage beziehungsweise Arbeitsplatz.', ['Verkabelung', 'Infrastruktur']),
+      card(infrastructure, 'patch', 'Welche Aufgabe hat ein Patchfeld?', 'Es terminiert und ordnet feste Leitungen; Patchkabel stellen flexible Verbindungen zu aktiven Komponenten her.', 'So bleiben feste Installation und wechselnde Portbelegung getrennt.', ['Patchpanel', 'Verkabelung']),
+      card(infrastructure, 'fiber', 'Welcher zentrale Vorteil spricht für LWL auf Backbone-Strecken?', 'Hohe Reichweite und Bandbreite bei Unempfindlichkeit gegen elektromagnetische Störungen.', 'Die Auswahl muss zusätzlich Fasertyp und Transceiver berücksichtigen.', ['LWL', 'Backbone']),
+      card(infrastructure, 'pan', 'Wofür steht WPAN?', 'Wireless Personal Area Network', 'Es verbindet Geräte im unmittelbaren persönlichen Umfeld, beispielsweise per Bluetooth.', ['WPAN', 'Netzwerkdimension']),
+    ]),
+  topic(vlan, 'VLAN, Trunks und Inter-VLAN-Routing', 13,
+    'Broadcast-Domänen mit IEEE 802.1Q logisch trennen und kontrolliert verbinden.',
+    [
+      p('Ein VLAN bildet auf einem VLAN-fähigen Switch eine eigene logische Layer-2-Domäne. Geräte in verschiedenen VLANs tauschen nicht direkt Ethernet-Frames aus; für Kommunikation zwischen ihnen ist Routing erforderlich.'),
+      ...goals('VLANs als getrennte Broadcast-Domänen erklären.', 'Access- und Trunk-Port unterscheiden.', 'Den 802.1Q-Tag und seine VLAN-ID lesen.', 'Inter-VLAN-Routing und Sicherheitsgrenzen einordnen.'),
+      h('Access und Trunk'),
+      table(['Porttyp', 'Frames am Endgerät', 'Verwendung'], [
+        ['Access', 'Normalerweise ungetaggt; der Switch ordnet sie einem VLAN zu', 'PC, Drucker oder einzelnes Endgerät'],
+        ['Trunk', 'Mehrere VLANs werden per IEEE 802.1Q gekennzeichnet übertragen', 'Switch-Switch, Switch-Router oder Switch-Hypervisor'],
+      ]),
+      p('IEEE 802.1Q fügt vier Byte in den Ethernet-Frame ein. Die VLAN-ID belegt 12 Bit. Rechnerisch existieren 4096 Werte; 0 und 4095 sind reserviert, sodass regulär 4094 VLAN-IDs nutzbar sind. Die Prioritätsbits können Verkehrsklassen kennzeichnen, garantieren allein aber weder Bandbreite noch Verzögerung.'),
+      h('Broadcast-Domänen und Routing'),
+      p('Broadcasts wie ARP oder DHCP bleiben grundsätzlich im jeweiligen VLAN. Ein Router oder Layer-3-Switch verbindet unterschiedliche IP-Subnetze und VLANs. Dafür braucht jedes VLAN ein eigenes Layer-3-Interface beziehungsweise Gateway und passende Routing- sowie Firewallregeln.'),
+      ex('Zwei Abteilungen', 'VLAN 10 nutzt 192.168.10.0/24, VLAN 20 nutzt 192.168.20.0/24. Zwei Access-Ports hängen in unterschiedlichen VLANs; der Uplink transportiert beide VLANs als Trunk. Erst ein Layer-3-Gerät routet zwischen 192.168.10.0/24 und 192.168.20.0/24.'),
+      note('Die Quelle beschreibt VLANs teilweise als Sicherheitsmaßnahme. Moderne Klarstellung: Segmentierung reduziert Reichweite und Angriffsfläche, ersetzt aber keine Zugriffskontrolle, sichere Switch-Konfiguration oder Firewallregeln.'),
+      { type: 'key-points', items: ['Ein VLAN ist eine logische Broadcast-Domäne auf Layer 2.', 'Access-Ports tragen gewöhnlich ein VLAN, Trunks mehrere.', 'Inter-VLAN-Kommunikation benötigt Layer-3-Routing.', '802.1Q erweitert den Ethernet-Frame um vier Byte.'] },
+    ],
+    [
+      choice('vlan-layer', vlan, 'Auf welcher OSI-Schicht arbeitet die VLAN-Zuordnung nach IEEE 802.1Q?', ['Schicht 1', 'Schicht 2', 'Schicht 4'], 1, 'Das VLAN-Tag gehört zum Ethernet-Frame auf der Sicherungsschicht.'),
+      choice('vlan-trunk', vlan, 'Welcher Port transportiert typischerweise mehrere VLANs zwischen Switches?', ['Access-Port', 'Trunk-Port', 'Console-Port'], 1, 'Ein Trunk kennzeichnet die VLAN-Zugehörigkeit der Frames.'),
+      calc('vlan-ids', vlan, 'Wie viele regulär nutzbare VLAN-IDs bleiben bei 12 Bit, wenn 0 und 4095 reserviert sind?', '4094', '2^12 ergibt 4096 Werte; zwei reservierte Werte werden abgezogen.'),
+      choice('vlan-route', vlan, 'Was ist für Verkehr zwischen VLAN 10 und VLAN 20 notwendig?', ['Nur ein Hub', 'Layer-3-Routing', 'Ein längeres Patchkabel'], 1, 'Unterschiedliche VLANs beziehungsweise IP-Subnetze werden geroutet.'),
+    ],
+    [
+      card(vlan, 'domain', 'Was bildet jedes VLAN?', 'Eine eigene logische Broadcast-Domäne.', 'Layer-2-Broadcasts werden nicht automatisch in andere VLANs weitergeleitet.', ['VLAN', 'Broadcast']),
+      card(vlan, 'access', 'Was kennzeichnet einen Access-Port?', 'Er ordnet ungetaggte Endgeräte-Frames einem einzelnen VLAN zu.', 'Die VLAN-Zuordnung erfolgt am Switchport.', ['VLAN', 'Access-Port']),
+      card(vlan, 'trunk', 'Was kennzeichnet einen Trunk-Port?', 'Er transportiert mehrere VLANs, gewöhnlich mit IEEE-802.1Q-Tags.', 'Trunks verbinden häufig Netzwerkkomponenten.', ['VLAN', 'Trunk']),
+      card(vlan, 'tag', 'Um wie viele Byte erweitert IEEE 802.1Q den Ethernet-Frame?', '4 Byte', 'Der Tag enthält unter anderem Priorität und VLAN-ID.', ['802.1Q', 'Ethernet']),
+      card(vlan, 'routing', 'Was ermöglicht Kommunikation zwischen VLANs?', 'Ein Router oder Layer-3-Switch mit Inter-VLAN-Routing.', 'Jedes VLAN benötigt dabei eine passende Layer-3-Anbindung.', ['VLAN', 'Routing']),
+    ]),
+  topic(diagnostics, 'Netzwerkdienste und systematische Diagnose', 14,
+    'ARP, DHCP, DNS, ICMP und Kommandozeilenwerkzeuge in einer belastbaren Prüfreihenfolge.',
+    [
+      p('Diagnose beginnt lokal und arbeitet sich schichtweise zum entfernten Dienst vor. Ein einzelner erfolgreicher Ping beweist weder funktionierende Namensauflösung noch einen erreichbaren TCP- oder UDP-Dienst.'),
+      ...goals('ARP, DHCP, DNS und ICMP ihren Aufgaben zuordnen.', 'Eine Diagnose vom lokalen Stack bis zum Anwendungsdienst strukturieren.', 'Ausgaben von ipconfig, ping, tracert, nslookup, arp und netstat einordnen.', 'Ping- und Portscan verantwortungsvoll unterscheiden.'),
+      table(['Baustein', 'Prüffrage', 'Typisches Werkzeug'], [
+        ['Lokale Konfiguration', 'Adresse, Präfix, Gateway und DNS-Server plausibel?', 'ipconfig /all beziehungsweise ip addr'],
+        ['Nachbarschaft', 'Kann die lokale Ziel-IP einer MAC zugeordnet werden?', 'arp -a beziehungsweise ip neigh'],
+        ['Erreichbarkeit', 'Antwortet Ziel oder Gateway auf ICMP Echo?', 'ping'],
+        ['Paketweg', 'An welcher Station endet der erreichbare Pfad?', 'tracert beziehungsweise traceroute'],
+        ['Namensauflösung', 'Liefert DNS den erwarteten Resource Record?', 'nslookup beziehungsweise dig'],
+        ['Dienst', 'Lauscht der erwartete Port und ist er erreichbar?', 'netstat/ss; autorisierter Verbindungstest'],
+      ]),
+      h('Dienste richtig trennen'),
+      table(['Protokoll', 'Aufgabe'], [
+        ['ARP', 'IPv4-Ziel im lokalen Segment einer MAC-Adresse zuordnen'],
+        ['DHCP', 'Adresskonfiguration wie IP, Präfix, Gateway und DNS-Server bereitstellen'],
+        ['DNS', 'Namen und weitere Ressourcendaten auflösen'],
+        ['ICMP', 'Fehler- und Diagnosemeldungen; Echo Request/Reply für ping'],
+        ['NAT', 'Adress-/Portinformationen an einer Übergangsgrenze umsetzen; kein Namensdienst'],
+      ]),
+      ex('Diagnosekette', 'Funktioniert ping 127.0.0.1, aber nicht das eigene Gateway, sind DNS und Internetdienst noch nicht die erste Baustelle. Prüfe zuerst Interfacezustand, lokale Adresse, VLAN/WLAN, ARP/Nachbarschaft und Gateway-Erreichbarkeit.'),
+      note('Ein ausbleibendes Ping-Echo beweist nicht sicher, dass ein Host ausgeschaltet ist: Firewalls können ICMP filtern. Port- und Netzscans dürfen nur in ausdrücklich autorisierten Netzen durchgeführt werden.'),
+      { type: 'key-points', items: ['Erst lokale Konfiguration, dann Nachbarschaft, Gateway, Routing, DNS und Anwendung prüfen.', 'DNS löst Namen; DHCP verteilt Konfiguration; ARP löst lokale IPv4-Nachbarn auf.', 'Ping prüft ICMP-Erreichbarkeit, nicht automatisch einen Anwendungsdienst.'] },
+    ],
+    [
+      choice('diag-dns', diagnostics, 'Welches Werkzeug prüft gezielt die DNS-Auflösung?', ['nslookup', 'arp -a', 'tracert'], 0, 'nslookup stellt DNS-Anfragen und zeigt die Antwort des DNS-Servers.'),
+      choice('diag-arp', diagnostics, 'Welche Zuordnung zeigt die ARP-Tabelle?', ['IPv4-Adresse zu MAC-Adresse im lokalen Netz', 'Port zu Prozess auf einem Server', 'DNS-Name zu Mailserver'], 0, 'ARP dient der IPv4-Nachbarschaftsauflösung im lokalen Segment.'),
+      choice('diag-ping', diagnostics, 'Was beweist ein erfolgreicher Ping am zuverlässigsten?', ['Der Webserver liefert HTTP 200.', 'ICMP-Echo zwischen den Endpunkten funktioniert.', 'Alle TCP-Ports sind offen.'], 1, 'Ping verwendet ICMP und testet keinen bestimmten Anwendungsport.'),
+      open('diag-case', diagnostics, 'Plattformübung: Ein Client erreicht 8.8.8.8, aber nicht intranet.example. Formuliere eine kurze, risikoarme Diagnosefolge.', 'Prüfe zuerst DNS-Konfiguration und Namensauflösung, vergleiche die aufgelöste Adresse und teste anschließend gezielt Route und Dienst. Keine unautorisierten Scans.'),
+    ],
+    [
+      card(diagnostics, 'arp', 'Welche Aufgabe hat ARP?', 'Eine IPv4-Adresse im lokalen Segment einer MAC-Adresse zuordnen.', 'Für entfernte Ziele wird die MAC des nächsten Hops benötigt.', ['ARP', 'Diagnose']),
+      card(diagnostics, 'dhcp', 'Welche Kerninformationen verteilt DHCP typischerweise?', 'IP-Adresse, Präfix/Netzmaske, Standardgateway und DNS-Server.', 'Optionen können weitere Einstellungen liefern.', ['DHCP', 'Adressierung']),
+      card(diagnostics, 'dns', 'Welche Aufgabe hat DNS?', 'Namen und Ressourcendaten auflösen.', 'DNS ist von der reinen IP-Erreichbarkeit getrennt zu prüfen.', ['DNS', 'Diagnose']),
+      card(diagnostics, 'ping', 'Welches Protokoll nutzt ping?', 'ICMP beziehungsweise ICMPv6.', 'Echo Request und Echo Reply testen Erreichbarkeit, nicht den Anwendungsdienst.', ['ICMP', 'Ping']),
+      card(diagnostics, 'order', 'Welche grobe Diagnosefolge ist sinnvoll?', 'Lokal → Nachbarschaft → Gateway/Route → DNS → Anwendungsdienst.', 'Die Reihenfolge verhindert vorschnelle Schlüsse auf höheren Schichten.', ['Troubleshooting', 'Diagnose']),
+    ]),
+  topic(firewall, 'Firewall, Ports und zustandsbehaftete Filterung', 15,
+    'Datenverkehr nach Sicherheitsstrategie, Richtung, Zustand und benötigtem Dienst freigeben.',
+    [
+      p('Eine Firewall setzt eine Sicherheitsrichtlinie technisch um. Sie kann Verkehr kontrollieren, protokollieren, erlauben oder verwerfen, ersetzt aber weder sichere Dienste noch Patchmanagement und Monitoring.'),
+      ...goals('Default Deny und Default Allow bewerten.', 'Paketfilter, Stateful Inspection und Proxy unterscheiden.', 'Ports korrekt als Dienstendpunkte einordnen.', 'Portfreigabe, NAT und Portknocking voneinander abgrenzen.'),
+      h('Regelstrategie'),
+      table(['Strategie', 'Wirkung', 'Bewertung'], [
+        ['Default Deny', 'Zunächst gesperrt; nur begründete Verbindungen werden erlaubt', 'Sicherer Ausgangspunkt, benötigt Pflege'],
+        ['Default Allow', 'Zunächst erlaubt; bekannte Risiken werden gesperrt', 'Bequem, aber unbekannte Risiken bleiben offen'],
+      ]),
+      table(['Technik', 'Prüft beziehungsweise vermittelt'], [
+        ['Stateless Paketfilter', 'Einzelne Headermerkmale wie Adressen, Protokoll und Ports'],
+        ['Stateful Inspection', 'Zusätzlich den Zustand und Zusammenhang einer Verbindung'],
+        ['Application Proxy', 'Beendet und vermittelt Anwendungsverkehr; kann Inhalte prüfen'],
+      ]),
+      h('Ports und Regeln'),
+      p('Ein Port bezeichnet einen logischen Transportendpunkt von TCP oder UDP. Eine Regel muss mindestens Richtung, Protokoll, Quelle, Ziel und gewünschten Dienst betrachten. „Port 53“ allein ist unvollständig, weil DNS TCP und UDP verwenden kann.'),
+      ex('Minimale Freigabe', 'Clients sollen ausschließlich einen internen DNS-Resolver verwenden. Erlaubt werden DNS-Anfragen der Clientnetze an genau dessen Adresse; direkte Anfragen an beliebige externe Resolver bleiben gesperrt. Rückverkehr wird über den Verbindungszustand zugeordnet.'),
+      h('Portfreigabe und Portknocking'),
+      p('Eine Portweiterleitung übersetzt eingehenden Verkehr zu einem internen Ziel und vergrößert dessen Angriffsfläche. Portknocking beobachtet eine vereinbarte Folge von Verbindungsversuchen und öffnet anschließend zeitweise einen Dienst. Es ist höchstens eine zusätzliche Hürde, kein Ersatz für starke Authentisierung und verschlüsselte Protokolle.'),
+      note('Die Altquelle warnt zu Recht, dass eine IPv4-Regelbasis IPv6 nicht automatisch absichert. IPv6 benötigt eigene, fachlich passende Regeln; ICMPv6 darf nicht pauschal blockiert werden, weil zentrale IPv6-Funktionen davon abhängen.'),
+      { type: 'key-points', items: ['Default Deny erlaubt nur begründeten Verkehr.', 'Stateful Firewalls ordnen Pakete einem Verbindungszustand zu.', 'Offener Port bedeutet: Ein Dienst ist erreichbar und muss abgesichert werden.', 'NAT ist keine vollständige Firewallstrategie.'] },
+    ],
+    [
+      choice('fw-default', firewall, 'Welche Grundhaltung entspricht Default Deny?', ['Alles erlauben, einzelne Risiken sperren', 'Alles sperren, notwendige Verbindungen gezielt erlauben', 'Nur ICMP erlauben'], 1, 'Default Deny beginnt mit einer geschlossenen Regelbasis.'),
+      choice('fw-state', firewall, 'Was berücksichtigt Stateful Inspection zusätzlich zu einzelnen Headerfeldern?', ['Den Verbindungszustand', 'Die Kabelfarbe', 'Den DNS-Zonennamen'], 0, 'Zustandsbehaftete Filter können Rückverkehr einer aufgebauten Verbindung zuordnen.'),
+      choice('fw-port', firewall, 'Warum beschreibt „Port 53 erlauben“ noch keine vollständige Regel?', ['Weil Richtung, Adressen und TCP/UDP fehlen', 'Weil DNS keine Ports verwendet', 'Weil Portnummern nur zu Ethernet gehören'], 0, 'Eine Regel braucht Kontext zu Richtung, Endpunkten und Transportprotokoll.'),
+      open('fw-rule', firewall, 'Plattformübung: Formuliere eine minimal notwendige Regel für HTTPS-Zugriff eines Client-VLANs auf einen internen Webserver.', 'Nenne Quelle, Ziel, Richtung, TCP-Port 443, Verbindungszustand, Logging/Review und eine begründete Standardverweigerung für übrigen Verkehr.'),
+    ],
+    [
+      card(firewall, 'deny', 'Was bedeutet Default Deny?', 'Nicht ausdrücklich erlaubter Verkehr wird verworfen.', 'Freigaben müssen fachlich begründet und gepflegt werden.', ['Firewall', 'Default Deny']),
+      card(firewall, 'stateful', 'Was ist Stateful Packet Inspection?', 'Filterung unter Berücksichtigung des Verbindungszustands.', 'Dadurch kann legitimer Rückverkehr einer Verbindung zugeordnet werden.', ['Firewall', 'SPI']),
+      card(firewall, 'port', 'Was ist ein TCP- oder UDP-Port?', 'Ein logischer Endpunkt für einen Transportdienst.', 'Die gleiche Nummer kann bei TCP und UDP unterschiedliche Bedeutung haben.', ['Port', 'TCP', 'UDP']),
+      card(firewall, 'proxy', 'Wie unterscheidet sich ein Proxy von einem einfachen Paketfilter?', 'Er vermittelt Anwendungsverkehr und kann anwendungsbezogene Inhalte prüfen.', 'Dafür benötigt er mehr Protokollwissen und Ressourcen.', ['Firewall', 'Proxy']),
+      card(firewall, 'knocking', 'Was ist Portknocking?', 'Eine vereinbarte Folge von Verbindungsversuchen löst eine zeitweise Freigabe aus.', 'Es ersetzt keine starke Authentisierung und Verschlüsselung.', ['Firewall', 'Portknocking']),
+    ]),
+  topic(vpn, 'VPN, Tunnel und sichere Standortkopplung', 16,
+    'Private Kommunikation über fremde Netze nach Endpunkten und Sicherheitszielen planen.',
+    [
+      p('Ein VPN ist ein logisches privates Netz über einer gemeinsam oder öffentlich genutzten Infrastruktur. Der Begriff allein garantiert keine Sicherheit: Authentizität, Vertraulichkeit und Integrität müssen durch das konkrete Verfahren und seine Konfiguration erreicht werden.'),
+      ...goals('Remote-Access-, Site-to-Site- und End-to-End-VPN unterscheiden.', 'Tunnel, Endpunkt und Kapselung erklären.', 'Authentizität, Vertraulichkeit und Integrität auf VPNs anwenden.', 'Split Tunneling und Full Tunneling bewerten.'),
+      table(['VPN-Typ', 'Endpunkte', 'Typischer Einsatz'], [
+        ['Remote Access / End-to-Site', 'Client ↔ Unternehmensgateway', 'Homeoffice oder Außendienst'],
+        ['Site-to-Site', 'Gateway ↔ Gateway', 'Niederlassungen oder Extranet'],
+        ['End-to-End / Host-to-Host', 'Endgerät ↔ Endgerät', 'Gezielte Verbindung zweier Systeme'],
+      ]),
+      h('Tunnel und Endpunkte'),
+      p('Beim Tunneling wird ein Paket in ein anderes Protokoll eingebettet. Die VPN-Endpunkte kapseln und entkapseln; bei einem sicheren VPN authentisieren sie Gegenstellen, verschlüsseln Nutzdaten und prüfen Integrität. Der äußere Header transportiert das gekapselte Paket durch das Trägernetz.'),
+      h('Routing durch den Tunnel'),
+      table(['Betrieb', 'Verkehr durch VPN', 'Abwägung'], [
+        ['Full Tunnel', 'Gesamter Clientverkehr', 'Zentrale Kontrolle, höhere Last und Abhängigkeit vom Gateway'],
+        ['Split Tunnel', 'Nur definierte Unternehmensnetze', 'Weniger Last, aber parallele Vertrauenspfade müssen bewusst abgesichert werden'],
+      ]),
+      ex('Site-to-Site', 'Standort A nutzt 10.10.0.0/16, Standort B 10.20.0.0/16. Die Gateways schützen den Verkehr zwischen diesen Präfixen und routen ihn in den Tunnel. Überlappende interne Adressräume würden die eindeutige Wegwahl erschweren und müssen in der Planung berücksichtigt werden.'),
+      note('Die Altquelle nennt auch ältere oder produktspezifische Verfahren. Für reale Implementierungen sind aktuelle Hersteller- und BSI-Empfehlungen, starke Algorithmen, Zertifikatsprüfung und sichere Schlüsselaushandlung maßgeblich.'),
+      { type: 'key-points', items: ['VPN beschreibt eine logische private Verbindung, nicht automatisch deren Sicherheitsniveau.', 'Remote Access verbindet Clients, Site-to-Site verbindet Netze.', 'Tunnelendpunkte kapseln, authentisieren und – beim sicheren VPN – verschlüsseln und schützen die Integrität.'] },
+    ],
+    [
+      choice('vpn-remote', vpn, 'Welches VPN-Szenario bindet einen Homeoffice-Client an das Unternehmensnetz an?', ['Remote Access', 'Nur Site-to-Site', 'VLAN-Trunk'], 0, 'Remote-Access- beziehungsweise End-to-Site-VPN verbindet einen Client mit einem Standortnetz.'),
+      choice('vpn-site', vpn, 'Welche Endpunkte sind für ein typisches Site-to-Site-VPN zuständig?', ['Zwei Gateways', 'Zwei Access-Ports', 'Ein DNS-Server und ein Switch'], 0, 'Gateways koppeln die Netze beider Standorte.'),
+      choice('vpn-goals', vpn, 'Welche drei Schutzziele nennt die Quelle für sichere VPNs?', ['Authentizität, Vertraulichkeit und Integrität', 'Reichweite, Bandbreite und VLAN-ID', 'Broadcast, Multicast und Anycast'], 0, 'Diese Ziele schützen Gegenstellen, Geheimhaltung und Unverändertheit.'),
+      open('vpn-design', vpn, 'Quellen-Transferaufgabe: Wähle für Außendienst und zwei Niederlassungen passende VPN-Typen und begründe Endpunkte, Routen und Schutzziele.', 'Außendienst: Remote Access. Niederlassungen: Site-to-Site. Eine eindeutige Musterkonfiguration hängt von Adressplan, Plattform und Sicherheitsvorgaben ab.'),
+    ],
+    [
+      card(vpn, 'remote', 'Was verbindet ein Remote-Access-VPN?', 'Einen einzelnen Client mit einem entfernten Standortnetz.', 'Synonyme sind End-to-Site oder Road-Warrior-Szenario.', ['VPN', 'Remote Access']),
+      card(vpn, 'site', 'Was verbindet ein Site-to-Site-VPN?', 'Zwei oder mehr Netze über ihre Gateways.', 'Es wird auch LAN-to-LAN- oder Branch-Office-VPN genannt.', ['VPN', 'Site-to-Site']),
+      card(vpn, 'tunnel', 'Was geschieht beim Tunneling?', 'Ein Paket wird in ein anderes Protokoll gekapselt und zwischen Tunnelendpunkten transportiert.', 'Die Endpunkte kapseln und entkapseln.', ['VPN', 'Tunneling']),
+      card(vpn, 'goals', 'Welche Schutzziele braucht ein sicheres VPN?', 'Authentizität, Vertraulichkeit und Integrität.', 'Der Begriff VPN allein garantiert diese Eigenschaften nicht.', ['VPN', 'Schutzziele']),
+      card(vpn, 'split', 'Was bedeutet Split Tunneling?', 'Nur definierter Verkehr läuft durch den VPN-Tunnel; übriger Verkehr nutzt den lokalen Weg.', 'Die parallelen Vertrauenspfade müssen bewusst abgesichert werden.', ['VPN', 'Routing']),
+    ]),
+  topic(planning, 'Netzwerkplanung und Übertragungsrechnung', 17,
+    'Anforderungen in einen dokumentierten Netzplan übersetzen und Kapazitäten nachvollziehbar berechnen.',
+    [
+      p('Die Altmaterialien verbinden technische Grundlagen mit offenen Projektaufträgen und prüfungsnahen Berechnungen. Planung beginnt mit Anforderungen und endet nicht beim Zeichnen eines Netzplans: Adressierung, Kapazität, Sicherheit, Betrieb und Abnahme müssen prüfbar dokumentiert sein.'),
+      ...goals('Übertragungsdauer aus Datenmenge und Datenrate berechnen.', 'Protokolloverhead und gleichzeitige Teilnehmer berücksichtigen.', 'Einen Netzplan mit Adress-, VLAN-, Routing- und Sicherheitskonzept strukturieren.', 'Annahmen und offene Punkte prüfungstauglich dokumentieren.'),
+      h('Einheiten sauber trennen'),
+      list('1 Byte = 8 Bit.', 'Binäre Datenmengen: 1 MiB = 1024² Byte.', 'Dezimale Datenrate: 1 Mbit/s = 1 000 000 Bit/s.', 'Zeit in Sekunden = Datenmenge in Bit ÷ Datenrate in Bit/s.', 'Overhead wird als Faktor berücksichtigt, zum Beispiel 10 % → × 1,10.'),
+      ex('Offizielle Lösung: Cloud-Upload', '100 MiB bei 40 Mbit/s Upload: 100 × 1024² × 8 = 838 860 800 Bit. Geteilt durch 40 000 000 Bit/s ergibt 20,97152 Sekunden, also auf volle Sekunden gerundet 21 Sekunden.'),
+      ex('Offizielle Lösung: VoIP', 'Fünf interne Gespräche erzeugen zehn Teilnehmerströme, fünfzehn externe Gespräche weitere fünfzehn. 25 × 64 kbit/s × 1,10 = 1760 kbit/s. Die Quelle rechnet bewusst mit Teilnehmerströmen, nicht nur mit der Zahl der Gespräche.'),
+      h('Planungsartefakte'),
+      table(['Artefakt', 'Mindestinhalt'], [
+        ['Anforderungsliste', 'Standorte, Nutzer, Dienste, Verfügbarkeit, Wachstum und Schutzbedarf'],
+        ['Physischer Plan', 'Räume, Verteiler, Kabelwege, Medien, Ports und Reserven'],
+        ['Logischer Plan', 'Subnetze, VLANs, Gateways, Routing, DNS/DHCP und Namensschema'],
+        ['Sicherheitskonzept', 'Zonen, Freigaben, Administration, VPN, Protokollierung und Wiederherstellung'],
+        ['Abnahme', 'Messungen, Funktionstests, Dokumentation und Verantwortlichkeiten'],
+      ]),
+      h('Supernetting und VLSM'),
+      p('VLSM vergibt unterschiedlich große, passend ausgerichtete Präfixe. Routenaggregation fasst nur zusammenhängende, binär passend ausgerichtete Netze zusammen. In der offiziellen Aufgabe können 200.100.56.0/24 und 200.100.57.0/24 zu 200.100.56.0/23 zusammengefasst werden; 200.100.55.0/24 liegt nicht auf dieser /23-Grenze.'),
+      note('Projekt-Netzwerk ist ein offener Arbeitsauftrag ohne einzelne Musterlösung. Die Lektion macht deshalb Prüfkriterien sichtbar, behauptet aber keine erfundene Original-Lösung.'),
+      { type: 'key-points', items: ['Datenmenge und Datenrate müssen vor dem Dividieren dieselbe Einheit verwenden.', 'Adressblöcke werden nach Bedarf dimensioniert und binär ausgerichtet.', 'Ein belastbarer Netzplan dokumentiert physische, logische, sicherheitsbezogene und betriebliche Entscheidungen.'] },
+    ],
+    [
+      calc('plan-upload', planning, 'Offizielle Aufgabe: Wie lange dauert der Upload von 100 MiB bei 40 Mbit/s ohne weiteren Overhead, auf volle Sekunden gerundet?', '21', '100 × 1024² × 8 ÷ 40 000 000 = 20,97152 Sekunden; gerundet 21 Sekunden.'),
+      calc('plan-voip', planning, 'Offizielle Aufgabe: 25 gleichzeitige G.722-Teilnehmerströme zu 64 kbit/s plus 10 % Overhead benötigen wie viel kbit/s?', '1760', '25 × 64 × 1,10 = 1760 kbit/s.'),
+      choice('plan-summary', planning, 'Welche beiden /24-Netze lassen sich korrekt als 200.100.56.0/23 zusammenfassen?', ['200.100.55.0 und 200.100.56.0', '200.100.56.0 und 200.100.57.0', '200.100.57.0 und 200.100.58.0'], 1, 'Ein /23 beginnt hier an einer geraden Grenze im dritten Oktett und umfasst 56 sowie 57.'),
+      open('plan-project', planning, 'Quellenprojekt: Erstelle für ein Unternehmen mit fünf Zweigstellen ein begründetes Netzwerkdesign einschließlich Adressierung, Medien, Dienste, Sicherheit, Kosten- und Abnahmekriterien.', 'Offene Transferaufgabe ohne offizielle Einzellösung. Dokumentiere Annahmen und prüfe Konsistenz, Skalierbarkeit, Schutzbedarf, Betrieb und Testbarkeit.'),
+    ],
+    [
+      card(planning, 'formula', 'Wie berechnet man die ideale Übertragungsdauer?', 'Datenmenge in Bit geteilt durch Datenrate in Bit pro Sekunde.', 'Vorher müssen die Einheiten vereinheitlicht werden.', ['Übertragungsrechnung', 'Bandbreite']),
+      card(planning, 'mib', 'Wie viele Bit sind 1 MiB?', '1024 × 1024 × 8 Bit', 'MiB ist eine binäre Datenmenge, Mbit/s üblicherweise eine dezimale Rate.', ['MiB', 'Einheiten']),
+      card(planning, 'vlsm', 'Was ist das Ziel von VLSM?', 'Teilnetze mit unterschiedlich großen, bedarfsgerechten Präfixen vergeben.', 'Große Netze werden üblicherweise zuerst passend ausgerichtet.', ['VLSM', 'Subnetting']),
+      card(planning, 'summary', 'Wann dürfen Routen zusammengefasst werden?', 'Wenn die Netze zusammenhängend sind und eine gemeinsame binär ausgerichtete Präfixgrenze besitzen.', 'Eine bloße Nachbarschaft der Dezimalzahlen reicht nicht.', ['Supernetting', 'Routing']),
+      card(planning, 'artifacts', 'Welche zwei Sichten braucht ein Netzplan mindestens?', 'Eine physische und eine logische Sicht.', 'Ergänzt werden Sicherheits-, Betriebs- und Abnahmedokumentation.', ['Netzwerkplanung', 'Dokumentation']),
     ]),
 ]

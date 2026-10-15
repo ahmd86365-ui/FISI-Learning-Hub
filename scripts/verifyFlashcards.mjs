@@ -49,7 +49,7 @@ for (const bank of flashcardBanks) {
   }
 }
 
-if (globalIds.size !== 3023) failures.push(`expected 3023 globally unique card ids, received ${globalIds.size}`)
+if (globalIds.size !== 3103) failures.push(`expected 3103 globally unique card ids, received ${globalIds.size}`)
 
 if (failures.length) {
   console.error(failures.join('\n'))
