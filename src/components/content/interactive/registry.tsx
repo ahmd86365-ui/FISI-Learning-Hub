@@ -4,6 +4,7 @@ import { BildgroesseCalculator } from './BildgroesseCalculator'
 import { AudiogroesseCalculator } from './AudiogroesseCalculator'
 import { GewinnverteilungCalculator } from './GewinnverteilungCalculator'
 import { KrankenversicherungCalculator } from './KrankenversicherungCalculator'
+import { HtmlCssSandbox } from './HtmlCssSandbox'
 
 /**
  * Registry of reusable interactive widgets, keyed by the string a Topic's
@@ -18,4 +19,5 @@ export const interactiveRegistry: Record<string, ComponentType> = {
   'audiogroesse-calculator': AudiogroesseCalculator,
   'gewinnverteilung-calculator': GewinnverteilungCalculator,
   'krankenversicherung-calculator': KrankenversicherungCalculator,
+  'html-css-sandbox': HtmlCssSandbox,
 }

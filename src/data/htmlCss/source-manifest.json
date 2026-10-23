@@ -1,0 +1,3922 @@
+[
+  {
+    "sourcePath": "HTML/Aufgaben/01_Hello_World/hello_world.html",
+    "sizeBytes": 1021,
+    "sha256": "da113533dbb15f9f02b90da466743287a1e188e8f7c82d02f26ead8f2a8063c0",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/01_tags/1_tags.html",
+    "sizeBytes": 1125,
+    "sha256": "fa072b269b643189aa92574f3ab8ebd318c37dcb08785fbfc0f565f09a4a4565",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/01_tags/2_tags.html",
+    "sizeBytes": 1521,
+    "sha256": "79468dfb4bb9425c1d7328125836ad00a379f127f72ba6632ff92262c2c7022b",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/01_tags/image.png",
+    "sizeBytes": 266534,
+    "sha256": "7747d83dbe55ae5a26a0278ba6e76232e6dc7a5debaf85ca0d26a1cdb0ecf4fa",
+    "extension": ".png",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/02_Attribute/1_attribute.html",
+    "sizeBytes": 1101,
+    "sha256": "1d01ae3d9d2dc3fa226048d106074536b0efc9d26abe4a4b1c669d813c59b77b",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-attribute-formulare",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/02_Attribute/2_attribute.html",
+    "sizeBytes": 4431,
+    "sha256": "b7e81c366d590f6ab9dd7255a1c530d92fbbe7a820ad8baa81800eb7258c5588",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-attribute-formulare",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/02_Attribute/image.png",
+    "sizeBytes": 266534,
+    "sha256": "7747d83dbe55ae5a26a0278ba6e76232e6dc7a5debaf85ca0d26a1cdb0ecf4fa",
+    "extension": ".png",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-attribute-formulare",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/02_Attribute/keinedunklematerie.jpg",
+    "sizeBytes": 10395,
+    "sha256": "73a2b2f0e958c4d1d52473aabda9e2843c27f8fe5667f280fd61724795b7eabd",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-attribute-formulare",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/03_Grundaufbau/1_grundaufbau.html",
+    "sizeBytes": 1846,
+    "sha256": "dc79f39d263ac86e1b3d9940c9052a6bb883df044c04d4dc8bd8a6b95b9927b8",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/03_Grundaufbau/2_newsbeispiel.html",
+    "sizeBytes": 2305,
+    "sha256": "c84e598bf4fa7d81c672d9aa3b05a5624b1d3c38ce0012962e2284db89d8b87c",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/03_Grundaufbau/buero-genervt-workshop.jpg",
+    "sizeBytes": 13594,
+    "sha256": "9918f7abca634e052505fb9d4f5092db1540c6d0ddcd0baaa4abf53d1530a208",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/03_Grundaufbau/china-online-handel.jpg",
+    "sizeBytes": 17982,
+    "sha256": "29fdac90cdea1d9a8cd436bb09cf98debd96d56989295f6038dba2db91c0ec50",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/03_Grundaufbau/image.png",
+    "sizeBytes": 266534,
+    "sha256": "7747d83dbe55ae5a26a0278ba6e76232e6dc7a5debaf85ca0d26a1cdb0ecf4fa",
+    "extension": ".png",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/03_Grundaufbau/IMG_6255.jpg",
+    "sizeBytes": 10564,
+    "sha256": "7e1d1837514f18456aa0ae40dc345fffe46fb9568aabe171a76e89f1a8dc9ffb",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/03_Grundaufbau/ki-geschaeft.png",
+    "sizeBytes": 85481,
+    "sha256": "be5691ff3a1eff1e7c4bb02b4aeb669930326f09f4f2bc5c28979c1f5cc38902",
+    "extension": ".png",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/04_Links/1_links.html",
+    "sizeBytes": 681,
+    "sha256": "c84f934894920c0ec4b4cd998f75722f6725c31ea727ad98abcde0c5ca60080c",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/04_Links/2_links.html",
+    "sizeBytes": 1314,
+    "sha256": "8a3fe00cf4d0afd30d0e142738ecf668f605de1cf783aa44046c8a117191aa65",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/04_Links/3_bookmarks.html",
+    "sizeBytes": 1408,
+    "sha256": "4a73c37e3b90e8a6d11609ebae571fa842b572f8895c2d07c43234c50b31439f",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/04_Links/beispiel.html",
+    "sizeBytes": 4403,
+    "sha256": "038749f6bd6921c9322499ddaffe5a334c8cc0331bc31e04000a8035986066be",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/04_Links/image.png",
+    "sizeBytes": 266534,
+    "sha256": "7747d83dbe55ae5a26a0278ba6e76232e6dc7a5debaf85ca0d26a1cdb0ecf4fa",
+    "extension": ".png",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/04_Links/test.html",
+    "sizeBytes": 26,
+    "sha256": "5fbabef3cf180fa5a3c98b1ddb5503981b01c17794d5def207fd0b084fb24857",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/05_Textelemente/1_sonnensystem.html",
+    "sizeBytes": 1351,
+    "sha256": "c1f8bb5be8dde3f1df187986fb17471a3c7b0bf05373842905d1e24a50e31a14",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-textelemente-listen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/05_Textelemente/2_textformat.html",
+    "sizeBytes": 1446,
+    "sha256": "901b08c7da24c00a4b9a35470a6f25b3f8c68b9281ffc4556d6c1af74f10c216",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-textelemente-listen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/05_Textelemente/3_textformat.html",
+    "sizeBytes": 985,
+    "sha256": "6b9f6c1a90732aa4e86034aabdee462ee93be08f5d9fd4e71c0e674a32787ddb",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-textelemente-listen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/06_Seitenstruktur/64x64.jpg",
+    "sizeBytes": 1886,
+    "sha256": "f6b370500e197f605f205c945fccc3a136dee0a107095c30e8e62dd0a7c43c43",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-html5-semantik",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/06_Seitenstruktur/aufbau.png",
+    "sizeBytes": 141082,
+    "sha256": "49ccc53388c85e77ea8a265ce9dd3e208e7923bd40fddc0c23f7d6694f859ff3",
+    "extension": ".png",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-html5-semantik",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/06_Seitenstruktur/struktur_demo.html",
+    "sizeBytes": 2614,
+    "sha256": "be6593de596c6428d8e39b2ffa247e8c54b2c4a7ffe903e7362bcf269160b1cd",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-html5-semantik",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/09_Block-Inline-Elemente/Beispiel.html",
+    "sizeBytes": 2064,
+    "sha256": "5536f7abf1a73323abd13b070cf6cef07bc407e92e5c1510bc976d1999fd7b17",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-block-inline",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/09_Block-Inline-Elemente/block.html",
+    "sizeBytes": 1213,
+    "sha256": "fba55d1cb363eff5b0e2d02d71b16b1339c7eb59b95fc2f064ffcd9a9fea6755",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-block-inline",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/09_Block-Inline-Elemente/inline.html",
+    "sizeBytes": 2175,
+    "sha256": "8b82ac0a046c252743da9bccd83691639f8a113cff3e3a13482c63fce7fe66bb",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-block-inline",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.1_CSS-Start/aufgabe1.html",
+    "sizeBytes": 599,
+    "sha256": "34e0e1c54752ad3a24271e38fbff3e0544f7dc274021fafdfff429aa384f55e5",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.1_CSS-Start/aufgabe2.html",
+    "sizeBytes": 1727,
+    "sha256": "fd5632f187a00844bfedb2db933ba993629584106c5033c281fd4d0f9a0d1064",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.1_CSS-Start/styles-aufgabe1.css",
+    "sizeBytes": 722,
+    "sha256": "6d282940e161307dda28d63b4c4189a138b98b2a85094e007bd97b7173b6a571",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.1_CSS-Start/styles-aufgabe2.css",
+    "sizeBytes": 1811,
+    "sha256": "adedfd96d1d77159e87011f1551558f7fc83407acb52783e3a050a7b44636520",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.2_CSS-Selektoren/aufgabe1.html",
+    "sizeBytes": 970,
+    "sha256": "ba67a0b4b5375cf593d3a9c4523924ed1192cdd959ea38972219c74a42f08929",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-selektoren",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.2_CSS-Selektoren/Beispiel.html",
+    "sizeBytes": 3030,
+    "sha256": "33bff4494686dfe9b586364102eb5aa2c4af71baa0618c927ed890d94221a883",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-selektoren",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.2_CSS-Selektoren/style-aufgabe1.css",
+    "sizeBytes": 1607,
+    "sha256": "e55c39e672a74c92d9a9796005896aa9f494b8ceeac5de0ac9420dfecc0e6b0c",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-selektoren",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.3_CSS-Boxmodel/aufgabe1.html",
+    "sizeBytes": 1372,
+    "sha256": "43c68c0ae03e178c574dfec52bc839dcd2047546b83dc28e9d4a9d58815784a0",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-box-modell",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.3_CSS-Boxmodel/style-aufgabe1.css",
+    "sizeBytes": 1346,
+    "sha256": "79dcabb6c58c4773ea627569f0c3460624d93dfc9e904d5133ff201547c08ab1",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-box-modell",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.4_CSS-Kombinatoren/aufgabe1.html",
+    "sizeBytes": 562,
+    "sha256": "5886b1c697b476c6f6bf9b767e0229b8b9852b90d415f9cc4f7d32fa9c847445",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-kombinatoren",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.4_CSS-Kombinatoren/aufgabe2.html",
+    "sizeBytes": 977,
+    "sha256": "a5d5d37bac08894df39a8aba70b1bf4195a2a4ebdf58f339e59f84647f716cd6",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-kombinatoren",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.4_CSS-Kombinatoren/style-aufgabe1.css",
+    "sizeBytes": 738,
+    "sha256": "74dca249920c0dcfad27664bc3405d1230c9159397abe1bb2eb0b8841e609be4",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-kombinatoren",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.4_CSS-Kombinatoren/style-aufgabe2.css",
+    "sizeBytes": 1309,
+    "sha256": "18982a7b5562d2feaeeca5c89d12fda7893d9d6c4a294505de7250c6443c4988",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-kombinatoren",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.5_CSS-Selektoren-Cards/Aufgabe.png",
+    "sizeBytes": 89813,
+    "sha256": "14c55f18c6164b6803b7afcab843b91845bd975d140e195588267d66340d4f91",
+    "extension": ".png",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-komponenten-cards",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.5_CSS-Selektoren-Cards/css/styles.css",
+    "sizeBytes": 2420,
+    "sha256": "dc84ed71d0bfa5f588ec57d8be9a83ea355334dd44f340e0c2e3df1c178d37b5",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-komponenten-cards",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.5_CSS-Selektoren-Cards/img/img_avatar.png",
+    "sizeBytes": 8229,
+    "sha256": "cd1b399a6bb93a264f35a2a268f3cb80a30ea2e4af5a5738f9251004188990d9",
+    "extension": ".png",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-komponenten-cards",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.5_CSS-Selektoren-Cards/img/img_avatar2.png",
+    "sizeBytes": 8314,
+    "sha256": "a9331eccfdb210020aaa8fcf429cfad18b29d4e7126bd5ba088c723266b52d49",
+    "extension": ".png",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-komponenten-cards",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.5_CSS-Selektoren-Cards/index.html",
+    "sizeBytes": 383,
+    "sha256": "77832cb8bc288c457bffd5c19e058da43279b15d201a26a9d56c998804615a75",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-komponenten-cards",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.5_CSS-Selektoren-Cards/Vorschau.png",
+    "sizeBytes": 55316,
+    "sha256": "641a93bd0a068de2050679570cb0b08ab6b5b76c98d322b292da908dc19d3a52",
+    "extension": ".png",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-komponenten-cards",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.6_Sonnensystem-Bonusaufgabe/images/aste.jpg",
+    "sizeBytes": 4421,
+    "sha256": "9aa30c5d4c57af0ee5e009615a572bbfd9009fb89ec728961cd7adf84886bc10",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.6_Sonnensystem-Bonusaufgabe/images/erde.jpg",
+    "sizeBytes": 9698,
+    "sha256": "1b22370b09882b718a842290bf8f7c6efa9f8dcc0bb72ea6910e4ea9fb791c61",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.6_Sonnensystem-Bonusaufgabe/images/interstellar.jpg",
+    "sizeBytes": 204554,
+    "sha256": "509f25967143206eb4eae821f6c9c538cb5a81133ea0ae3cbdbb42f3e7ebcc19",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.6_Sonnensystem-Bonusaufgabe/images/jupiter.jpg",
+    "sizeBytes": 4486,
+    "sha256": "9e43a7b655ef67013c68f97e93a64b725d27628e485523c45f8446c8e7372afb",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.6_Sonnensystem-Bonusaufgabe/images/Komet.jpg",
+    "sizeBytes": 46542,
+    "sha256": "1cef7408d7c39f6ee933017e2b3eda9c80a1053c3c8e88ecd99c1f46b682facd",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.6_Sonnensystem-Bonusaufgabe/images/mars.jpg",
+    "sizeBytes": 3645,
+    "sha256": "2e5452efdb0be369351906c582686c6e5125722f6a821a6670a570806a5f637a",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.6_Sonnensystem-Bonusaufgabe/images/merkur.jpg",
+    "sizeBytes": 11194,
+    "sha256": "cdd234b8e0d0b7d055125833d5d52930d971b1052a23e0543b677396ea3611c6",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.6_Sonnensystem-Bonusaufgabe/images/moons.jpg",
+    "sizeBytes": 182750,
+    "sha256": "4250a1b4fa2869ea5f7e1424fdcc3a34cde928be2b8e028484e393eab5291d57",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.6_Sonnensystem-Bonusaufgabe/images/neptun.jpg",
+    "sizeBytes": 2273,
+    "sha256": "e648a8cec454fd3484ebd61ac820e374420545f91352164b67cc337f8a1f3c96",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.6_Sonnensystem-Bonusaufgabe/images/planeten.jpg",
+    "sizeBytes": 4832,
+    "sha256": "baf0454aaaa8a9cbe02558b5617cc183c16b745315c166c4d382a372da51357b",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.6_Sonnensystem-Bonusaufgabe/images/pluto.jpg",
+    "sizeBytes": 4950,
+    "sha256": "31da6c646d41dc659c6410c00edd3480f5f515d179e6d2b4b36af135c4636f26",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.6_Sonnensystem-Bonusaufgabe/images/saturn.jpg",
+    "sizeBytes": 4327,
+    "sha256": "ec00c83f032a1a498b9d4a2dc3c141bdf9bd7d6a0be50e1d27175dffbc7ba198",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.6_Sonnensystem-Bonusaufgabe/images/sonne.jpg",
+    "sizeBytes": 26223,
+    "sha256": "5204195df6c646b56738e9dd56a073bfa1f4b1ed08349c7adcd13d065d916034",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.6_Sonnensystem-Bonusaufgabe/images/uranus.jpg",
+    "sizeBytes": 4826,
+    "sha256": "b29fed10cb36c267e3e56a234e992b34fc1073390993ad8167c35e750778251b",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.6_Sonnensystem-Bonusaufgabe/images/venus.jpg",
+    "sizeBytes": 2839,
+    "sha256": "8c9ee83fc6017faa5352d97dc7118369151b582227fa95a2863717918b1cdb76",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.6_Sonnensystem-Bonusaufgabe/Sonnensystem.html",
+    "sizeBytes": 11612,
+    "sha256": "035e4e0edfbbbd18e019ab7585dc40920e0d06ca08a91064bbd76ad37d7442f7",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/10.6_Sonnensystem-Bonusaufgabe/styles.css",
+    "sizeBytes": 1163,
+    "sha256": "862cd3f4e70df798b03051dfc0839444c031d18c43f1d6408b6a8bed85663ea0",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/11.0_CSS_position/01_Beispiel.html",
+    "sizeBytes": 10240,
+    "sha256": "bdd826c0917319e9d690fb728a35ceb313a7d3b0f3de5e17d037b84442a354d0",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/11.1_CSS-Position_absolute/css/styles.css",
+    "sizeBytes": 1566,
+    "sha256": "ecd297dcd7ecb1902fc25c2a3419bb1b4008d8a5d238e12ed26b90493a1aea76",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/11.1_CSS-Position_absolute/img/close.svg",
+    "sizeBytes": 898,
+    "sha256": "7af861bcb6297cb917b440242c306360069f994dda00b3264c9e800ec143e9ad",
+    "extension": ".svg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/11.1_CSS-Position_absolute/img/img_avatar.png",
+    "sizeBytes": 8229,
+    "sha256": "cd1b399a6bb93a264f35a2a268f3cb80a30ea2e4af5a5738f9251004188990d9",
+    "extension": ".png",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/11.1_CSS-Position_absolute/img/img_avatar2.png",
+    "sizeBytes": 8314,
+    "sha256": "a9331eccfdb210020aaa8fcf429cfad18b29d4e7126bd5ba088c723266b52d49",
+    "extension": ".png",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/11.1_CSS-Position_absolute/index.html",
+    "sizeBytes": 711,
+    "sha256": "19d82741c2f678fae94a3428b2fbaa5c74a433c9621d4c07cb20600539e0b61a",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/11.2_css-position-relative/images/facebook.svg",
+    "sizeBytes": 446,
+    "sha256": "2dd3dce1ba3050cebbe061188a739c1a5af34698c4b2d2d141cc5136b05f5699",
+    "extension": ".svg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/11.2_css-position-relative/images/instagram.svg",
+    "sizeBytes": 16342,
+    "sha256": "2edb9868f24a611bc49b325b4e762daf5e65c741d0674d8f70a229c6c5ec3c2a",
+    "extension": ".svg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/11.2_css-position-relative/images/linkedin.svg",
+    "sizeBytes": 598,
+    "sha256": "10c1f22695d2e67cc2dd47baa775da0ea84d4101ab9eb3e733f30e5010b671b7",
+    "extension": ".svg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/11.2_css-position-relative/images/xing.svg",
+    "sizeBytes": 980,
+    "sha256": "3645c57f8d6f6c66bfd7f55846893a6132324f7e87f46a5b3a047c48bdd29ad5",
+    "extension": ".svg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/11.2_css-position-relative/images/youtube.svg",
+    "sizeBytes": 450,
+    "sha256": "3112676c5dcba70d5e44646da8e3e3d557e0877f7de000cf58c7814fa116fcbf",
+    "extension": ".svg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/11.2_css-position-relative/position_relative.html",
+    "sizeBytes": 1070,
+    "sha256": "6bfd65033818b81f2c48cd1e8bc31b6ad40e0e3c2b8a1ccee65c5de62082913f",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/11.2_css-position-relative/Vorlage.png",
+    "sizeBytes": 13000,
+    "sha256": "fc7596c50f6c765fa7447f0449bf539802bf544d5dc7870ab7b1f0a4ce07c1c8",
+    "extension": ".png",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/11.3_CSS-Position-sticky/css/style.css",
+    "sizeBytes": 792,
+    "sha256": "1bf519302ae3d1f5c7d987a88bc82f72d9b765017de56b0a159ffd52bd05b3cd",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/11.3_CSS-Position-sticky/index.html",
+    "sizeBytes": 4445,
+    "sha256": "2dfd680710be1049486409bdd35eb4663d43d00470636999038392e95aea9f48",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/13.0_Flexbox-Schnelleinstieg/1_Flexbox_Beispiel.html",
+    "sizeBytes": 1493,
+    "sha256": "2d6459733fee951dbcb75593076b915e4a897603dc6179d0432e7af3a7d1c727",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-flexbox-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/13.0_Flexbox-Schnelleinstieg/2_Flexbox-Beispiel.html",
+    "sizeBytes": 995,
+    "sha256": "bd356a4818f73d25c24f9a7bf2e766abdea7e8aa677ec5d8a4d92410f98e79af",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-flexbox-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/13.0_Flexbox-Schnelleinstieg/css/beispiel-style1.css",
+    "sizeBytes": 689,
+    "sha256": "c685634d034510687004bb1ff07efea63a762b3af1c9b349308ce9d8edd38a61",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-flexbox-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/13.0_Flexbox-Schnelleinstieg/css/beispiel-style2.css",
+    "sizeBytes": 579,
+    "sha256": "8acb1bb3e66e0c64dee31a87775bcb1b9d43b5cc074c8d09705478356110f0d7",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-flexbox-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/13.1_Übung-flex/Übung 4 - 13_flex Layouts.pdf",
+    "sizeBytes": 345563,
+    "sha256": "45d62c71a83207fe8f07278092f48886b87a39b99134e834f02367f8b0aa37f6",
+    "extension": ".pdf",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-flexbox-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/13.2_Übung-flex2/Übung 5 - 13_flex more Layouts.pdf",
+    "sizeBytes": 262880,
+    "sha256": "d39038f0d37ef16676f550f22f4880ada9b9736bf2151c6a727fc9b0464b03f5",
+    "extension": ".pdf",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-flexbox-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.0_Responsive-Beispiel1/css/styles.css",
+    "sizeBytes": 1642,
+    "sha256": "9ed2dee9204da7fc4cd3a3fee030d5a632019b5e1f1377b22b69f338fb0e32d5",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.0_Responsive-Beispiel1/index.html",
+    "sizeBytes": 355,
+    "sha256": "50c6bf3dd7677cad100f511be71382d67148f9b8af7522a37c475c6c768bbb48",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.0_Responsive-Beispiel2/css/card.css",
+    "sizeBytes": 375,
+    "sha256": "9fae632ca53f12b7a52ee55692bae7e676b971e9c15578b51063e63e9046e6d9",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.0_Responsive-Beispiel2/css/style.css",
+    "sizeBytes": 1662,
+    "sha256": "8df87fc1db2dafccc812379eca4d3a32890aa2306c3cd88c7a9d87fb10ccfd75",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.0_Responsive-Beispiel2/images/tablesetting2.jpg",
+    "sizeBytes": 43811,
+    "sha256": "d85ac99371929876f014b656cb789aa47ef5cde6f6aabd0e660831d23ca211e1",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.0_Responsive-Beispiel2/responsive.html",
+    "sizeBytes": 2008,
+    "sha256": "0c58428899e855d2bfbe9350fc27fbadd33595fb59953bd099c2b540851b7f4d",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.0_Responsive-Beispiel3/css/card.css",
+    "sizeBytes": 375,
+    "sha256": "9fae632ca53f12b7a52ee55692bae7e676b971e9c15578b51063e63e9046e6d9",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.0_Responsive-Beispiel3/css/style.css",
+    "sizeBytes": 2980,
+    "sha256": "55562ace9258cda25fe8ed6e95f30eab0a5cd802b70e1f29917ec43bab79f75f",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.0_Responsive-Beispiel3/images/tablesetting2.jpg",
+    "sizeBytes": 43811,
+    "sha256": "d85ac99371929876f014b656cb789aa47ef5cde6f6aabd0e660831d23ca211e1",
+    "extension": ".jpg",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.0_Responsive-Beispiel3/responsive.html",
+    "sizeBytes": 4651,
+    "sha256": "051e5f30862a03d4fd6dc6ca3688782a3d076f34152869c1db760e3edce0d47e",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.2_Responsive-Übung1/css/styles.css",
+    "sizeBytes": 1683,
+    "sha256": "6493037961d178f3cdcd5af93feae4c4136c60289c8769a55dc89baff7bcb7ba",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.2_Responsive-Übung1/index.html",
+    "sizeBytes": 355,
+    "sha256": "50c6bf3dd7677cad100f511be71382d67148f9b8af7522a37c475c6c768bbb48",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.2_Responsive-Übung2/css/styles.css",
+    "sizeBytes": 1827,
+    "sha256": "eb4d1cdfbb189d63002e4d256b762f12155419858e5bcaf2eb129c5458adcd14",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.2_Responsive-Übung2/index.html",
+    "sizeBytes": 355,
+    "sha256": "50c6bf3dd7677cad100f511be71382d67148f9b8af7522a37c475c6c768bbb48",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.3_Responsive_Navi/index.html",
+    "sizeBytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.3_Responsive_Navi/styles.css",
+    "sizeBytes": 732,
+    "sha256": "0868b247e907d32fa202061c2349ac1e2100a24d1e4018f1fe9a30e3e0edc889",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.4_Responsive_row-column/Desktop Ansicht.pdf",
+    "sizeBytes": 17743,
+    "sha256": "639ba52038cbfe4f8afbc95675c8498818b52df83b36d200640cd29029db0646",
+    "extension": ".pdf",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.4_Responsive_row-column/index.html",
+    "sizeBytes": 355,
+    "sha256": "05f5c795e5c756e6bdad73e381f309083c3c9e1304c1f1ca8ae602863e850be8",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/15.4_Responsive_row-column/style.css",
+    "sizeBytes": 1408,
+    "sha256": "4dd3fa03abe817ddf2caa89f158ca6e9ef2f8ca58877cf414db465e5c117f866",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/BONUS_8-point-grid/8 Punkt Grid.pdf",
+    "sizeBytes": 166485,
+    "sha256": "708b09f3f364ca305012dcdc34be52d656d52a031d749159c42ca676d63b7fa7",
+    "extension": ".pdf",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-8-point-grid",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/BONUS_8-point-grid/css/styles.css",
+    "sizeBytes": 247,
+    "sha256": "bc469f6db9b81031148df4e78ae3f517afac05d9422f42e3a9e32791d0d6e3ab",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-8-point-grid",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/BONUS_8-point-grid/index.html",
+    "sizeBytes": 889,
+    "sha256": "ea6c77fcc85c9e3b5db9aa8cf35963faceb4877addada4e9f06d4579bb908d84",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-8-point-grid",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/BONUS_8-point-grid2/einstieg/aufgabe.md",
+    "sizeBytes": 1916,
+    "sha256": "4271c5b41f6dbbdef2c33de9a7e8e46529775a7a5a9583feadaec197847913a0",
+    "extension": ".md",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-8-point-grid",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/BONUS_8-point-grid2/einstieg/Desktop-Ansicht.png",
+    "sizeBytes": 62527,
+    "sha256": "48cbe03b4751be0718465ee66591e718b03236fd0c8bec7d6034e886c42102a7",
+    "extension": ".png",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-8-point-grid",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/BONUS_8-point-grid2/einstieg/index.html",
+    "sizeBytes": 1489,
+    "sha256": "a88cc3cf6459e7e05db9e4f152c0cb8ab0e1c47ff0589fdc7794a233fbf7c686",
+    "extension": ".html",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-8-point-grid",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/BONUS_8-point-grid2/einstieg/Mobile-Ansicht.png",
+    "sizeBytes": 42741,
+    "sha256": "678151f2735686d83e5c182e9463ccaf9fbf11d13fab697644fc8703d5982da5",
+    "extension": ".png",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-8-point-grid",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben/BONUS_8-point-grid2/einstieg/style.css",
+    "sizeBytes": 227,
+    "sha256": "15928d64290a9823bf566c72dc93257a1b29a44829621871834cfb1f57bacd69",
+    "extension": ".css",
+    "category": "exercise_starter",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-8-point-grid",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/01_tags/1_tags.html",
+    "sizeBytes": 1906,
+    "sha256": "f7b3587a016670cf659e988767f70faf274142c01190ffe7107ee28b3ec62f31",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/01_tags/2_tags.html",
+    "sizeBytes": 2743,
+    "sha256": "0fa664cc0b9303331e4a958fde7e65ea50f2db65c296f82a6312b573eb77466a",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/01_tags/image.png",
+    "sizeBytes": 266534,
+    "sha256": "7747d83dbe55ae5a26a0278ba6e76232e6dc7a5debaf85ca0d26a1cdb0ecf4fa",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/02_Attribute/1_attribute.html",
+    "sizeBytes": 1814,
+    "sha256": "d3d16fd54a96aa4bc2533e00028e6c2519f1aa207e1704c62a0e4a195f5e0649",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-attribute-formulare",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/02_Attribute/2_attribute.html",
+    "sizeBytes": 8977,
+    "sha256": "6950c0cd2ec49fdd5235921cb5cb7da91f35df41599772af56786a1006c71aa4",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-attribute-formulare",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/02_Attribute/image.png",
+    "sizeBytes": 266534,
+    "sha256": "7747d83dbe55ae5a26a0278ba6e76232e6dc7a5debaf85ca0d26a1cdb0ecf4fa",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-attribute-formulare",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/02_Attribute/keinedunklematerie.jpg",
+    "sizeBytes": 10395,
+    "sha256": "73a2b2f0e958c4d1d52473aabda9e2843c27f8fe5667f280fd61724795b7eabd",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-attribute-formulare",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/03_Grundaufbau/1_grundaufbau.html",
+    "sizeBytes": 1888,
+    "sha256": "c5a7d78341b742cf39a114d13ebe77aa9225f09d3ed9961dc697f7b7988fa42d",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/03_Grundaufbau/2_newsbeispiel.html",
+    "sizeBytes": 4623,
+    "sha256": "f42ec01735ee65c6927c2d7a0a7f02f6d3f2e611e4a1a408e682d5f3b40c3c3b",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/03_Grundaufbau/buero-genervt-workshop.jpg",
+    "sizeBytes": 13594,
+    "sha256": "9918f7abca634e052505fb9d4f5092db1540c6d0ddcd0baaa4abf53d1530a208",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/03_Grundaufbau/china-online-handel.jpg",
+    "sizeBytes": 17982,
+    "sha256": "29fdac90cdea1d9a8cd436bb09cf98debd96d56989295f6038dba2db91c0ec50",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/03_Grundaufbau/image.png",
+    "sizeBytes": 266534,
+    "sha256": "7747d83dbe55ae5a26a0278ba6e76232e6dc7a5debaf85ca0d26a1cdb0ecf4fa",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/03_Grundaufbau/IMG_6255.jpg",
+    "sizeBytes": 10564,
+    "sha256": "7e1d1837514f18456aa0ae40dc345fffe46fb9568aabe171a76e89f1a8dc9ffb",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/03_Grundaufbau/ki-geschaeft.png",
+    "sizeBytes": 85481,
+    "sha256": "be5691ff3a1eff1e7c4bb02b4aeb669930326f09f4f2bc5c28979c1f5cc38902",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/03_Grundaufbau/style.css",
+    "sizeBytes": 100,
+    "sha256": "8c6aa3762a942053ad40ca509c2d07bc83e91fcafd2fe795e507cc1ead2682c7",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/04_Links/1_links.html",
+    "sizeBytes": 681,
+    "sha256": "c84f934894920c0ec4b4cd998f75722f6725c31ea727ad98abcde0c5ca60080c",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/04_Links/2_links/impressum.html",
+    "sizeBytes": 893,
+    "sha256": "9bb19d1e889e5a98ab0cae441384ce04f2e01370efecefe1073a5c7ceeaf870f",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/04_Links/2_links/index.html",
+    "sizeBytes": 880,
+    "sha256": "3279f5b5600dc5a6fdb286014fb5eb3b094b99132aab1899529d6e345291f651",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/04_Links/2_links/kontakt.html",
+    "sizeBytes": 900,
+    "sha256": "b223fdcd9bc862fdbac938f81391c8b13c9eed8f66234128cf47abb783fbcd06",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/04_Links/2_links.html",
+    "sizeBytes": 1298,
+    "sha256": "76bf1b95ddd601595f62bebc7b7c1b6c6d4904eabc8068460c288a7d4d2839f2",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/04_Links/3_bookmarks.html",
+    "sizeBytes": 2059,
+    "sha256": "def47d63521ce88fd9ccbcf5b7b139460cb4f78df2242590a1269c79cd8df0ee",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/04_Links/3_bookmarks_2.html",
+    "sizeBytes": 2058,
+    "sha256": "04a77e5d2e4c2d1cc76e0c13e2a8751b7b7cbe147c1aaf59d58ad5d211553337",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/04_Links/beispiel.html",
+    "sizeBytes": 4403,
+    "sha256": "038749f6bd6921c9322499ddaffe5a334c8cc0331bc31e04000a8035986066be",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/04_Links/html/klausdieter.html",
+    "sizeBytes": 251,
+    "sha256": "17f4537ca3cafedce661e9ba1f79dc9fe1e01162d162c4e468afee208def554e",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/04_Links/image.png",
+    "sizeBytes": 266534,
+    "sha256": "7747d83dbe55ae5a26a0278ba6e76232e6dc7a5debaf85ca0d26a1cdb0ecf4fa",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/04_Links/index.html",
+    "sizeBytes": 437,
+    "sha256": "96ff71309518a9b87aed812bab0ca1ba734f93a3f5824078f9bac958056f4d88",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/04_Links/kontakt.html",
+    "sizeBytes": 384,
+    "sha256": "d22e7ce96e9f54b71f3dd479bda487e49075233e19d7326a61c5e0a1b4f38e5c",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/04_Links/Link-Beispiel/kontakt.html",
+    "sizeBytes": 244,
+    "sha256": "3b818a07ec70aafcc76bcb14a08311e31f49a68cfcef8490626637c200772947",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/04_Links/Link-Beispiel/linkbeispiel.html",
+    "sizeBytes": 3333,
+    "sha256": "bc31d506b99a0895950130a8974d1be119f63a39e1882a5a8541475fef485b21",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/04_Links/test.html",
+    "sizeBytes": 26,
+    "sha256": "5fbabef3cf180fa5a3c98b1ddb5503981b01c17794d5def207fd0b084fb24857",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/05_Textelemente/2_textformat.html",
+    "sizeBytes": 4405,
+    "sha256": "9289996d2e2b1abc1c4a3670dc557a980dd88b5f17a828db10e257bf9c434c9e",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-textelemente-listen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/06_Seitenstruktur_Lösung/aufbau.png",
+    "sizeBytes": 141082,
+    "sha256": "49ccc53388c85e77ea8a265ce9dd3e208e7923bd40fddc0c23f7d6694f859ff3",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-html5-semantik",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/06_Seitenstruktur_Lösung/image.png",
+    "sizeBytes": 266534,
+    "sha256": "7747d83dbe55ae5a26a0278ba6e76232e6dc7a5debaf85ca0d26a1cdb0ecf4fa",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-html5-semantik",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/06_Seitenstruktur_Lösung/struktur.html",
+    "sizeBytes": 1759,
+    "sha256": "46f385e859875561f0ab881957fca96c551f9ed3bd6ebef1ce1219b79eaa002b",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-html5-semantik",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.0_CSS-Start-Sonnen-Beispiel/images/aste.jpg",
+    "sizeBytes": 4421,
+    "sha256": "9aa30c5d4c57af0ee5e009615a572bbfd9009fb89ec728961cd7adf84886bc10",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.0_CSS-Start-Sonnen-Beispiel/images/erde.jpg",
+    "sizeBytes": 9698,
+    "sha256": "1b22370b09882b718a842290bf8f7c6efa9f8dcc0bb72ea6910e4ea9fb791c61",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.0_CSS-Start-Sonnen-Beispiel/images/interstellar.jpg",
+    "sizeBytes": 204554,
+    "sha256": "509f25967143206eb4eae821f6c9c538cb5a81133ea0ae3cbdbb42f3e7ebcc19",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.0_CSS-Start-Sonnen-Beispiel/images/jupiter.jpg",
+    "sizeBytes": 4486,
+    "sha256": "9e43a7b655ef67013c68f97e93a64b725d27628e485523c45f8446c8e7372afb",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.0_CSS-Start-Sonnen-Beispiel/images/Komet.jpg",
+    "sizeBytes": 46542,
+    "sha256": "1cef7408d7c39f6ee933017e2b3eda9c80a1053c3c8e88ecd99c1f46b682facd",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.0_CSS-Start-Sonnen-Beispiel/images/mars.jpg",
+    "sizeBytes": 3645,
+    "sha256": "2e5452efdb0be369351906c582686c6e5125722f6a821a6670a570806a5f637a",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.0_CSS-Start-Sonnen-Beispiel/images/merkur.jpg",
+    "sizeBytes": 11194,
+    "sha256": "cdd234b8e0d0b7d055125833d5d52930d971b1052a23e0543b677396ea3611c6",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.0_CSS-Start-Sonnen-Beispiel/images/moons.jpg",
+    "sizeBytes": 182750,
+    "sha256": "4250a1b4fa2869ea5f7e1424fdcc3a34cde928be2b8e028484e393eab5291d57",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.0_CSS-Start-Sonnen-Beispiel/images/neptun.jpg",
+    "sizeBytes": 2273,
+    "sha256": "e648a8cec454fd3484ebd61ac820e374420545f91352164b67cc337f8a1f3c96",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.0_CSS-Start-Sonnen-Beispiel/images/planeten.jpg",
+    "sizeBytes": 4832,
+    "sha256": "baf0454aaaa8a9cbe02558b5617cc183c16b745315c166c4d382a372da51357b",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.0_CSS-Start-Sonnen-Beispiel/images/pluto.jpg",
+    "sizeBytes": 4950,
+    "sha256": "31da6c646d41dc659c6410c00edd3480f5f515d179e6d2b4b36af135c4636f26",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.0_CSS-Start-Sonnen-Beispiel/images/saturn.jpg",
+    "sizeBytes": 4327,
+    "sha256": "ec00c83f032a1a498b9d4a2dc3c141bdf9bd7d6a0be50e1d27175dffbc7ba198",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.0_CSS-Start-Sonnen-Beispiel/images/sonne.jpg",
+    "sizeBytes": 26223,
+    "sha256": "5204195df6c646b56738e9dd56a073bfa1f4b1ed08349c7adcd13d065d916034",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.0_CSS-Start-Sonnen-Beispiel/images/uranus.jpg",
+    "sizeBytes": 4826,
+    "sha256": "b29fed10cb36c267e3e56a234e992b34fc1073390993ad8167c35e750778251b",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.0_CSS-Start-Sonnen-Beispiel/images/venus.jpg",
+    "sizeBytes": 2839,
+    "sha256": "8c9ee83fc6017faa5352d97dc7118369151b582227fa95a2863717918b1cdb76",
+    "extension": ".jpg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.0_CSS-Start-Sonnen-Beispiel/Sonnensystem.html",
+    "sizeBytes": 11557,
+    "sha256": "d1db4a3f4f23fb3d0083a43f37a3b5aeb5d63bcc157ed1f7826819b2d82e6d47",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.0_CSS-Start-Sonnen-Beispiel/styles.css",
+    "sizeBytes": 923,
+    "sha256": "ab198ef8bce03be8241a96d3f20a6e8943a1a32a17b1cb75964134a0a4c43201",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.1_CSS-Start-Lösung/aufgabe1.html",
+    "sizeBytes": 655,
+    "sha256": "88a60758496f5fa4b822376c53d53e72dacf2999ca7c61ba73634c72af3668da",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.1_CSS-Start-Lösung/aufgabe2-Preview.png",
+    "sizeBytes": 79984,
+    "sha256": "7a04fa623988f8b186abe75b96623d0ce736efbfde9a9ab62d40b907f8a1883e",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.1_CSS-Start-Lösung/aufgabe2.html",
+    "sizeBytes": 1792,
+    "sha256": "0e3f3a913008790767a4484abc084704a23d361a489d02d1419ff396d8877cb5",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.1_CSS-Start-Lösung/styles-aufgabe1.css",
+    "sizeBytes": 1165,
+    "sha256": "f948a165b653bf156305a37cb9f6a5f6af599ea667bbfca93748e8e6c8149bf4",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.1_CSS-Start-Lösung/styles-aufgabe2.css",
+    "sizeBytes": 3294,
+    "sha256": "aa8489043da4a09a777a55231ff15cbf278bb53322528c42e724b731aac35ad1",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.2_CSS-Selektoren-Lösung/aufgabe1.html",
+    "sizeBytes": 1028,
+    "sha256": "659b81955de853df978bad022de387f5b348265ba727dd5c5395fdef619a804c",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-selektoren",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.2_CSS-Selektoren-Lösung/style-aufgabe1.css",
+    "sizeBytes": 3714,
+    "sha256": "3644c771a16afc648579c2c2006e97117bc46fa71a4d655a9a5c42b6620ba364",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-css-selektoren",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.3_CSS-Boxmodel-Lösung/aufgabe1.html",
+    "sizeBytes": 1372,
+    "sha256": "43c68c0ae03e178c574dfec52bc839dcd2047546b83dc28e9d4a9d58815784a0",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-box-modell",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.3_CSS-Boxmodel-Lösung/style-aufgabe1.css",
+    "sizeBytes": 2947,
+    "sha256": "05488fe64c66c02b2bbefdc5b859a23cc4fcd816a2d911f6495a386776ebcdbd",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-box-modell",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.4_CSS-Kombinatoren-Lösung/aufgabe1.html",
+    "sizeBytes": 562,
+    "sha256": "5886b1c697b476c6f6bf9b767e0229b8b9852b90d415f9cc4f7d32fa9c847445",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-kombinatoren",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.4_CSS-Kombinatoren-Lösung/aufgabe2.html",
+    "sizeBytes": 977,
+    "sha256": "a5d5d37bac08894df39a8aba70b1bf4195a2a4ebdf58f339e59f84647f716cd6",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-kombinatoren",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.4_CSS-Kombinatoren-Lösung/beispiel.html",
+    "sizeBytes": 587,
+    "sha256": "2fff12a7b9cafc4a7f1c60c916ed8c789fbfb54179812fd332c457c8e52bab5a",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-kombinatoren",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.4_CSS-Kombinatoren-Lösung/style-aufgabe1.css",
+    "sizeBytes": 1226,
+    "sha256": "2260e4fefcb4991c1caa114f021f9e6fbd094e6c1668a1a3f68efa51fe1e53a3",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-kombinatoren",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.4_CSS-Kombinatoren-Lösung/style-aufgabe2.css",
+    "sizeBytes": 2461,
+    "sha256": "313fa84821be4e11c0a68881b395a841df24e748a9f9105f7d15d7b94e15647e",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-kombinatoren",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.5b_CSS-Selektoren-Cards-Flexbox-Beispiel/Aufgabe.png",
+    "sizeBytes": 89813,
+    "sha256": "14c55f18c6164b6803b7afcab843b91845bd975d140e195588267d66340d4f91",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-komponenten-cards",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.5b_CSS-Selektoren-Cards-Flexbox-Beispiel/css/styles.css",
+    "sizeBytes": 3864,
+    "sha256": "1696690c0eac64182163aa3e0ff97748cc1bf647dbbf2f816c8e0c494dcfc8a1",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-komponenten-cards",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.5b_CSS-Selektoren-Cards-Flexbox-Beispiel/img/img_avatar.png",
+    "sizeBytes": 8229,
+    "sha256": "cd1b399a6bb93a264f35a2a268f3cb80a30ea2e4af5a5738f9251004188990d9",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-komponenten-cards",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.5b_CSS-Selektoren-Cards-Flexbox-Beispiel/img/img_avatar2.png",
+    "sizeBytes": 8314,
+    "sha256": "a9331eccfdb210020aaa8fcf429cfad18b29d4e7126bd5ba088c723266b52d49",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-komponenten-cards",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.5b_CSS-Selektoren-Cards-Flexbox-Beispiel/index.html",
+    "sizeBytes": 1825,
+    "sha256": "b79c560fc4db10ea8a221e21bc799f051dde38572d83c1116c8b651d712e124d",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-komponenten-cards",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.5b_CSS-Selektoren-Cards-Flexbox-Beispiel/Vorschau.png",
+    "sizeBytes": 55316,
+    "sha256": "641a93bd0a068de2050679570cb0b08ab6b5b76c98d322b292da908dc19d3a52",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-komponenten-cards",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.5_CSS-Selektoren-Cards-Lösung/Aufgabe.png",
+    "sizeBytes": 89813,
+    "sha256": "14c55f18c6164b6803b7afcab843b91845bd975d140e195588267d66340d4f91",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-komponenten-cards",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.5_CSS-Selektoren-Cards-Lösung/css/styles.css",
+    "sizeBytes": 3411,
+    "sha256": "f6d11ccd2849714ca6a226f5c1330e54a223191ab9aa7f1d4db41bfff95ed834",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-komponenten-cards",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.5_CSS-Selektoren-Cards-Lösung/img/img_avatar.png",
+    "sizeBytes": 8229,
+    "sha256": "cd1b399a6bb93a264f35a2a268f3cb80a30ea2e4af5a5738f9251004188990d9",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-komponenten-cards",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.5_CSS-Selektoren-Cards-Lösung/img/img_avatar2.png",
+    "sizeBytes": 8314,
+    "sha256": "a9331eccfdb210020aaa8fcf429cfad18b29d4e7126bd5ba088c723266b52d49",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-komponenten-cards",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.5_CSS-Selektoren-Cards-Lösung/index.html",
+    "sizeBytes": 655,
+    "sha256": "74acb43d5722ed07cd1767cf6eac474453a08c3803781abcde57297e7f74c8ce",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-komponenten-cards",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/10.5_CSS-Selektoren-Cards-Lösung/Vorschau.png",
+    "sizeBytes": 55316,
+    "sha256": "641a93bd0a068de2050679570cb0b08ab6b5b76c98d322b292da908dc19d3a52",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-komponenten-cards",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/11.1_CSS-Position_absolute-Lösung/css/styles.css",
+    "sizeBytes": 1780,
+    "sha256": "217aa9547f3cfd646b81b6185706048dc81ad4a78c504697a6c2ac3b7796ad27",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/11.1_CSS-Position_absolute-Lösung/img/close.svg",
+    "sizeBytes": 898,
+    "sha256": "7af861bcb6297cb917b440242c306360069f994dda00b3264c9e800ec143e9ad",
+    "extension": ".svg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/11.1_CSS-Position_absolute-Lösung/img/img_avatar.png",
+    "sizeBytes": 8229,
+    "sha256": "cd1b399a6bb93a264f35a2a268f3cb80a30ea2e4af5a5738f9251004188990d9",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/11.1_CSS-Position_absolute-Lösung/img/img_avatar2.png",
+    "sizeBytes": 8314,
+    "sha256": "a9331eccfdb210020aaa8fcf429cfad18b29d4e7126bd5ba088c723266b52d49",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/11.1_CSS-Position_absolute-Lösung/index.html",
+    "sizeBytes": 745,
+    "sha256": "28cebf0ccdacd115b4acc4078202a2d4af638f3abea51148fb6bd27b621aa830",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/11.2_css-position-relative-Lösung/images/facebook.svg",
+    "sizeBytes": 446,
+    "sha256": "2dd3dce1ba3050cebbe061188a739c1a5af34698c4b2d2d141cc5136b05f5699",
+    "extension": ".svg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/11.2_css-position-relative-Lösung/images/instagram.svg",
+    "sizeBytes": 16342,
+    "sha256": "2edb9868f24a611bc49b325b4e762daf5e65c741d0674d8f70a229c6c5ec3c2a",
+    "extension": ".svg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/11.2_css-position-relative-Lösung/images/linkedin.svg",
+    "sizeBytes": 598,
+    "sha256": "10c1f22695d2e67cc2dd47baa775da0ea84d4101ab9eb3e733f30e5010b671b7",
+    "extension": ".svg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/11.2_css-position-relative-Lösung/images/xing.svg",
+    "sizeBytes": 980,
+    "sha256": "3645c57f8d6f6c66bfd7f55846893a6132324f7e87f46a5b3a047c48bdd29ad5",
+    "extension": ".svg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/11.2_css-position-relative-Lösung/images/youtube.svg",
+    "sizeBytes": 450,
+    "sha256": "3112676c5dcba70d5e44646da8e3e3d557e0877f7de000cf58c7814fa116fcbf",
+    "extension": ".svg",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/11.2_css-position-relative-Lösung/position_relative.html",
+    "sizeBytes": 1395,
+    "sha256": "4b08a354a6785911d7ed6c437ab851664c4af441c21b111384d0af01ed246a03",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/11.2_css-position-relative-Lösung/style.css",
+    "sizeBytes": 1058,
+    "sha256": "3033c4043e3a8456e7cc9dd582677b2ca0d2d40258409808a43b70959a6f7352",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/11.2_css-position-relative-Lösung/Vorlage.png",
+    "sizeBytes": 13000,
+    "sha256": "fc7596c50f6c765fa7447f0449bf539802bf544d5dc7870ab7b1f0a4ce07c1c8",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/11.3_CSS-Position-sticky-Lösung/css/style.css",
+    "sizeBytes": 826,
+    "sha256": "4a0ad4e9108328ae5901cc87293c2acc14dd227b65734906f0f3e314589328a4",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/11.3_CSS-Position-sticky-Lösung/index.html",
+    "sizeBytes": 4445,
+    "sha256": "2dfd680710be1049486409bdd35eb4663d43d00470636999038392e95aea9f48",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-positionierung",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/13.1_Übung-flex-Lösung/index.html",
+    "sizeBytes": 1496,
+    "sha256": "0a480a2b26c2f359e553fa43820911c5ee97053edd89cb38c8021f1161aa7997",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-flexbox-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/13.1_Übung-flex-Lösung/styles.css",
+    "sizeBytes": 896,
+    "sha256": "a969e157fd22edee0e4605e3d6a7dc38dd8674ef19a8babda0c4e42c9f0cfd27",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-flexbox-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/13.1_Übung-flex-Lösung/Übung 4 - 13_flex Layouts.pdf",
+    "sizeBytes": 345563,
+    "sha256": "45d62c71a83207fe8f07278092f48886b87a39b99134e834f02367f8b0aa37f6",
+    "extension": ".pdf",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-flexbox-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/13.2_Übung-flex2-Lösung/index.html",
+    "sizeBytes": 1432,
+    "sha256": "0680c3b72e33e91476d8946e5f06941aebdb0a0f049d636500ac052ef7920109",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-flexbox-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/13.2_Übung-flex2-Lösung/kontakt.html",
+    "sizeBytes": 1785,
+    "sha256": "4ff6a05670f8da6db30ff1b7eac54911673b0f494efa6936c12eb041124ef60c",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-flexbox-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/13.2_Übung-flex2-Lösung/styles.css",
+    "sizeBytes": 1229,
+    "sha256": "bd5e79d156dc434c6e4db7c65bd3be91f9469e5117ea7edce096f5d50fda0c3e",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-flexbox-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/13.2_Übung-flex2-Lösung/Übung 5 - 13_flex more Layouts.pdf",
+    "sizeBytes": 262880,
+    "sha256": "d39038f0d37ef16676f550f22f4880ada9b9736bf2151c6a727fc9b0464b03f5",
+    "extension": ".pdf",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-flexbox-grundlagen",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/15.0_Responsive-Beispiel1-Variante1/css/styles.css",
+    "sizeBytes": 2131,
+    "sha256": "ddc2a969a3813ed3253e8d3110103a819de7eabdf91ff42e5a2da2db0445b7c9",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/15.0_Responsive-Beispiel1-Variante1/index.html",
+    "sizeBytes": 543,
+    "sha256": "4530cfcae8dc0977f3d767d5617d3417a7ef77d1d6f38723132f1e73b862d612",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/15.0_Responsive-Beispiel1-Variante1/media-minmax.html",
+    "sizeBytes": 529,
+    "sha256": "e52e5704187d77e366a25b65f88e0939aee8f75f8575fb016c161f796d0b6310",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/15.2_Responsive-Übung1-Lösung/css/styles.css",
+    "sizeBytes": 1732,
+    "sha256": "e0b5d24bd1fb132b8b083bcbcea5fd08606b08944c893662fba1f39e65930ea7",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/15.2_Responsive-Übung1-Lösung/index.html",
+    "sizeBytes": 525,
+    "sha256": "d8f19eeae2bd79e6772ae449e3bb730a645f32ae65356db43a008665328aa2be",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/15.2_Responsive-Übung2-Lösung/css/styles.css",
+    "sizeBytes": 2096,
+    "sha256": "7b8865a743e1fd9e41c074d419a7e7b10696881f06bdafc031da2e0dd1ffe871",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/15.2_Responsive-Übung2-Lösung/index.html",
+    "sizeBytes": 624,
+    "sha256": "6ea4c8788c0662542527978f4319444732d17aaaa3de820dd26865cdbbfb6f01",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/15.3_Responsive_Navi-Lösung/index.html",
+    "sizeBytes": 644,
+    "sha256": "65507031892a82015ca83639d28cd52f29e28d4ebd73f148ed5acdb104cd1fb9",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/15.3_Responsive_Navi-Lösung/styles.css",
+    "sizeBytes": 1307,
+    "sha256": "4ee7a13442c9fde7cfc27e15a1d3f48ca91d29af29810eff3cfe3b4098238e83",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/15.4_Responsive_row-column-Lösung/Desktop Ansicht.pdf",
+    "sizeBytes": 17743,
+    "sha256": "639ba52038cbfe4f8afbc95675c8498818b52df83b36d200640cd29029db0646",
+    "extension": ".pdf",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/15.4_Responsive_row-column-Lösung/index.html",
+    "sizeBytes": 888,
+    "sha256": "0fbbc1fd9f79ec293b470e5bdadaaa02a08c26fc86946a812361df1dd349e2b6",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/15.4_Responsive_row-column-Lösung/style.css",
+    "sizeBytes": 1315,
+    "sha256": "8366d6a35069734b6ca52606f5604126007423df481ab1cf68172fabff2348a2",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-responsive-design",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/BONUS_8-point-grid-Lösung/8 Punkt Grid.pdf",
+    "sizeBytes": 166485,
+    "sha256": "708b09f3f364ca305012dcdc34be52d656d52a031d749159c42ca676d63b7fa7",
+    "extension": ".pdf",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-8-point-grid",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/BONUS_8-point-grid-Lösung/css/styles.css",
+    "sizeBytes": 622,
+    "sha256": "e1af08cfe80971294a27f703a0e2ab93090e4adf7858792d013ae03aee2e5cf3",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-8-point-grid",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/BONUS_8-point-grid-Lösung/index.html",
+    "sizeBytes": 987,
+    "sha256": "e2250f427371d6778572ff2e65397da5ab8fde8801602b590678dbc601cd2b48",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-8-point-grid",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/BONUS_8-point-grid2-Lösung/einstieg/aufgabe.md",
+    "sizeBytes": 1916,
+    "sha256": "4271c5b41f6dbbdef2c33de9a7e8e46529775a7a5a9583feadaec197847913a0",
+    "extension": ".md",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-8-point-grid",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/BONUS_8-point-grid2-Lösung/einstieg/Desktop-Ansicht.png",
+    "sizeBytes": 62527,
+    "sha256": "48cbe03b4751be0718465ee66591e718b03236fd0c8bec7d6034e886c42102a7",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-8-point-grid",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/BONUS_8-point-grid2-Lösung/einstieg/index.html",
+    "sizeBytes": 1489,
+    "sha256": "a88cc3cf6459e7e05db9e4f152c0cb8ab0e1c47ff0589fdc7794a233fbf7c686",
+    "extension": ".html",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-8-point-grid",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/BONUS_8-point-grid2-Lösung/einstieg/Mobile-Ansicht.png",
+    "sizeBytes": 42741,
+    "sha256": "678151f2735686d83e5c182e9463ccaf9fbf11d13fab697644fc8703d5982da5",
+    "extension": ".png",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-8-point-grid",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Aufgaben-Lösungen/BONUS_8-point-grid2-Lösung/einstieg/style.css",
+    "sizeBytes": 1822,
+    "sha256": "903809767f6fba438779f13de68ece44758a70ac0d611067fb651d285124e8b4",
+    "extension": ".css",
+    "category": "exercise_solution",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-8-point-grid",
+    "notes": "Practice exercise and solution"
+  },
+  {
+    "sourcePath": "HTML/Klausurthemen.pdf",
+    "sizeBytes": 265038,
+    "sha256": "f29924893ef3ee9d84770317dd579d3661f3c2d81a4e70cf0339b2928d6f6c30",
+    "extension": ".pdf",
+    "category": "exam_syllabus",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-klausurvorbereitung",
+    "notes": "Exam syllabus breakdown"
+  },
+  {
+    "sourcePath": "HTML/Klausurvorbereitung/1_Klausurvorbereitung-HTML-CSS-Lösung/1_HTML-Tags_und _Container.html",
+    "sizeBytes": 843,
+    "sha256": "de92170da08e7b29b83f2e9194f7eb027c08e6a826ec92b84e14cce6db082fdd",
+    "extension": ".html",
+    "category": "exam_prep",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-klausurvorbereitung",
+    "notes": "Exam preparation task / solution"
+  },
+  {
+    "sourcePath": "HTML/Klausurvorbereitung/1_Klausurvorbereitung-HTML-CSS-Lösung/2_Boxmodell.txt",
+    "sizeBytes": 83,
+    "sha256": "0a6c6fe117c51234a1f6552ed864f74b956e31a00170914976b52a5efa6a713d",
+    "extension": ".txt",
+    "category": "exam_prep",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-klausurvorbereitung",
+    "notes": "Exam preparation task / solution"
+  },
+  {
+    "sourcePath": "HTML/Klausurvorbereitung/1_Klausurvorbereitung-HTML-CSS-Lösung/3_CSS-Selektoren.txt",
+    "sizeBytes": 101,
+    "sha256": "bc2b98777cda8b335244e082feb58dffad1de1f7a197e971448ab36a6a779550",
+    "extension": ".txt",
+    "category": "exam_prep",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-klausurvorbereitung",
+    "notes": "Exam preparation task / solution"
+  },
+  {
+    "sourcePath": "HTML/Klausurvorbereitung/1_Klausurvorbereitung-HTML-CSS-Lösung/4_CSS-Kombinatoren.css",
+    "sizeBytes": 857,
+    "sha256": "0a2f27f5672e823e7dca9b18ab99dbee062b4e816075fbe6d7cb6677218c8b2a",
+    "extension": ".css",
+    "category": "exam_prep",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-klausurvorbereitung",
+    "notes": "Exam preparation task / solution"
+  },
+  {
+    "sourcePath": "HTML/Klausurvorbereitung/1_Klausurvorbereitung-HTML-CSS-Lösung/5_CSS-Position.css",
+    "sizeBytes": 425,
+    "sha256": "67102ba21f43a286c49b58d1342a38e07d8e46b0a09dbabb7e14c7751940647b",
+    "extension": ".css",
+    "category": "exam_prep",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-klausurvorbereitung",
+    "notes": "Exam preparation task / solution"
+  },
+  {
+    "sourcePath": "HTML/Klausurvorbereitung/1_Klausurvorbereitung-HTML-CSS-Lösung/6_Flexbox.html",
+    "sizeBytes": 566,
+    "sha256": "c461b10187a13f93ef2990a2c8e3fd856a8409758a2617a1897a2f21eb4c893f",
+    "extension": ".html",
+    "category": "exam_prep",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-klausurvorbereitung",
+    "notes": "Exam preparation task / solution"
+  },
+  {
+    "sourcePath": "HTML/Klausurvorbereitung/1_Klausurvorbereitung-HTML-CSS-Lösung/test.html",
+    "sizeBytes": 335,
+    "sha256": "3547604c13ea53f2af720c9750516442d3427de2fb70d0fc9c8a2c273e6df120",
+    "extension": ".html",
+    "category": "exam_prep",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-klausurvorbereitung",
+    "notes": "Exam preparation task / solution"
+  },
+  {
+    "sourcePath": "HTML/Klausurvorbereitung/1_Klausurvorbereitung-HTML-CSS.pdf",
+    "sizeBytes": 360347,
+    "sha256": "d852efcde9283a1a935d976386b59299c3bda1965e39ac5249c2e84ccf7f3f7d",
+    "extension": ".pdf",
+    "category": "exam_prep",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-klausurvorbereitung",
+    "notes": "Exam preparation task / solution"
+  },
+  {
+    "sourcePath": "HTML/Klausurvorbereitung/2_Klausurvorbereitung-CSS-2-mediaqueries.pdf",
+    "sizeBytes": 117876,
+    "sha256": "d3fa05a075bbc756552d31c7db73a72e6a56b59076af8786c8371a251ad2a306",
+    "extension": ".pdf",
+    "category": "exam_prep",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-klausurvorbereitung",
+    "notes": "Exam preparation task / solution"
+  },
+  {
+    "sourcePath": "HTML/Klausurvorbereitung/2_Klausurvorbereitung_Bonus-Lösung/index.html",
+    "sizeBytes": 3167,
+    "sha256": "29bebf3d2b52b18119f29bf7eae29628b64124817540d986bd5ecf5d39ddd295",
+    "extension": ".html",
+    "category": "exam_prep",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-klausurvorbereitung",
+    "notes": "Exam preparation task / solution"
+  },
+  {
+    "sourcePath": "HTML/Klausurvorbereitung/2_Klausurvorbereitung_Bonus-Lösung/styles.css",
+    "sizeBytes": 1018,
+    "sha256": "5c83512377dd62b4d4c023b2515502f8ed1bb080774fa2c346cdaf0d549070da",
+    "extension": ".css",
+    "category": "exam_prep",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-klausurvorbereitung",
+    "notes": "Exam preparation task / solution"
+  },
+  {
+    "sourcePath": "HTML/Klausurvorbereitung/3_Klausurvorbereitung2-Bonus-ohne@media.pdf",
+    "sizeBytes": 243191,
+    "sha256": "635addba7dbcdad7f425e2586117d5dceaeb89b9a6d1ec6a1216cbe2618377ed",
+    "extension": ".pdf",
+    "category": "exam_prep",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-klausurvorbereitung",
+    "notes": "Exam preparation task / solution"
+  },
+  {
+    "sourcePath": "HTML/Klausurvorbereitung/CSS-2-MediaQueries-Lösung/index.html",
+    "sizeBytes": 1357,
+    "sha256": "f02278c580f4ad86320f04ddabd609a145d5e2294144b79d297322898c779c6a",
+    "extension": ".html",
+    "category": "exam_prep",
+    "classification": "integrated",
+    "targetLesson": "topic-html-css-klausurvorbereitung",
+    "notes": "Exam preparation task / solution"
+  },
+  {
+    "sourcePath": "HTML/Nützliches/Background-Kurzreferenz.md",
+    "sizeBytes": 4504,
+    "sha256": "94a20cd536c3c7584805649fbb990ddcaf3a90739f28681052148344e3e416f3",
+    "extension": ".md",
+    "category": "reference_doc",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-hintergruende-farben",
+    "notes": "Official reference / cheatsheet"
+  },
+  {
+    "sourcePath": "HTML/Nützliches/CSS-Kurzreferenz.md",
+    "sizeBytes": 7270,
+    "sha256": "49e31dd55677c9bc73bb70d3ef23086742a20fbc2f86ed1df9cf3ed820705b96",
+    "extension": ".md",
+    "category": "reference_doc",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Official reference / cheatsheet"
+  },
+  {
+    "sourcePath": "HTML/Nützliches/HTML Entities - html_entities.pdf",
+    "sizeBytes": 52711,
+    "sha256": "95123ac331f09e8e2cf118a45385da37b3c8c369d7ee3a83295de38d4806bd65",
+    "extension": ".pdf",
+    "category": "reference_doc",
+    "classification": "reference_resource",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Official reference / cheatsheet"
+  },
+  {
+    "sourcePath": "HTML/Nützliches/HTML-Kurzreferenz.md",
+    "sizeBytes": 6691,
+    "sha256": "2f8f7b430f7804317f64e1d274a4b1fca9b74ee190d0f856b1357d61bbafbc83",
+    "extension": ".md",
+    "category": "reference_doc",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-html5-semantik",
+    "notes": "Official reference / cheatsheet"
+  },
+  {
+    "sourcePath": "HTML/Nützliches/html5-css-referenz.pdf",
+    "sizeBytes": 939532,
+    "sha256": "ad5dc8a045ba058e79a089c6dd3000ed850191b75db76925218cfcd65180dd29",
+    "extension": ".pdf",
+    "category": "reference_doc",
+    "classification": "reference_resource",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Official reference / cheatsheet"
+  },
+  {
+    "sourcePath": "HTML/Nützliches/Resourcensammlung.pdf",
+    "sizeBytes": 216376,
+    "sha256": "c5ad3176afe45981703f186fae94bb96e6142500460b34e3848a45daa1bc1880",
+    "extension": ".pdf",
+    "category": "reference_doc",
+    "classification": "reference_resource",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Official reference / cheatsheet"
+  },
+  {
+    "sourcePath": "HTML/Nützliches/VisualStudioCode-Instsallationsguide.pdf",
+    "sizeBytes": 591617,
+    "sha256": "c46c5f25028601d413377bc66337682461a8d4197d8ca1092978d9f7c2e4799a",
+    "extension": ".pdf",
+    "category": "reference_doc",
+    "classification": "reference_resource",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Official reference / cheatsheet"
+  },
+  {
+    "sourcePath": "HTML/Präsentation/1_HTML-Einführung.pdf",
+    "sizeBytes": 1547063,
+    "sha256": "a6b8763a55b34de953db021540957993e6351eedd913d83d22f7cdfc2559121c",
+    "extension": ".pdf",
+    "category": "presentation_pdf",
+    "classification": "reference_resource",
+    "targetLesson": "topic-html-css-grundlagen",
+    "notes": "Official course presentation PDF"
+  },
+  {
+    "sourcePath": "HTML/Präsentation/2.5_CSS-Flexbox-Kurzbeschreibung.pdf",
+    "sizeBytes": 530525,
+    "sha256": "b11eef6e89a99a97f378027371920658aec1e96c06a9adf84c3173cc1cad7f75",
+    "extension": ".pdf",
+    "category": "presentation_pdf",
+    "classification": "reference_resource",
+    "targetLesson": "topic-html-css-flexbox-grundlagen",
+    "notes": "Official course presentation PDF"
+  },
+  {
+    "sourcePath": "HTML/Präsentation/2_CSS-Einführung2.0.pdf",
+    "sizeBytes": 1159575,
+    "sha256": "f955b146d5eca504abba65b3b9720e0ee39306c6cab9af5791985f706d619124",
+    "extension": ".pdf",
+    "category": "presentation_pdf",
+    "classification": "reference_resource",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Official course presentation PDF"
+  },
+  {
+    "sourcePath": "HTML/Präsentation/3_CSS-Flexbox.pdf",
+    "sizeBytes": 942400,
+    "sha256": "aae2070c1bafa2ef9003f7aebd510497954a69bbd1b86eed01ae501a1ddc9312",
+    "extension": ".pdf",
+    "category": "presentation_pdf",
+    "classification": "reference_resource",
+    "targetLesson": "topic-html-css-flexbox-grundlagen",
+    "notes": "Official course presentation PDF"
+  },
+  {
+    "sourcePath": "HTML/Präsentation/4_CSS-Media-Queries.pdf",
+    "sizeBytes": 509692,
+    "sha256": "a2d407e57f936ffdc720999df4feba3aec26fe92541218bc2770fd64347e8e8e",
+    "extension": ".pdf",
+    "category": "presentation_pdf",
+    "classification": "reference_resource",
+    "targetLesson": "topic-html-css-media-queries",
+    "notes": "Official course presentation PDF"
+  },
+  {
+    "sourcePath": "HTML/Präsentation/6_DESIGN-8-Point-Grid.pdf",
+    "sizeBytes": 590072,
+    "sha256": "765cb410dafb41537e58250cec73b3b537d8ed807758899dd6e906b064b6fbdb",
+    "extension": ".pdf",
+    "category": "presentation_pdf",
+    "classification": "reference_resource",
+    "targetLesson": "topic-html-css-8-point-grid",
+    "notes": "Official course presentation PDF"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/01_Planung/64x64.jpg",
+    "sizeBytes": 1886,
+    "sha256": "f6b370500e197f605f205c945fccc3a136dee0a107095c30e8e62dd0a7c43c43",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-webseiten-projekt",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/01_Planung/index.html",
+    "sizeBytes": 701,
+    "sha256": "694c76e27e93f16d9849384a124c0a76925c8d5e92b7e163158405dd97bc92bc",
+    "extension": ".html",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-webseiten-projekt",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/01_Planung/Planung-Startseite.png",
+    "sizeBytes": 99237,
+    "sha256": "11be0b0aeb160155f75b53fa19dd8a5177f05e2cc0180d878bb02f8e62547a59",
+    "extension": ".png",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-webseiten-projekt",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/01_Projekt-Website-Dummy/doggo.avif",
+    "sizeBytes": 18924,
+    "sha256": "ef0841b3bf87ba05c1117ad3a7aadbf1182c5e6969fd1e328b4f433810716904",
+    "extension": ".avif",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-webseiten-projekt",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/01_Projekt-Website-Dummy/index.html",
+    "sizeBytes": 1199,
+    "sha256": "ef69ababbae21a79fa91689d39fbf92213a18daaa0cb6aed6ef7f6791937eb14",
+    "extension": ".html",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-webseiten-projekt",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/01_Projekt-Website-Dummy/styles.css",
+    "sizeBytes": 1157,
+    "sha256": "a51ea08aaca5832fa686077bc021ea17e9646079e0b3979437830f5ec1f71a09",
+    "extension": ".css",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-webseiten-projekt",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/03_singlepagewebsite/css/stylesheet.css",
+    "sizeBytes": 2107,
+    "sha256": "0d057d341c239b1bd39eda6615bf39009aab741c67ba9561033097490c1948c4",
+    "extension": ".css",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-webseiten-projekt",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/03_singlepagewebsite/images/philip-jahn-Htcn117mnSs-unsplash.jpg",
+    "sizeBytes": 5360838,
+    "sha256": "53296cf179285a58f90942f3576e9217b9cca75c98b806f7befe053f6dadc4fb",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-webseiten-projekt",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/03_singlepagewebsite/index.html",
+    "sizeBytes": 3439,
+    "sha256": "dad19cbe245fe37976897133f7827e5c51c3ed4c3d662a2d26e4a1d4845711ea",
+    "extension": ".html",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-webseiten-projekt",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/04_Background/Background-Kurzreferenz.md",
+    "sizeBytes": 4504,
+    "sha256": "94a20cd536c3c7584805649fbb990ddcaf3a90739f28681052148344e3e416f3",
+    "extension": ".md",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-hintergruende-farben",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/04_Background/background_complex/css/styles.css",
+    "sizeBytes": 2077,
+    "sha256": "d7a4a90c6a4d8f29c2fa8900286070fbd99c5e347bd533ee0092848a55540a78",
+    "extension": ".css",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-hintergruende-farben",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/04_Background/background_complex/images/alex-sanislav-3ioKijQhxxI-unsplash.jpg",
+    "sizeBytes": 2528212,
+    "sha256": "fe535be3db5277d0ae3ea5488621f6db2d64e9946279d78017589c03bb8a8f77",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-hintergruende-farben",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/04_Background/background_complex/images/chris-czermak-7ybKmhDTcz0-unsplash.jpg",
+    "sizeBytes": 2686881,
+    "sha256": "a1f04449686307270b9cff2362bd2f6be7da8ecc847984d538cf9a1b3abbd6c0",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-hintergruende-farben",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/04_Background/background_complex/images/fabio-mangione-fs1B0RX4j1o-unsplash.jpg",
+    "sizeBytes": 4969369,
+    "sha256": "6df8a475667dda2876b7287b54d2dcbc12b0a619d967d7366c3fd11b7ddf0843",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-hintergruende-farben",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/04_Background/background_complex/images/howard-bouchevereau-i0nW-lPiR6w-unsplash.jpg",
+    "sizeBytes": 3182457,
+    "sha256": "81f1fd229ddaba48a0b7e46957172bd7fd32b4b46679654db6ec991f2ce25c3b",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-hintergruende-farben",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/04_Background/background_complex/images/jorge-zapata-zISkTiXiAxM-unsplash.jpg",
+    "sizeBytes": 2158690,
+    "sha256": "74c7956fc69953f25217bad72308bcfa73b434d7cc84011710f667161045e324",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-hintergruende-farben",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/04_Background/background_complex/images/karsten-wurth-9qvZSH_NOQs-unsplash.jpg",
+    "sizeBytes": 3235812,
+    "sha256": "c3c196b6ab3d45f1087fa41366081a218c126ad76b50e73bd15f63d7bba666c1",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-hintergruende-farben",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/04_Background/background_complex/index.html",
+    "sizeBytes": 3110,
+    "sha256": "2509728f8afe09f0e8fd60c5353ec3941ba3e92491c47e5530aa15ac08c25eeb",
+    "extension": ".html",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-hintergruende-farben",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/04_Background/background_simple/css/styles.css",
+    "sizeBytes": 1815,
+    "sha256": "b7cc7a05cb5bb1de2b0020f79b2a19200a031619eac007e47b311e031efc2425",
+    "extension": ".css",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-hintergruende-farben",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/04_Background/background_simple/images/alex-sanislav-3ioKijQhxxI-unsplash.jpg",
+    "sizeBytes": 2528212,
+    "sha256": "fe535be3db5277d0ae3ea5488621f6db2d64e9946279d78017589c03bb8a8f77",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-hintergruende-farben",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/04_Background/background_simple/images/chris-czermak-7ybKmhDTcz0-unsplash.jpg",
+    "sizeBytes": 2686881,
+    "sha256": "a1f04449686307270b9cff2362bd2f6be7da8ecc847984d538cf9a1b3abbd6c0",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-hintergruende-farben",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/04_Background/background_simple/images/fabio-mangione-fs1B0RX4j1o-unsplash.jpg",
+    "sizeBytes": 4969369,
+    "sha256": "6df8a475667dda2876b7287b54d2dcbc12b0a619d967d7366c3fd11b7ddf0843",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-hintergruende-farben",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/04_Background/background_simple/images/howard-bouchevereau-i0nW-lPiR6w-unsplash.jpg",
+    "sizeBytes": 3182457,
+    "sha256": "81f1fd229ddaba48a0b7e46957172bd7fd32b4b46679654db6ec991f2ce25c3b",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-hintergruende-farben",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/04_Background/background_simple/images/jorge-zapata-zISkTiXiAxM-unsplash.jpg",
+    "sizeBytes": 2158690,
+    "sha256": "74c7956fc69953f25217bad72308bcfa73b434d7cc84011710f667161045e324",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-hintergruende-farben",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/04_Background/background_simple/images/karsten-wurth-9qvZSH_NOQs-unsplash.jpg",
+    "sizeBytes": 3235812,
+    "sha256": "c3c196b6ab3d45f1087fa41366081a218c126ad76b50e73bd15f63d7bba666c1",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-hintergruende-farben",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/04_Background/background_simple/index.html",
+    "sizeBytes": 3093,
+    "sha256": "6e16e0758ae6130bdc24c9adf857c658ec8c10472406472f2841e75e82c59cc9",
+    "extension": ".html",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-hintergruende-farben",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/css/card.css",
+    "sizeBytes": 375,
+    "sha256": "9fae632ca53f12b7a52ee55692bae7e676b971e9c15578b51063e63e9046e6d9",
+    "extension": ".css",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/css/frameset.css",
+    "sizeBytes": 3619,
+    "sha256": "43a8078e43675b613ffaa8d3a63153c5d95e7042e7c2667eeb7349de07727181",
+    "extension": ".css",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/css/gimmicks.css",
+    "sizeBytes": 663,
+    "sha256": "bd2ffe6728e9503f0d43cc64bdc552b34c095b009f0d745c73c5844d802ec64a",
+    "extension": ".css",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/css/navigation.css",
+    "sizeBytes": 2133,
+    "sha256": "ad9442540eb9435a3507fa82407fe484989c13d9a5c50f0a24e3a702e7f2d896",
+    "extension": ".css",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/css/normalize.css",
+    "sizeBytes": 6142,
+    "sha256": "6a75510b28883629cb92761ce242c2e93ec56be428936dd7ebbc2de572b32e95",
+    "extension": ".css",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/css/style.css",
+    "sizeBytes": 7313,
+    "sha256": "2f580eeb3a2bb7346756166e325f33be275e33a877cb85b5d59f006f61986dd2",
+    "extension": ".css",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/fonts/open-sans-v40-latin-300.woff2",
+    "sizeBytes": 18704,
+    "sha256": "758015e3cb56989df5cfcf912d2c3861a62e623d386ef12d4bacf15891a4eb81",
+    "extension": ".woff2",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/fonts/open-sans-v40-latin-300italic.woff2",
+    "sizeBytes": 19332,
+    "sha256": "8202d126a1bd9699b9d97ff51bf012337200b44be67f0f64140b16edd458e802",
+    "extension": ".woff2",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/fonts/open-sans-v40-latin-600.woff2",
+    "sizeBytes": 18596,
+    "sha256": "7f7fcda5f37c18def2314b911b02417b773c4f459df0d25931ffa7389b872b89",
+    "extension": ".woff2",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/fonts/open-sans-v40-latin-600italic.woff2",
+    "sizeBytes": 19328,
+    "sha256": "442b72c81ff4e9ff67268cc1226abce9add2d282993daad01eedfe13fab0fbb5",
+    "extension": ".woff2",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/fonts/open-sans-v40-latin-800.woff2",
+    "sizeBytes": 18644,
+    "sha256": "3403fa778109bceb18b607b327d3a721f225555e078ccbdacb4238b733856ff7",
+    "extension": ".woff2",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/fonts/open-sans-v40-latin-800italic.woff2",
+    "sizeBytes": 19056,
+    "sha256": "2cf7414e40490f8db33bb6c31731c67699d63c787aa98897bb58563f039e3109",
+    "extension": ".woff2",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/fonts/open-sans-v40-latin-italic.woff2",
+    "sizeBytes": 19280,
+    "sha256": "b4855cc8ec721cbaf27f3c907345e101b1524858221c14faa79df34cb2f84991",
+    "extension": ".woff2",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/fonts/open-sans-v40-latin-regular.woff2",
+    "sizeBytes": 18668,
+    "sha256": "e7af9d60d875eb1c1b1037bbbfdec41fcb096d0ebcf98a48717ad8b07906ced6",
+    "extension": ".woff2",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/allison-saeng-BJFRrEkkV9c-unsplash.jpg",
+    "sizeBytes": 262663,
+    "sha256": "aed9a5c2d5f02f6ddaf6ea82a1d5e4e1537bd28064b647bc9e735ed2652851bc",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/amritansh-dubey-5z7vN1QrQwU-unsplash.jpg",
+    "sizeBytes": 1581694,
+    "sha256": "0d5eb6ebbab1d96a212ede351a59bbc71786a2c6a6b123fa72192409648a94f5",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/annie-spratt-At3-0ITk3Po-unsplash.jpg",
+    "sizeBytes": 9738317,
+    "sha256": "680ed37158c9f791208e314b81a50a4f812bce242df90b08ed84d1857ca50296",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/berg.jpg",
+    "sizeBytes": 14799,
+    "sha256": "3b852b7faaed217e958c20ddc84e9218e5efb2e31af73970327fffe17cfe7c91",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/boki-markov-a_5wjo55RG4-unsplash.jpg",
+    "sizeBytes": 6191478,
+    "sha256": "41178f65bebc25b706b2aaf11d44740060c8c3bec98d4cc592d12f022a2a2639",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/boot-klein.jpg",
+    "sizeBytes": 10331,
+    "sha256": "70e99e664756fe9963fb7c5eed8b3713e4bce3924d951d0d466db243feeccabf",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/chuttersnap-QOwUu-hNid8-unsplash.jpg",
+    "sizeBytes": 1158570,
+    "sha256": "f797dffa6e8c35d650ee7be79c07f7f0dc3a27310204a9d91e672f4304a8d608",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/conner-bowe-JOXBKxiZEU8-unsplash.jpg",
+    "sizeBytes": 192487,
+    "sha256": "f2f4632b8961dd68387cef8533ab19306d04e6035a5f03aa9c17b0929372ca14",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/doggo.jpg",
+    "sizeBytes": 35581,
+    "sha256": "a4e9525378cd4fe61edf3c7709cece4639d07cdaf55748e57e35dd421d5e58bc",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/eugene-golovesov-y6OwxwYKSQE-unsplash.jpg",
+    "sizeBytes": 1047695,
+    "sha256": "10074348a42a6446f0181eda16257218094a0a793fad5eec1e6f591cbb106c55",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/jeremy-bishop-Nl5a_rZs6y4-unsplash.jpg",
+    "sizeBytes": 1859797,
+    "sha256": "abd102e4794a3e3227f79a4c34ce963aa0ab0fd321b1f2a8d81c1da07ab2a11c",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/josh-appel-ErK4Vf4lwi8-unsplash.jpg",
+    "sizeBytes": 1234553,
+    "sha256": "bb1b50d8dea164a073f3fe5e7245b743aa8d636fe9dbc4c3882d9edb31bbbdb6",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/krzysztof-kowalik-9pFK1FR_5KQ-unsplash.jpg",
+    "sizeBytes": 1984886,
+    "sha256": "0c7c2e3905df3cb1a002479b712fe2fd3cd47c7d5b68b65af48221fb8265fdfb",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/kueste-klein.jpg",
+    "sizeBytes": 10175,
+    "sha256": "0f89f642fa83c4383e19785adc75e868f1f4f077a5111d7b137216d64a3bcbaf",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/laura-vinck-Hyu76loQLdk-unsplash.jpg",
+    "sizeBytes": 1265343,
+    "sha256": "97dfaeeaf80fd3e0bd1970ee5289658e3cadb05fa7d2d570e02dd5a8bf141e3d",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/marek-piwnicki-JnXebVlsVrg-unsplash.jpg",
+    "sizeBytes": 3007454,
+    "sha256": "c0581c087e55779c82fb332390127bf48e7a86ad676d8fcb2e4d4a60a74eeca9",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/markus-spiske-k0rVudBoB4c-unsplash.jpg",
+    "sizeBytes": 3179778,
+    "sha256": "2d03ef6e8446567163126e54bd6ccc3ae4b39624ef620a69aa6d1c767c99515a",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/mathias-reding-umKZ7nf05io-unsplash.jpg",
+    "sizeBytes": 3425984,
+    "sha256": "bee0e4c7a01a2a5dfa7b993e645b45d3c61b1458ce6503fab64af5b8a5ad3f17",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/mona-eendra-vC8wj_Kphak-unsplash.jpg",
+    "sizeBytes": 3181635,
+    "sha256": "b029399e4d66e180a6cb01d59e3a12299b2746a2cfbb070de31270dcadafdaa6",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/nadine-shaabana-PpGORaWlCgg-unsplash.jpg",
+    "sizeBytes": 1535363,
+    "sha256": "f63f629d9ebcebbefc05e83987704c75f594b5cc3ccf52ee8d46c76304a07210",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/norris-niman-ePB2oGU8mb4-unsplash.jpg",
+    "sizeBytes": 3455160,
+    "sha256": "1a7eed3bd23b3fd5e9dad08b0dd0c8b1999603d93098ada3d3fc9558fdd71bb2",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/olegs-jonins-LeFL-LvxJRY-unsplash.jpg",
+    "sizeBytes": 1110143,
+    "sha256": "e913988898e106d4ac3deda383e0d9d0de79eaae47dc42e6252d6f6667587d07",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/visualsofdana-tmmMi8FgdR0-unsplash.jpg",
+    "sizeBytes": 3860694,
+    "sha256": "0785d874d80fccd883887eeea074b30e96f16af6aa5a27c54beb9f496f06704f",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/william-warby-wrLm8KATZis-unsplash.jpg",
+    "sizeBytes": 3568803,
+    "sha256": "f9639d970986758e35695451f93ae5d3544e27fbe4ec44d345eae83c42749d23",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/wolken-klein.jpg",
+    "sizeBytes": 8999,
+    "sha256": "32e17ae81e03b05802ce65d080795a2046fc60a1ccbd17d5a62d553f789216a8",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/images/zetong-li-NAP14GEjvh8-unsplash.jpg",
+    "sizeBytes": 1774242,
+    "sha256": "2712ddca266351064d8382f779e66ba61a6699b0ee8cfc1c3bffcfc5307846d2",
+    "extension": ".jpg",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/impressum.html",
+    "sizeBytes": 6675,
+    "sha256": "a34319a3c66279c872c5f4ab960d0b95ca376bbffca407208b736671beff40df",
+    "extension": ".html",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/index.html",
+    "sizeBytes": 11663,
+    "sha256": "03aa40ee5f1f21c8d2c7e0dfe997ed5eb118911de02baaac3906121ebecc7d84",
+    "extension": ".html",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/kontakt.html",
+    "sizeBytes": 6661,
+    "sha256": "67226c78b04147637829159b1d2e9288581664f6bb304d0bbb139272da9a4804",
+    "extension": ".html",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/OFL.txt",
+    "sizeBytes": 4484,
+    "sha256": "6c632858146b13645c7730e2b98881f00f4e545949d2c0368a65b071ed8301da",
+    "extension": ".txt",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/OpenSans-Italic-VariableFont_wdth,wght.ttf",
+    "sizeBytes": 580280,
+    "sha256": "412a16bfd878e82457fdf765a853373b6777f8f177475b2b9dbe3351ecdc2e6d",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/OpenSans-VariableFont_wdth,wght.ttf",
+    "sizeBytes": 529700,
+    "sha256": "13744bbc079f0f492e4fb3b14a15d242b8d9600faacd423d58cdf937fea7ce6b",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/README.txt",
+    "sizeBytes": 3518,
+    "sha256": "f99078a1ccb7d0f5a9814a569bf763b93c817bf362135c84146ec7fb338305b0",
+    "extension": ".txt",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans-Bold.ttf",
+    "sizeBytes": 130860,
+    "sha256": "bc73c45e5810a0971ebeaef4eb6c35dec84607dbe02da6757f9f43d958b6da5f",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans-BoldItalic.ttf",
+    "sizeBytes": 136360,
+    "sha256": "b6219df45cbee6f876e6b28f668348e1807b1fb9ad118ea7d687041f0d332384",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans-ExtraBold.ttf",
+    "sizeBytes": 131244,
+    "sha256": "0c078107776634131162be46a38245399040c2becc495e93d69d9b6edd65a98d",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans-ExtraBoldItalic.ttf",
+    "sizeBytes": 136928,
+    "sha256": "a034466210aeb09f7ffdbc9250accd1f5c3e2fb8acbfd3be8aa154993ec43d9b",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans-Italic.ttf",
+    "sizeBytes": 136604,
+    "sha256": "5eabd67fe3d8b5b5eee64504ea9e4a5ef7665b643577ef117f3c32fda67cd29f",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans-Light.ttf",
+    "sizeBytes": 130804,
+    "sha256": "46ead38978e28f32ad7dc10d467efe8d8b5786ff98020c3718a296f88ef7f1cc",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans-LightItalic.ttf",
+    "sizeBytes": 136896,
+    "sha256": "4eac502c10daf6608e53e7db86d79769890373ebbd5472a57bbcb75789bc5110",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans-Medium.ttf",
+    "sizeBytes": 130976,
+    "sha256": "2ab15629424ace86d429dbc0e5a7beb30d2af3db998a2b03a71601ee6965c334",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans-MediumItalic.ttf",
+    "sizeBytes": 136796,
+    "sha256": "bf436f4c34d2c921d0f2d4997e7854050a60feaa89bbacc604ae896ad254ca8b",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans-Regular.ttf",
+    "sizeBytes": 130832,
+    "sha256": "6530480277da62efde047eb26e78a7e532d1cfaeec91603e68d63876b9669f0d",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans-SemiBold.ttf",
+    "sizeBytes": 130760,
+    "sha256": "e603135cc3b1200c7260b34f37f9cb1f2178a42b363037e26a1e18276ab78bf0",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans-SemiBoldItalic.ttf",
+    "sizeBytes": 136724,
+    "sha256": "b1bf2c582820b5703dbcd339b5dc97235c145185d0fabbb09c224ef87215266b",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_Condensed-Bold.ttf",
+    "sizeBytes": 130372,
+    "sha256": "08858694d203191fbddbc603f0d82e18d104c27941622afa4b8ff0ccaca12b60",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_Condensed-BoldItalic.ttf",
+    "sizeBytes": 136240,
+    "sha256": "75dffec080d8dc033a9794ff253614a380f51f7e139aae48daf12ebe9aa4aec4",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_Condensed-ExtraBold.ttf",
+    "sizeBytes": 130812,
+    "sha256": "f7cb3b6dd0084d59f66fa9e5238b4bb8192ad6949f99a1673c910b832ae2a53e",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_Condensed-ExtraBoldItalic.ttf",
+    "sizeBytes": 136652,
+    "sha256": "621ee76be446afeac7e13fee34bbfa70679f9907f200bb1bd50adfe1ce71a77d",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_Condensed-Italic.ttf",
+    "sizeBytes": 136588,
+    "sha256": "2bc823a7660f1fd34b0c2a57dd9acd46fedf0ac7abe32a146d2e895e88f39102",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_Condensed-Light.ttf",
+    "sizeBytes": 130472,
+    "sha256": "c1c6e126200cefe046a49f36ab020c0dcc844095671977132739459804787ad6",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_Condensed-LightItalic.ttf",
+    "sizeBytes": 136760,
+    "sha256": "e1e60f4093232a627f42e215b8fea141a838995631839c1524557c876f3377f7",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_Condensed-Medium.ttf",
+    "sizeBytes": 130520,
+    "sha256": "69c1f94736232a3b7d78f3df863c2f7561dabbd17192054d082573c5405433a6",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_Condensed-MediumItalic.ttf",
+    "sizeBytes": 136700,
+    "sha256": "bcbfc3d6e7258e022bf6ccf8152a16920dfc40b55bc4c8254c15f4ff4d68dd5a",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_Condensed-Regular.ttf",
+    "sizeBytes": 130492,
+    "sha256": "f59481d260f7aafc6c4696dd8608ccbe12714c98e64f8d61422ee75afb9497b5",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_Condensed-SemiBold.ttf",
+    "sizeBytes": 130524,
+    "sha256": "17995de0355f8f96e9bf7ecc7dcae2b0aadd5a8b32e82f3909589b826169321c",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_Condensed-SemiBoldItalic.ttf",
+    "sizeBytes": 136792,
+    "sha256": "6c3543f02911695383f7a24905446d9dac12b3cbeca4f28236c0475bd482064d",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_SemiCondensed-Bold.ttf",
+    "sizeBytes": 131168,
+    "sha256": "b1a405296720729a9ccb2215ef8e25fa031f28a74a23a782ee003b120d92a887",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_SemiCondensed-BoldItalic.ttf",
+    "sizeBytes": 137104,
+    "sha256": "c131cd1ca5b9d6e4ace568ee0ccf3cd697b9d54db97b3cc8838a4a89092492c1",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_SemiCondensed-ExtraBold.ttf",
+    "sizeBytes": 131744,
+    "sha256": "356012920cf82d3ad23c3022a42638d6e9766795c331e52578313c0bb36de912",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_SemiCondensed-ExtraBoldItalic.ttf",
+    "sizeBytes": 137584,
+    "sha256": "3d94b1b6990162aefd796aa74e1e0a730b5aa0077f40503a0187ddb6f648f9b7",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_SemiCondensed-Italic.ttf",
+    "sizeBytes": 137000,
+    "sha256": "6c73ebe56797e33acff95695547aaec72b130659d1a20f257eb876cf6c9d7f58",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_SemiCondensed-Light.ttf",
+    "sizeBytes": 131128,
+    "sha256": "92cd488028cd9e0ee4b1934e48a6aa05e7f1bf04c65eb8104f2486cb49df2096",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_SemiCondensed-LightItalic.ttf",
+    "sizeBytes": 137220,
+    "sha256": "f976b54657dc331335418a6330d6cd46ff9ae646bc9b9a3987edcfee0b0ca11b",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_SemiCondensed-Medium.ttf",
+    "sizeBytes": 130976,
+    "sha256": "6be32b58eb0616a206aa941779a672c6bb97a94de1302d9e1e958d6b8c2af111",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_SemiCondensed-MediumItalic.ttf",
+    "sizeBytes": 137068,
+    "sha256": "bc97ce0653959b1fcc5db92049dc477734927802e4776e770b84abafce10beaf",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_SemiCondensed-Regular.ttf",
+    "sizeBytes": 130848,
+    "sha256": "b248380c2975e732fd643e0c00bf5f3ade168e89ca60150e323e3a22d4807b94",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_SemiCondensed-SemiBold.ttf",
+    "sizeBytes": 130856,
+    "sha256": "b82891f7b8e0eac507b462953cdb49120d73646e58f40ad0fab6aa0468da7868",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/30_CSS-Flexbox-Frameset/Beispielwebsite/open_sans/static/OpenSans_SemiCondensed-SemiBoldItalic.ttf",
+    "sizeBytes": 137132,
+    "sha256": "6b9fb4a0e22bb4996d4116bae2e14a09db5c8f33ef109ef57ff7186af1b68b71",
+    "extension": ".ttf",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-flexbox-advanced",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/Burgermenü/css/navigation.css",
+    "sizeBytes": 2133,
+    "sha256": "ad9442540eb9435a3507fa82407fe484989c13d9a5c50f0a24e3a702e7f2d896",
+    "extension": ".css",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-navigationsleisten",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/Burgermenü/css/style.css",
+    "sizeBytes": 2797,
+    "sha256": "1fd935de806289143ed4be4d285af6cc80fc1f178173aebd3dbee5fccaa21914",
+    "extension": ".css",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-navigationsleisten",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/Burgermenü/index.html",
+    "sizeBytes": 869,
+    "sha256": "d6c5a7e8d65b40bc3abd591b6dc37312cec676203d18085c65e44886ddfc57df",
+    "extension": ".html",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-navigationsleisten",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/Burgermenü_simple/index.html",
+    "sizeBytes": 2230,
+    "sha256": "8de4c7978a3d33a9e0f9e6ba08048c12f23e8e232bac0d2c89cc9b13a5aefe90",
+    "extension": ".html",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-navigationsleisten",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/Burgermenü_simple/style.css",
+    "sizeBytes": 1486,
+    "sha256": "2e6cc8afec8198678e2b6fc89a11393bae3c6479ca8f9e3f6e95081e2bc670b0",
+    "extension": ".css",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-navigationsleisten",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/Burgermenü_simple-2nd/index.html",
+    "sizeBytes": 3511,
+    "sha256": "7163acd2c3f8319af0f76b2f090c2f78933c09ecb726a4c8e116b39a8b2fcc47",
+    "extension": ".html",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-navigationsleisten",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/Burgermenü_simple-2nd/style.css",
+    "sizeBytes": 1655,
+    "sha256": "6317485f2cf907592403b242a5fc60576a3b60cd92d50e969a968cbc0657d3a4",
+    "extension": ".css",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-navigationsleisten",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/css_normalize/index.html",
+    "sizeBytes": 380,
+    "sha256": "400a2c22af5eeeec540c14f42e03ae08a8de5fafeb82a5a00590abfb83e042fa",
+    "extension": ".html",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/css_normalize/normalize.css",
+    "sizeBytes": 6138,
+    "sha256": "580818700724d42d7fcc4979b0197971fca1c6d2e0286769237a0ac897df5512",
+    "extension": ".css",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/css_normalize/style.css",
+    "sizeBytes": 330,
+    "sha256": "0576967912bf8ace84f848ac2219c6610b9f708c749a0a4bcd6ca01a009be08a",
+    "extension": ".css",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-css-syntax",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/image_float/css/styles.css",
+    "sizeBytes": 74,
+    "sha256": "6a820cf771cd3b085f1c9499872779b8e55d7db287d236f6c55343e4c3d1a5e8",
+    "extension": ".css",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-block-inline",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/image_float/doggo.avif",
+    "sizeBytes": 18924,
+    "sha256": "ef0841b3bf87ba05c1117ad3a7aadbf1182c5e6969fd1e328b4f433810716904",
+    "extension": ".avif",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-block-inline",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/image_float/image-float.html",
+    "sizeBytes": 2037,
+    "sha256": "20de8d2b4bbc909106436f3c58a338916242905ef2d70bf6a6f1f860b53c8708",
+    "extension": ".html",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-block-inline",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/image_float/image-float_simple.html",
+    "sizeBytes": 1239,
+    "sha256": "3b9413247d68d1dfe4c5ce96dfc2a0be7ee925d741c6572207ca0a8132ce1b52",
+    "extension": ".html",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-block-inline",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/link_colors/link-colors.html",
+    "sizeBytes": 1430,
+    "sha256": "a2937e9e26e6bfce9f1e80507bacc2912f6aec9a39d96cfd47f4efcdfcc54b65",
+    "extension": ".html",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-links-navigation",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/margin_wrapper/index.html",
+    "sizeBytes": 3439,
+    "sha256": "7e5f873a7b64b39868d85bc19bba0a3ab7effb88569eb720946bebdaa30a3215",
+    "extension": ".html",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-box-modell",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/webfonts/css/styles.css",
+    "sizeBytes": 1388,
+    "sha256": "27c2f58808e5b49a94c088ed43d30d5a079a9191e91a9354a6f533453db9350c",
+    "extension": ".css",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-textelemente-listen",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/webfonts/fonts/dosis-v32-latin-200.woff2",
+    "sizeBytes": 15432,
+    "sha256": "19b4eef14cd5725dfa6d98ec5a021dbcbcffc607e185693f1a2099016130d015",
+    "extension": ".woff2",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-textelemente-listen",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/webfonts/fonts/dosis-v32-latin-regular.woff2",
+    "sizeBytes": 16552,
+    "sha256": "3830ba0a1c13e1a44b25b86be30bcbc4581a104b2d875aa377bd613477a2e6b4",
+    "extension": ".woff2",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-textelemente-listen",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/webfonts/fonts/roboto-condensed-v31-latin-regular.woff2",
+    "sizeBytes": 20820,
+    "sha256": "543c03fff71d1b39590af102e0852c2dbce46f4dbe4faaebafbef6edc82e78f5",
+    "extension": ".woff2",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-textelemente-listen",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/webfonts/google webfonts helper.url",
+    "sizeBytes": 56,
+    "sha256": "1fa6c4dff2304f773aba698cec22e41c5aeeb8c4fdc5a7ae39b8e7d32734e32a",
+    "extension": ".url",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-textelemente-listen",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/webfonts/index.html",
+    "sizeBytes": 1318,
+    "sha256": "23e708dba4e588b1da972aadbe2b6ee47f8c78363ba4208a95dac67c6f5d5e61",
+    "extension": ".html",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-textelemente-listen",
+    "notes": "Code snippet / component template"
+  },
+  {
+    "sourcePath": "HTML/Website_und_Bausteine/webfonts/roboto-condensed-v31-latin.zip",
+    "sizeBytes": 21008,
+    "sha256": "671dba082ad5f040e6add45d7e7f6f5fcfeb2258b398917159ac0ac1231a6386",
+    "extension": ".zip",
+    "category": "components_and_templates",
+    "classification": "integrated_and_reference",
+    "targetLesson": "topic-html-css-textelemente-listen",
+    "notes": "Code snippet / component template"
+  }
+]

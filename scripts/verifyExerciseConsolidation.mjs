@@ -65,7 +65,7 @@ for (const { topic } of lessons) {
   if (topic.exercises.length > 0 && practicalCount === 0) report.lessonsWhereUebungenSectionWasRemoved += 1
 }
 
-if (report.lessonsAudited !== 119) failures.push(`Expected 119 lessons, found ${report.lessonsAudited}`)
+if (report.lessonsAudited !== 138) failures.push(`Expected 138 lessons, found ${report.lessonsAudited}`)
 if (report.totalExercisesFound !== report.exercisesAlreadyCoveredByLernkarten + report.exercisesNewlyMigratedIntoLernkarten + report.practicalExercisesKept) {
   failures.push('Exercise classification totals do not add up')
 }

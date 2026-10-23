@@ -1,5 +1,6 @@
 import { Cpu, Landmark, Briefcase, Terminal, Code2, Network } from 'lucide-react'
 import { itTechnicalModule } from './itTechnical'
+import { htmlCssModule } from './htmlCss'
 import type { Module, SubjectSlug } from '../types/content'
 import { vonNeumannTopic } from './itGrundlagen/vonNeumann'
 import { zahlensystemeTopic } from './itGrundlagen/zahlensysteme'
@@ -271,6 +272,7 @@ export const modules: Module[] = [
   javaModule,
   netzwerktechnikModule,
   linuxModule,
+  htmlCssModule,
   wisoModule,
   itEnglishGrundlagenModule,
   technicalEnglishFisiModule,

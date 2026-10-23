@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Check, Copy, GraduationCap, Info, Lightbulb, Sparkles, TriangleAlert } from 'lucide-react'
+import { useState, type ReactNode } from 'react'
+import { Check, Copy, ExternalLink, FileText, GraduationCap, Info, Lightbulb, Sparkles, TriangleAlert } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import type { ContentBlock } from '../../types/content'
 import { illustrationRegistry } from './illustrations/registry'
@@ -24,6 +24,49 @@ const headingSizes = {
   4: 'text-lg',
 } as const
 
+/**
+ * Parses markdown links like [Title](url) and inline code `code` within text strings,
+ * rendering them as clickable <a> tags or <code> badges.
+ */
+function renderInlineFormattedText(text: string): ReactNode {
+  // Regex to match markdown links [label](url)
+  const linkRegex = /\[(.*?)\]\((.*?)\)/g
+  const parts: ReactNode[] = []
+  let lastIndex = 0
+  let match: RegExpExecArray | null
+
+  while ((match = linkRegex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index))
+    }
+    const label = match[1]
+    const url = match[2]
+    const isExternal = url.startsWith('http://') || url.startsWith('https://')
+    const isDoc = url.endsWith('.pdf') || url.endsWith('.html') || url.endsWith('.md')
+
+    parts.push(
+      <a
+        key={match.index}
+        href={url}
+        target={isExternal || isDoc ? '_blank' : undefined}
+        rel={isExternal ? 'noopener noreferrer' : undefined}
+        className="inline-flex items-center gap-1.5 font-medium text-brand-600 underline underline-offset-2 transition-colors hover:text-brand-800 dark:text-brand-400 dark:hover:text-brand-300"
+      >
+        {isDoc && <FileText className="h-3.5 w-3.5 shrink-0 opacity-70" />}
+        <span>{label}</span>
+        {isExternal && <ExternalLink className="h-3 w-3 shrink-0 opacity-60" />}
+      </a>
+    )
+    lastIndex = linkRegex.lastIndex
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex))
+  }
+
+  return parts.length > 0 ? parts : text
+}
+
 function ContentBlockView({ block }: { block: ContentBlock }) {
   switch (block.type) {
     case 'heading': {
@@ -36,19 +79,19 @@ function ContentBlockView({ block }: { block: ContentBlock }) {
     }
 
     case 'paragraph':
-      return <p className="text-base leading-relaxed text-ink-600 dark:text-ink-300">{block.text}</p>
+      return <p className="text-base leading-relaxed text-ink-600 dark:text-ink-300">{renderInlineFormattedText(block.text)}</p>
 
     case 'list':
       return block.style === 'numbered' ? (
         <ol className="list-decimal space-y-2 pl-6 text-base leading-relaxed text-ink-600 marker:text-ink-400 dark:text-ink-300 dark:marker:text-ink-500">
           {block.items.map((item, i) => (
-            <li key={i}>{item}</li>
+            <li key={i}>{renderInlineFormattedText(item)}</li>
           ))}
         </ol>
       ) : (
         <ul className="list-disc space-y-2 pl-6 text-base leading-relaxed text-ink-600 marker:text-ink-400 dark:text-ink-300 dark:marker:text-ink-500">
           {block.items.map((item, i) => (
-            <li key={i}>{item}</li>
+            <li key={i}>{renderInlineFormattedText(item)}</li>
           ))}
         </ul>
       )
@@ -130,7 +173,7 @@ function ContentBlockView({ block }: { block: ContentBlock }) {
             {block.items.map((item, i) => (
               <li key={i} className="flex items-start gap-2 text-sm leading-relaxed text-ink-700 dark:text-ink-200">
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-500 dark:text-brand-400" aria-hidden="true" />
-                {item}
+                {renderInlineFormattedText(item)}
               </li>
             ))}
           </ul>
@@ -216,7 +259,7 @@ function CodeBlockView({ language, code }: { language?: string; code: string }) 
       setCopied(true)
       setTimeout(() => setCopied(false), 1500)
     } catch {
-      // Clipboard API unavailable — no fallback needed, copy is a nicety.
+      // Clipboard API unavailable
     }
   }
 
